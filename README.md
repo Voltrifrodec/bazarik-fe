@@ -1,6 +1,5 @@
 # BazarikFe
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.
 
 ## Odkazy
 Odkazy na ostatné stránky spojené s projektom:
@@ -13,7 +12,6 @@ Odkazy na ostatné stránky spojené s projektom:
 
 **Backend repository**: https://github.com/Voltrifrodec/bazarik-be
 
----
 
 
 <!-- ### Tags
