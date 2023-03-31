@@ -1,1 +1,140 @@
-/* You can add global styles to this file, and also import other style files */
+/*? Premenne */
+:root {
+
+    /* Farby pozadia */
+    --paletteColorBackgroundPage: #CCCCCC; /* Pozadie pre body */
+    --paletteColorBanner:#FFCC66; /* Napr. na header, footer, ... */
+    --paletteColorContainer: #FFCC99; /* Napr. ako pozadie inzeratu v liste */
+    --paletteColorContainerAlt: #666666; /* Napr. ako druhotne pozadie stranky, pozadie podkategorii, etc. */
+
+    /* Farby textu */
+    --paletteTColorPrimary: #000000;
+    --paletteTColorSecondary: #000000;
+    --paletteTColorAlternative: #000000;
+    --paletteTColorLink: #000000;
+
+    /* Farby oramovania */
+    --paletteBorderColorPrimary: #000000; /* Header, Footer, Specialne elementy */
+    --paletteBorderColorSecondary: #1B3280; /* Pozadie kontajnerov inzeratov v liste, border color pre tlacidla, alebo ine sekundarne elementy */
+
+}
+
+
+/* Globalne nastavenia */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100vh;
+    width: 100%;
+    background-color: var(--paletteColorContainerAlt);
+}
+
+
+.HeaderContainer {
+    min-height: 10vh;
+    width: 100%;
+    background-color: var(--paletteColorBanner);
+    border-bottom: .25rem solid var(--paletteBorderColorPrimary);
+}
+
+
+.RouterContainer {
+    width: 100%;
+}
+.RouterContainerFix {
+    min-height: 80vh;
+    margin: 0 auto;
+    background-color: var(--paletteColorBackgroundPage);
+}
+
+.FooterContainer {
+    min-height: 10vh;
+    width: 100%;
+    background-color: var(--paletteColorBanner);
+    /* border-top: .25rem solid var(--paletteBorderColorPrimary); */
+    box-shadow: .5rem .5rem .5rem var(--paletteBorderColorPrimary);
+}
+
+
+/* Globalne nastavenia */
+/*  {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+
+    background-color: var(--paletteColorContainerAlt);
+}
+
+
+/* Stylizacia hlavicky 
+.HeaderContainer > div {
+    min-height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: .5rem;
+
+    background-color: var(--paletteColorBanner);
+    border-bottom: .25rem solid var(--paletteBorderColorPrimary);
+}
+
+.HeaderContainer {
+    padding: 0 1.5rem;
+}
+.HeaderContainer > .SearchBox {
+    padding-left: 1.5rem;
+}
+
+.HeaderContainer > .SearchBox > form {
+    display: flex;
+}
+
+.HeaderPageLogo > img {
+    width: 100px;
+    margin-bottom: 10px;
+    aspect-ratio: 18 / 5; /* Super Ultrawide Aspect Ratio, pre teraz 
+} 
+
+/* .HeaderContainer > .ButtonsBox {
+
+}
+.HeaderContainer > .ButtonsBox > button {
+    background-color: #f00;
+} */
+
+
+/* Nastavenia kontajnera, v ktorom je <router-outlet> */
+/* .RouterContainer {
+    min-height: 80vh !important;
+    width: 60%;
+    margin: 0 auto;
+
+    background-color: var(--paletteColorBackgroundPage);
+    border-left: .25rem solid var(--paletteBorderColorPrimary);
+    border-right: .25rem solid var(--paletteBorderColorPrimary);
+}
+
+
+
+.FooterContainer {
+    min-height: 10vh;
+    width: 100%;
+
+    background-color: var(--paletteColorBanner);
+    border-top: .25rem solid var(--paletteBorderColorPrimary);
+}
+
+*/
+@media screen and (min-width:0px) and (max-width:940px) {
+    .RouterContainerFix {
+        width: 100% !important;
+    }
+} 
