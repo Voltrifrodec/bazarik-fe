@@ -1,4 +1,5 @@
 form {
+	margin: auto 10%;
 	margin-bottom: 42pt;
 }
 
@@ -6,7 +7,7 @@ form {
 	margin-top: 8pt;
 	padding-bottom: 12pt;
 	border-bottom: 1px solid rgb(155, 155, 155);
-	max-width: 100%;
+	/* max-width: 80%; */
 }
 
 .group {
