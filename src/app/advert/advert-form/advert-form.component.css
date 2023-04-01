@@ -1,0 +1,16 @@
+form {
+	margin-bottom: 42pt;
+}
+
+.form-group {
+	margin-top: 16pt;
+	padding-bottom: 16pt;
+	border-bottom: 1px solid rgb(155, 155, 155);
+
+}
+
+.group {
+	margin-top: 12pt;
+	/* border: 1px solid black; */
+	/* border-top: 1px solid black; */
+}

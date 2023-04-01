@@ -1,0 +1,137 @@
+<h1 class="display-2 underline mt-3">Pridať inzerát</h1>
+
+<form [formGroup]="advertForm" (submit)="authorizeAdvert()">
+	<!-- name -->
+	<div class="form-group">
+		<label class="h3">Názov</label>
+		<input class="form-control form-control-lg" name="Názov inzerátu" type="text"
+			placeholder="Zadajte názov inzerátu" formControlName="name" required>
+	</div>
+
+
+	<!-- description -->
+	<div class="form-group">
+		<label class="h3">Opis</label>
+		<textarea formControlName="description" class="form-control" rows="3"
+			placeholder="Zadajte opis inzerátu"></textarea>
+	</div>
+
+
+	<div class="group">
+		<!-- category -->
+		<div class="form-group">
+			<label class="h3">Kategória</label>
+			<select class="form-control form-control-lg" formControlName="category">
+				<option disabled selected [value]="null">Vyberte kategóriu inzerátu</option>
+				<option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+			</select>
+		</div>
+
+		<!-- subcategory, cez ngif -->
+		<div class="form-group" *ngIf="advertForm.controls['category'].value">
+			<label class="h3">Podkategória</label>
+			<select class="form-control form-control-lg" formControlName="subcategory">
+				<option disabled selected [value]="null">Vyberte kategóriu inzerátu</option>
+				<option *ngFor="let subcategory of subcategories" [value]="subcategory.id">{{ subcategory.name }}
+				</option>
+			</select>
+		</div>
+
+		<!-- subsubcategory, cez ngif -->
+		<div class="form-group" *ngIf="advertForm.controls['subcategory'].value">
+			<label class="h3">Podpodkategória</label>
+			<select class="form-control form-control-lg" formControlName="subsubcategory">
+				<option disabled selected [value]="null">Vyberte podkategóriu inzerátu</option>
+				<option *ngFor="let subsubcategory of subsubcategories" [value]="subsubcategory.id">{{
+					subsubcategory.name }}
+				</option>
+			</select>
+		</div>
+	</div>
+
+
+	<div class="group">
+		<!-- region -->
+		<div class="form-group">
+			<p class="h3">Región</p>
+			<select class="form-control form-control-lg" formControlName="region">
+				<option disabled selected [value]="null">Vyberte región</option>
+				<option *ngFor="let region of regions" [value]="region.id">{{ region.name }}</option>
+			</select>
+		</div>
+
+		<!-- district -->
+		<div class="form-group" *ngIf="advertForm.controls['region'].value">
+			<p class="h3">
+				Okres
+				<small class="text-muted h6">Kliknite sem, pre návrh chýbajúceho okresu.</small>
+			</p>
+			<select class="form-control form-control-lg" formControlName="district">
+				<option disabled selected [value]="null">Vyberte okres</option>
+				<option *ngFor="let district of districts" [value]="district.id">{{ district.name + " " +
+					district.postcode }}
+				</option>
+			</select>
+		</div>
+	</div>
+
+
+	<!-- keywords -->
+
+
+	<!-- price -->
+	<!-- currency: disabled on EURO € -->
+	<div class="form-group">
+		<p class="h3">
+			Cena
+		</p>
+		<div class="input-group mb-2">
+			<div class="input-group-prepend">
+				<input class="d-none" [value]="this.currencies[0].id" formControlName="currency" required>
+				<div class="input-group-text">{{ this.currencies[0].symbol }}</div>
+			</div>
+			<input type="number" class="form-control" placeholder="Cena pre inzerát" required>
+		</div>
+
+
+	<!-- </div> -->
+
+
+	<!-- fixedPrice -->
+	<!-- <div class="form-group"> -->
+		<!-- <label class="h4">Je cena fixná?<label> -->
+		<p class="h3">
+			Fixná cena
+			<small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small>
+		</p>
+		<div class="form-check">
+			<label class="form-check-label">
+				<input class="form-check-input" type="radio" name="fixedPrice" [value]=true
+					formControlName="fixedPrice" [required]="true" [checked]="true">
+				Áno
+			</label>
+		</div>
+		<div class="form-check">
+			<label class="form-check-label">
+				<input class="form-check-input" type="radio" name="fixedPrice" [value]=false formControlName="fixedPrice"
+					required>
+				Nie
+			</label>
+		</div>
+	</div>
+
+
+	<!-- image upload -->
+	<div class="form-group">
+		<p class="h3">
+			Obrázok pre inzerát
+			<!-- <small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small> -->
+		</p>
+		<input type="file" accept="image/*" class="form-control-file" id="exampleFormControlFile1">
+	</div>
+
+	<div class="group">
+		<input class="btn btn-primary" type="submit" value="Odoslať inzerát">
+	</div>
+
+</form>
