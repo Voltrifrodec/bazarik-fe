@@ -12,7 +12,7 @@
 	<!-- description -->
 	<div class="form-group">
 		<label class="h3">Opis</label>
-		<textarea formControlName="description" class="form-control" rows="5"
+		<textarea formControlName="description" class="form-control form-control-lg" rows="5"
 			placeholder="Zadajte opis inzerátu"></textarea>
 	</div>
 
@@ -86,11 +86,11 @@
 			Cena
 		</p>
 		<div class="input-group mb-2">
-			<div class="input-group-prepend">
+			<div class="currency input-group-prepend">
 				<input class="d-none" [value]="this.currencies[0].id" formControlName="currency" required>
-				<div class="input-group-text">{{ this.currencies[0].symbol }}</div>
+				<div class="form-control form-control-lg bg-secondary text-light rounded-left">{{ this.currencies[0].symbol }}</div>
 			</div>
-			<input type="tel" class="form-control" placeholder="Cena pre inzerát" required>
+			<input type="number" min="0" max="9999" class="form-control form-control-lg" placeholder="Cena pre inzerát" required>
 		</div>
 		<!-- </div> -->
 		
@@ -125,12 +125,12 @@
 			Obrázok pre inzerát
 			<!-- <small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small> -->
 		</p>
-		<input type="file" accept="image/*" class="form-control-file">
+		<input type="file" accept="image/*" class="form-control-file form-control-lg">
 	</div>
 
 	<div class="form-group">
 		<p class="h3">E-mailová adresa</p>
-		<input type="email" class="form-control" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
+		<input type="email" class="form-control form-control-lg" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
 		<small class="form-text text-muted">Na túto e-mailovú adresu Vám bude zaslaný kód na overenie.</small>
 	</div>
 
