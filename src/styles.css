@@ -6,6 +6,7 @@
     --paletteColorBanner:#FFCC66; /* Napr. na header, footer, ... */
     --paletteColorContainer: #FFCC99; /* Napr. ako pozadie inzeratu v liste */
     --paletteColorContainerAlt: #666666; /* Napr. ako druhotne pozadie stranky, pozadie podkategorii, etc. */
+    --paletteColorContainerAlt2: #CC6B5C; /* Napr. ako druhotne pozadie stranky, pozadie podkategorii, etc. */
 
     /* Farby textu */
     --paletteTColorPrimary: #000000;
@@ -56,6 +57,15 @@ body {
     width: 100%;
     background-color: var(--paletteColorContainerAlt);
 }
+a {
+    text-decoration: none;
+    color: #000000;
+    transition: color .1s linear, font-weight .1s linear;
+}
+a:hover {
+    color: #1B3280;
+    font-weight: bold;
+}
 h1 {
     font-size: x-large;
 }
@@ -82,7 +92,11 @@ h1 {
 .QuickNavBox button {
     text-align: center;
 }
-
+.QuickNavBox button::after {
+    content: 'Nový inzerát';
+    padding-left: 10px;
+    display: inline-block;
+}
 
 .RouterContainer {
     width: 100%;
@@ -198,5 +212,11 @@ body {
 @media screen and (min-width:0px) and (max-width:940px) {
     .RouterContainerFix {
         width: 100% !important;
+    }
+    h1 {
+        display: none;
+    }
+    .QuickNavBox > button::after {
+        display: none;
     }
 } 
