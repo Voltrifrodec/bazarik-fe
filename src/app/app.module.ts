@@ -8,12 +8,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AdvertComponent } from './advert/advert.component';
 import { AdvertFormComponent } from './advert/advert-form/advert-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdvertDetailPageComponent } from './advert/advert-detail-page/advert-detail-page.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		AdvertComponent,
-		AdvertFormComponent
+		AdvertFormComponent,
+  		AdvertDetailPageComponent
 	],
 	imports: [
 		BrowserModule,
