@@ -1,1 +1,202 @@
-/* You can add global styles to this file, and also import other style files */
+/*? Premenne */
+:root {
+
+    /* Farby pozadia */
+    --paletteColorBackgroundPage: #CCCCCC; /* Pozadie pre body */
+    --paletteColorBanner:#FFCC66; /* Napr. na header, footer, ... */
+    --paletteColorContainer: #FFCC99; /* Napr. ako pozadie inzeratu v liste */
+    --paletteColorContainerAlt: #666666; /* Napr. ako druhotne pozadie stranky, pozadie podkategorii, etc. */
+
+    /* Farby textu */
+    --paletteTColorPrimary: #000000;
+    --paletteTColorSecondary: #000000;
+    --paletteTColorAlternative: #000000;
+    --paletteTColorLink: #000000;
+
+    /* Farby oramovania */
+    --paletteBorderColorPrimary: #000000; /* Header, Footer, Specialne elementy */
+    --paletteBorderColorSecondary: #1B3280; /* Pozadie kontajnerov inzeratov v liste, border color pre tlacidla, alebo ine sekundarne elementy */
+
+}
+
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+
+::-webkit-scrollbar-track {
+    border-radius: 25px;
+    border: .05rem solid;
+    background: var(--paletteColorBackgroundPage);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--paletteColorContainerAlt);
+    border-left: .05rem solid;
+    width:calc(15px - 0.05rem);
+    border-radius: 15px;
+    transition: background .2s linear;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #333; 
+}
+
+
+/* Globalne nastavenia */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100vh;
+    width: 100%;
+    background-color: var(--paletteColorContainerAlt);
+}
+h1 {
+    font-size: x-large;
+}
+
+
+.HeaderContainer {
+    min-height: 10vh;
+    width: 100%;
+    background-color: var(--paletteColorBanner);
+    border-bottom: .15rem solid var(--paletteBorderColorPrimary);
+    box-shadow: 0 0 2.5rem #000000;
+}
+
+.HeaderContainer .row {
+    margin: 0 auto;
+}
+.HeaderPageLogo img {
+    width: 100px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    aspect-ratio: 18 / 5;
+}
+
+.QuickNavBox button {
+    text-align: center;
+}
+
+
+.RouterContainer {
+    width: 100%;
+}
+.RouterContainerFix {
+    min-height: 90vh;
+    margin: 0 auto;
+    border-left: .15rem solid;
+    border-right: .15rem solid;
+    background-color: var(--paletteColorBackgroundPage);
+    box-shadow: 2rem 0 2.5rem -2rem #000000,
+                -2rem 0 2.5rem -2rem #000000;
+}
+
+.FooterContainer {
+    padding: 5vh;
+    min-height: 10vh;
+    width: 100%;
+    background-color: var(--paletteColorBanner);
+    border-top: .15rem solid var(--paletteBorderColorPrimary);
+    box-shadow: 0 0 2.5rem var(--paletteBorderColorPrimary);
+}
+.QuickNavFooter button {
+    display: block;
+    padding: 5px 0;
+    border: none;
+    background: none;
+    transition: color .1s linear, font-weight .1s linear;
+}
+.QuickNavFooter button:hover {
+    color: #1B3280;
+    font-weight: bold;
+}
+.FooterCopyrightText > span {
+    font-family: monospace;
+    display: block;
+}
+
+/* Globalne nastavenia */
+/*  {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+
+    background-color: var(--paletteColorContainerAlt);
+}
+
+
+/* Stylizacia hlavicky 
+.HeaderContainer > div {
+    min-height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: .5rem;
+
+    background-color: var(--paletteColorBanner);
+    border-bottom: .25rem solid var(--paletteBorderColorPrimary);
+}
+
+.HeaderContainer {
+    padding: 0 1.5rem;
+}
+.HeaderContainer > .SearchBox {
+    padding-left: 1.5rem;
+}
+
+.HeaderContainer > .SearchBox > form {
+    display: flex;
+}
+
+.HeaderPageLogo > img {
+    width: 100px;
+    margin-bottom: 10px;
+    aspect-ratio: 18 / 5; /* Super Ultrawide Aspect Ratio, pre teraz 
+} 
+
+/* .HeaderContainer > .ButtonsBox {
+
+}
+.HeaderContainer > .ButtonsBox > button {
+    background-color: #f00;
+} */
+
+
+/* Nastavenia kontajnera, v ktorom je <router-outlet> */
+/* .RouterContainer {
+    min-height: 80vh !important;
+    width: 60%;
+    margin: 0 auto;
+
+    background-color: var(--paletteColorBackgroundPage);
+    border-left: .25rem solid var(--paletteBorderColorPrimary);
+    border-right: .25rem solid var(--paletteBorderColorPrimary);
+}
+
+
+
+.FooterContainer {
+    min-height: 10vh;
+    width: 100%;
+
+    background-color: var(--paletteColorBanner);
+    border-top: .25rem solid var(--paletteBorderColorPrimary);
+}
+
+*/
+@media screen and (min-width:0px) and (max-width:940px) {
+    .RouterContainerFix {
+        width: 100% !important;
+    }
+} 
