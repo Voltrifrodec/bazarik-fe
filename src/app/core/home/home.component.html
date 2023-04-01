@@ -1,0 +1,13 @@
+<div class="LatestSearching auto m-3">
+    <div *ngFor="let i of [1,2,3,4]" class="p-2">
+        (2023-04-01 14:56) <a href="/">Text pre odkaz na inzerát #{{i}}, ktorý naschvál píšem taký dlhý aby som skúsil maximálnu dĺžku názvu inzerátu.</a>
+    </div>
+</div>
+<div class="CategoriesGrid auto m-2">
+    <div class="ContainerRow" *ngFor="let num of [].constructor(4); let i = index;">
+        <div class="ContainerItem" *ngFor="let num of [].constructor(4); let j = index;">
+            <fa-icon [icon]="fa.faSearch"></fa-icon>
+            <a href="/">Kategória [{{i}},{{j}}]</a>
+        </div>
+    </div>
+</div>
