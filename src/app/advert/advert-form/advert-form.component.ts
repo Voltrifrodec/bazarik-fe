@@ -83,8 +83,10 @@ export class AdvertFormComponent {
 		let confirmationNumber = this.getRandomInt(1000,9999);
 		
 		let userResponse = window.prompt(`Pre overenie inzerátu zadajte číslo: ${confirmationNumber}`);
+		
+		console.log(userResponse);
 
-		if (!userResponse) { return; }
+		if (userResponse == null) { return; }
 		
 		if (Number(userResponse) === confirmationNumber) {
 			window.confirm("Inzerát bol úspešne pridaný.");

@@ -12,7 +12,7 @@
 	<!-- description -->
 	<div class="form-group">
 		<label class="h3">Opis</label>
-		<textarea formControlName="description" class="form-control" rows="3"
+		<textarea formControlName="description" class="form-control" rows="5"
 			placeholder="Zadajte opis inzerátu"></textarea>
 	</div>
 
@@ -31,7 +31,7 @@
 		<div class="form-group" *ngIf="advertForm.controls['category'].value">
 			<label class="h3">Podkategória</label>
 			<select class="form-control form-control-lg" formControlName="subcategory">
-				<option disabled selected [value]="null">Vyberte kategóriu inzerátu</option>
+				<option disabled selected [value]="null">Vyberte podkategóriu inzerátu</option>
 				<option *ngFor="let subcategory of subcategories" [value]="subcategory.id">{{ subcategory.name }}
 				</option>
 			</select>
@@ -41,7 +41,7 @@
 		<div class="form-group" *ngIf="advertForm.controls['subcategory'].value">
 			<label class="h3">Podpodkategória</label>
 			<select class="form-control form-control-lg" formControlName="subsubcategory">
-				<option disabled selected [value]="null">Vyberte podkategóriu inzerátu</option>
+				<option disabled selected [value]="null">Vyberte podpodkategóriu inzerátu</option>
 				<option *ngFor="let subsubcategory of subsubcategories" [value]="subsubcategory.id">{{
 					subsubcategory.name }}
 				</option>
@@ -90,31 +90,29 @@
 				<input class="d-none" [value]="this.currencies[0].id" formControlName="currency" required>
 				<div class="input-group-text">{{ this.currencies[0].symbol }}</div>
 			</div>
-			<input type="number" class="form-control" placeholder="Cena pre inzerát" required>
+			<input type="tel" class="form-control" placeholder="Cena pre inzerát" required>
 		</div>
-
-
-	<!-- </div> -->
-
-
-	<!-- fixedPrice -->
-	<!-- <div class="form-group"> -->
+		<!-- </div> -->
+		
+		<!-- fixedPrice -->
+		<!-- <div class="form-group"> -->
 		<!-- <label class="h4">Je cena fixná?<label> -->
 		<p class="h3">
-			Fixná cena
-			<small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small>
+			<!-- Fixná cena -->
+			<!-- <small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small> -->
+			<small class="text-muted h6">Je možné vyjednať cenu od pôvodnej ceny?</small>
 		</p>
 		<div class="form-check">
 			<label class="form-check-label">
-				<input class="form-check-input" type="radio" name="fixedPrice" [value]=true
-					formControlName="fixedPrice" [required]="true" [checked]="true">
+				<input class="form-check-input" type="radio" name="fixedPrice" [value]=true formControlName="fixedPrice"
+					[required]="true" [checked]="true">
 				Áno
 			</label>
 		</div>
 		<div class="form-check">
 			<label class="form-check-label">
-				<input class="form-check-input" type="radio" name="fixedPrice" [value]=false formControlName="fixedPrice"
-					required>
+				<input class="form-check-input" type="radio" name="fixedPrice" [value]=false
+					formControlName="fixedPrice" required>
 				Nie
 			</label>
 		</div>
@@ -127,7 +125,13 @@
 			Obrázok pre inzerát
 			<!-- <small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small> -->
 		</p>
-		<input type="file" accept="image/*" class="form-control-file" id="exampleFormControlFile1">
+		<input type="file" accept="image/*" class="form-control-file">
+	</div>
+
+	<div class="form-group">
+		<p class="h3">E-mailová adresa</p>
+		<input type="email" class="form-control" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
+		<small class="form-text text-muted">Na túto e-mailovú adresu Vám bude zaslaný kód na overenie.</small>
 	</div>
 
 	<div class="group">
