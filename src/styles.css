@@ -20,6 +20,31 @@
 }
 
 
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+
+::-webkit-scrollbar-track {
+    border-radius: 25px;
+    border: .05rem solid;
+    background: var(--paletteColorBackgroundPage);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--paletteColorContainerAlt);
+    border-left: .05rem solid;
+    width:calc(15px - 0.05rem);
+    border-radius: 15px;
+    transition: background .2s linear;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #333; 
+}
+
+
 /* Globalne nastavenia */
 * {
     box-sizing: border-box;
@@ -31,13 +56,31 @@ body {
     width: 100%;
     background-color: var(--paletteColorContainerAlt);
 }
+h1 {
+    font-size: x-large;
+}
 
 
 .HeaderContainer {
     min-height: 10vh;
     width: 100%;
     background-color: var(--paletteColorBanner);
-    border-bottom: .25rem solid var(--paletteBorderColorPrimary);
+    border-bottom: .15rem solid var(--paletteBorderColorPrimary);
+    box-shadow: 0 0 2.5rem #000000;
+}
+
+.HeaderContainer .row {
+    margin: 0 auto;
+}
+.HeaderPageLogo img {
+    width: 100px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    aspect-ratio: 18 / 5;
+}
+
+.QuickNavBox button {
+    text-align: center;
 }
 
 
@@ -45,19 +88,38 @@ body {
     width: 100%;
 }
 .RouterContainerFix {
-    min-height: 80vh;
+    min-height: 90vh;
     margin: 0 auto;
+    border-left: .15rem solid;
+    border-right: .15rem solid;
     background-color: var(--paletteColorBackgroundPage);
+    box-shadow: 2rem 0 2.5rem -2rem #000000,
+                -2rem 0 2.5rem -2rem #000000;
 }
 
 .FooterContainer {
+    padding: 5vh;
     min-height: 10vh;
     width: 100%;
     background-color: var(--paletteColorBanner);
-    /* border-top: .25rem solid var(--paletteBorderColorPrimary); */
-    box-shadow: .5rem .5rem .5rem var(--paletteBorderColorPrimary);
+    border-top: .15rem solid var(--paletteBorderColorPrimary);
+    box-shadow: 0 0 2.5rem var(--paletteBorderColorPrimary);
 }
-
+.QuickNavFooter button {
+    display: block;
+    padding: 5px 0;
+    border: none;
+    background: none;
+    transition: color .1s linear, font-weight .1s linear;
+}
+.QuickNavFooter button:hover {
+    color: #1B3280;
+    font-weight: bold;
+}
+.FooterCopyrightText > span {
+    font-family: monospace;
+    display: block;
+}
 
 /* Globalne nastavenia */
 /*  {

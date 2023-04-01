@@ -1,6 +1,23 @@
-<div class="HeaderContainer container-fluid">
-	<div class="row">
-		<div class="HeaderPageLogo">
+<div class="HeaderContainer w-100 container-fluid d-flex align-items-center">
+	<div class="row w-100">
+		<div class="HeaderPageLogo col-2 d-flex pa-5">
+			<a href="/" class="d-inline">
+				<img src="./assets/images/random-logo.png" alt="Page Logo">
+			</a>
+			<h1>Bazarik</h1>
+		</div>
+		<div class="SearchBox col-8">
+			<form class="input-group">
+				<input type="search" class="form-control rounded" name="Search product..." placeholder="Hľadajte inzerát...">
+				<button type="submit" class="btn btn-outline-primary">
+					<fa-icon [icon]="iconSearch"></fa-icon>
+				</button>
+			</form>
+		</div>
+		<div class="QuickNavBox col-2 text-center">
+			<button class="btn btn-success auto">
+				<fa-icon [icon]="iconSearch"></fa-icon> Nový inzerát
+			</button>
 		</div>
 	</div>
 </div>
@@ -31,10 +48,24 @@
 	</div>
 </div>
 <div class="FooterContainer container-fluid">
-	<div class="row">
-
+	<div class="row w-100">
+		<div class="QuickNavFooter col-7 m-2">
+			<h4>Rýchla navigácia</h4>
+			<button type="button" routerLink="/">Domov</button>
+			<button type="button" routerLink="/">Inzeráty</button>
+			<button type="button" routerLink="/">O nás</button>
+			<button type="button" routerLink="/">Zákaznícka podpora</button>
+			<button type="button" routerLink="/">Kontakt</button>
+		</div>
 	</div>
-	<div class="row">
-
+	<div class="row w-100 mt-2">
+		<div class="FooterCopyrightText d-block text-center">
+			<span>
+				2023 &copy; Dvestodola.
+			</span>
+			<span>
+				Fakulta prírodných vied - Univerzita Mateja Bela v Banskej Bystrici 
+			</span>
+		</div>
 	</div>
 </div>
