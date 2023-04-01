@@ -1,0 +1,21 @@
+.detail {
+	margin: 20pt 2%;
+}
+
+.breadcrumb > .breadcrumb-item > a {
+	font-size: larger;
+}
+
+.image {
+	width: 100%;
+	border: 1px solid rgb(148, 148, 148);
+	margin: 10pt auto 12pt;
+}
+
+.description {
+	font-size: larger;
+}
+
+a {
+	cursor: pointer;
+}
