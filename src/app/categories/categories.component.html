@@ -1,0 +1,29 @@
+<!-- Path -->
+<span class="CategoryPath p-2 d-block">
+    <a href="/">Domov</a> > <span class="fw-bold">Katgória N</span>
+</span>
+
+<!-- TODO: Presunúť do osobitného komponentu -->
+<h3>Podkategórie</h3>
+<div class="CategoriesGrid text-center p-2">
+    <div class="ContainerRow p-2" *ngFor="let num of [].constructor(4); let i = index;">
+        <a href="/categoriesKategória" *ngFor="let num of [].constructor(3); let j = index;"> Podkategória [{{i}},{{j}}]</a>
+    </div>
+</div>
+
+<!-- TODO: Presunúť do osobitného komponentu -->
+<div class="AdvertsList">
+    <div class="AdvertItem" *ngFor="let num of [].constructor(10); let i = index;">
+        <img class="AdvertImage" src="assets/images/advert-image.png" alt="Advert Image">
+        <div class="AdvertInfo">
+            <h4 class="AdvertName">Inzerát {{i + 1}} od Huberta Blaine W. Sr.</h4>
+            <p>
+                <span class="AdvertPrice">154,565.98€</span>
+                <span class="AdvertPriceIsAdjustable">
+                    <fa-icon [icon]="fa.faCheck"></fa-icon> Cena je / nie je fixná
+                </span>
+            </p>
+            <div class="AdvertLocation"><fa-icon [icon]="fa.faLocationArrow"></fa-icon>  Banská Bystrica, 974 01</div>
+        </div>
+    </div>
+</div>
