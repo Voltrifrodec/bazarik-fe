@@ -1,12 +1,13 @@
 /* TODO: Zistiť, prečo .CategoriesGrid sa totálne zdeformujú keď je nastavená šírka na viacej ako 92% pri 1920x1080 rozlíšení */
 .CategoriesGrid {
     width: 90%;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 2vmin;
     margin: 10px auto;
     background-color: var(--paletteColorContainerAlt);
     border: .15rem solid;
+}
+.CategoriesGridInformation {
+    display: block;
+    width: 100%;
 }
 h3 {
     width: 90%;
@@ -63,20 +64,12 @@ font-size: xx-large;
 }
 
 
-@media screen and (min-width:1000px) and (max-width:1600px) {
-    .CategoriesGrid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
 @media screen and (min-width:0px) and (max-width:1000px) {
-    .CategoriesGrid {
-        grid-template-columns: 1fr 1fr;
+    .AdvertsList {
+        grid-template-columns: repeat(1, 1fr);
     }
     .CategoryPath {
         font-size: smaller;
-    }
-    .AdvertsList {
-        grid-template-columns: repeat(1, 1fr);
     }
     .AdvertItem {
         flex-direction: column;

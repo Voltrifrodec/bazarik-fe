@@ -6,6 +6,7 @@ import { AdvertDetailPageComponent } from './advert/advert-detail-page/advert-de
 import { CategoriesComponent } from './categories/categories.component';
 import { HomeComponent } from './core/home/home.component';
 import { SubcategoryComponent } from './subcategory/subcategory.component';
+import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
 
 const routes: Routes = [
 	{
@@ -29,6 +30,11 @@ const routes: Routes = [
 		path: 'subcategories',
 		pathMatch: 'full',
 		component: SubcategoryComponent
+	},
+	{
+		path: 'subsubcategories',
+		pathMatch: 'full',
+		component: SubsubcategoryComponent
 	},
 	{
 		path: '**',

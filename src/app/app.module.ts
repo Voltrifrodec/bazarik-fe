@@ -12,6 +12,7 @@ import { AdvertFormComponent } from './advert/advert-form/advert-form.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdvertDetailPageComponent } from './advert/advert-detail-page/advert-detail-page.component';
 import { SubcategoryComponent } from './subcategory/subcategory.component';
+import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
 
 @NgModule({
 	declarations: [
@@ -21,7 +22,8 @@ import { SubcategoryComponent } from './subcategory/subcategory.component';
 		AdvertComponent,
 		AdvertFormComponent,
   		AdvertDetailPageComponent,
-    SubcategoryComponent
+    SubcategoryComponent,
+    SubsubcategoryComponent
 	],
 	imports: [
 		BrowserModule,
