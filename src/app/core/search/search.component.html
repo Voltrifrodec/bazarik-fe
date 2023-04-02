@@ -1,0 +1,29 @@
+<div class="SearchBox">
+	<form class="input-group" action="/search">
+		<input type="search" class="form-control rounded" name="Search product..." placeholder="Vyhľadávať inzeráty...">
+		<button type="submit" class="btn btn-success">
+			<fa-icon [icon]="fa.faSearch"></fa-icon>
+		</button>
+	</form>
+</div>
+<!-- TODO: Presunúť do osobitného komponentu -->
+<h3>Výsledky vyhľadávania</h3>
+<div class="AdvertsList">
+    <div class="AdvertItem" *ngFor="let num of [].constructor(10); let i = index;">
+        <img class="AdvertImage" src="../../assets/images/stiahnuť.png" alt="Advert Image">
+        <div class="AdvertInfo">
+            <h4 class="AdvertName">
+                <a href="/advert/{{i}}">
+                    Inzerát {{i + 1}} od Huberta Blaine W. Sr.
+                </a>
+            </h4>
+            <p>
+                <span class="AdvertPrice">154,565.98€</span>
+                <span class="AdvertPriceIsAdjustable">
+                    <fa-icon [icon]="fa.faCheck"></fa-icon> Cena je / nie je fixná
+                </span>
+            </p>
+            <div class="AdvertLocation"><fa-icon [icon]="fa.faLocationArrow"></fa-icon>  Banská Bystrica, 974 01</div>
+        </div>
+    </div>
+</div>
