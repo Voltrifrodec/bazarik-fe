@@ -91,6 +91,7 @@ export class AdvertFormComponent {
 		if (Number(userResponse) === confirmationNumber) {
 			window.confirm("Inzerát bol úspešne pridaný.");
 			this.router.navigate(['/advert/1'])
+			window.scrollTo(0,0);
 		} else {
 			window.alert("Overenie nebolo úspešné.");
 			this.authorizeAdvert();
