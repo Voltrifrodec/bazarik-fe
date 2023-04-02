@@ -1,4 +1,7 @@
 /* TODO: Zistiť, prečo .CategoriesGrid sa totálne zdeformujú keď je nastavená šírka na viacej ako 92% pri 1920x1080 rozlíšení */
+.CategoryPath ol * {
+    color: #000 !important;
+}
 .CategoriesGrid {
     width: 90%;
     display: grid;

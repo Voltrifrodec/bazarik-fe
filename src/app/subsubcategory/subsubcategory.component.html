@@ -1,7 +1,23 @@
 <!-- Path -->
-<span class="CategoryPath p-2 d-block">
-    <a href="/">Domov</a> > <a href="/categories">Kategória</a> > <a href="/subcategories">Podkategória</a> > <span class="fw-bold">Podpodkategória N</span>
-</span>
+<div class="CategoryPath p-2">
+    <nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a class="link-success" routerLink="/">Domov</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a class="link-success" routerLink="/categories">Kategória</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a class="link-success" routerLink="/subcategories">Podkategória</a>
+			</li>
+			<li class="breadcrumb-item">
+				<!-- TODO:  Subcategories -->
+				<a class="link-success" routerLink="/subsubcategories"><span class="fw-bold">Podkategória n</span></a>
+			</li>
+		</ol>
+	</nav>
+</div>
 
 <!-- TODO: Presunúť do osobitného komponentu -->
 <h3>Podpodkategórie</h3>
