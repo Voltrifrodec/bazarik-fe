@@ -14,7 +14,11 @@
     <div class="AdvertItem" *ngFor="let num of [].constructor(10); let i = index;">
         <img class="AdvertImage" src="../../assets/images/stiahnuť.png" alt="Advert Image">
         <div class="AdvertInfo">
-            <h4 class="AdvertName">Inzerát {{i + 1}} od Huberta Blaine W. Sr.</h4>
+            <h4 class="AdvertName">
+                <a href="/advert/{{i}}">
+                    Inzerát {{i + 1}} od Huberta Blaine W. Sr.
+                </a>
+            </h4>
             <p>
                 <span class="AdvertPrice">154,565.98€</span>
                 <span class="AdvertPriceIsAdjustable">
