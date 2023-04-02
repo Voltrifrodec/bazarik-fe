@@ -13,6 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdvertDetailPageComponent } from './advert/advert-detail-page/advert-detail-page.component';
 import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
+import { SearchComponent } from './core/search/search.component';
+
 
 @NgModule({
 	declarations: [
@@ -22,8 +24,9 @@ import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.compone
 		AdvertComponent,
 		AdvertFormComponent,
   		AdvertDetailPageComponent,
-    SubcategoryComponent,
-    SubsubcategoryComponent
+		SubcategoryComponent,
+		SubsubcategoryComponent,
+		SearchComponent
 	],
 	imports: [
 		BrowserModule,
