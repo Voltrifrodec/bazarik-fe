@@ -72,6 +72,9 @@ font-size: xx-large;
     .CategoriesGrid {
         grid-template-columns: 1fr 1fr;
     }
+    .CategoryPath {
+        font-size: smaller;
+    }
     .AdvertsList {
         grid-template-columns: repeat(1, 1fr);
     }

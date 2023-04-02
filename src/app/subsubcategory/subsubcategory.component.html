@@ -1,12 +1,12 @@
 <!-- Path -->
 <span class="CategoryPath p-2 d-block">
-    <a href="/">Domov</a> > <span class="fw-bold">Kategória N</span>
+    <a href="/">Domov</a> > <a href="/categories">Kategória</a> > <a href="/subcategories">Podkategória</a> > <span class="fw-bold">Podpodkategória N</span>
 </span>
 
 <!-- TODO: Presunúť do osobitného komponentu -->
-<h3>Podkategórie</h3>
+<h3>Podpodkategórie</h3>
 <div class="CategoriesGrid text-center p-2">
-    <a href="/subcategories" *ngFor="let num of [].constructor(12); let i = index;"> Podpodkategória {{i}}</a>
+    <span class="CategoriesGridInformation text-info">Už neexistujú žiadne ďalšie podkategórie na zobrazenie.</span>
 </div>
 
 <!-- TODO: Presunúť do osobitného komponentu -->
