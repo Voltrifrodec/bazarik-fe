@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import * as fa from '@fortawesome/free-solid-svg-icons';
-import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-categories',
