@@ -1,12 +1,22 @@
 <!-- Path -->
-<span class="CategoryPath p-2 d-block">
-    <a href="/">Domov</a> > <span class="fw-bold">Kategória N</span>
-</span>
+<div class="CategoryPath p-2">
+    <nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a class="link-success" routerLink="/">Domov</a>
+			</li>
+			<li class="breadcrumb-item">
+				<!-- TODO:  Subcategories -->
+				<a class="link-success" routerLink="/categories"><span class="fw-bold">Kategória n</span></a>
+			</li>
+		</ol>
+	</nav>
+</div>
 
 <!-- TODO: Presunúť do osobitného komponentu -->
 <h3>Podkategórie</h3>
 <div class="CategoriesGrid text-center p-2">
-    <a href="/subcategories" *ngFor="let num of [].constructor(12); let i = index;"> Podpodkategória {{i}}</a>
+    <a href="/subcategories" *ngFor="let num of [].constructor(12); let i = index;"> Podkategória {{i}}</a>
 </div>
 
 <!-- TODO: Presunúť do osobitného komponentu -->
