@@ -24,21 +24,23 @@
 
 <!-- TODO: Presunúť do osobitného komponentu -->
 <div class="AdvertsList">
-    <div class="AdvertItem" *ngFor="let num of [].constructor(10); let i = index;">
-        <img class="AdvertImage" src="../../assets/images/stiahnuť.png" alt="Advert Image">
-        <div class="AdvertInfo">
-            <h4 class="AdvertName">
-                <a href="/advert/{{i}}">
-                    Inzerát {{i + 1}} od Huberta Blaine W. Sr.
-                </a>
-            </h4>
-            <p>
-                <span class="AdvertPrice">154,565.98€</span>
-                <span class="AdvertPriceIsAdjustable">
-                    <fa-icon [icon]="fa.faCheck"></fa-icon> Cena je / nie je fixná
-                </span>
-            </p>
-            <div class="AdvertLocation"><fa-icon [icon]="fa.faLocationArrow"></fa-icon>  Banská Bystrica, 974 01</div>
+    <a href="/advert/{{i}}" class="AdvertItem"  *ngFor="let num of [].constructor(10); let i = index;">
+        <div>
+            <img class="AdvertImage" src="../../assets/images/stiahnuť.png" alt="Advert Image">
+            <div class="AdvertInfo">
+                <h4 class="AdvertName">
+                    <a href="/advert/{{i}}">
+                        Inzerát {{i + 1}} od Huberta Blaine W. Sr.
+                    </a>
+                </h4>
+                <p>
+                    <span class="AdvertPrice">154,565.98€</span>
+                    <span class="AdvertPriceIsAdjustable">
+                        <fa-icon [icon]="fa.faCheck"></fa-icon> Cena je / nie je fixná
+                    </span>
+                </p>
+                <div class="AdvertLocation"><fa-icon [icon]="fa.faLocationArrow"></fa-icon>  Banská Bystrica, 974 01</div>
+            </div>
         </div>
-    </div>
+    </a>
 </div>

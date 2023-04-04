@@ -5,6 +5,10 @@
 .LatestSearching > div {
     padding: 2px 0;
 }
+.LatestSearching span:nth-child(2) {
+    text-decoration: underline !important;
+    padding-left: 10px;
+}
 
 .CategoriesGrid {
     display: grid;

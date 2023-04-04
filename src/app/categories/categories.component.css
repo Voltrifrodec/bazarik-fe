@@ -1,3 +1,5 @@
+@import url(../../styles/advert.css);
+
 /* TODO: Zistiť, prečo .CategoriesGrid sa totálne zdeformujú keď je nastavená šírka na viacej ako 92% pri 1920x1080 rozlíšení */
 .CategoryPath ol * {
     color: #000 !important;
@@ -16,55 +18,6 @@ h3 {
     padding: 5px 5% 0 5%;
 }
 
-.AdvertsList {
-    width: 100%;
-    margin: 30px 0 50px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-}
-.AdvertName {
-font-size: xx-large;
-}
-.AdvertImage {
-    width: 80%;
-    aspect-ratio: 4/3;
-    padding: 10px;
-    margin: 0 auto;
-    vertical-align: middle;
-    display: inline;
-}
-.AdvertPrice {
-    font-size: x-large;
-    padding-bottom: 10px;
-}
-.AdvertLocation {
-    padding: 5px 5px;
-    border-top: .15rem solid;
-    font-size: large;
-}
-.AdvertPriceIsAdjustable {
-    display: inline;
-    color: #0a0;
-    vertical-align: text-bottom;
-    padding-left: 10px;
-}
-.AdvertInfo {
-    width: 80%;
-    padding: 10px;
-    display: flex;
-    margin: 0 auto;
-    flex-direction: column;
-}
-
-.AdvertItem {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    margin: 10px auto;
-    background-color: var(--paletteColorContainer);
-    border: .15rem solid;
-}
-
 
 @media screen and (min-width:1000px) and (max-width:1600px) {
     .CategoriesGrid {
@@ -77,38 +30,5 @@ font-size: xx-large;
     }
     .CategoryPath {
         font-size: smaller;
-    }
-    .AdvertsList {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    .AdvertItem {
-        flex-direction: column;
-    }
-    .AdvertName {
-        font-size: x-large;
-    }
-    .AdvertInfo {
-        width: 90%;
-        margin: 0 auto;
-    }
-    .AdvertInfo p > span {
-        display: block;
-        padding: 0;
-    }
-    .AdvertImage {
-        width: 90%;
-        height: auto;
-        margin: 0 auto;
-    }
-    .AdvertPrice {
-        padding: 0;
-        font-size: larger;
-    }
-    .AdvertPriceIsAdjustable {
-        font-size: medium;
-    }
-    .AdvertLocation {
-        padding: 5px 0 10px;
-        font-size: medium;
     }
 } 
