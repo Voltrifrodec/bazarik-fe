@@ -18,6 +18,9 @@ h3 {
 .CategoryPath ol * {
     color: #000 !important;
 }
+.CategoriesGrid > a {
+    color: #ddd !important;
+}
 
 
 

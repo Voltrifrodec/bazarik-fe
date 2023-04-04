@@ -9,7 +9,7 @@
     width: 90%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 /*? Advert Item (grid-item) */
@@ -36,7 +36,7 @@
 /*? Advert Item Info (container)  */
 .AdvertInfo {
     width: inherit;
-    padding: 10px;
+    padding: 5px 15px;
     display: flex;
     margin: 0 auto;
     flex-direction: column;
@@ -51,21 +51,28 @@
     vertical-align: middle;
     display: inline;
 }
-.AdvertName { font-size: xx-large; }
-.AdvertPrice {
-    font-size: x-large;
-    padding-bottom: 10px;
+.AdvertName {
+    font-size: medium;
+    margin: 0;
+    padding: 2.5px 0;
 }
-.AdvertPriceIsAdjustable {
+.AdvertPrice {
+    width: 100%;
+    /* border-bottom: .15rem solid; */
+    display: block;
+    font-size: large;
+}
+.AdvertPriceIsConstant {
     display: inline;
     color: #0a0;
     vertical-align: text-bottom;
-    padding-left: 10px;
 }
 .AdvertLocation {
-    padding: 5px 5px;
-    border-top: .15rem solid;
-    font-size: large;
+    padding: 2.5px 0;
+    font-size: medium;
+}
+.AdvertLocation > fa-icon {
+    font-size: small;
 }
 
 
@@ -73,6 +80,8 @@
     width: 95%;
     margin: 0 auto;
 }
+
+
 
 @media screen and (min-width:0px) and (max-width:1000px) {
     .AdvertsList {
@@ -107,5 +116,10 @@
     .AdvertLocation {
         padding: 5px 0 10px;
         font-size: medium;
+    }
+}
+@media screen and (min-width:700px) and (max-width:1200px) {
+    .AdvertsList {
+        grid-template-columns: 1fr 1fr;
     }
 }

@@ -13,6 +13,9 @@
     background-color: var(--paletteColorContainerAlt);
     border: .15rem solid;
 }
+.CategoriesGrid > a {
+    color: #ddd !important;
+}
 h3 {
     width: 90%;
     padding: 5px 5% 0 5%;

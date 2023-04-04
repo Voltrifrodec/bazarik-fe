@@ -21,22 +21,18 @@
 
 <!-- TODO: Presunúť do osobitného komponentu -->
 <div class="AdvertsList">
-    <a href="/advert/{{i}}" class="AdvertItem"  *ngFor="let num of [].constructor(10); let i = index;">
+    <a href="/advert/{{i}}" class="AdvertItem"  *ngFor="let num of [].constructor(150); let i = index;">
         <div>
-            <img class="AdvertImage" src="../../assets/images/stiahnuť.png" alt="Advert Image">
+            <img class="AdvertImage" src="{{i % 2 == 0 ? '../../assets/images/advert-image.png' : '../../assets/images/advert-image2.png'}}" alt="Advert Image">
             <div class="AdvertInfo">
+                <span class="AdvertPrice">
+                    154,565.98 €
+                </span>
                 <h4 class="AdvertName">
-                    <a href="/advert/{{i}}">
-                        Inzerát {{i + 1}} od Huberta Blaine W. Sr.
-                    </a>
+                    Inzerát {{i + 1}} od Huberta Blaine W. Sr.
                 </h4>
-                <p>
-                    <span class="AdvertPrice">154,565.98€</span>
-                    <span class="AdvertPriceIsAdjustable">
-                        <fa-icon [icon]="fa.faCheck"></fa-icon> Cena je / nie je fixná
-                    </span>
-                </p>
-                <div class="AdvertLocation"><fa-icon [icon]="fa.faLocationArrow"></fa-icon>  Banská Bystrica, 974 01</div>
+                <span class="AdvertLocation"><fa-icon [icon]="fa.faLocationArrow"></fa-icon>  Banská Bystrica, 974 01</span>
+                <span class="AdvertPriceIsConstant"><fa-icon [icon]="fa.faCheck"></fa-icon>  Cena je / nie je fixná</span>
             </div>
         </div>
     </a>
