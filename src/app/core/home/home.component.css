@@ -5,34 +5,44 @@
 .LatestSearching > div {
     padding: 2px 0;
 }
+.LatestSearching span:nth-child(2) {
+    text-decoration: underline !important;
+    padding-left: 10px;
+}
 
 .CategoriesGrid {
+    width: 75%;
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    gap: 5vmin;
+    margin: 0 auto !important;
 }
-.ContainerItem {
-    margin: 10px;
+.ContainerRow {
+    margin-top: -17px;
+    
+}
+.ContainerItem > div {
+    margin: 20px 10px;
     padding: 5px;
     text-align: center;
-    min-width: 150px;
-    min-height: 150px;
+    min-width: 100px;
+    min-height: 100px;
     background-color: var(--paletteColorContainerAlt2);
     border: 1px solid;
 }
-.ContainerItem > fa-icon {
+.ContainerItem > div > fa-icon {
     line-height: 90px;
     display: block;
     font-size: 40px;
 }
 
-@media screen and (min-width:1000px) and (max-width:1600px) {
+@media screen and (min-width:650px) and (max-width:1600px) {
     .CategoriesGrid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
-@media screen and (min-width:0px) and (max-width:1000px) {
+@media screen and (min-width:0px) and (max-width:650px) {
     .CategoriesGrid {
+        width: 100%;
         grid-template-columns: 1fr 1fr;
         gap: 0;
     }
