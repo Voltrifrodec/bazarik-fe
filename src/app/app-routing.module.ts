@@ -42,6 +42,16 @@ const routes: Routes = [
 		component: SubcategoryComponent
 	},
 	{
+		path: 'subcategories/:subcategoryId',
+		pathMatch: 'full',
+		component: SubcategoryComponent
+	},
+	{
+		path: 'subsubcategories/:subsubcategoryId',
+		pathMatch: 'full',
+		component: SubsubcategoryComponent
+	},
+	{
 		path: 'subsubcategories',
 		pathMatch: 'full',
 		component: SubsubcategoryComponent
