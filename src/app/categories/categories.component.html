@@ -1,26 +1,81 @@
-<!-- Path -->
-<div class="CategoryPath p-2">
+<div class="border border-dark m-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="link" href="/">Domov</a> 
+        </li>
+        <li class="breadcrumb-item">
+            <a class="link" routerLink="/categories">
+                <span class="fw-bold">Kategória n</span>
+            </a> 
+        </li>
+    </ol>
+</div>
+
+<div class="border border-dark m-3 pt-2 pb-2">
+    <h3>Podkategórie</h3>
+</div>
+<div class="border border-dark bg-container-alt categories-alt-grid m-3">
+    <div *ngFor="let num of [].constructor(12); let i = index;" class="p-2">
+        <a href="/subcategories/{{i + 1}}" class="color-light">Podkategória {{i + 1}}</a>
+    </div>
+</div>
+
+<div class="border border-dark m-3 adverts-grid">
+    <a *ngFor="let num of [].constructor(22); let i = index;" class="border border-dark bg-container p-3" href="/advert/{{i + 1}}">
+        <div class="text-center">
+            <img src="../../assets/images/advert-image2.png" alt="Ilustračná fotografia inzerátu" class="advert-image">
+        </div>
+        <div class="text-left">
+            <p class="h4 pt-2">154,656.98 €</p>
+            <p class="border-bottom border-dark pb-2 fw-bold h6">Inzerát #X od Huberta Blaine W. Sr.</p>
+            <span>
+                <fa-icon [icon]="fa.faLocationArrow"></fa-icon> Banská Bystrica, 974 01
+            </span>
+            <span class="text-success d-block">
+                <fa-icon [icon]="fa.faCheck"></fa-icon> Cena je / nie je fixná
+            </span>
+        </div>  
+    </a>
+</div>
+
+<!-- <div class="border border-dark m-3 p-2 container-fluid">
+    <div *ngFor="let num of [].constructor(5); let i = index;" class="row">
+        <div *ngFor="let num of [].constructor(4); let j = index;" class="col-lg-3 col-6">
+            <img src="../../assets/images/advert-image2.png" alt="Ilustračná fotografia inzerátu" class="advert-image">
+            <div>
+                <span class="h4">154,656.98 €</span>
+                <h4 class="AdvertName">Inzerát #X od Huberta Blaine W. Sr.</h4>
+                <span>
+                    <fa-icon [icon]="fa.faLocationArrow"></fa-icon> Banská Bystrica, 974 01
+                </span>
+                <span class="text-success d-block">
+                    <fa-icon [icon]="fa.faCheck"></fa-icon> Cena je / nie je fixná
+                </span>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- <div class="CategoryPath p-2">
     <nav>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item">
 				<a class="link-success" routerLink="/">Domov</a>
 			</li>
 			<li class="breadcrumb-item">
-				<!-- TODO:  Subcategories -->
 				<a class="link-success" routerLink="/categories"><span class="fw-bold">Kategória n</span></a>
 			</li>
 		</ol>
 	</nav>
-</div>
+</div> -->
 
 <!-- TODO: Presunúť do osobitného komponentu -->
-<h3>Podkategórie</h3>
+<!-- <h3>Podkategórie</h3>
 <div class="CategoriesGrid text-center p-2">
     <a href="/subcategories" *ngFor="let num of [].constructor(12); let i = index;"> Podkategória {{i}}</a>
-</div>
+</div> -->
 
 <!-- TODO: Presunúť do osobitného komponentu -->
-<div class="AdvertsList">
+<!-- <div class="AdvertsList">
     <a href="/advert/{{i}}" class="AdvertItem"  *ngFor="let num of [].constructor(150); let i = index;">
         <div>
             <img class="AdvertImage" src="{{i % 2 == 0 ? '../../assets/images/advert-image.png' : '../../assets/images/advert-image2.png'}}" alt="Advert Image">
@@ -36,4 +91,4 @@
             </div>
         </div>
     </a>
-</div>
+</div> -->

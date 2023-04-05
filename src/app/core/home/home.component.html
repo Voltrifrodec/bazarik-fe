@@ -1,19 +1,17 @@
-<div class="LatestSearching auto m-3">
-    <div *ngFor="let i of [1,2,3,4]" class="p-2">
-        <span>(2023-04-01 14:56)</span>
-        <span>
-            <a routerLink="advert/{{i}}" href="/">Text pre odkaz na inzerát #{{i}}, ktorý naschvál píšem taký dlhý aby som skúsil maximálnu dĺžku názvu inzerátu.</a>
+<div class="border border-dark auto m-3 p-2 bg-container">
+    <div *ngFor="let i of [1,2,3,4]">
+        <!-- <span class="p-2 d-inline-block">(2023-04-0{{i}} 14:56)</span> -->
+        <span class="p-1 d-inline-block">
+            <a routerLink="advert/{{i}}" class="text-decoration-underline">Text pre odkaz na inzerát #{{i}}, ktorý naschvál píšem taký dlhý aby som skúsil maximálnu dĺžku názvu inzerátu.</a>
         </span>
     </div>
 </div>
-<div class="CategoriesGrid auto m-2">
-    <div class="ContainerRow" *ngFor="let num of [].constructor(4); let i = index;">
-        <a href="category/{{(i+j) * (i + 1)}}" *ngFor="let num of [].constructor(4); let j = index;" class="ContainerItem">
-            <div>
-                <fa-icon [icon]="fa.faSearch"></fa-icon>
-                <a href="category/{{i+j}}">Kategória [{{i}},{{j}}]</a>
-            </div>
-        </a>
-    </div>
-    
+
+<div class="categories-grid m-3">
+    <a class="categories-grid-item bg-container-alt-2 border border-dark" *ngFor="let num of [].constructor(16); let i = index;" href="/category/{{i+1}}">
+        <div class="p-2 d-flex flex-column align-items-center justify-content mb-2">
+            <fa-icon [icon]="fa.faSearch" class="h2 d-block pt-2"></fa-icon>
+            <span>Kategória {{i + 1}}</span>
+        </div>
+    </a>
 </div>

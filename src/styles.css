@@ -1,4 +1,4 @@
-/*? Premenne */
+/*? Premenné */
 :root {
 
     /* Farby pozadia */
@@ -21,18 +21,13 @@
 }
 
 
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 15px;
-}
-
-
+/*? Scrollbar */
+::-webkit-scrollbar { width: 15px; }
 ::-webkit-scrollbar-track {
     border-radius: 25px;
     border: .05rem solid;
     background: var(--paletteColorBackgroundPage);
 }
-
 ::-webkit-scrollbar-thumb {
     background: var(--paletteColorContainerAlt);
     border-left: .05rem solid;
@@ -40,13 +35,12 @@
     border-radius: 15px;
     transition: background .2s linear;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-    background: #333; 
+    background: #333;
 }
 
 
-/* Globalne nastavenia */
+/*? Nastavenia pre všetky značky / hlavné značky */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -62,48 +56,76 @@ a {
     color: #000000;
     transition: color .1s linear, font-weight .1s linear;
 }
-/* a:hover {
-    color: #1B3280;
-    font-weight: bold;
-} */
 h1 {
     font-size: x-large;
 }
 
 
-.HeaderContainer {
-    min-height: 10vh;
-    width: 100%;
+/*? Nastavenie podporných tried pre Bootstrap */
+.bg-banner {
     background-color: var(--paletteColorBanner);
-    border-bottom: .15rem solid var(--paletteBorderColorPrimary);
-    box-shadow: 0 0 2.5rem #000000;
 }
-
-.HeaderContainer .row {
-    margin: 0 auto;
+.bg-container {
+    background-color: var(--paletteColorContainer);
 }
-.HeaderPageLogo img {
-    width: 100px;
-    margin-bottom: 10px;
-    margin-right: 20px;
-    aspect-ratio: 18 / 5;
+.bg-container-alt {
+    background-color: var(--paletteColorContainerAlt);
 }
-
-.QuickNavBox button {
+.bg-container-alt-2 {
+    background-color: var(--paletteColorContainerAlt2);
+}
+.text-true-right {
+    text-align: right;
+}
+.text-true-right fa-icon {
+    padding-right: 10px;
+}
+.breadcrumbs a:hover {
+    color: var(--paletteBorderColorSecondary) !important;
+}
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2vmin;
+}
+.categories-alt-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2vmin;
     text-align: center;
 }
-.QuickNavBox button::after {
-    content: 'Nový inzerát';
-    padding-left: 10px;
-    display: inline-block;
+.advert-image {
+    width: 24vmin;
+}
+.color-light {
+    color: #CCCCCC;
+}
+.color-light:hover {
+    color: #000000;
+}
+.adverts-grid {
+    display: grid;
+    gap: 2vmin;
+    grid-template-columns: repeat(4, 1fr);
+}
+.adverts-grid span {
+    font-size: small;
+}
+.adverts-grid *:hover {
+    color: #000000;
+}
+.adverts-grid a:hover {
+    background-color: #fbb671;
 }
 
+/*? Nastavenie pre RouterContainer */
 .RouterContainer {
     width: 100%;
 }
 .RouterContainerFix {
     min-height: 90vh;
     margin: 0 auto;
+    
     border-left: .15rem solid;
     border-right: .15rem solid;
     background-color: var(--paletteColorBackgroundPage);
@@ -111,12 +133,12 @@ h1 {
                 -2rem 0 2.5rem -2rem #000000;
 }
 
+
+/*? Nastavenie pre pätu stránky */
 .FooterContainer {
     padding: 5vh;
     min-height: 10vh;
     width: 100%;
-    background-color: var(--paletteColorBanner);
-    border-top: .15rem solid var(--paletteBorderColorPrimary);
     box-shadow: 0 0 2.5rem var(--paletteBorderColorPrimary);
 }
 .QuickNavFooter button {
@@ -135,88 +157,35 @@ h1 {
     display: block;
 }
 
-/* Globalne nastavenia */
-/*  {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+
+/* TODO: Optimalizovat! */
+@media screen and (min-width:651px) and (max-width:850px) {
+    .categories-grid, .categories-alt-grid, .adverts-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
-body {
-    height: 100vh;
-    width: 100vw;
-
-    background-color: var(--paletteColorContainerAlt);
+@media screen and (min-width: 0px) and (max-width: 1105px) {
+    .adverts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
-
-
-/* Stylizacia hlavicky 
-.HeaderContainer > div {
-    min-height: 10vh;
-    width: 100%;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    padding: .5rem;
-
-    background-color: var(--paletteColorBanner);
-    border-bottom: .25rem solid var(--paletteBorderColorPrimary);
+@media screen and (min-width: 1105px) and (max-width:1450px) {
+    .adverts-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
-
-.HeaderContainer {
-    padding: 0 1.5rem;
-}
-.HeaderContainer > .SearchBox {
-    padding-left: 1.5rem;
-}
-
-.HeaderContainer > .SearchBox > form {
-    display: flex;
-}
-
-.HeaderPageLogo > img {
-    width: 100px;
-    margin-bottom: 10px;
-    aspect-ratio: 18 / 5; /* Super Ultrawide Aspect Ratio, pre teraz 
+@media screen and (min-width:0px) and (max-width:700px) {
+    .categories-grid, .categories-alt-grid, .adverts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 } 
 
-/* .HeaderContainer > .ButtonsBox {
-
-}
-.HeaderContainer > .ButtonsBox > button {
-    background-color: #f00;
-} */
-
-
-/* Nastavenia kontajnera, v ktorom je <router-outlet> */
-/* .RouterContainer {
-    min-height: 80vh !important;
-    width: 60%;
-    margin: 0 auto;
-
-    background-color: var(--paletteColorBackgroundPage);
-    border-left: .25rem solid var(--paletteBorderColorPrimary);
-    border-right: .25rem solid var(--paletteBorderColorPrimary);
-}
-
-
-
-.FooterContainer {
-    min-height: 10vh;
-    width: 100%;
-
-    background-color: var(--paletteColorBanner);
-    border-top: .25rem solid var(--paletteBorderColorPrimary);
-}
-
-*/
 @media screen and (min-width:0px) and (max-width:940px) {
-    .RouterContainerFix {
-        width: 100% !important;
-    }
-    h1 {
-        display: none;
-    }
-    .QuickNavBox > button::after {
-        display: none;
-    }
-} 
+    h1 { display: none; }
+    
+    .text-true-right > button > span { display: none; }
+    .text-true-right fa-icon { padding: 0; }
+    
+    .RouterContainerFix { width: 100% !important; }
+    .QuickNavBox > button::after { display: none; }
+}

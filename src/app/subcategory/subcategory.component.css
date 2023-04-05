@@ -10,10 +10,6 @@
     background-color: var(--paletteColorContainerAlt);
     border: .15rem solid;
 }
-h3 {
-    width: 90%;
-    padding: 5px 5% 0 5%;
-}
 
 .CategoryPath ol * {
     color: #000 !important;
@@ -21,8 +17,6 @@ h3 {
 .CategoriesGrid > a {
     color: #ddd !important;
 }
-
-
 
 
 @media screen and (min-width:1000px) and (max-width:1600px) {

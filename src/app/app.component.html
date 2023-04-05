@@ -1,45 +1,22 @@
-<div class="HeaderContainer w-100 container-fluid d-flex align-items-center">
-	<div class="row w-100">
-		<div class="HeaderPageLogo col-3 d-flex pa-5">
-			<a href="/" class="d-inline">
-				<img src="./assets/images/random-logo.png" alt="Page Logo">
-			</a>
-			<!-- <h1>Bazarik</h1> -->
-		</div>
-		<div class="SearchBox col-7 auto">
-			<form class="input-group" action="/search">
-				<input type="search" class="form-control rounded" name="Search product..." placeholder="Hľadajte inzerát...">
-				<button type="submit" class="btn btn-success">
-					<fa-icon [icon]="iconSearch"></fa-icon>
-				</button>
-			</form>
-		</div>
-		<div class="QuickNavBox col-2 text-center">
-			<button class="btn btn-success auto" routerLink="/advert">
-				<fa-icon [icon]="iconAddNew"></fa-icon>
-			</button>
-		</div>
+<div class="navbar navbar-expand-lg navbar-light p-3 bg-banner border-bottom border-dark">
+	<div class="navbar-item w-25">
+		<!-- TODO: Pozrieť, že či AliExpress ma brightness hover effect pre logo -->
+		<a href="/" class="navbar-brand fw-bold">Bazarik</a>
+	</div>
+	<form class="input-group w-50" action="/search">
+		<input type="search" class="form-control rounded" name="Search product..." placeholder="Hľadajte inzerát...">
+		<button type="submit" class="btn btn-success">
+			<fa-icon [icon]="fa.faSearch"></fa-icon>
+		</button>
+	</form>
+	<div class="w-25 text-true-right">
+		<button class="btn btn-success" routerLink="/advert">
+			<fa-icon [icon]="fa.faPlus"></fa-icon>
+			<span>Nový inzerát</span>
+		</button>
 	</div>
 </div>
 
-<!-- <div class="HeaderContainer">
-	<div class="container-fluid pa-0">
-		<div class="row">
-			<div class="HeaderPageLogo">
-				<img src="/assets/images/random-logo.png" alt="Page Logo">
-			</div>
-			Search form 
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn bg-info my-2 my-sm-0" type="submit">
-					<fa-icon [icon]="iconSearch" class="form-control-sm"></fa-icon>
-				</button>
-				<fa-icon [icon]="iconSearch" class="form-control-sm"></fa-icon>
-			</form>
-
-		</div>
-	</div>
-</div> -->
 
 <div class="RouterContainer container-fluid">
 	<div class="row">
@@ -49,13 +26,13 @@
 	</div>
 </div>
 
-<div class="FooterContainer container-fluid">
+
+<div class="FooterContainer container-fluid bg-banner border-top border-dark">
 	<div class="row w-100">
 		<div class="QuickNavFooter col-7 m-2">
 			<h4>Rýchla navigácia</h4>
 			<button type="button" routerLink="/">Domov</button>
 			<button type="button" routerLink="/">O nás</button>
-			<!-- <button type="button" routerLink="/">Zákaznícka podpora</button> -->
 			<button type="button" routerLink="/">Kontakt</button>
 		</div>
 	</div>
