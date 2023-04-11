@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 	providedIn: 'root'
 })
 export class AdvertService {
+	
 	private apiUrl = `http://localhost:8080/api`;
 	private advertsUrl = 'http://localhost:8080/api/adverts';
 	
@@ -32,8 +33,8 @@ export class AdvertService {
 		return this.http.get<Advert>(`${this.advertsUrl}/${advertId}`);
 	}
 
-	createAdvert(advert: Advert): Observable<number> {
-		return this.http.post<number>(this.advertsUrl, advert);
+	createAdvert(advert: Advert): Observable<string> {
+		return this.http.post<string>(this.advertsUrl, advert);
 	}
 
 	updateAdvert(advert: Advert): Observable<Advert> {
