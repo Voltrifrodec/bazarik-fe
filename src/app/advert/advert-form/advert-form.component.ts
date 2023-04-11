@@ -131,9 +131,9 @@ export class AdvertFormComponent {
 		}
 	}
 
-	private prepareAdvert(advertId?: number): Advert {
+	private prepareAdvert(advertId?: string): Advert {
     	return {
-			id: advertId !== undefined ? advertId : Date.now(),
+			id: advertId !== undefined ? advertId : '',
 			name: this.advertForm.controls['name'].value,
 			description: this.advertForm.controls['description'].value,
 			keywords: this.advertForm.controls['keywords'].value,

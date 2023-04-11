@@ -7,7 +7,7 @@ import { Subsubcategory } from "./subsubcategory.model";
 import { Image } from "./image.model";
 
 export interface Advert {
-	id: number;
+	id: string;
 	name: string;
 	description: string;
 	keywords: string;

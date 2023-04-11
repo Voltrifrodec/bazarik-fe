@@ -28,7 +28,7 @@ export class AdvertService {
 		return this.http.get<Advert[]>(`${this.apiUrl}/categories/${subsubcategoryId}/adverts`);
 	}
 
-	getAdvertById(advertId: number): Observable<Advert> {
+	getAdvertById(advertId: string): Observable<Advert> {
 		return this.http.get<Advert>(`${this.advertsUrl}/${advertId}`);
 	}
 

@@ -15,7 +15,7 @@ export class AdvertDetailPageComponent {
 
 	advert?: Advert;
 
-	private advertId: number | null;
+	private advertId: string | null;
 
 	constructor(
 		private router: Router,
@@ -23,7 +23,7 @@ export class AdvertDetailPageComponent {
 		private service: AdvertService,
 		private toastService: ToastService
 	) {
-		this.advertId = Number(route.snapshot.paramMap.get('advertId'));
+		this.advertId = route.snapshot.paramMap.get('advertId');
 		this.getAdvert();
 	}
 
