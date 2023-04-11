@@ -4,8 +4,8 @@
 	<!-- name -->
 	<div class="form-group">
 		<label class="h3">Názov</label>
-		<input class="form-control form-control-lg" name="Názov inzerátu" type="text"
-			placeholder="Zadajte názov inzerátu" formControlName="name" required>
+		<input formControlName="name" class="form-control form-control-lg" name="Názov inzerátu" type="text"
+			placeholder="Zadajte názov inzerátu" required>
 	</div>
 
 
@@ -21,7 +21,7 @@
 		<!-- category -->
 		<div class="form-group">
 			<label class="h3">Kategória</label>
-			<select class="form-control form-control-lg" formControlName="category">
+			<select formControlName="category" class="form-control form-control-lg">
 				<option disabled selected [value]="null">Vyberte kategóriu inzerátu</option>
 				<option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
 			</select>
@@ -30,7 +30,7 @@
 		<!-- subcategory, cez ngif -->
 		<div class="form-group" *ngIf="advertForm.controls['category'].value">
 			<label class="h3">Podkategória</label>
-			<select class="form-control form-control-lg" formControlName="subcategory">
+			<select formControlName="subcategory" class="form-control form-control-lg">
 				<option disabled selected [value]="null">Vyberte podkategóriu inzerátu</option>
 				<option *ngFor="let subcategory of subcategories" [value]="subcategory.id">{{ subcategory.name }}
 				</option>
@@ -40,7 +40,7 @@
 		<!-- subsubcategory, cez ngif -->
 		<div class="form-group" *ngIf="advertForm.controls['subcategory'].value">
 			<label class="h3">Podpodkategória</label>
-			<select class="form-control form-control-lg" formControlName="subsubcategory">
+			<select formControlName="subsubcategory" class="form-control form-control-lg">
 				<option disabled selected [value]="null">Vyberte podpodkategóriu inzerátu</option>
 				<option *ngFor="let subsubcategory of subsubcategories" [value]="subsubcategory.id">{{
 					subsubcategory.name }}
@@ -54,7 +54,7 @@
 		<!-- region -->
 		<div class="form-group">
 			<p class="h3">Región</p>
-			<select class="form-control form-control-lg" formControlName="region">
+			<select formControlName="region" class="form-control form-control-lg">
 				<option disabled selected [value]="null">Vyberte región</option>
 				<option *ngFor="let region of regions" [value]="region.id">{{ region.name }}</option>
 			</select>
@@ -66,7 +66,7 @@
 				Okres
 				<small class="text-muted h6">Kliknite sem, pre návrh chýbajúceho okresu.</small>
 			</p>
-			<select class="form-control form-control-lg" formControlName="district">
+			<select formControlName="district" class="form-control form-control-lg">
 				<option disabled selected [value]="null">Vyberte okres</option>
 				<option *ngFor="let district of districts" [value]="district.id">{{ district.name + " " +
 					district.postcode }}
@@ -87,10 +87,10 @@
 		</p>
 		<div class="input-group mb-2">
 			<div class="currency input-group-prepend">
-				<input class="d-none" [value]="this.currency.id" formControlName="currency" required>
+				<input formControlName="currency" class="d-none" [value]="this.currency.id" required>
 				<div class="form-control form-control-lg bg-secondary text-light rounded-left">{{ this.currency.symbol }}</div>
 			</div>
-			<input type="number" min="0" max="9999" class="form-control form-control-lg" placeholder="Cena pre inzerát" required>
+			<input formControlName="priceEur" type="number" min="0" max="9999" class="form-control form-control-lg" placeholder="Cena pre inzerát" required>
 		</div>
 		<!-- </div> -->
 		

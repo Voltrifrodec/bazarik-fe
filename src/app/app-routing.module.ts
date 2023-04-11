@@ -16,7 +16,7 @@ const routes: Routes = [
 		component: HomeComponent
 	},
 	{
-		path: 'advert',
+		path: 'advert/new',
 		component: AdvertFormComponent
 	},
 	{

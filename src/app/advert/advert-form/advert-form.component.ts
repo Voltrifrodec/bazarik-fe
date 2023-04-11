@@ -64,7 +64,7 @@ export class AdvertFormComponent {
 			description: new FormControl(null, [Validators.required]),
 			keywords: new FormControl(null, [Validators.required]),
 
-			priceEur: new FormControl(null, [Validators.required]),
+			priceEur: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(50000)]),
 			currency: new FormControl(this.currency, [Validators.required]),
 			fixedPrice: new FormControl(null, [Validators.required]),
 
