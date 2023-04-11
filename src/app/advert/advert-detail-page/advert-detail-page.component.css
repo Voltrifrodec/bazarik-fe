@@ -1,15 +1,5 @@
-.detail {
-	margin: 20pt 2%;
-}
-
 .breadcrumb > .breadcrumb-item > a {
 	font-size: larger;
-}
-
-.image {
-	width: 100%;
-	border: 1px solid rgb(148, 148, 148);
-	margin: 10pt auto 12pt;
 }
 
 .description {
@@ -17,5 +7,13 @@
 }
 
 a {
-	cursor: pointer;
+	/* cursor: pointer; */
+}
+
+.hideOverflow {
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	width:100%;
+	display:block;
 }

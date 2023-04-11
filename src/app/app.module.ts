@@ -14,6 +14,8 @@ import { AdvertDetailPageComponent } from './advert/advert-detail-page/advert-de
 import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
 import { SearchComponent } from './core/search/search.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component'
 
 
 @NgModule({
@@ -26,14 +28,17 @@ import { SearchComponent } from './core/search/search.component';
   		AdvertDetailPageComponent,
 		SubcategoryComponent,
 		SubsubcategoryComponent,
-		SearchComponent
+		SearchComponent,
+  PagenotfoundComponent,
+		
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		NgbModule,
 		FontAwesomeModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		HttpClientModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

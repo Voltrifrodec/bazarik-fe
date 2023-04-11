@@ -8,8 +8,13 @@ import { HomeComponent } from './core/home/home.component';
 import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
 import { SearchComponent } from './core/search/search.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
+	{
+		path: '',
+		component: HomeComponent
+	},
 	{
 		path: 'advert',
 		component: AdvertFormComponent
@@ -17,10 +22,6 @@ const routes: Routes = [
 	{
 		path: 'advert/:advertId',
 		component: AdvertDetailPageComponent
-	},
-	{
-		path: '',
-		component: HomeComponent
 	},
 	{
 		path: 'search',
@@ -55,6 +56,10 @@ const routes: Routes = [
 		path: 'subsubcategories',
 		pathMatch: 'full',
 		component: SubsubcategoryComponent
+	},
+	{
+		path: '404',
+		component: PagenotfoundComponent
 	},
 	{
 		path: '**',

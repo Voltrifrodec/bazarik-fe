@@ -1,5 +1,5 @@
 
-<form [formGroup]="advertForm" (submit)="authorizeAdvert()">
+<form [formGroup]="advertForm" (submit)="saveAdvert()">
 	<h1 class="display-2 underline mt-3">Pridať inzerát</h1>
 	<!-- name -->
 	<div class="form-group">
@@ -87,8 +87,8 @@
 		</p>
 		<div class="input-group mb-2">
 			<div class="currency input-group-prepend">
-				<input class="d-none" [value]="this.currencies[0].id" formControlName="currency" required>
-				<div class="form-control form-control-lg bg-secondary text-light rounded-left">{{ this.currencies[0].symbol }}</div>
+				<input class="d-none" [value]="this.currency.id" formControlName="currency" required>
+				<div class="form-control form-control-lg bg-secondary text-light rounded-left">{{ this.currency.symbol }}</div>
 			</div>
 			<input type="number" min="0" max="9999" class="form-control form-control-lg" placeholder="Cena pre inzerát" required>
 		</div>
@@ -135,7 +135,8 @@
 	</div>
 
 	<div class="group">
-		<input class="btn btn-primary" type="submit" value="Odoslať inzerát">
+		<input class="btn btn-primary" type="submit" value="Odoslať inzerát" [disabled]="advertForm.invalid">
+		<input class="btn btn-danger" type="button" value="Zrušiť inzerát">
 	</div>
 
 </form>
