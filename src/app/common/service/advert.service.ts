@@ -40,7 +40,7 @@ export class AdvertService {
 		return this.http.put<Advert>(`${this.advertsUrl}/${advert.id}`, advert);
 	}
 
-	deleteAdvert(advertId: number): Observable<void> {
+	deleteAdvert(advertId: string): Observable<void> {
 		return this.http.delete<void>(`${this.advertsUrl}/${advertId}`);
 	}
 }
