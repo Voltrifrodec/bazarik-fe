@@ -1,4 +1,4 @@
-<form [formGroup]="advertForm" (submit)="saveAdvert()">
+<form [formGroup]="advertForm" (submit)="saveAdvert()" ng-attr-title="Nový inzerát">
     <h1 class="display-2 underline mt-3">Pridať inzerát</h1>
     <!-- name -->
     <div class="form-group">
@@ -52,7 +52,8 @@
         <!-- category -->
         <div class="form-group">
             <label class="h3">Kategória</label>
-            <select formControlName="category" class="form-control form-control-lg">
+            <!-- TODO: (input) -> (change) -->
+            <select formControlName="category" class="form-control form-control-lg" (change)="loadSubcategories()">
 				<option disabled selected [value]="null">Vyberte kategóriu inzerátu</option>
 				<option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
 			</select>
@@ -61,7 +62,7 @@
         <!-- subcategory, cez ngif -->
         <div class="form-group" *ngIf="advertForm.controls['category'].value">
             <label class="h3">Podkategória</label>
-            <select formControlName="subcategory" class="form-control form-control-lg">
+            <select formControlName="subcategory" class="form-control form-control-lg" (change)="loadSubsubcategories()">
 				<option disabled selected [value]="null">Vyberte podkategóriu inzerátu</option>
 				<option *ngFor="let subcategory of subcategories" [value]="subcategory.id">{{ subcategory.name }}
 				</option>
@@ -86,7 +87,7 @@
         <!-- region -->
         <div class="form-group">
             <label class="h3">Región</label>
-            <select formControlName="region" class="form-control form-control-lg">
+            <select formControlName="region" class="form-control form-control-lg" (change)="loadDistricts()">
 				<option disabled selected [value]="null">Vyberte región</option>
 				<option *ngFor="let region of regions" [value]="region.id">{{ region.name }}</option>
 			</select>
@@ -98,9 +99,9 @@
                 Okres
                 <small class="text-muted h6">Kliknite sem, pre návrh chýbajúceho okresu.</small>
             </label>
-            <select formControlName="district" class="form-control form-control-lg">
+            <select formControlName="district" class="form-control form-control-lg" (change)="loadCities()">
 				<option disabled selected [value]="null">Vyberte okres</option>
-				<option *ngFor="let district of districts" [value]="district.id">{{ district.name + " " +
+				<option *ngFor="let district of districts" [value]="district.id">{{ district.name + ", " +
 					district.postcode }}
 				</option>
 			</select>

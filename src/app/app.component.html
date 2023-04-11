@@ -1,49 +1,49 @@
 <div class="navbar navbar-expand-lg navbar-light p-3 bg-banner border-bottom border-dark">
-	<div class="navbar-item w-25">
-		<!-- TODO: Pozrieť, že či AliExpress ma brightness hover effect pre logo -->
-		<a href="/" class="navbar-brand fw-bold">Bazarik</a>
-	</div>
-	<form class="input-group w-50" action="/search">
-		<input type="search" class="form-control rounded" name="Search product..." placeholder="Hľadajte inzerát...">
-		<button type="submit" class="btn btn-success">
+    <div class="navbar-item w-25">
+        <!-- TODO: Pozrieť, že či AliExpress ma brightness hover effect pre logo -->
+        <a href="/" class="navbar-brand fw-bold">Bazarik</a>
+    </div>
+    <form class="input-group w-50" action="/search">
+        <input type="search" class="form-control rounded" name="Search product..." placeholder="Hľadajte inzerát...">
+        <button type="submit" class="btn btn-success">
 			<fa-icon [icon]="fa.faSearch"></fa-icon>
 		</button>
-	</form>
-	<div class="w-25 text-true-right">
-		<button class="btn btn-success" routerLink="/advert">
+    </form>
+    <div class="w-25 text-true-right">
+        <button class="btn btn-success" routerLink="/advert/new">
 			<fa-icon [icon]="fa.faPlus"></fa-icon>
 			<span>Nový inzerát</span>
 		</button>
-	</div>
+    </div>
 </div>
 
 
 <div class="RouterContainer container-fluid">
-	<div class="row">
-		<div class="RouterContainerFix col-8">
-			<router-outlet></router-outlet>
-		</div>
-	</div>
+    <div class="row">
+        <div class="RouterContainerFix col-8">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>
 
 
 <div class="FooterContainer container-fluid bg-banner border-top border-dark">
-	<div class="row w-100">
-		<div class="QuickNavFooter col-7 m-2">
-			<h4>Rýchla navigácia</h4>
-			<button type="button" routerLink="/">Domov</button>
-			<button type="button" routerLink="/">O nás</button>
-			<button type="button" routerLink="/">Kontakt</button>
-		</div>
-	</div>
-	<div class="row w-100 mt-2">
-		<div class="FooterCopyrightText d-block text-center">
-			<span>
+    <div class="row w-100">
+        <div class="QuickNavFooter col-7 m-2">
+            <h4>Rýchla navigácia</h4>
+            <button type="button" routerLink="/">Domov</button>
+            <button type="button" routerLink="/">O nás</button>
+            <button type="button" routerLink="/">Kontakt</button>
+        </div>
+    </div>
+    <div class="row w-100 mt-2">
+        <div class="FooterCopyrightText d-block text-center">
+            <span>
 				2023 &copy; dvestodola
 			</span>
-			<span>
+            <span>
 				Fakulta prírodných vied - Univerzita Mateja Bela v Banskej Bystrici 
 			</span>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>

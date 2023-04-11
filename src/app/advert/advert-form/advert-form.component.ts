@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Advert } from 'src/app/common/model/advert.model';
 import { Category } from 'src/app/common/model/category.model';
 import { Country } from 'src/app/common/model/country.model';
@@ -9,13 +10,21 @@ import { District } from 'src/app/common/model/district.model';
 import { Region } from 'src/app/common/model/region.model';
 import { Subcategory } from 'src/app/common/model/subcategory.model';
 import { Subsubcategory } from 'src/app/common/model/subsubcategory.model';
+import { CategoryService } from 'src/app/common/service/category.service';
+import { RegionService } from 'src/app/common/service/region.service';
+import { SubcategoryService } from 'src/app/common/service/subcategory.service';
+import { SubsubcategoryService } from 'src/app/common/service/subsubcategory.service';
 
+@UntilDestroy()
 @Component({
   selector: 'app-advert-form',
   templateUrl: './advert-form.component.html',
   styleUrls: ['./advert-form.component.css']
 })
-export class AdvertFormComponent {
+export class AdvertFormComponent implements OnInit, OnChanges, OnDestroy {
+
+	title = 'Nový inzerát';
+
 	advertForm: FormGroup;
 
 	@Input()
@@ -30,8 +39,8 @@ export class AdvertFormComponent {
 	subsubcategories?: Subsubcategory[];
 	
 	countries?: Country[];
-	districts?: District[];
 	regions?: Region[];
+	districts?: District[];
 
 	currencies?: Currency[];
 	currency: Currency = {id: 0, symbol: '€', name: 'EURO'};
@@ -45,7 +54,13 @@ export class AdvertFormComponent {
 	@Output()
 	formUpdate = new EventEmitter<Advert>();
 
-	constructor(private router: Router) {
+	constructor(
+		private router: Router,
+		private categoryService: CategoryService,
+		private subcategoryService: SubcategoryService,
+		private subsubcategoryService: SubsubcategoryService,
+		private regionService: RegionService
+	) {
 		this.advertForm = new FormGroup({
 			id: new FormControl(null, [Validators.required]),
 			name: new FormControl(null, [Validators.required]),
@@ -67,35 +82,65 @@ export class AdvertFormComponent {
 
 			image: new FormControl(null, [Validators.required])
 		})
-		/*
-		this.categories.push(
-			{ id: 0, name: "Počítače, notebooky" },
-			{ id: 1, name: "Náradie" },
-			{ id: 2, name: "Stavba" },
-			{ id: 3, name: "Ovocie" },
-		);
+	}
 
-		this.subcategories.push(
-			{ id: 0, name: "Komponenty", category: this.categories[0] },
-			{ id: 1, name: "Notebooky", category: this.categories[0] },
-			{ id: 2, name: "Počítače", category: this.categories[0] }
-		)
-		
-		this.subsubcategories.push(
-			{ id: 0, name: "Pamäť RAM", subcategory: this.subcategories[0] }
-		)
+	ngOnDestroy(): void {
+		// TODO: Pridať ukladanie údajov do localStorage
+		// FIX: TEST
+		console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	}
 
-		this.countries.push(
-			{ id: 0, name: "Slovakia"}
-		)
+	ngOnChanges(changes: SimpleChanges): void {
+		console.log(changes);
+	}
 
-		this.regions.push(
-			{ id: 0, name: "Banskobystrický", country: this.countries[0] }
-		)
+	ngOnInit(): void {
+		this.categoryService.getAllCategories().pipe(untilDestroyed(this)).subscribe((categories: Category[]) => {
+			this.categories = categories;
+		});
 
-		this.districts.push(
-			{ id: 0, name: "Banská Bystrica", postcode: "974 01", region: this.regions[0] }
-		)
+		this.regionService.getAllRegions().pipe(untilDestroyed(this)).subscribe((regions: Region[]) => {
+			this.regions = regions;
+		});
+
+		// TODO: Pridať načítavanie údajov z localStorage
+	}
+
+	loadSubcategories(): void {
+		let categoryId = Number(this.advertForm.controls['category'].value);
+		this.categoryService.getSubcategoriesByCategoryId(categoryId).pipe(untilDestroyed(this))
+			.subscribe((subcategories: Subcategory[]) => {
+			this.subcategories = subcategories;
+		})
+	}
+
+	loadSubsubcategories(): void {
+		let subcategoryId = Number(this.advertForm.controls['subcategory'].value);
+		// console.log(categoryId.value);
+		this.subcategoryService.getSubsubcategoriesBySubcategoryId(subcategoryId).pipe(untilDestroyed(this))
+			.subscribe((subsubcategories: Subsubcategory[]) => {
+			this.subsubcategories = subsubcategories;
+		})
+	}
+
+	loadDistricts(): void {
+		let regionId = Number(this.advertForm.controls['region'].value);
+		console.log(regionId);
+		this.regionService.getAllDistrictsByRegionId(regionId).pipe(untilDestroyed(this))
+			.subscribe((districts: District[]) => {
+			this.districts = districts;
+		})
+	}
+
+	loadCities(): void {
+		// TODO: Implementovať obec
+		/* 
+		let regionId = Number(this.advertForm.controls['region'].value);
+		console.log(regionId);
+		this.regionService.getAllDistrictsByRegionId(regionId).pipe(untilDestroyed(this))
+			.subscribe((districts: District[]) => {
+			this.districts = districts;
+		})
 		*/
 	}
 
@@ -110,6 +155,12 @@ export class AdvertFormComponent {
 		if (userResponse == null) { return; }
 		
 		if (Number(userResponse) === confirmationNumber) {
+			
+			// TODO: Poslať obrázok na upload, vráti ID
+			// TODO: Alebo to spraviť cez Blob
+
+			// TODO: Poslať inzerát na backend
+			// TODO: Presmerovať používateľa na úspešne vytvorený inzerát
 			window.confirm("Inzerát bol úspešne pridaný.");
 			this.router.navigate(['/advert/1'])
 			window.scrollTo(0,0);

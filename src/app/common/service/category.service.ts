@@ -2,19 +2,23 @@ import { Injectable } from '@angular/core';
 import { Category } from '../model/category.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Subcategory } from '../model/subcategory.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-	private apiUrl = `http://localhost:8080/api`;
 	private categoryUrl = 'http://localhost:8080/api/categories';
 	
 	constructor(private http: HttpClient) { }
 
-	getAllCategoryies(): Observable<Category[]> {
+	getAllCategories(): Observable<Category[]> {
 		return this.http.get<Category[]>(this.categoryUrl);
+	}
+
+	getSubcategoriesByCategoryId(categoryId: number): Observable<Subcategory[]> {
+		return this.http.get<Subcategory[]>(`${this.categoryUrl}/${categoryId}/subcategories`);
 	}
 
 	getCategoryById(categoryId: number): Observable<Category> {
