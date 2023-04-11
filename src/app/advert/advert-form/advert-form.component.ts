@@ -25,27 +25,15 @@ export class AdvertFormComponent {
 		}
 	}
 
-	@Input()
 	categories?: Category[];
-
-	@Input()
 	subcategories?: Subcategory[];
-	
-	@Input()
 	subsubcategories?: Subsubcategory[];
 	
-	@Input()
 	countries?: Country[];
-
-	@Input()
 	districts?: District[];
-	
-	@Input()
 	regions?: Region[];
 
-	@Input()
 	currencies?: Currency[];
-	// currencies: Array<Currency> = [{id: 0, symbol: '€', name: 'EURO'}];
 	currency: Currency = {id: 0, symbol: '€', name: 'EURO'};
 
 	@Output()
@@ -132,7 +120,7 @@ export class AdvertFormComponent {
 	}
 
 	private prepareAdvert(advertId?: string): Advert {
-    	return {
+		return {
 			id: advertId !== undefined ? advertId : '',
 			name: this.advertForm.controls['name'].value,
 			description: this.advertForm.controls['description'].value,
@@ -161,5 +149,14 @@ export class AdvertFormComponent {
 		min = Math.ceil(min);
 		max = Math.floor(max);
 		return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
-	  }
+	}
+
+	leaveDialog(): void {
+		let userResponse = window.confirm(`Naozaj chcete odísť z tejto stránky?\nÚdaje budú obnovené po následujúcom vstupe na stránku.`);
+		
+		if (userResponse) {
+			this.router.navigate(['/'])
+			window.scrollTo(0, 0);
+		}
+	}
 }

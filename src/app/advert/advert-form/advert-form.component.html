@@ -1,142 +1,137 @@
-
 <form [formGroup]="advertForm" (submit)="saveAdvert()">
-	<h1 class="display-2 underline mt-3">Pridať inzerát</h1>
-	<!-- name -->
-	<div class="form-group">
-		<label class="h3">Názov</label>
-		<input formControlName="name" class="form-control form-control-lg" name="Názov inzerátu" type="text"
-			placeholder="Zadajte názov inzerátu" required>
-	</div>
+    <h1 class="display-2 underline mt-3">Pridať inzerát</h1>
+    <!-- name -->
+    <div class="form-group">
+        <label class="h3">Názov</label>
+        <input formControlName="name" class="form-control form-control-lg" name="Názov inzerátu" type="text" placeholder="Zadajte názov inzerátu" required>
+    </div>
 
 
-	<!-- description -->
-	<div class="form-group">
-		<label class="h3">Opis</label>
-		<textarea formControlName="description" class="form-control form-control-lg" rows="5"
-			placeholder="Zadajte opis inzerátu"></textarea>
-	</div>
+    <!-- description -->
+    <div class="form-group">
+        <label class="h3">Opis</label>
+        <textarea formControlName="description" class="form-control form-control-lg" rows="5" placeholder="Zadajte opis inzerátu"></textarea>
+    </div>
 
 
-	<div class="group">
-		<!-- category -->
-		<div class="form-group">
-			<label class="h3">Kategória</label>
-			<select formControlName="category" class="form-control form-control-lg">
+    <!-- price -->
+    <!-- currency: disabled on EURO € -->
+    <div class="form-group">
+        <label class="h3">
+			Cena
+		</label>
+        <div class="input-group mb-2">
+            <div class="currency input-group-prepend">
+                <input formControlName="currency" class="d-none" [value]="this.currency.id" required>
+                <div class="form-control form-control-lg bg-secondary text-light rounded-left">{{ this.currency.symbol }}</div>
+            </div>
+            <input formControlName="priceEur" type="number" min="0" max="9999" class="form-control form-control-lg" placeholder="Cena pre inzerát" required>
+        </div>
+        <!-- </div> -->
+
+        <!-- fixedPrice -->
+        <small class="text-muted h6">Je možné vyjednať cenu od pôvodnej ceny?</small>
+        <div class="form-check">
+            <label class="form-check-label">
+				<input formControlName="fixedPrice" class="form-check-input" type="radio"
+					name="fixedPrice" [value]=true [checked]="true">
+				Áno
+			</label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+				<input formControlName="fixedPrice" class="form-check-input" type="radio"
+					name="fixedPrice" [value]=false required>
+				Nie
+			</label>
+        </div>
+    </div>
+
+
+    <div class="group">
+        <!-- category -->
+        <div class="form-group">
+            <label class="h3">Kategória</label>
+            <select formControlName="category" class="form-control form-control-lg">
 				<option disabled selected [value]="null">Vyberte kategóriu inzerátu</option>
 				<option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
 			</select>
-		</div>
+        </div>
 
-		<!-- subcategory, cez ngif -->
-		<div class="form-group" *ngIf="advertForm.controls['category'].value">
-			<label class="h3">Podkategória</label>
-			<select formControlName="subcategory" class="form-control form-control-lg">
+        <!-- subcategory, cez ngif -->
+        <div class="form-group" *ngIf="advertForm.controls['category'].value">
+            <label class="h3">Podkategória</label>
+            <select formControlName="subcategory" class="form-control form-control-lg">
 				<option disabled selected [value]="null">Vyberte podkategóriu inzerátu</option>
 				<option *ngFor="let subcategory of subcategories" [value]="subcategory.id">{{ subcategory.name }}
 				</option>
 			</select>
-		</div>
+        </div>
 
-		<!-- subsubcategory, cez ngif -->
-		<div class="form-group" *ngIf="advertForm.controls['subcategory'].value">
-			<label class="h3">Podpodkategória</label>
-			<select formControlName="subsubcategory" class="form-control form-control-lg">
+        <!-- subsubcategory, cez ngif -->
+        <div class="form-group" *ngIf="advertForm.controls['subcategory'].value">
+            <label class="h3">Podpodkategória</label>
+            <select formControlName="subsubcategory" class="form-control form-control-lg">
 				<option disabled selected [value]="null">Vyberte podpodkategóriu inzerátu</option>
 				<option *ngFor="let subsubcategory of subsubcategories" [value]="subsubcategory.id">{{
 					subsubcategory.name }}
 				</option>
 			</select>
-		</div>
-	</div>
+        </div>
+    </div>
 
 
-	<div class="group">
-		<!-- region -->
-		<div class="form-group">
-			<p class="h3">Región</p>
-			<select formControlName="region" class="form-control form-control-lg">
+    <!-- location of advert -->
+    <div class="group">
+        <!-- region -->
+        <div class="form-group">
+            <label class="h3">Región</label>
+            <select formControlName="region" class="form-control form-control-lg">
 				<option disabled selected [value]="null">Vyberte región</option>
 				<option *ngFor="let region of regions" [value]="region.id">{{ region.name }}</option>
 			</select>
-		</div>
+        </div>
 
-		<!-- district -->
-		<div class="form-group" *ngIf="advertForm.controls['region'].value">
-			<p class="h3">
-				Okres
-				<small class="text-muted h6">Kliknite sem, pre návrh chýbajúceho okresu.</small>
-			</p>
-			<select formControlName="district" class="form-control form-control-lg">
+        <!-- district -->
+        <div class="form-group" *ngIf="advertForm.controls['region'].value">
+            <label class="h3">
+                Okres
+                <small class="text-muted h6">Kliknite sem, pre návrh chýbajúceho okresu.</small>
+            </label>
+            <select formControlName="district" class="form-control form-control-lg">
 				<option disabled selected [value]="null">Vyberte okres</option>
 				<option *ngFor="let district of districts" [value]="district.id">{{ district.name + " " +
 					district.postcode }}
 				</option>
 			</select>
-		</div>
-	</div>
+        </div>
+    </div>
 
 
-	<!-- keywords -->
+    <!-- keywords -->
+
+    <!-- image upload -->
+    <div class="form-group">
+        <p class="h3">
+            Obrázok pre inzerát
+            <!-- <small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small> -->
+        </p>
+        <input formControlName="image" type="file" accept="image/*" class="form-control-file form-control-lg">
+    </div>
 
 
-	<!-- price -->
-	<!-- currency: disabled on EURO € -->
-	<div class="form-group">
-		<p class="h3">
-			Cena
-		</p>
-		<div class="input-group mb-2">
-			<div class="currency input-group-prepend">
-				<input formControlName="currency" class="d-none" [value]="this.currency.id" required>
-				<div class="form-control form-control-lg bg-secondary text-light rounded-left">{{ this.currency.symbol }}</div>
-			</div>
-			<input formControlName="priceEur" type="number" min="0" max="9999" class="form-control form-control-lg" placeholder="Cena pre inzerát" required>
-		</div>
-		<!-- </div> -->
-		
-		<!-- fixedPrice -->
-		<!-- <div class="form-group"> -->
-		<!-- <label class="h4">Je cena fixná?<label> -->
-		<p class="h3">
-			<!-- Fixná cena -->
-			<!-- <small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small> -->
-			<small class="text-muted h6">Je možné vyjednať cenu od pôvodnej ceny?</small>
-		</p>
-		<div class="form-check">
-			<label class="form-check-label">
-				<input class="form-check-input" type="radio" name="fixedPrice" [value]=true formControlName="fixedPrice"
-					[required]="true" [checked]="true">
-				Áno
-			</label>
-		</div>
-		<div class="form-check">
-			<label class="form-check-label">
-				<input class="form-check-input" type="radio" name="fixedPrice" [value]=false
-					formControlName="fixedPrice" required>
-				Nie
-			</label>
-		</div>
-	</div>
+    <!-- contact -->
+    <!-- e-mail -->
+    <div class="form-group">
+        <p class="h3">E-mailová adresa</p>
+        <input type="email" class="form-control form-control-lg" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
+        <small class="form-text text-muted">Na túto e-mailovú adresu Vám bude zaslaný kód na overenie.</small>
+    </div>
+    <!-- phone number -->
+    <div class="d-flex justify-content-between mt-3">
+        <input class="btn btn-primary" type="submit" value="Odoslať inzerát" [disabled]="advertForm.invalid">
+        <input class="btn btn-danger" type="button" value="Zrušiť inzerát" (click)="leaveDialog()">
+    </div>
 
-
-	<!-- image upload -->
-	<div class="form-group">
-		<p class="h3">
-			Obrázok pre inzerát
-			<!-- <small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small> -->
-		</p>
-		<input type="file" accept="image/*" class="form-control-file form-control-lg">
-	</div>
-
-	<div class="form-group">
-		<p class="h3">E-mailová adresa</p>
-		<input type="email" class="form-control form-control-lg" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
-		<small class="form-text text-muted">Na túto e-mailovú adresu Vám bude zaslaný kód na overenie.</small>
-	</div>
-
-	<div class="group">
-		<input class="btn btn-primary" type="submit" value="Odoslať inzerát" [disabled]="advertForm.invalid">
-		<input class="btn btn-danger" type="button" value="Zrušiť inzerát">
-	</div>
 
 </form>
