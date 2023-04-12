@@ -1,0 +1,8 @@
+<div class="categories-grid m-3">
+    <a class="categories-grid-item bg-container-alt-2 border border-dark" *ngFor="let num of [].constructor(16); let i = index;" href="/category/{{i+1}}">
+        <div class="p-2 d-flex flex-column align-items-center justify-content mb-2">
+            <fa-icon [icon]="fa.faSearch" class="h2 d-block pt-2"></fa-icon>
+            <span>Kategória {{i + 1}}</span>
+        </div>
+    </a>
+</div>
