@@ -1,0 +1,11 @@
+/* h2:first-child::before {
+    display: block;
+    content: '404';
+    font-size: 10rem;
+    font-weight: bold;
+    text-align: center;
+    color: #f00;
+}
+h2 {
+    text-align: center;
+} */
