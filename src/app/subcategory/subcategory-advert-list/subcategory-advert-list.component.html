@@ -1,0 +1,17 @@
+<div class="border border-dark m-3 adverts-grid">
+    <a *ngFor="let num of [].constructor(22); let i = index;" class="border border-dark bg-container p-3" href="/advert/{{i + 1}}">
+        <div class="text-center">
+            <img src="../../assets/images/advert-image2.png" alt="Ilustračná fotografia inzerátu" class="advert-image">
+        </div>
+        <div class="text-left">
+            <p class="h4 pt-2">154,656.98 €</p>
+            <p class="border-bottom border-dark pb-2 fw-bold h6">Inzerát #X od Huberta Blaine W. Sr.</p>
+            <span>
+                <fa-icon [icon]="fa.faLocationArrow"></fa-icon> Banská Bystrica, 974 01
+            </span>
+            <span class="text-success d-block">
+                <fa-icon [icon]="fa.faCheck"></fa-icon> Cena je / nie je fixná
+            </span>
+        </div>  
+    </a>
+</div>

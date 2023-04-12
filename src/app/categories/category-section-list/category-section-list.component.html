@@ -1,0 +1,8 @@
+<div class="border border-dark m-3 pt-2 pb-2">
+    <h3>Podkategórie</h3>
+</div>
+<div class="border border-dark bg-container-alt categories-alt-grid m-3">
+    <div *ngFor="let num of [].constructor(12); let i = index;" class="p-2">
+        <a href="/subcategories/{{i + 1}}" class="color-light">Podkategória {{i + 1}}</a>
+    </div>
+</div>
