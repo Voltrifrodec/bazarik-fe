@@ -3,14 +3,20 @@
     <!-- name -->
     <div class="form-group">
         <label class="h3">Názov</label>
-        <input formControlName="name" class="form-control form-control-lg" name="Názov inzerátu" type="text" placeholder="Zadajte názov inzerátu" required>
+        <input formControlName="name" class="form-control form-control-lg" name="Názov inzerátu"
+			type="text" placeholder="Zadajte názov inzerátu">
+
+        <h5 *ngIf="advertForm.controls['name'].invalid" class="text-danger">
+			Je nutné zadať názov inzerátu
+		</h5>
     </div>
 
 
     <!-- description -->
     <div class="form-group">
         <label class="h3">Opis</label>
-        <textarea formControlName="description" class="form-control form-control-lg" rows="5" placeholder="Zadajte opis inzerátu"></textarea>
+        <textarea formControlName="description" class="form-control form-control-lg" rows="5"
+			placeholder="Zadajte opis inzerátu"></textarea>
     </div>
 
 
@@ -22,11 +28,15 @@
 		</label>
         <div class="input-group mb-2">
             <div class="currency input-group-prepend">
-                <input formControlName="currency" class="d-none" [value]="this.currency.id" required>
-                <div class="form-control form-control-lg bg-secondary text-light rounded-left">{{ this.currency.symbol }}</div>
+                <input formControlName="currency" class="d-none">
+                <div class="form-control form-control-lg bg-secondary text-light rounded-left">{{ '€' }}</div>
             </div>
-            <input formControlName="priceEur" type="number" min="0" max="9999" class="form-control form-control-lg" placeholder="Cena pre inzerát" required>
-        </div>
+            <input formControlName="priceEur" type="number" min="0" max="9999" class="form-control form-control-lg"
+				placeholder="Cena pre inzerát">
+		</div>
+		<h5 *ngIf="advertForm.controls['priceEur'].invalid" class="text-danger">
+			Je nutné zadať cenu inzerátu
+		</h5>
         <!-- </div> -->
 
         <!-- fixedPrice -->
@@ -34,17 +44,20 @@
         <div class="form-check">
             <label class="form-check-label">
 				<input formControlName="fixedPrice" class="form-check-input" type="radio"
-					name="fixedPrice" [value]=true [checked]="true">
+					name="fixedPrice" [value]=true checked>
 				Áno
 			</label>
         </div>
         <div class="form-check">
             <label class="form-check-label">
 				<input formControlName="fixedPrice" class="form-check-input" type="radio"
-					name="fixedPrice" [value]=false required>
+					name="fixedPrice" [value]=false>
 				Nie
 			</label>
         </div>
+		<h5 *ngIf="advertForm.controls['fixedPrice'].invalid" class="text-danger">
+			Je nutné vybrať, či je cena inzerátu fixná
+		</h5>
     </div>
 
 
@@ -57,6 +70,9 @@
 				<option disabled selected [value]="null">Vyberte kategóriu inzerátu</option>
 				<option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
 			</select>
+			<h5 *ngIf="advertForm.controls['category'].invalid" class="text-danger">
+				Je nutné vybrať kategóriu inzerátu
+			</h5>
         </div>
 
         <!-- subcategory, cez ngif -->
@@ -86,18 +102,21 @@
     <div class="group">
         <!-- region -->
         <div class="form-group">
-            <label class="h3">Región</label>
+            <label class="h3">Kraj</label>
             <select formControlName="region" class="form-control form-control-lg" (change)="loadDistricts()">
-				<option disabled selected [value]="null">Vyberte región</option>
+				<option disabled selected [value]="null">Vyberte kraj</option>
 				<option *ngFor="let region of regions" [value]="region.id">{{ region.name }}</option>
 			</select>
+			<h5 *ngIf="advertForm.controls['region'].invalid" class="text-danger">
+				Je nutné vybrať kraj
+			</h5>
         </div>
 
         <!-- district -->
         <div class="form-group" *ngIf="advertForm.controls['region'].value">
             <label class="h3">
                 Okres
-                <small class="text-muted h6">Kliknite sem, pre návrh chýbajúceho okresu.</small>
+                <!-- <small class="text-muted h6">Kliknite sem, pre návrh chýbajúceho okresu.</small> -->
             </label>
             <select formControlName="district" class="form-control form-control-lg" (change)="loadCities()">
 				<option disabled selected [value]="null">Vyberte okres</option>
@@ -105,6 +124,9 @@
 					district.postcode }}
 				</option>
 			</select>
+			<h5 *ngIf="advertForm.controls['district'].invalid" class="text-danger">
+				Je nutné vybrať okres
+			</h5>
         </div>
     </div>
 
@@ -117,7 +139,7 @@
             Obrázok pre inzerát
             <!-- <small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small> -->
         </p>
-        <input formControlName="image" type="file" accept="image/*" class="form-control-file form-control-lg">
+        <input formControlName="image" id="file" type="file" accept="image/*" class="form-control-file form-control-lg">
     </div>
 
 
@@ -125,12 +147,18 @@
     <!-- e-mail -->
     <div class="form-group">
         <p class="h3">E-mailová adresa</p>
-        <input type="email" class="form-control form-control-lg" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
+        <input formControlName="contact" type="email" class="form-control form-control-lg" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
         <small class="form-text text-muted">Na túto e-mailovú adresu Vám bude zaslaný kód na overenie.</small>
+		<h5 *ngIf="advertForm.controls['contact'].invalid" class="text-danger">
+			Je nutné zadať e-mailovú adresu
+		</h5>
     </div>
     <!-- phone number -->
     <div class="d-flex justify-content-between mt-3">
         <input class="btn btn-primary" type="submit" value="Odoslať inzerát" [disabled]="advertForm.invalid">
+		<h5 *ngIf="advertForm.invalid" class="text-danger">
+			Je nutné vyplniť formulár na pridanie inzerátu správne.
+		</h5>
         <input class="btn btn-danger" type="button" value="Zrušiť inzerát" (click)="leaveDialog()">
     </div>
 
