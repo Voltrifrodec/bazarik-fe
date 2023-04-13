@@ -16,11 +16,11 @@ const routes: Routes = [
 		component: HomeComponent
 	},
 	{
-		path: 'advert/new',
+		path: 'adverts/new',
 		component: AdvertFormComponent
 	},
 	{
-		path: 'advert/:advertId',
+		path: 'adverts/:advertId',
 		component: AdvertDetailPageComponent
 	},
 	{
@@ -33,7 +33,7 @@ const routes: Routes = [
 		component: CategoriesComponent
 	},
 	{
-		path: 'category/:categoryId',
+		path: 'categories/:categoryId',
 		pathMatch: 'full',
 		component: CategoriesComponent
 	},
