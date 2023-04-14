@@ -1,0 +1,9 @@
+fa-icon:has([data-icon="exclamation-triangle"]) {
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+    animation: rotationAnimation 2.2s linear infinite;
+    transform-style: preserve-3d;
+}
+@keyframes rotationAnimation {
+  from { transform: rotateY(180deg); }
+  to { transform: rotateY(0deg); }
+}

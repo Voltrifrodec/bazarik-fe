@@ -5,15 +5,17 @@
         </li>
         <li class="breadcrumb-item">
             <a class="link" routerLink="/categories">
-                <span class="fw-bold">Kategória n</span>
+                <span class="fw-bold">{{category?.name}}</span>
             </a> 
         </li>
     </ol>
 </div>
+<div class="border border-dark m-3">
+    <h3>{{category?.name}}</h3>
+</div>
+<app-category-section-list [subcategories]="subcategories"></app-category-section-list>
 
-<app-category-section-list></app-category-section-list>
-
-<app-category-advert-list></app-category-advert-list>
+<app-category-advert-list [adverts]="adverts"></app-category-advert-list>
 
 <!-- <div class="border border-dark m-3 p-2 container-fluid">
     <div *ngFor="let num of [].constructor(5); let i = index;" class="row">
