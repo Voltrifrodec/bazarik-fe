@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Advert } from 'src/app/common/model/advert.model';
 import { Category } from 'src/app/common/model/category.model';
@@ -45,17 +45,9 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	districts?: District[];
 	currencies?: Currency[];
 
-	@Output()
-	formCancel = new EventEmitter<void>();
-
-	@Output()
-	formCreate = new EventEmitter<Advert>();
-
-	@Output()
-	formUpdate = new EventEmitter<Advert>();
-
 	constructor(
 		private router: Router,
+		private route: ActivatedRoute,
 		private categoryService: CategoryService,
 		private subcategoryService: SubcategoryService,
 		private subsubcategoryService: SubsubcategoryService,
@@ -246,7 +238,8 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		let advert = this.prepareAdvert();
 
 		for (const [key, value] of Object.entries(advert)) {
-			if (String(value!).trim() !== null) {
+			if (value == null) continue;
+			if (String(value).trim() != null) {
 				localStorage.setItem(key, String(value));
 			}
 		}
@@ -259,8 +252,6 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 			let value: string = localStorage.getItem(key!)!;
 			if (! value) continue;
-
-			// console.log(key, value);
 
 			if (! this.advertForm.controls[key]) continue;
 

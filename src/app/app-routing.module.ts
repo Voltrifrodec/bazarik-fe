@@ -24,6 +24,10 @@ const routes: Routes = [
 		component: AdvertDetailPageComponent
 	},
 	{
+		path: 'advert/edit/:advertId',
+		component: AdvertFormComponent
+	},
+	{
 		path: 'search/:query',
 		component: SearchComponent
 	},
