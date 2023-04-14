@@ -1,21 +1,4 @@
-<div class="navbar navbar-expand-lg navbar-light p-3 bg-banner border-bottom border-dark">
-    <div class="navbar-item w-25">
-        <!-- TODO: Pozrieť, že či AliExpress ma brightness hover effect pre logo -->
-        <a href="/" class="navbar-brand fw-bold">Bazarik</a>
-    </div>
-    <form class="input-group w-50" action="/search">
-        <input type="search" class="form-control rounded" name="Search product..." placeholder="Hľadajte inzerát...">
-        <button type="submit" class="btn btn-success">
-			<fa-icon [icon]="fa.faSearch"></fa-icon>
-		</button>
-    </form>
-    <div class="w-25 text-true-right">
-        <button class="btn btn-success" routerLink="/advert/new">
-			<fa-icon [icon]="fa.faPlus"></fa-icon>
-			<span>Nový inzerát</span>
-		</button>
-    </div>
-</div>
+<app-navbar></app-navbar>
 
 
 <div class="RouterContainer container-fluid">

@@ -9,5 +9,5 @@ import * as fa from '@fortawesome/free-solid-svg-icons';
 export class SearchComponent {
     fa = fa;
 
-    math = Array(150).map((num, i) => num[i] = Math.round(Math.random()));
+    math = Array(40).map((num, i) => num[i] = Math.round(Math.random()));
 }

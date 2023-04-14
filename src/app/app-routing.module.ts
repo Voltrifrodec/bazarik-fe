@@ -24,7 +24,7 @@ const routes: Routes = [
 		component: AdvertDetailPageComponent
 	},
 	{
-		path: 'search',
+		path: 'search/:query',
 		component: SearchComponent
 	},
 	{
