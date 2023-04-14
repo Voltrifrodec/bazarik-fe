@@ -26,6 +26,7 @@ export class NavbarComponent {
 		}
 
 		let query = this.searchForm.controls['query'].value;
+		console.log(query);
 		this.router.navigate([`/search/${query}`]);
 	}
 }
