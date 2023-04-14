@@ -17,16 +17,20 @@ export class AdvertService {
 		return this.http.get<Advert[]>(this.advertsUrl);
 	}
 
+	getAllAdvertsByQuery(query: string): Observable<Advert[]> {
+		return this.http.get<Advert[]>(`${this.apiUrl}/search/${query}`);
+	}
+
 	getAllAdvertsByCategoryId(categoryId: number): Observable<Advert[]> {
 		return this.http.get<Advert[]>(`${this.apiUrl}/categories/${categoryId}/adverts`);
 	}
 
 	getAllAdvertsBySubcategoryId(subcategoryId: number): Observable<Advert[]> {
-		return this.http.get<Advert[]>(`${this.apiUrl}/categories/${subcategoryId}/adverts`);
+		return this.http.get<Advert[]>(`${this.apiUrl}/subcategories/${subcategoryId}/adverts`);
 	}
 
 	getAllAdvertsBySubsubcategoryId(subsubcategoryId: number): Observable<Advert[]> {
-		return this.http.get<Advert[]>(`${this.apiUrl}/categories/${subsubcategoryId}/adverts`);
+		return this.http.get<Advert[]>(`${this.apiUrl}/subsubcategories/${subsubcategoryId}/adverts`);
 	}
 
 	getAdvertById(advertId: string): Observable<Advert> {
