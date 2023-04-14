@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as fa from '@fortawesome/free-solid-svg-icons';
@@ -34,5 +34,7 @@ export class NavbarComponent {
 
 		console.log(query);
 		this.router.navigate([`search/${query}`]);
+
+
 	}
 }

@@ -25,6 +25,7 @@ import { SubcategoryAdvertListComponent } from './subcategory/subcategory-advert
 import { SubsubcategoryAdvertListComponent } from './subsubcategory/subsubcategory-advert-list/subsubcategory-advert-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AdvertTileComponent } from './advert/advert-tile/advert-tile.component';
+import { ErrorsComponent } from './errors/errors.component';
 
 @NgModule({
 	declarations: [
@@ -46,7 +47,8 @@ import { AdvertTileComponent } from './advert/advert-tile/advert-tile.component'
 		SubcategoryAdvertListComponent,
   		SubsubcategoryAdvertListComponent,
     NavbarComponent,
-    AdvertTileComponent
+    AdvertTileComponent,
+    ErrorsComponent
 	],
 	imports: [
 		BrowserModule,

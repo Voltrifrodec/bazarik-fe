@@ -124,7 +124,6 @@ h1 {
 }
 .RouterContainerFix {
     min-height: 90vh;
-    margin: 0 auto;
     
     border-left: .15rem solid;
     border-right: .15rem solid;

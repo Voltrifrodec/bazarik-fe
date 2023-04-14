@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as fa from '@fortawesome/free-solid-svg-icons';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Advert } from 'src/app/common/model/advert.model';
@@ -16,13 +16,13 @@ export class SearchComponent {
 
 	adverts?: Advert[];
 
+	@Input()
 	private query: string | null;
-
-    math = Array(40).map((num, i) => num[i] = Math.round(Math.random()));
 
 	constructor(
 		private route: ActivatedRoute,
-		private advertService: AdvertService
+		private advertService: AdvertService,
+		private router: Router
 	) {
 		this.query = route.snapshot.paramMap.get('query');
 		this.searchAdvertsByQuery();
@@ -31,9 +31,11 @@ export class SearchComponent {
 	private searchAdvertsByQuery(): void {
 		console.log(this.query);
 		if (this.query) {
-			this.advertService.getAllAdvertsByQuery(this.query).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
+			this.advertService.getAllAdvertsByQuery(this.query).subscribe((adverts: Advert[]) => {
 				this.adverts = adverts;
 				console.log(this.adverts);
+				
+				this.router.dispose();
 			});
 		}
 	}

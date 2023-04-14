@@ -7,13 +7,21 @@
 	
 	<div class="d-flex justify-content-evenly">
 		<div class="row row-cols-2 g-3 mt-0">
-			<app-advert-tile
-				role="button"
-				*ngFor="let advert of adverts"
-				[advert]="advert"
-				routerLink="/adverts/{{ advert.id }}"
-				class="col-md-3"
-			></app-advert-tile>
+			<div *ngIf="adverts?.length; then advertsFound else advertsNotFound"></div>
+
+			<ng-template #advertsFound>
+				<app-advert-tile
+					role="button"
+					*ngFor="let advert of adverts"
+					[advert]="advert"
+					routerLink="/adverts/{{ advert.id }}"
+					class="col-md-3"
+				></app-advert-tile>
+			</ng-template>
+
+			<ng-template #advertsNotFound>
+				<app-pagenotfound></app-pagenotfound>
+			</ng-template>
 		</div>
 	</div>
 </div>
