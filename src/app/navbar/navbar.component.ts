@@ -24,8 +24,14 @@ export class NavbarComponent {
 			window.alert("Pre vyhľadávanie je nutné zadať text.");
 			return;
 		}
+		
+		let query = this.searchForm.controls['query'].value as String;
 
-		let query = this.searchForm.controls['query'].value;
+		if (query.trim().length < 3) {
+			window.alert("Pre vyhľadávanie sú nutné aspoň tri znaky.");
+			return;
+		}
+
 		console.log(query);
 		this.router.navigate([`/search/${query}`]);
 	}
