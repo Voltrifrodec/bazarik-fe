@@ -23,6 +23,7 @@ import { CategoryAdvertListComponent } from './categories/category-advert-list/c
 import { SubcategorySectionListComponent } from './subcategory/subcategory-section-list/subcategory-section-list.component';
 import { SubcategoryAdvertListComponent } from './subcategory/subcategory-advert-list/subcategory-advert-list.component';
 import { SubsubcategoryAdvertListComponent } from './subsubcategory/subsubcategory-advert-list/subsubcategory-advert-list.component';
+import { EmptyAdvertListComponent } from './core/exceptions/empty-advert-list/empty-advert-list.component';
 
 @NgModule({
 	declarations: [
@@ -42,7 +43,8 @@ import { SubsubcategoryAdvertListComponent } from './subsubcategory/subsubcatego
 		CategoryAdvertListComponent,
 		SubcategorySectionListComponent,
 		SubcategoryAdvertListComponent,
-  		SubsubcategoryAdvertListComponent
+  		SubsubcategoryAdvertListComponent,
+    EmptyAdvertListComponent
 	],
 	imports: [
 		BrowserModule,

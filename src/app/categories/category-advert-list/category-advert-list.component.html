@@ -16,15 +16,6 @@
         </div>  
     </a>
 </div>
-<div class="border border-dark m-3 h-50 d-flex flex-column justify-content-center align-items-center" *ngIf="!advertsAmount">
-    <fa-icon [icon]="fa.faExclamationTriangle" class="display-1 text-danger outline"></fa-icon>
-    <p class="p-4 fw-bold">Nenašli sa žiadne inzeráty!</p>
-    <button class="btn btn-success">
-        <fa-icon [icon]="fa.faPlus"></fa-icon>
-        Pridajte nový inzerát
-    </button>
-    <button class="btn btn-success m-2">
-        <fa-icon [icon]="fa.faHome"></fa-icon>
-        Späť na hl. stránku
-    </button>
+<div *ngIf="!advertsAmount">
+    <app-empty-advert-list></app-empty-advert-list>
 </div>
