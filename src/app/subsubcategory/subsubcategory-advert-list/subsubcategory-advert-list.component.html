@@ -1,17 +1,30 @@
-<div class="border border-dark m-3 adverts-grid">
-    <a *ngFor="let num of [].constructor(22); let i = index;" class="border border-dark bg-container p-3" href="/advert/{{i + 1}}">
+<div class="border border-dark m-3 adverts-grid" *ngIf="adverts?.length">
+    <a *ngFor="let advert of adverts;" class="border border-dark bg-container p-3" href="/advert/{{advert.id}}">
         <div class="text-center">
             <img src="../../assets/images/advert-image2.png" alt="Ilustračná fotografia inzerátu" class="advert-image">
         </div>
         <div class="text-left">
-            <p class="h4 pt-2">154,656.98 €</p>
-            <p class="border-bottom border-dark pb-2 fw-bold h6">Inzerát #X od Huberta Blaine W. Sr.</p>
+            <p class="h4 pt-2">{{advert.priceEur}}</p>
+            <p class="border-bottom border-dark pb-2 fw-bold h6">{{advert.name}}</p>
             <span>
-                <fa-icon [icon]="fa.faLocationArrow"></fa-icon> Banská Bystrica, 974 01
+                <fa-icon [icon]="fa.faLocationArrow"></fa-icon> {{advert.district}}
             </span>
             <span class="text-success d-block">
-                <fa-icon [icon]="fa.faCheck"></fa-icon> Cena je / nie je fixná
+                <fa-icon [icon]="fa.faCheck"></fa-icon> 
+                {{advert.fixedPrice ? 'Cena je fixná' : 'Cena nie je fixná'}}
             </span>
         </div>  
     </a>
+</div>
+<div class="border border-dark m-3 h-50 d-flex flex-column justify-content-center align-items-center" *ngIf="!adverts?.length">
+    <fa-icon [icon]="fa.faExclamationTriangle" class="display-1 text-danger outline"></fa-icon>
+    <p class="p-4 fw-bold">Nenašli sa žiadne inzeráty!</p>
+    <button class="btn btn-success">
+        <fa-icon [icon]="fa.faPlus"></fa-icon>
+        Pridajte nový inzerát
+    </button>
+    <button class="btn btn-success m-2">
+        <fa-icon [icon]="fa.faHome"></fa-icon>
+        Späť na hl. stránku
+    </button>
 </div>
