@@ -1,1 +1,39 @@
-<p>advert-tile works!</p>
+<div *ngIf="advert"  class="border border-dark p-2">
+	<div class="text-center">
+		<img
+			class="mg-fluid border-secondary w-100"
+			alt="{{ advert.name }}"
+			src="data:{{ advert.image.type }};base64,{{ advert.image.image }}"
+		/>
+	</div>
+	<div class="text-left">
+		<span class="h4 pt-2 d-block">
+			{{ advert.currency.symbol }} {{ advert.priceEur }}
+		</span>
+
+		<div class="d-inline-block overflow-hidden" style="text-overflow: ellipsis; overflow: hidden; height: 16pt;">
+			<span class="h6" title="{{advert.name}}" >
+				{{ advert.name }}
+			</span>
+		</div>
+
+		<span class="d-block">
+			<fa-icon [icon]="fa.faLocationArrow"></fa-icon>
+			{{ advert.district.name }}, {{ advert.district.postcode }}
+		</span>
+
+		<span class="text-success d-block">
+			<div *ngIf="advert.fixedPrice; then cenaJeFixnaBlock else cenaNieJeFixnaBlock"></div>
+			
+			<ng-template #cenaJeFixnaBlock class="text-success">
+				<fa-icon [icon]="fa.faCheck"></fa-icon>
+				<small class="text-success h6">Cena nie je fixná</small>
+			</ng-template>
+
+			<ng-template #cenaNieJeFixnaBlock class="text-danger">
+				<fa-icon [icon]="['fas', 'xmark']"></fa-icon>
+				<small class="text-danger h6">Cena je fixná</small>
+			</ng-template>
+		</span>
+	</div>
+</div>

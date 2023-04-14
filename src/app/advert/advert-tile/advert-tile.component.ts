@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Advert } from 'src/app/common/model/advert.model';
+import * as fontAwesome from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-advert-tile',
@@ -8,8 +9,15 @@ import { Advert } from 'src/app/common/model/advert.model';
 })
 export class AdvertTileComponent {
 
+	fa = fontAwesome;
+
 	@Input()
 	advert?: Advert;
 
-	
+	constructor() {
+		console.log(this.advert);
+		if (this.advert) {
+			console.log(this.advert);
+		}
+	}
 }
