@@ -4,19 +4,21 @@
             <a class="link" href="/">Domov</a> 
         </li>
         <li class="breadcrumb-item">
-            <a class="link" routerLink="/categories">Kategória n</a> 
+            <a class="link" routerLink="/categories/{{subcategory?.category?.id}}">{{subcategory?.category?.name}}</a> 
         </li>
         <li class="breadcrumb-item">
             <a class="link" routerLink="/subcategories">
-                <span class="fw-bold">Podkategória n</span>
+                <span class="fw-bold">{{subcategory?.name}}</span>
             </a>
         </li>
     </ol>
 </div>
+<div class="border border-dark m-3">
+    <h3>{{subcategory?.name}}</h3>
+</div>
+<app-subcategory-section-list [subsubcategories]="subsubcategories"></app-subcategory-section-list>
 
-<app-subcategory-section-list></app-subcategory-section-list>
-
-<app-subcategory-advert-list></app-subcategory-advert-list>
+<app-subcategory-advert-list [adverts]="adverts"></app-subcategory-advert-list>
 
 <!--
 <div class="CategoryPath p-2">

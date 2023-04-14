@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subcategory } from 'src/app/common/model/subcategory.model';
 @Component({
   selector: 'app-category-section-list',
@@ -10,4 +10,5 @@ export class CategorySectionListComponent {
     @Input()
     subcategories?: Subcategory[];
     
+
 }

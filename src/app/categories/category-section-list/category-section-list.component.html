@@ -1,11 +1,11 @@
 <div class="border border-dark m-3 pt-2 pb-2">
     <h5>Podkategórie</h5>
 </div>
-<div class="border border-dark bg-container-alt categories-alt-grid m-3" *ngIf="!subcategories">
+<div class="border border-dark bg-container-alt categories-alt-grid m-3" *ngIf="subcategories?.length">
     <div class="p-2" *ngFor="let subcategory of subcategories">
         <a href="/subcategories/{{subcategory.id}}" class="color-light">{{subcategory.name}}</a>
     </div>
 </div>
-<div class="border border-dark bg-container-alt m-3 text-center pt-3" *ngIf="subcategories">
+<div class="border border-dark bg-container-alt m-3 text-center pt-3" *ngIf="!subcategories?.length">
     <p class="text-warning fw-bold">Nenašli sa žiadne podkategórie!</p>
 </div>
