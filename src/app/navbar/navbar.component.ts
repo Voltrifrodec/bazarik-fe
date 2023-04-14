@@ -1,4 +1,4 @@
-import { Component, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, Output, SimpleChanges, destroyPlatform } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as fa from '@fortawesome/free-solid-svg-icons';
@@ -24,17 +24,18 @@ export class NavbarComponent {
 			window.alert("Pre vyhľadávanie je nutné zadať text.");
 			return;
 		}
-		
-		let query = this.searchForm.controls['query'].value as String;
+
+		const query = this.searchForm.controls['query'].value as string;
+
+		if (query.trim().length == 0) {
+			this.searchForm.controls['query'].setValue('');
+		}
 
 		if (query.trim().length < 3) {
 			window.alert("Pre vyhľadávanie sú nutné aspoň tri znaky.");
 			return;
 		}
 
-		console.log(query);
 		this.router.navigate([`search/${query}`]);
-
-
 	}
 }

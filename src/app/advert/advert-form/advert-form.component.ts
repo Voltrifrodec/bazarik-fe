@@ -66,7 +66,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		this.advertForm = new FormGroup({
 			id: new FormControl(null, []),
 			name: new FormControl(null, [Validators.required]),
-			description: new FormControl(null, []),
+			description: new FormControl(null, [Validators.maxLength(1024)]),
 			keywords: new FormControl(null, []),
 
 			priceEur: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(50000)]),

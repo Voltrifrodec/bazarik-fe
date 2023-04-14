@@ -16,11 +16,11 @@ const routes: Routes = [
 		component: HomeComponent
 	},
 	{
-		path: 'adverts/new',
+		path: 'advert/new',
 		component: AdvertFormComponent
 	},
 	{
-		path: 'adverts/:advertId',
+		path: 'advert/:advertId',
 		component: AdvertDetailPageComponent
 	},
 	{

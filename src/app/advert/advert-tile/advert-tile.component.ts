@@ -14,10 +14,5 @@ export class AdvertTileComponent {
 	@Input()
 	advert?: Advert;
 
-	constructor() {
-		console.log(this.advert);
-		if (this.advert) {
-			console.log(this.advert);
-		}
-	}
+	constructor() {}
 }

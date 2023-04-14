@@ -26,6 +26,7 @@ import { SubsubcategoryAdvertListComponent } from './subsubcategory/subsubcatego
 import { NavbarComponent } from './navbar/navbar.component';
 import { AdvertTileComponent } from './advert/advert-tile/advert-tile.component';
 import { ErrorsComponent } from './errors/errors.component';
+import { SearchListComponent } from './core/search/search-list/search-list.component';
 
 @NgModule({
 	declarations: [
@@ -48,7 +49,8 @@ import { ErrorsComponent } from './errors/errors.component';
   		SubsubcategoryAdvertListComponent,
     NavbarComponent,
     AdvertTileComponent,
-    ErrorsComponent
+    ErrorsComponent,
+    SearchListComponent
 	],
 	imports: [
 		BrowserModule,
