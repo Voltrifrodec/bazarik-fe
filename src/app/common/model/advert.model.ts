@@ -5,6 +5,7 @@ import { District } from "./district.model";
 import { Subcategory } from "./subcategory.model";
 import { Subsubcategory } from "./subsubcategory.model";
 import { Image } from "./image.model";
+import { Region } from "./region.model";
 
 export interface Advert {
 	id: string;
@@ -12,8 +13,8 @@ export interface Advert {
 	description: string;
 	keywords: string;
 
-	dateAdded: Date;
-	dateModified: Date;
+	dateAdded?: Date;
+	dateModified?: Date;
 
 	priceEur: number;
 	fixedPrice: boolean;
@@ -26,6 +27,7 @@ export interface Advert {
 	contact: Contact;
 
 	district: District;
+	region: Region;
 
 	image: Image;
 }

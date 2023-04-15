@@ -1,0 +1,23 @@
+<div class="container-fluid bg-banner border-bottom border-dark py-3">
+    <div class="col-lg-8 mx-auto">
+        <nav class="navbar navbar-expand-lg navbar-light justify-content-lg-between px-3 px-lg-0">
+            <div class="navbar-item col-3">
+                <a routerLink="/" class="navbar-brand fw-bold">Bazarik</a>
+            </div>
+
+            <form [formGroup]="searchForm" class="input-group w-50 col-6" (submit)="search()">
+                <input formControlName="query" type="search" class="form-control rounded d-inline-block" placeholder="Hľadajte inzerát..." />
+                <button type="submit" class="btn btn-success d-inline">
+					<fa-icon [icon]="fa.faSearch"></fa-icon>
+				</button>
+            </form>
+
+            <div class="navbar-item col-3 text-true-right">
+                <button class="btn btn-success" routerLink="/advert/new">
+					<fa-icon [icon]="fa.faPlus"></fa-icon>
+					<span>Nový inzerát</span>
+				</button>
+            </div>
+        </nav>
+    </div>
+</div>

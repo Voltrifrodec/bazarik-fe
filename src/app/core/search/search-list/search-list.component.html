@@ -1,0 +1,22 @@
+<div class="m-3">
+	<div class="pt-2 pb-2">
+		<h1 class="display-4">Výsledky vyhľadávania</h1>
+	</div>
+	
+	<hr>
+
+	<small class="h5">Bolo nájdených {{ adverts?.length }} inzerátov.</small>
+	
+	<div class="d-flex">
+		<div class="row row-cols-2 g-3 mt-0">
+			<app-advert-tile
+				role="button"
+				*ngFor="let advert of adverts"
+				[advert]="advert"
+				routerLink="/advert/{{ advert.id }}"
+				class="col-md-3"
+			></app-advert-tile>
+
+		</div>
+	</div>
+</div>

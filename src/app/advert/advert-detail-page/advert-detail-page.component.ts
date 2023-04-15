@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import { Advert } from 'src/app/common/model/advert.model';
@@ -13,9 +13,15 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class AdvertDetailPageComponent {
 
-	advert?: Advert;
+	@Input()
+	public advert?: Advert;
 
 	private advertId: string | null;
+
+	@Output()
+	get advertData(): Advert {
+		return this.advert!;
+	}
 
 	constructor(
 		private router: Router,
@@ -31,8 +37,6 @@ export class AdvertDetailPageComponent {
 		if (this.advertId) {
 			this.service.getAdvertById(this.advertId).pipe(untilDestroyed(this)).subscribe((advert: Advert) => {
 				this.advert = advert;
-			}, () => {
-				this.router.navigate([`404`]);
 			});
 		}
 	}
@@ -43,6 +47,10 @@ export class AdvertDetailPageComponent {
 		}, () => {
 			this.toastService.error('Inzerát nebol úspešne zmenený.');
 		})
+	}
+
+	sendData() {
+		this.router.navigate([`advert/edit`]);
 	}
 
 	cancel(): void {

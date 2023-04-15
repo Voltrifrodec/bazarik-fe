@@ -1,17 +1,14 @@
 # bazarik-fe
-
+<ul>
+  <li> Webové technológie 3 </li>
+</ul>
 
 ## Odkazy
-Odkazy na ostatné stránky spojené s projektom:
-
-**Jira**: https://student-umb.atlassian.net/jira/software/projects/DVES/boards/1
-
-
-**Figma**: https://www.figma.com/files/team/1221129547730039189/DveStodola
-
-
-**Backend repository**: https://github.com/Voltrifrodec/bazarik-be
-
+<ul>
+  <li> Jira: https://student-umb.atlassian.net/jira/software/projects/DVES/boards/1 </li>
+  <li> Figma: https://www.figma.com/files/team/1221129547730039189/DveStodola </li>
+  <li> Backend repository: https://github.com/Voltrifrodec/bazarik-be </li>
+</ul>
 
 
 <!-- ### Tags

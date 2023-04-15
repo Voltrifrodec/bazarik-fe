@@ -1,0 +1,38 @@
+<div *ngIf="advert"  class="border border-dark p-2 h-100">
+	<div class="text-center">
+		<img
+			class="mg-fluid border-secondary w-100"
+			alt="{{ advert.name }}"
+			title="{{ advert.name }}"
+			src="data:{{ advert.image.type }};base64,{{ advert.image.image }}"
+		/>
+	</div>
+	<div class="text-left">
+		<span class="h4 pt-2 d-block">
+			{{ advert.currency.symbol }} {{ advert.priceEur }}
+		</span>
+
+		<div class="d-inline-block overflow-hidden" style="text-overflow: ellipsis;">
+			<span class="h6 d-inline-block mb-1" title="{{advert.name}}">
+				{{ advert.name }}
+			</span>
+		</div>
+
+		<span class="d-block">
+			<fa-icon [icon]="fa.faLocationArrow"></fa-icon>
+			{{ advert.district.name }}, {{ advert.district.postcode }}
+		</span>
+
+		<span class="d-block">
+			<div *ngIf="advert.fixedPrice; then cenaJeFixnaBlock else cenaNieJeFixnaBlock"></div>
+			
+			<ng-template #cenaJeFixnaBlock>
+				<small class="h6">Cena nie je fixná</small>
+			</ng-template>
+
+			<ng-template #cenaNieJeFixnaBlock>
+				<small class="h6"> Cena je fixná</small>
+			</ng-template>
+		</span>
+	</div>
+</div>

@@ -17,6 +17,10 @@ export class AdvertService {
 		return this.http.get<Advert[]>(this.advertsUrl);
 	}
 
+	getAllAdvertsByQuery(query: string): Observable<Advert[]> {
+		return this.http.get<Advert[]>(`${this.apiUrl}/search/${query}`);
+	}
+
 	getAllAdvertsByCategoryId(categoryId: number): Observable<Advert[]> {
 		return this.http.get<Advert[]>(`${this.apiUrl}/categories/${categoryId}/adverts`);
 	}
