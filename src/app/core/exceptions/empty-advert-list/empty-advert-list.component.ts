@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import * as fa from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle, faPlus, faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-empty-advert-list',
@@ -7,5 +7,7 @@ import * as fa from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./empty-advert-list.component.css']
 })
 export class EmptyAdvertListComponent {
-    fa = fa;
+    faExclamationTriangle = faExclamationTriangle;
+    faPlus = faPlus;
+    faHome = faHome
 }

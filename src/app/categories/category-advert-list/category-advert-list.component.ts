@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as fa from '@fortawesome/free-solid-svg-icons';
+import { faLocationArrow, faExclamationCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
 import { Advert } from 'src/app/common/model/advert.model';
 
 @Component({
@@ -8,7 +8,10 @@ import { Advert } from 'src/app/common/model/advert.model';
   styleUrls: ['./category-advert-list.component.css']
 })
 export class CategoryAdvertListComponent implements OnInit {
-    fa = fa;
+
+    faLocationArrow = faLocationArrow;
+    faExclamationCircle = faExclamationCircle;
+    faCheckCircle = faCheckCircle;
 
     @Input()
     adverts?: Advert[];

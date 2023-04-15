@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import * as fa from '@fortawesome/free-solid-svg-icons';
+import {faExclamationTriangle, faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-pagenotfound',
@@ -7,5 +7,6 @@ import * as fa from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./pagenotfound.component.css']
 })
 export class PagenotfoundComponent {
-    fa = fa;
+    faExclamationTriangle = faExclamationTriangle;
+    faHome = faHome;
 }

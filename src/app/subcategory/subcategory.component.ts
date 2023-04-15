@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import * as fa from '@fortawesome/free-solid-svg-icons';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Advert } from '../common/model/advert.model';
 import { Subcategory } from '../common/model/subcategory.model';
@@ -16,7 +15,6 @@ import { SubcategoryService } from '../common/service/subcategory.service';
   styleUrls: ['./subcategory.component.css']
 })
 export class SubcategoryComponent implements OnInit {
-    fa = fa;
 
     subcategoryId: number;
     subcategory?: Subcategory;

@@ -1,4 +1,4 @@
-<div class="border border-dark m-3">
+<div class="m-3">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a class="link" href="/">Domov</a> 
@@ -13,53 +13,8 @@
         </li>
     </ol>
 </div>
-<div class="border border-dark m-3">
+<div class="m-3">
     <h3>{{subcategory?.name}}</h3>
 </div>
 <app-subcategory-section-list [subsubcategories]="subsubcategories"></app-subcategory-section-list>
-
 <app-subcategory-advert-list [adverts]="adverts"></app-subcategory-advert-list>
-
-<!--
-<div class="CategoryPath p-2">
-    <nav>
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item">
-				<a class="link-success" routerLink="/">Domov</a>
-			</li>
-			<li class="breadcrumb-item">
-				<a class="link-success" routerLink="/categories">Kategória</a>
-			</li>
-			<li class="breadcrumb-item">
-				TODO:  Subcategories
-				<a class="link-success" routerLink="/subcategories"><span class="fw-bold">Podkategória n</span></a>
-			</li>
-		</ol>
-	</nav>
-</div>
-
-TODO: Presunúť do osobitného komponentu
-<h3>Podpodkategórie</h3>
-<div class="CategoriesGrid text-center p-2">
-    <a href="/subsubcategories" *ngFor="let num of [].constructor(12); let i = index;"> Podpodkategória {{i}}</a>
-</div>
-
-TODO: Presunúť do osobitného komponentu
-<div class="AdvertsList">
-    <a href="/advert/{{i}}" class="AdvertItem"  *ngFor="let num of [].constructor(150); let i = index;">
-        <div>
-            <img class="AdvertImage" src="{{i % 2 == 0 ? '../../assets/images/advert-image.png' : '../../assets/images/advert-image2.png'}}" alt="Advert Image">
-            <div class="AdvertInfo">
-                <span class="AdvertPrice">
-                    154,565.98 €
-                </span>
-                <h4 class="AdvertName">
-                    Inzerát {{i + 1}} od Huberta Blaine W. Sr.
-                </h4>
-                <span class="AdvertLocation"><fa-icon [icon]="fa.faLocationArrow"></fa-icon>  Banská Bystrica, 974 01</span>
-                <span class="AdvertPriceIsConstant"><fa-icon [icon]="fa.faCheck"></fa-icon>  Cena je / nie je fixná</span>
-            </div>
-        </div>
-    </a>
-</div>
--->

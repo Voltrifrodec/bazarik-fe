@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Category } from 'src/app/common/model/category.model';
-import * as fa from '@fortawesome/free-solid-svg-icons';
+import { faBox }from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-category-list',
@@ -8,10 +8,9 @@ import * as fa from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./category-list.component.css']
 })
 export class CategoryListComponent {
-    fa = fa;
+    faBox = faBox;
 
     @Input()
     categories? : Category[];
-
 
 }

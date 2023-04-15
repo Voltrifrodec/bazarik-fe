@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import * as fa from '@fortawesome/free-solid-svg-icons';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Advert } from '../common/model/advert.model';
 import { Category } from '../common/model/category.model';
@@ -15,7 +14,6 @@ import { CategoryService } from '../common/service/category.service';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent {
-    fa = fa;
     categoryId: number;
     category?: Category;
 
