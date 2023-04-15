@@ -124,6 +124,7 @@ h1 {
 }
 .RouterContainerFix {
     min-height: 90vh;
+    margin: 0 auto;
     
     border-left: .15rem solid;
     border-right: .15rem solid;
@@ -155,7 +156,6 @@ h1 {
     font-family: monospace;
     display: block;
 }
-
 
 /* TODO: Optimalizovat! */
 @media screen and (min-width:651px) and (max-width:850px) {

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import * as fa from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'app-recent-advert-list',
@@ -7,5 +6,5 @@ import * as fa from '@fortawesome/fontawesome-svg-core';
   styleUrls: ['./recent-advert-list.component.css']
 })
 export class RecentAdvertListComponent {
-  fa = fa;
+    
 }

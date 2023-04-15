@@ -1,4 +1,9 @@
-<div class="text-center text-danger auto h-100">
-    <h1 class="display-1 fw-bold">404</h1>
-    <h2 class="display-6">Stránka sa nenašla</h2>
+<div class="m-2 h-100 d-flex flex-column justify-content-center align-items-center text-center   ">
+    <fa-icon [icon]="faExclamationTriangle" class="display-1 text-danger outline"></fa-icon>
+    <h1 class="display-3 fw-bold">404</h1>
+    <h2 class="display-6 pb-4">Stránka nebola nájdená!</h2>
+    <button class="btn btn-success m-2" routerLink="">
+        <fa-icon [icon]="faHome"></fa-icon>
+        Späť na hlavnú stránku
+    </button>
 </div>

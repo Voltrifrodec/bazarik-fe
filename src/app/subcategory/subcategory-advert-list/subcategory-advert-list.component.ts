@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import * as fa from '@fortawesome/free-solid-svg-icons';
+import { Component, Input } from '@angular/core';
+import { faLocationArrow, faExclamationCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+import { Advert } from 'src/app/common/model/advert.model';
 
 @Component({
   selector: 'app-subcategory-advert-list',
@@ -7,5 +8,10 @@ import * as fa from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./subcategory-advert-list.component.css']
 })
 export class SubcategoryAdvertListComponent {
-    fa = fa;
+    faLocationArrow = faLocationArrow;
+    faExclamationCircle = faExclamationCircle;
+    faCheckCircle = faCheckCircle;
+
+    @Input()
+    adverts?: Advert[];
 }

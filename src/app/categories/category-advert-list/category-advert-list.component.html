@@ -1,17 +1,26 @@
-<div class="border border-dark m-3 adverts-grid">
-    <a *ngFor="let num of [].constructor(22); let i = index;" class="border border-dark bg-container p-3" href="/advert/{{i + 1}}">
-        <div class="text-center">
-            <img src="../../assets/images/advert-image2.png" alt="Ilustračná fotografia inzerátu" class="advert-image">
-        </div>
-        <div class="text-left">
-            <p class="h4 pt-2">154,656.98 €</p>
-            <p class="border-bottom border-dark pb-2 fw-bold h6">Inzerát #X od Huberta Blaine W. Sr.</p>
-            <span>
-                <fa-icon [icon]="fa.faLocationArrow"></fa-icon> Banská Bystrica, 974 01
-            </span>
-            <span class="text-success d-block">
-                <fa-icon [icon]="fa.faCheck"></fa-icon> Cena je / nie je fixná
-            </span>
-        </div>  
-    </a>
-</div>
+<ng-container *ngIf="adverts?.length; then advertsExist; else advertsMissing"></ng-container>
+<ng-template #advertsExist>
+    <div class="m-3 adverts-grid">
+        <a *ngFor="let advert of adverts;" class="border border-dark bg-container p-3" href="/advert/{{advert.id}}">
+            <div class="text-center d-flex flex-column justify-content-center image-fix">
+                <img src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}" alt="Ilustračná fotografia inzerátu" class="advert-image">
+            </div>
+            <div class="text-left">
+                <p class="h4 pt-2">{{advert.priceEur}} {{advert.currency.symbol}}</p>
+                <p class="border-bottom border-dark pb-2 fw-bold h6">{{advert.name}}</p>
+                <span>
+                    <fa-icon [icon]="faLocationArrow"></fa-icon> {{advert.district.name}}, {{advert.district.postcode}}
+                </span>
+                <span class="text-danger d-block" *ngIf="!advert.fixedPrice">
+                    <fa-icon [icon]="faExclamationCircle"></fa-icon> Cena nie je fixná
+                </span>
+                <span class="text-success d-block" *ngIf="advert.fixedPrice">
+                    <fa-icon [icon]="faCheckCircle"></fa-icon> Cena je fixná
+                </span>
+            </div>  
+        </a>
+    </div>
+</ng-template>
+<ng-template #advertsMissing>
+    <app-empty-advert-list></app-empty-advert-list>
+</ng-template>

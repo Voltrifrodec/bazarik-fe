@@ -27,6 +27,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AdvertTileComponent } from './advert/advert-tile/advert-tile.component';
 import { ErrorsComponent } from './errors/errors.component';
 import { SearchListComponent } from './core/search/search-list/search-list.component';
+import { EmptyAdvertListComponent } from './core/exceptions/empty-advert-list/empty-advert-list.component';
 
 @NgModule({
 	declarations: [
@@ -47,10 +48,11 @@ import { SearchListComponent } from './core/search/search-list/search-list.compo
 		SubcategorySectionListComponent,
 		SubcategoryAdvertListComponent,
   		SubsubcategoryAdvertListComponent,
-    NavbarComponent,
-    AdvertTileComponent,
-    ErrorsComponent,
-    SearchListComponent
+        NavbarComponent,
+        AdvertTileComponent,
+        ErrorsComponent,
+        SearchListComponent,
+        EmptyAdvertListComponent
 	],
 	imports: [
 		BrowserModule,
