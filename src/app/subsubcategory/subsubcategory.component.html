@@ -4,25 +4,24 @@
             <a class="link" href="/">Domov</a> 
         </li>
         <li class="breadcrumb-item">
-            <a class="link" routerLink="/categories">Kategória n</a> 
+            <a class="link" routerLink="/categories/{{subsubcategory?.subcategory?.category?.id}}">{{subsubcategory?.subcategory?.category?.name}}</a> 
         </li>
         <li class="breadcrumb-item">
-            <a class="link" routerLink="/subcategories">Podkategória n
-            </a>
+            <a class="link" routerLink="/subcategories/{{subsubcategory?.subcategory?.id}}">{{subsubcategory?.subcategory?.name}}</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="link" routerLink="/subsubcategories">
-                <span class="fw-bold">Podpodkategória n</span>
+            <a class="link" routerLink="/subsubcategories/{{subsubcategory?.id}}">
+                <span class="fw-bold">{{subsubcategory?.name}}</span>
             </a>
         </li>
     </ol>
 </div>
 
 <div class="border border-dark m-3 pt-2 pb-2">
-    <h3>Podpodkategória n</h3>
+    <h3>{{subsubcategory?.name}}</h3>
 </div>
-<div class="border border-dark bg-container-alt p-2 m-3">
+<!-- <div class="border border-dark bg-container-alt p-2 m-3">
     <span class="CategoriesGridInformation text-info d-block text-center">Už neexistujú žiadne ďalšie podkategórie na zobrazenie.</span>
-</div>
+</div> -->
 
 <app-subsubcategory-advert-list [adverts]="adverts"></app-subsubcategory-advert-list>
