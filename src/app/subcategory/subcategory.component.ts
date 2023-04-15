@@ -41,6 +41,7 @@ export class SubcategoryComponent implements OnInit {
     }
 
     getAdverts(): void {
+        console.log('Posielam ID subcategory:', this.subcategoryId);
         this.advertService.getAllAdvertsBySubcategoryId(this.subcategoryId).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
             this.adverts = adverts;
             console.log('Received adverts for the subcategory:', this.adverts);
@@ -54,6 +55,6 @@ export class SubcategoryComponent implements OnInit {
             this.subcategory = subcategory;
         });
     }
-
+    
 
 }

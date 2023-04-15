@@ -22,11 +22,11 @@ export class AdvertService {
 	}
 
 	getAllAdvertsBySubcategoryId(subcategoryId: number): Observable<Advert[]> {
-		return this.http.get<Advert[]>(`${this.apiUrl}/categories/${subcategoryId}/adverts`);
+		return this.http.get<Advert[]>(`${this.apiUrl}/subcategories/${subcategoryId}/adverts`);
 	}
 
 	getAllAdvertsBySubsubcategoryId(subsubcategoryId: number): Observable<Advert[]> {
-		return this.http.get<Advert[]>(`${this.apiUrl}/categories/${subsubcategoryId}/adverts`);
+		return this.http.get<Advert[]>(`${this.apiUrl}/subsubcategories/${subsubcategoryId}/adverts`);
 	}
 
 	getAdvertById(advertId: string): Observable<Advert> {

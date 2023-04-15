@@ -42,7 +42,7 @@ export class SubsubcategoryComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // this.getAdverts();
+        this.getAdverts();
         // this.subsubcategoryService.getSubsubcategoryById(this.subsubcategoryId).pipe(untilDestroyed(this)).subscribe((subsubcategory: Subsubcategory) => {
         //     this.subsubcategory = subsubcategory;
         //     console.log('Received subsubcategory:', this.subsubcategory);
