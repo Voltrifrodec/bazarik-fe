@@ -1,21 +1,23 @@
-<div class="border border-dark m-3 adverts-grid" *ngIf="advertsAmount">
-    <a *ngFor="let advert of adverts;" class="border border-dark bg-container p-3" href="/advert/{{advert.id}}">
-        <div class="text-center">
-            <img src="../../assets/images/advert-image2.png" alt="Ilustračná fotografia inzerátu" class="advert-image">
-        </div>
-        <div class="text-left">
-            <p class="h4 pt-2">{{advert.priceEur}}</p>
-            <p class="border-bottom border-dark pb-2 fw-bold h6">{{advert.name}}</p>
-            <span>
-                <fa-icon [icon]="fa.faLocationArrow"></fa-icon> {{advert.district}}
-            </span>
-            <span class="text-success d-block">
-                <fa-icon [icon]="fa.faCheck"></fa-icon> 
-                {{advert.fixedPrice ? 'Cena je fixná' : 'Cena nie je fixná'}}
-            </span>
-        </div>  
-    </a>
-</div>
-<div *ngIf="!advertsAmount">
-    <app-empty-advert-list></app-empty-advert-list>
-</div>
+<ng-container class="border border-dark m-3 adverts-grid" *ngIf="advertsAmount; then advertsExist; else advertsMissing">
+    <ng-template #advertsExist>
+        <a *ngFor="let advert of adverts;" class="border border-dark bg-container p-3" href="/advert/{{advert.id}}">
+            <div class="text-center">
+                <img src="../../assets/images/advert-image2.png" alt="Ilustračná fotografia inzerátu" class="advert-image">
+            </div>
+            <div class="text-left">
+                <p class="h4 pt-2">{{advert.priceEur}}</p>
+                <p class="border-bottom border-dark pb-2 fw-bold h6">{{advert.name}}</p>
+                <span>
+                    <fa-icon [icon]="fa.faLocationArrow"></fa-icon> {{advert.district}}
+                </span>
+                <span class="text-success d-block">
+                    <fa-icon [icon]="fa.faCheck"></fa-icon> 
+                    {{advert.fixedPrice ? 'Cena je fixná' : 'Cena nie je fixná'}}
+                </span>
+            </div>  
+        </a>
+    </ng-template>
+    <ng-template #advertsMissing>
+        <app-empty-advert-list></app-empty-advert-list>
+    </ng-template>
+</ng-container>
