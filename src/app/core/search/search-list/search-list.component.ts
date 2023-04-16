@@ -27,14 +27,14 @@ export class SearchListComponent implements OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		console.log(this.route.snapshot.paramMap.get('query'));
+		// console.log(this.route.snapshot.paramMap.get('query'));
 		this.query = this.route.snapshot.paramMap.get('query');
 		this.searchAdvertsByQuery();
-		console.log(this.query);
+		// console.log(this.query);
 	}
 	
 	private searchAdvertsByQuery(): void {
-		console.log(this.query);
+		// console.log(this.query);
 		if (this.query) {
 			this.advertService.getAllAdvertsByQuery(this.query).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
 				this.adverts = adverts;

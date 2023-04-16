@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   getCategories() : void {
     this.service.getAllCategories().pipe(untilDestroyed(this)).subscribe((categories: Category[]) => {
         this.categories = categories;
-        console.log(this.categories);
+        // console.log(this.categories);
     });
   }
 

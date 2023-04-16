@@ -142,7 +142,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	                invalid.push(name);
 	            }
 	        }
-	        console.log(invalid);
+	        // console.log(invalid);
 			return;
 		}
 	}
@@ -175,7 +175,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		}
 
 		if (file) {
-			console.log(file);
+			// console.log(file);
 			this.imageService.uploadImage(file).pipe(untilDestroyed(this)).subscribe((imageId: number) => {
 				if (imageId) {
 					advert.imageId = imageId;

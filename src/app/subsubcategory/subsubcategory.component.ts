@@ -23,7 +23,7 @@ export class SubsubcategoryComponent implements OnInit {
         this.subsubcategoryId = this.route.snapshot.params['subsubcategoryId'];
         this.subsubcategoryService.getSubsubcategoryById(this.subsubcategoryId).pipe(untilDestroyed(this)).subscribe((subsubcategory: Subsubcategory) => {
             this.subsubcategory = subsubcategory;
-            console.log('Received subsubcategory:', this.subsubcategory);
+            // console.log('Received subsubcategory:', this.subsubcategory);
         });
         this.getAdverts();
     }
@@ -32,7 +32,7 @@ export class SubsubcategoryComponent implements OnInit {
     getAdverts(): void {
         this.advertService.getAllAdvertsBySubsubcategoryId(this.subsubcategoryId).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
             this.adverts = adverts;
-            console.log('Received adverts for the subsubcategory:', this.adverts);
+            // console.log('Received adverts for the subsubcategory:', this.adverts);
         });
     }
 
@@ -40,7 +40,7 @@ export class SubsubcategoryComponent implements OnInit {
         this.subsubcategoryId = this.route.snapshot.params['subsubcategoryId'];
         this.subsubcategoryService.getSubsubcategoryById(this.subsubcategoryId).pipe(untilDestroyed(this)).subscribe((subsubcategory: Subsubcategory) => {
             this.subsubcategory = subsubcategory;
-            console.log('Received subsubcategory:', this.subsubcategory);
+            // console.log('Received subsubcategory:', this.subsubcategory);
         });
         this.getAdverts();
     }
