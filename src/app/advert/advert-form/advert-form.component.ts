@@ -157,18 +157,22 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		if (Number(userResponse) !== confirmationNumber) {
 			window.alert("Overenie nebolo úspešné.");
 			this.saveAdvert();
+			return;
 		}
 
 		let advert = this.prepareAdvert();
+
+		this.saveToLocalStorage();
 
 		let fileElement = document.querySelector('#file') as HTMLInputElement;
 		let files = fileElement.files as FileList | undefined;
 		let file = files![0] as File;
 
 		if (! file) {
-			advert.imageId = 1;
+			advert.imageId = 0;
 			this.advertService.createAdvert(advert).pipe(untilDestroyed(this)).subscribe((advertId: string) => {
 				this.redirectToHomePage(advertId);
+				this.clearLocalStorage();
 			}, (error: Error) => {
 				console.error(error);
 			})
@@ -182,6 +186,8 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 					this.advertService.createAdvert(advert).pipe(untilDestroyed(this)).subscribe((advertId: string) => {
 						this.redirectToHomePage(advertId);
+						this.clearLocalStorage();
+
 					}, (error: Error) => {
 						console.error(error);
 					})
@@ -196,7 +202,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 		this.router.navigate([`/advert/${advertId}`]);
 		
-		this.clearLocalStorage()
+		this.clearLocalStorage();
 	}
 
 	private prepareAdvert(): any {

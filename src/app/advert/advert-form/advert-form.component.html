@@ -28,10 +28,12 @@
 		</label>
         <div class="input-group mb-2">
             <div class="currency input-group-prepend">
-                <input formControlName="currency" class="d-none">
-                <div class="form-control form-control-lg bg-secondary text-light rounded-left">{{ '€' }}</div>
+				<input formControlName="currency" class="d-none" [value]="this.currencies?.at(0)?.id">
+				<div class="form-control form-control-lg bg-secondary text-light rounded-left">
+					{{ '€' }}
+				</div>
             </div>
-            <input formControlName="priceEur" type="number" min="0" max="9999" class="form-control form-control-lg"
+            <input formControlName="priceEur" type="number" class="form-control form-control-lg"
 				placeholder="Cena pre inzerát">
 		</div>
 		<h5 *ngIf="advertForm.controls['priceEur'].invalid" class="text-danger">
