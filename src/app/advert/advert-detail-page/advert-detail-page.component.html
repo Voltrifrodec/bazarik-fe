@@ -60,7 +60,7 @@
 		<div *ngIf="advert?.fixedPrice; then cenaJeFixnaBlock else cenaNieJeFixnaBlock"></div>
 
 		<ng-template #cenaJeFixnaBlock>
-			<small *ngIf="advert?.fixedPrice" class="text-success h6">Cena nie je fixná</small>
+			<small *ngIf="advert?.fixedPrice" class="text-success h6">Cena nie je fixná {{advert?.fixedPrice}}</small>
 		</ng-template>
 
 		<ng-template #cenaNieJeFixnaBlock>

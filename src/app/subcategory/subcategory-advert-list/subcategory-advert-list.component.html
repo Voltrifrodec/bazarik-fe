@@ -11,10 +11,10 @@
                 <span>
                     <fa-icon [icon]="faLocationArrow"></fa-icon> {{advert.district.name}}, {{advert.district.postcode}}
                 </span>
-                <span class="text-danger d-block" *ngIf="!advert.fixedPrice">
+                <span class="text-success d-block" *ngIf="advert.fixedPrice">
                     <fa-icon [icon]="faExclamationCircle"></fa-icon> Cena nie je fixná
                 </span>
-                <span class="text-success d-block" *ngIf="advert.fixedPrice">
+                <span class="text-danger d-block" *ngIf="!advert.fixedPrice">
                     <fa-icon [icon]="faCheckCircle"></fa-icon> Cena je fixná
                 </span>
             </div>  
