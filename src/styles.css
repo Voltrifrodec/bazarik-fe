@@ -95,7 +95,13 @@ h1 {
     text-align: center;
 }
 .advert-image {
-    width: 24vmin;
+    /* width: 24vmin; */
+    width: 100%;
+    margin: 0 auto;
+    vertical-align: top;
+}
+div:has(.advert-image) {
+    min-height: 300px;
 }
 .color-light {
     color: #CCCCCC;
