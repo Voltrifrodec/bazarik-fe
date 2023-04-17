@@ -149,9 +149,9 @@
     <!-- e-mail -->
     <div class="form-group">
         <p class="h3">E-mailová adresa</p>
-        <input formControlName="contact" type="email" class="form-control form-control-lg" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
+        <input formControlName="contactEmail" type="email" class="form-control form-control-lg" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
         <small class="form-text text-muted">Na túto e-mailovú adresu Vám bude zaslaný kód na overenie.</small>
-		<h5 *ngIf="advertForm.controls['contact'].invalid" class="text-danger">
+		<h5 *ngIf="advertForm.controls['contactEmail'].invalid" class="text-danger">
 			Je nutné zadať e-mailovú adresu
 		</h5>
     </div>
