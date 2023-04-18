@@ -15,7 +15,7 @@ export class NavbarComponent {
 
 	constructor(private router: Router) {
 		this.searchForm = new FormGroup({
-			query: new FormControl("ram", [Validators.required])
+			query: new FormControl("", [Validators.required])
 		});
 	}
 

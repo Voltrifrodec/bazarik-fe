@@ -69,7 +69,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			subcategory: new FormControl(null, []),
 			subsubcategory: new FormControl(null, []),
 
-			contact: new FormControl(null, [Validators.required, Validators.email]),
+			contactEmail: new FormControl(null, [Validators.required, Validators.email]),
 
 			region: new FormControl(null, [Validators.required]),
 			district: new FormControl(null, [Validators.required]),
@@ -219,7 +219,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			subcategoryId: this.advertForm.controls['subcategory'].value,
 			subsubcategoryId: this.advertForm.controls['subsubcategory'].value,
 
-			contactEmail: this.advertForm.controls['contact'].value,
+			contactEmail: this.advertForm.controls['contactEmail'].value,
 
 			districtId: this.advertForm.controls['district'].value,
 
