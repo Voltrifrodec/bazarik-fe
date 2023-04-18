@@ -86,12 +86,12 @@ h1 {
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2vmin;
+    gap: 1vmin;
 }
 .categories-alt-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2vmin;
+    gap: 1vmin;
     text-align: center;
 }
 .image-fix {
