@@ -28,6 +28,7 @@ import { AdvertTileComponent } from './advert/advert-tile/advert-tile.component'
 import { ErrorsComponent } from './errors/errors.component';
 import { SearchListComponent } from './core/search/search-list/search-list.component';
 import { EmptyAdvertListComponent } from './core/exceptions/empty-advert-list/empty-advert-list.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
 	declarations: [
@@ -52,7 +53,8 @@ import { EmptyAdvertListComponent } from './core/exceptions/empty-advert-list/em
         AdvertTileComponent,
         ErrorsComponent,
         SearchListComponent,
-        EmptyAdvertListComponent
+        EmptyAdvertListComponent,
+        FooterComponent
 	],
 	imports: [
 		BrowserModule,
