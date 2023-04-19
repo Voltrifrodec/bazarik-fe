@@ -37,6 +37,8 @@ export class AdvertDetailPageComponent {
 		if (this.advertId) {
 			this.service.getAdvertById(this.advertId).pipe(untilDestroyed(this)).subscribe((advert: Advert) => {
 				this.advert = advert;
+			}, () => {
+				this.router.navigate(['404']);
 			});
 		}
 	}
