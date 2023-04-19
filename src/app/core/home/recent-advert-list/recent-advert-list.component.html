@@ -1,8 +1,8 @@
 <div class="auto m-3 p-2 bg-container">
-    <div *ngFor="let i of [1,2,3,4]">
+    <div *ngFor="let advert of adverts">
         <span class="p-1 d-inline-block">
-            <a routerLink="advert/{{i}}" class="text-decoration-underline">
-				Naposledy pridaný inzerát   /   Naposledy navštívený inzerát
+            <a routerLink="advert/{{advert.id}}" class="text-decoration-underline">
+				<span class="fw-bold">{{MilisToDate(advert.dateAdded).toLocaleString('en-GB')}}</span>: {{advert.name}}
 			</a>
         </span>
     </div>
