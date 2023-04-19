@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faLocationArrow, faExclamationCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+import { faLocationArrow, faExclamationCircle, faCheckCircle, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Advert } from 'src/app/common/model/advert.model';
 
 @Component({
@@ -12,6 +12,8 @@ export class CategoryAdvertListComponent implements OnInit {
     faLocationArrow = faLocationArrow;
     faExclamationCircle = faExclamationCircle;
     faCheckCircle = faCheckCircle;
+    faPencilAlt = faPencilAlt;
+    faTrash = faTrash;
 
     @Input()
     adverts?: Advert[];

@@ -1,23 +1,25 @@
 <ng-container *ngIf="adverts?.length; then advertsExist; else advertsMissing"></ng-container>
 <ng-template #advertsExist>
-    <div class="mt-3 adverts-grid">
-        <a *ngFor="let advert of adverts;" class="border border-dark bg-container p-3" href="/advert/{{advert.id}}">
-            <div class="text-center d-flex flex-column justify-content-center image-fix">
+    <div class="m-3 adverts-grid">
+        <a *ngFor="let advert of adverts;" class="border border-dark bg-container d-flex flex-column advert-item" href="/advert/{{advert.id}}">
+            <div class="text-center d-flex flex-column justify-content-top image-fix">
                 <img src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}" alt="Ilustračná fotografia inzerátu" class="advert-image">
             </div>
-            <div class="text-left">
+            <div class="text-left advert-info h-25 p-3">
                 <p class="h4 pt-2">{{advert.priceEur}} {{advert.currency.symbol}}</p>
                 <p class="border-bottom border-dark pb-2 fw-bold h6">{{advert.name}}</p>
-                <span>
-                    <fa-icon [icon]="faLocationArrow"></fa-icon> {{advert.district.name}}, {{advert.district.postcode}}
-                </span>
-                <span class="text-success d-block" *ngIf="advert.fixedPrice">
-                    <fa-icon [icon]="faExclamationCircle"></fa-icon> Cena nie je fixná
-                </span>
-                <span class="text-danger d-block" *ngIf="!advert.fixedPrice">
-                    <fa-icon [icon]="faCheckCircle"></fa-icon> Cena je fixná
-                </span>
-            </div>  
+                <div class="p-3 pb-4">
+                    <span class="d-block">
+                        <fa-icon [icon]="faLocationArrow"></fa-icon> {{advert.district.name}}, {{advert.district.postcode}}
+                    </span>
+                    <span class="text-success d-block" *ngIf="advert.fixedPrice">
+                        <fa-icon [icon]="faExclamationCircle"></fa-icon> Cena nie je fixná
+                    </span>
+                    <span class="text-danger d-block" *ngIf="!advert.fixedPrice">
+                        <fa-icon [icon]="faCheckCircle"></fa-icon> Cena je fixná
+                    </span>
+                </div>
+            </div>
         </a>
     </div>
 </ng-template>
