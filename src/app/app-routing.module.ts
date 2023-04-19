@@ -8,7 +8,7 @@ import { HomeComponent } from './core/home/home.component';
 import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
 import { SearchComponent } from './core/search/search.component';
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { PagenotfoundComponent } from './errors/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
 	{

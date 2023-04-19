@@ -15,7 +15,7 @@ import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
 import { SearchComponent } from './core/search/search.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { PagenotfoundComponent } from './errors/pagenotfound/pagenotfound.component';
 import { RecentAdvertListComponent } from './core/home/recent-advert-list/recent-advert-list.component';
 import { CategoryListComponent } from './core/home/category-list/category-list.component';
 import { CategorySectionListComponent } from './categories/category-section-list/category-section-list.component';
