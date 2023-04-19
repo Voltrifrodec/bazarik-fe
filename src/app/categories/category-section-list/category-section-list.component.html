@@ -1,7 +1,7 @@
-<div class="ps-3">
+<div class="mt-3">
     <h5>Podkategórie</h5>
 </div>
-<div class="bg-container-alt categories-alt-grid ms-3 me-3" *ngIf="subcategories?.length">
+<div class="bg-container-alt categories-alt-grid" *ngIf="subcategories?.length">
     <div *ngFor="let subcategory of subcategories" class="p-2">
         <a href="/subcategories/{{subcategory.id}}" class="color-light">{{subcategory.name}}</a>
     </div>
