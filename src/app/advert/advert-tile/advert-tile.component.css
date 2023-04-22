@@ -1,0 +1,10 @@
+
+.advert-img {
+    background-color: #000;
+}
+.advert-img > img {
+    height: 100%!important;
+}
+.advert-info {
+    z-index: 10;
+}
