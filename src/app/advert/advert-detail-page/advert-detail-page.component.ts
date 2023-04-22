@@ -4,6 +4,7 @@ import { ToastService } from 'angular-toastify';
 import { Advert } from 'src/app/common/model/advert.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 
 @UntilDestroy()
 @Component({
@@ -12,6 +13,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./advert-detail-page.component.css']
 })
 export class AdvertDetailPageComponent {
+
+    faClipboard = faClipboard;
 
 	@Input()
 	public advert?: Advert;
@@ -58,5 +61,17 @@ export class AdvertDetailPageComponent {
 	cancel(): void {
 		this.router.navigate([`advert/${this.advertId}`]);
 	}
+
+
+    async copyHref() {
+        console.log(this.router.url);
+        try {
+            await navigator.clipboard.writeText('localhost:4200' + this.router.url.toString()); // TODO: Nahradiť localhost názvom domény
+            alert('Odkaz na inzerát bol úspešne skopírovaný.');
+        }
+        catch (err) {
+            alert('Nepodarilo sa skopírovať odkaz na inzerát!')
+        }
+    }
 
 }
