@@ -8,13 +8,13 @@
             <form [formGroup]="searchForm" class="input-group w-50 col-6" (submit)="search()">
                 <input formControlName="query" type="search" class="form-control rounded d-inline-block" placeholder="Hľadajte inzerát..." />
                 <button type="submit" class="btn btn-success d-inline">
-					<fa-icon [icon]="fa.faSearch"></fa-icon>
+					<fa-icon [icon]="faSearch"></fa-icon>
 				</button>
             </form>
 
             <div class="navbar-item col-3 text-true-right">
                 <button class="btn btn-success" routerLink="/advert/new">
-					<fa-icon [icon]="fa.faPlus"></fa-icon>
+					<fa-icon [icon]="faPlus"></fa-icon>
 					<span>Nový inzerát</span>
 				</button>
             </div>
