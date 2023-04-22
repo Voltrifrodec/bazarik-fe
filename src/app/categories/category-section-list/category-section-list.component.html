@@ -6,6 +6,6 @@
         <a href="/subcategories/{{subcategory.id}}" class="color-light">{{subcategory.name}}</a>
     </div>
 </div>
-<div class="bg-container-alt d-flex align-items-center justify-content-center p-2" *ngIf="!subcategories?.length">
-    <span class="text-warning fw-bold d-block">Nenašli sa žiadne podkategórie!</span>
+<div class="bg-container-alt p-2" *ngIf="!subcategories?.length">
+    <span class="text-warning fw-bold d-block">V tejto kategórii sa už nenachádzajú žiadne podkategórie!</span>
 </div>
