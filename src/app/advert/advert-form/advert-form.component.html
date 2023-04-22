@@ -37,7 +37,13 @@
 				placeholder="Cena pre inzerát">
 		</div>
 		<h5 *ngIf="advertForm.controls['priceEur'].invalid" class="text-danger">
-			Je nutné zadať cenu inzerátu
+			Je nutné zadať správnu cenu inzerátu
+            <span *ngIf="advertForm.controls['priceEur'].errors?.['max']">
+                (cena nesmie presahovať 50000 {{ '€' }})
+            </span>
+            <span *ngIf="advertForm.controls['priceEur'].errors?.['min']">
+                (cena nesmie byť menšia ako 0 {{ '€' }})
+            </span>
 		</h5>
         <!-- </div> -->
 
@@ -152,7 +158,7 @@
         <input formControlName="contactEmail" type="email" class="form-control form-control-lg" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
         <small class="form-text text-muted">Na túto e-mailovú adresu Vám bude zaslaný kód na overenie.</small>
 		<h5 *ngIf="advertForm.controls['contactEmail'].invalid" class="text-danger">
-			Je nutné zadať e-mailovú adresu
+			Je nutné zadať správnu e-mailovú adresu
 		</h5>
     </div>
     <!-- phone number -->
