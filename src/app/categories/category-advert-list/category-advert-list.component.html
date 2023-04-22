@@ -33,6 +33,12 @@
             </div>
         </a>
     </div> -->
+    <ngb-pagination [collectionSize]="getTotalElements()"
+                    [page]="getPageNumber()"
+                    [pageSize]="getPageSize()"
+                    (pageChange)="changePage($event)">
+    </ngb-pagination>
+
 </ng-template>
 <ng-template #advertsMissing>
     <app-empty-advert-list></app-empty-advert-list>

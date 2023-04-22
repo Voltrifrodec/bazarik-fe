@@ -16,5 +16,7 @@
 
 	<app-category-section-list [subcategories]="subcategories"></app-category-section-list>
 	
-	<app-category-advert-list [adverts]="adverts"></app-category-advert-list>
+	<app-category-advert-list [adverts]="adverts"
+                              (pageChange)="getAdverts($event)"
+    ></app-category-advert-list>
 </div>
