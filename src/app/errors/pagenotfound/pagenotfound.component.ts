@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {faExclamationTriangle, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle, faHome } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-pagenotfound',
