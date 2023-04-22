@@ -57,7 +57,7 @@ export class CategoriesComponent {
 
     ngOnInit(): void {
         this.getSubcategories();
-        // this.getAdverts(this.categoryId);
+        this.getAdverts({page: 0, size: 10, filter: { categoryId: this.categoryId }});
         this.categoryService.getCategoryById(this.categoryId).pipe(untilDestroyed(this)).subscribe((category: Category) => {
             this.category = category;
         });
