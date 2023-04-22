@@ -141,6 +141,9 @@ h1 {
     display: block;
     width: 25%;
 }
+.advert-link:hover {
+    filter: brightness(300%);
+} 
 /* .admin-panel > button:has(fa-icon) {
     font-size: xx-small;
     margin: 0.4rem;

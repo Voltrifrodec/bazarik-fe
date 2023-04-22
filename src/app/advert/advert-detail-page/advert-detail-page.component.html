@@ -34,11 +34,15 @@
 	</nav>
 
 	<hr>
-
+    
+    
 	<!-- name -->
-	<h1 class="h1 mt-1">
-		{{advert?.name}}
-	</h1>
+    <div class="mt-1">
+        <h1 class="h1 d-inline-block align-middle w-75">
+            {{advert?.name}}
+        </h1>
+        <p class="d-inline-block advert-link w-25 btn text-right" (click)="copyHref()" title="Kopírovať odkaz"><fa-icon [icon]="faClipboard"></fa-icon><span class="d-none d-lg-inline-block ps-2">Kopírovať odkaz</span></p>
+    </div>
 
 	<!-- district ?dont need it-->
 	<!-- region -->
