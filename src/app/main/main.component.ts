@@ -6,10 +6,10 @@ import { CategoryService } from 'src/app/common/service/category.service';
 @UntilDestroy()
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.css']
 })
-export class HomeComponent implements OnInit {
+export class MainComponent implements OnInit {
 
   constructor(private service: CategoryService) {
     this.getCategories();
