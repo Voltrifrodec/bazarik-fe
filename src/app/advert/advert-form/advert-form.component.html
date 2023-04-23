@@ -4,7 +4,9 @@
     <div class="form-group">
         <label class="h3">Názov</label>
         <input formControlName="name" class="form-control form-control-lg" name="Názov inzerátu"
-			type="text" placeholder="Zadajte názov inzerátu">
+			type="text" placeholder="Zadajte názov inzerátu" (input)="countChars()">
+		<span>{{this.nameCharacterCount}}/{{this.maximumNameCharacterCount}}</span>
+
 
         <h5 *ngIf="advertForm.controls['name'].errors?.['required']" class="text-danger">
 			Je nutné zadať názov inzerátu

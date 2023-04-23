@@ -31,6 +31,9 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	descriptionCharacterCount: number = 0;
 	maximumDescriptionCharacterCount: number = 1024;
 
+	nameCharacterCount = 0;
+	maximumNameCharacterCount = 127;
+
 	advertId: string = "";
 	advertForm: FormGroup;
 
@@ -77,7 +80,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	) {
 		this.advertForm = new FormGroup({
 			id: new FormControl(null, []),
-			name: new FormControl(null, [Validators.required]),
+			name: new FormControl(null, [Validators.required, Validators.maxLength(this.maximumNameCharacterCount)]),
 			description: new FormControl(null, [Validators.maxLength(this.maximumDescriptionCharacterCount)]),
 			keywords: new FormControl(null, []),
 
@@ -278,6 +281,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 	countChars(): void {
 		this.descriptionCharacterCount = this.advertForm.controls['description'].value.length;
+		this.nameCharacterCount = this.advertForm.controls['name'].value.length;
 	}
 
 
