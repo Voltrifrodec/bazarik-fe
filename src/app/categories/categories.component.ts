@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Advert } from '../common/model/advert.model';
+import { Advert, AdvertResponse } from '../common/model/advert.model';
 import { Category } from '../common/model/category.model';
+import { Pagination } from '../common/model/pagination';
 import { Subcategory } from '../common/model/subcategory.model';
 import { AdvertService } from '../common/service/advert.service';
 import { CategoryService } from '../common/service/category.service';
@@ -18,7 +19,9 @@ export class CategoriesComponent {
     category?: Category;
 
     subcategories?: Subcategory[];
-    adverts?: Advert[];
+    // adverts?: Advert[];
+    adverts?: AdvertResponse;
+    advertsResult?: Advert[];
 
     // TODO: Prehodiť advert funkcie do category-advert-list
     constructor(private categoryService: CategoryService, private advertService: AdvertService, private route: ActivatedRoute) {
@@ -39,10 +42,12 @@ export class CategoriesComponent {
         });
     }
 
-    getAdverts(): void {
-        this.advertService.getAllAdvertsByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
+    getAdverts(pagination?: Pagination): void {
+        this.advertService.getAllAdvertsByCategoryId(this.categoryId, pagination).pipe(untilDestroyed(this)).subscribe((adverts: AdvertResponse) => {
             this.adverts = adverts;
-            // console.log('Received adverts for the category:', this.adverts);
+            console.log('Received adverts for the category:', this.adverts);
+            this.advertsResult = adverts.content;
+            console.log('Content:', this.advertsResult);
         })
     }
 

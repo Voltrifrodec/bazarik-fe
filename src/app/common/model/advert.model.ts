@@ -6,6 +6,7 @@ import { Subcategory } from "./subcategory.model";
 import { Subsubcategory } from "./subsubcategory.model";
 import { Image } from "./image.model";
 import { Region } from "./region.model";
+import { PaginableResponse } from "./pagination";
 
 export interface Advert {
 	id: string;
@@ -30,4 +31,8 @@ export interface Advert {
 	region: Region;
 
 	image: Image;
+}
+
+export interface AdvertResponse extends PaginableResponse {
+    content: Advert[];
 }

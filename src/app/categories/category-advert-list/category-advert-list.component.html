@@ -1,10 +1,10 @@
-<ng-container *ngIf="adverts?.length; then advertsExist; else advertsMissing"></ng-container>
+<ng-container *ngIf="adverts?.content?.length; then advertsExist; else advertsMissing"></ng-container>
 <ng-template #advertsExist>
     <div class="container px-0">
         <div class="row row-cols-3 g-3 mt-3">
             <app-advert-tile
                         role="button"
-                        *ngFor="let advert of adverts"
+                        *ngFor="let advert of adverts?.content"
                         [advert]="advert"
                         routerLink="/advert/{{ advert.id }}"
                         class="col-xl-3 col-lg-4 col-md-6"
@@ -33,6 +33,12 @@
             </div>
         </a>
     </div> -->
+    <ngb-pagination [collectionSize]="getTotalElements()"
+                    [page]="getPageNumber()"
+                    [pageSize]="getPageSize()"
+                    (pageChange)="changePage($any($event))">
+
+    </ngb-pagination>
 </ng-template>
 <ng-template #advertsMissing>
     <app-empty-advert-list></app-empty-advert-list>

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Advert } from '../model/advert.model';
+import { Advert, AdvertResponse } from '../model/advert.model';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { PaginableResponse, Pagination } from '../model/pagination';
 
 @Injectable({
 	providedIn: 'root'
@@ -21,8 +22,13 @@ export class AdvertService {
 		return this.http.get<Advert[]>(`${this.apiUrl}/search/${query}`);
 	}
 
-	getAllAdvertsByCategoryId(categoryId: number): Observable<Advert[]> {
-		return this.http.get<Advert[]>(`${this.apiUrl}/categories/${categoryId}/adverts`);
+	getAllAdvertsByCategoryId(categoryId: number, pagination: Pagination = {page: 0, size: 3 }): Observable<AdvertResponse> {
+        const params = new HttpParams().appendAll({
+            page: pagination.page,
+            size: pagination.size
+        });
+		// return this.http.get<Advert[]>(`${this.apiUrl}/categories/${categoryId}/adverts`);
+		return this.http.get<AdvertResponse>(`${this.apiUrl}/categories/${categoryId}/adverts`, {params});
 	}
 
 	getAllAdvertsBySubcategoryId(subcategoryId: number): Observable<Advert[]> {
