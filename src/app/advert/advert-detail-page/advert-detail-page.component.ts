@@ -74,4 +74,7 @@ export class AdvertDetailPageComponent {
         }
     }
 
+	editAdvert() {
+		this.router.navigate([`/advert/edit/${this.advertId}`]);
+	}
 }
