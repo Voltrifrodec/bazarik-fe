@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as fa from '@fortawesome/free-solid-svg-icons';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Category } from 'src/app/common/model/category.model';
 import { CategoryService } from 'src/app/common/service/category.service';
@@ -11,7 +10,6 @@ import { CategoryService } from 'src/app/common/service/category.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  fa = fa;
 
   constructor(private service: CategoryService) {
     this.getCategories();

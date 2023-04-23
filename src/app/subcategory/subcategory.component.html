@@ -13,9 +13,7 @@
         </li>
     </ol>
     <hr>
-</div>
-<div class="m-3">
     <h3>{{subcategory?.name}}</h3>
+    <app-subcategory-section-list [subsubcategories]="subsubcategories"></app-subcategory-section-list>
+    <app-subcategory-advert-list [adverts]="adverts"></app-subcategory-advert-list>
 </div>
-<app-subcategory-section-list [subsubcategories]="subsubcategories"></app-subcategory-section-list>
-<app-subcategory-advert-list [adverts]="adverts"></app-subcategory-advert-list>

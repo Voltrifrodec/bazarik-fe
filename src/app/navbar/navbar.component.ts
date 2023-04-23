@@ -1,7 +1,7 @@
 import { Component, OnChanges, Output, SimpleChanges, destroyPlatform } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import * as fa from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +9,8 @@ import * as fa from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-	fa = fa;
+    faSearch = faSearch;
+    faPlus = faPlus;
 
 	searchForm: FormGroup;
 
