@@ -4,7 +4,7 @@ import { AdvertComponent } from './advert/advert.component';
 import { AdvertFormComponent } from './advert/advert-form/advert-form.component';
 import { AdvertDetailPageComponent } from './advert/advert-detail-page/advert-detail-page.component';
 import { CategoriesComponent } from './categories/categories.component';
-import { HomeComponent } from './core/home/home.component';
+import { MainComponent } from './main/main.component';
 import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
 import { SearchComponent } from './core/search/search.component';
@@ -13,7 +13,7 @@ import { PagenotfoundComponent } from './errors/pagenotfound/pagenotfound.compon
 const routes: Routes = [
 	{
 		path: '',
-		component: HomeComponent
+		component: MainComponent
 	},
 	{
 		path: 'advert/new',

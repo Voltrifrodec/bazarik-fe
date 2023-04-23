@@ -13,3 +13,26 @@
 	width:100%;
 	display:block;
 }
+
+/* Modal window */
+dialog {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 80%;
+	width: 50%;
+	border: black 1px solid;
+}
+
+dialog input {
+	width: 100%;
+}
+
+dialog > .header {
+	padding: 18px;
+}
+
+dialog > .content {
+	padding: 18px;
+}

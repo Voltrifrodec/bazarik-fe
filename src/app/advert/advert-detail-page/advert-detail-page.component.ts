@@ -5,6 +5,7 @@ import { Advert } from 'src/app/common/model/advert.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
+import { SecurityAction } from 'src/app/common/model/security.model';
 
 @UntilDestroy()
 @Component({
@@ -16,7 +17,12 @@ export class AdvertDetailPageComponent {
 
     faClipboard = faClipboard;
 
-	@Input()
+	@Output()
+	action: SecurityAction = {
+		action: 'delete'
+	}
+
+	@Output()
 	public advert?: Advert;
 
 	private advertId: string | null;
@@ -64,14 +70,16 @@ export class AdvertDetailPageComponent {
 
 
     async copyHref() {
-        console.log(this.router.url);
+		const url = window.location.href;
         try {
-            await navigator.clipboard.writeText('localhost:4200' + this.router.url.toString()); // TODO: Nahradiť localhost názvom domény
+            await navigator.clipboard.writeText(url);
             alert('Odkaz na inzerát bol úspešne skopírovaný.');
-        }
-        catch (err) {
+        } catch (err) {
             alert('Nepodarilo sa skopírovať odkaz na inzerát!')
         }
     }
 
+	editAdvert() {
+		this.router.navigate([`/advert/edit/${this.advertId}`]);
+	}
 }
