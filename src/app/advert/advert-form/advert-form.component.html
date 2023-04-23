@@ -6,7 +6,7 @@
         <input formControlName="name" class="form-control form-control-lg" name="Názov inzerátu"
 			type="text" placeholder="Zadajte názov inzerátu">
 
-        <h5 *ngIf="advertForm.controls['name'].invalid" class="text-danger">
+        <h5 *ngIf="advertForm.controls['name'].errors?.['required']" class="text-danger">
 			Je nutné zadať názov inzerátu
 		</h5>
     </div>
