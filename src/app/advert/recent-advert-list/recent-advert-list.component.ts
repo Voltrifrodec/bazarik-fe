@@ -9,7 +9,7 @@ import { Advert } from 'src/app/common/model/advert.model';
 export class RecentAdvertListComponent {
     MilisToDate(arg0: number | undefined | Date) {
         if(arg0 !== undefined) {
-            return new Date(arg0);
+            return new Date(arg0).toLocaleString('sk-SK');
         }
         throw new Error('Neplatný vstupný parameter!');
     }

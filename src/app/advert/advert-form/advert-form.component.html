@@ -40,7 +40,7 @@
             <div class="currency input-group-prepend">
 				<input formControlName="currency" class="d-none" [value]="this.currencies?.at(0)?.id">
 				<div class="form-control form-control-lg bg-secondary text-light rounded-left">
-					{{this.currencies![0].symbol || '€'}}
+					{{this.currencies?.at(0)?.symbol || '€'}}
 				</div>
             </div>
             <input formControlName="priceEur" type="number" class="form-control form-control-lg"

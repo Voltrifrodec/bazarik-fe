@@ -92,7 +92,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			keywords: new FormControl(null, []),
 
 			priceEur: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(this.maximumPriceEur)]),
-			currency: new FormControl(1, []),
+			currency: new FormControl(null, []),
 			fixedPrice: new FormControl(true, [Validators.required]),
 
 			category: new FormControl(null, [Validators.required]),
@@ -114,6 +114,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			this.action.action = 'create';
 
 		}
+		this.getCurrencies();
 	}
 
 	ngOnDestroy(): void {
@@ -129,9 +130,6 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			this.regions = regions;
 		});
 		
-		this.currencyService.getAllCurrencies().pipe(untilDestroyed(this)).subscribe((currencies: Currency[]) => {
-			this.currencies = currencies;
-		});
 
 		this.loadFromLocalStorage();
 
@@ -139,6 +137,16 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		this.getAdvert();
 
 		this.countChars();
+
+		console.log(this.advertForm.controls['currency'].value);
+
+	}
+
+	getCurrencies(): void {
+		this.currencyService.getAllCurrencies().pipe(untilDestroyed(this)).subscribe((currencies: Currency[]) => {
+			this.currencies = currencies;
+			this.advertForm.controls['currency'].setValue(this.currencies?.at(0)?.id);
+		});
 	}
 
 	loadSubcategories(): void {
@@ -234,7 +242,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 			priceEur: this.advertForm.controls['priceEur'].value,
 			fixedPrice: this.advertForm.controls['fixedPrice'].value,
-			currencyId: this.advertForm.controls['currency'].value,
+			currencyId: this.currencies?.at(0)?.id || this.advertForm.controls['currency'].value,
 
 			categoryId: this.advertForm.controls['category'].value,
 			subcategoryId: this.advertForm.controls['subcategory'].value,
