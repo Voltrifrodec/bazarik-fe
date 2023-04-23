@@ -43,6 +43,9 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	@Output()
 	formCancel = new EventEmitter<void>();
 
+	@Input()
+	clearForm = new EventEmitter<void>();
+
 	categories?: Category[];
 	subcategories?: Subcategory[];
 	subsubcategories?: Subsubcategory[];
@@ -69,17 +72,17 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			keywords: new FormControl(null, []),
 
 			priceEur: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(50000)]),
-			currency: new FormControl(1, []),
+			currency: new FormControl(null, []),
 			fixedPrice: new FormControl(true, [Validators.required]),
 
-			category: new FormControl(50502, [Validators.required]),
+			category: new FormControl(null, [Validators.required]),
 			subcategory: new FormControl(null, []),
 			subsubcategory: new FormControl(null, []),
 
 			contactEmail: new FormControl(null, [Validators.required, Validators.email]),
 
-			region: new FormControl(1, [Validators.required]),
-			district: new FormControl(1, [Validators.required]),
+			region: new FormControl(null, [Validators.required]),
+			district: new FormControl(null, [Validators.required]),
 
 			image: new FormControl(null, [])
 		});
@@ -108,7 +111,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		let categoryId = Number(this.advertForm.controls['category'].value);
 		if (! categoryId) return;
 
-		this.categoryService.getSubcategoriesByCategoryId(categoryId).pipe(untilDestroyed(this))
+		this.categoryService.getSubcategoriesByCategoryId(categoryId)
 			.subscribe((subcategories: Subcategory[]) => {
 				this.subcategories = subcategories;
 			})
@@ -118,7 +121,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		let subcategoryId = Number(this.advertForm.controls['subcategory'].value);
 		if (! subcategoryId) return;
 
-		this.subcategoryService.getSubsubcategoriesBySubcategoryId(subcategoryId).pipe(untilDestroyed(this))
+		this.subcategoryService.getSubsubcategoriesBySubcategoryId(subcategoryId)
 			.subscribe((subsubcategories: Subsubcategory[]) => {
 				this.subsubcategories = subsubcategories;
 			})
@@ -161,32 +164,32 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	}
 
 	getAdvert() {
-		if (this.advertId) {
-			this.advertService.getAdvertById(this.advertId).pipe(untilDestroyed(this)).subscribe((advert: Advert) => {
-				this.advertForm.controls['id'].setValue(advert.id);
-				this.advertForm.controls['name'].setValue(advert.name);
-				this.advertForm.controls['description'].setValue(advert.description);
-				this.advertForm.controls['keywords'].setValue(advert.keywords);
+		if (! this.advertId) return;
+		
+		this.advertService.getAdvertById(this.advertId).pipe(untilDestroyed(this)).subscribe((advert: Advert) => {
+			this.advertForm.controls['id'].setValue(advert.id);
+			this.advertForm.controls['name'].setValue(advert.name);
+			this.advertForm.controls['description'].setValue(advert.description);
+			this.advertForm.controls['keywords'].setValue(advert.keywords);
 
-				this.advertForm.controls['priceEur'].setValue(advert.priceEur);
-				this.advertForm.controls['currency'].setValue(advert.currency.id);
-				this.advertForm.controls['fixedPrice'].setValue(advert.fixedPrice);
+			this.advertForm.controls['priceEur'].setValue(advert.priceEur);
+			this.advertForm.controls['currency'].setValue(advert.currency.id);
+			this.advertForm.controls['fixedPrice'].setValue(advert.fixedPrice);
 
-				this.advertForm.controls['category'].setValue(advert.category.id);
+			this.advertForm.controls['category'].setValue(advert.category.id);
 
-				this.loadSubcategories();
-				this.advertForm.controls['subcategory'].setValue(advert.subcategory?.id!);
+			this.loadSubcategories();
+			this.advertForm.controls['subcategory'].setValue(advert.subcategory?.id!);
 
-				this.loadSubsubcategories();
-				this.advertForm.controls['subsubcategory'].setValue(advert.subsubcategory?.id);
+			this.loadSubsubcategories();
+			this.advertForm.controls['subsubcategory'].setValue(advert.subsubcategory?.id);
 
-				this.advertForm.controls['contactEmail'].setValue(advert.contact.email);
+			this.advertForm.controls['contactEmail'].setValue(advert.contact.email);
 
-				this.advertForm.controls['region'].setValue(advert.district.region.id);
-				this.loadDistricts();
-				this.advertForm.controls['district'].setValue(advert.district.id);
-			})
-		}
+			this.advertForm.controls['region'].setValue(advert.district.region.id);
+			this.loadDistricts();
+			this.advertForm.controls['district'].setValue(advert.district.id);
+		})
 	}
 
 	prepareAdvert(): any {
@@ -246,7 +249,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 			if (!this.advertForm.controls[key]) continue;
 
-			this.advertForm.controls[key].setValue(value);
+			this.advertForm.controls[key].patchValue(value);
 		}
 	}
 

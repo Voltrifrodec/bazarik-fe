@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Route, Router, RouterLink } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -15,13 +15,16 @@ import { SecurityService } from 'src/app/common/service/security.service';
 	templateUrl: './security-form.component.html',
 	styleUrls: ['./security-form.component.css']
 })
-export class SecurityFormComponent implements OnInit{
+export class SecurityFormComponent implements OnInit, OnDestroy {
 
 	@Input()
 	advert?: any;
 
 	@Output()
 	formCancel = new EventEmitter<void>();
+
+	@Output()
+	clearForm = new EventEmitter<void>();
 
 	securityForm: FormGroup;
 
@@ -38,6 +41,10 @@ export class SecurityFormComponent implements OnInit{
 			code: new FormControl(),
 			hash: new FormControl()
 		});
+	}
+
+	ngOnDestroy() {
+		this.clearForm.emit();
 	}
 
 	ngOnInit(): void {
@@ -91,8 +98,6 @@ export class SecurityFormComponent implements OnInit{
 			// TODO: ToastService pre error
 			return;
 		});
-
-		this.saveToLocalStorage();
 	}
 
 	private sendFile() {
@@ -116,40 +121,23 @@ export class SecurityFormComponent implements OnInit{
 		})
 	}
 
-
 	private sendAdvert(advert: Advert): void {
 		this.advertService.createAdvert(advert).pipe(untilDestroyed(this)).subscribe((advertId: string) => {
+			this.clearForm.emit();
 			this.redirectToHomePage(advertId);
-			this.clearLocalStorage();
 		}, (error: Error) => {
 			// TODO: ToastService pre error
 			console.error(error);
 		})
 	}
 
-
 	private redirectToHomePage(advertId?: string): void {
 		window.confirm("Inzerát bol úspešne pridaný.\nBudete presmerovaný na stránku inzerátu.");
+
 		window.scrollTo(0, 0);
 
 		this.router.navigate([`/advert/${advertId}`]);
 
-		this.clearLocalStorage();
-	}
-
-	saveToLocalStorage(): void {
-		/* let advert = this.prepareAdvert();
-
-		for (const [key, value] of Object.entries(advert)) {
-			if (value == null) continue;
-			if (String(value).trim() != null) {
-				localStorage.setItem(key, String(value));
-			}
-		} */
-	}
-
-	clearLocalStorage(): void {
-		localStorage.clear();
 	}
 
 }

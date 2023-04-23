@@ -80,7 +80,7 @@
         <!-- subcategory, cez ngif -->
         <div class="form-group" *ngIf="advertForm.controls['category'].value">
             <label class="h3">Podkategória</label>
-            <select formControlName="subcategory" class="form-control form-control-lg" (change)="loadSubsubcategories()">
+            <select formControlName="subcategory" class="form-control form-control-lg" (change)="loadSubsubcategories()" (click)="loadSubcategories();">
 				<option disabled selected [value]="null">Vyberte podkategóriu inzerátu</option>
 				<option *ngFor="let subcategory of subcategories" [value]="subcategory.id">{{ subcategory.name }}
 				</option>
@@ -173,6 +173,7 @@
 			<app-security-form
 				[advert]="this.prepareAdvert()"
 				(formCancel)="addAdvertDialog.close()"
+				(clearForm)="this.clearLocalStorage()"
 			></app-security-form>
 		</div>
 	</dialog>
