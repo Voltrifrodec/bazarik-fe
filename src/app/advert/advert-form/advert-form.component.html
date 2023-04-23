@@ -67,7 +67,6 @@
         <!-- category -->
         <div class="form-group">
             <label class="h3">Kategória</label>
-            <!-- TODO: (input) -> (change) -->
             <select formControlName="category" class="form-control form-control-lg" (change)="loadSubcategories()">
 				<option disabled selected [value]="null">Vyberte kategóriu inzerátu</option>
 				<option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
