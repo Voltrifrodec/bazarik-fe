@@ -16,7 +16,12 @@
     <div class="form-group">
         <label class="h3">Opis</label>
         <textarea formControlName="description" class="form-control form-control-lg" rows="8"
-			placeholder="Zadajte opis inzerátu"></textarea>
+			placeholder="Zadajte opis inzerátu" (input)="countChars()">
+		</textarea>
+		<span>{{this.descriptionCharacterCount}}/{{this.maximumDescriptionCharacterCount}}</span>
+		<h5 *ngIf="advertForm.controls['description'].errors?.['maxlength']" class="text-danger">
+			Opis musí obsahovať maximálne 1024 znakov.
+		</h5>
     </div>
 
 

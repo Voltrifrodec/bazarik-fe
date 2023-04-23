@@ -28,6 +28,9 @@ import { SubsubcategoryService } from 'src/app/common/service/subsubcategory.ser
 })
 export class AdvertFormComponent implements OnInit, OnDestroy {
 
+	descriptionCharacterCount: number = 0;
+	maximumDescriptionCharacterCount: number = 1024;
+
 	advertId: string = "";
 	advertForm: FormGroup;
 
@@ -75,7 +78,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		this.advertForm = new FormGroup({
 			id: new FormControl(null, []),
 			name: new FormControl(null, [Validators.required]),
-			description: new FormControl(null, [Validators.maxLength(1024)]),
+			description: new FormControl(null, [Validators.maxLength(this.maximumDescriptionCharacterCount)]),
 			keywords: new FormControl(null, []),
 
 			priceEur: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(50000)]),
@@ -120,6 +123,8 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 		this.advertId = this.route.snapshot.paramMap.get('advertId')!;
 		this.getAdvert();
+
+		this.countChars();
 	}
 
 	loadSubcategories(): void {
@@ -269,6 +274,10 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 	clearLocalStorage(): void {
 		localStorage.clear();
+	}
+
+	countChars(): void {
+		this.descriptionCharacterCount = this.advertForm.controls['description'].value.length;
 	}
 
 
