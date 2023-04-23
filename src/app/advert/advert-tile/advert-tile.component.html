@@ -1,5 +1,5 @@
-<div *ngIf="advert"  class="border border-dark p-2 h-100">
-	<div class="text-center">
+<div *ngIf="advert" class="border border-dark h-100 mb-md-2 mb-4">
+	<div class="text-center h-50 advert-img">
 		<img
 			class="mg-fluid border-secondary w-100"
 			alt="{{ advert.name }}"
@@ -7,7 +7,7 @@
 			src="data:{{ advert.image.type }};base64,{{ advert.image.image }}"
 		/>
 	</div>
-	<div class="text-left">
+	<div class="text-left p-2 bg-container position-relative border-top border-dark advert-info h-50 mb-2">
 		<span class="h4 pt-2 d-block">
 			{{ advert.currency.symbol }} {{ advert.priceEur }}
 		</span>
@@ -19,7 +19,7 @@
 		</div>
 
 		<span class="d-block">
-			<fa-icon [icon]="fa.faLocationArrow"></fa-icon>
+			<fa-icon [icon]="faLocationArrow"></fa-icon>
 			{{ advert.district.name }}, {{ advert.district.postcode }}
 		</span>
 

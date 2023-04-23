@@ -4,6 +4,8 @@ import { ToastService } from 'angular-toastify';
 import { Advert } from 'src/app/common/model/advert.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { faClipboard } from '@fortawesome/free-solid-svg-icons';
+import { SecurityAction } from 'src/app/common/model/security.model';
 
 @UntilDestroy()
 @Component({
@@ -13,7 +15,14 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class AdvertDetailPageComponent {
 
-	@Input()
+    faClipboard = faClipboard;
+
+	@Output()
+	action: SecurityAction = {
+		action: 'delete'
+	}
+
+	@Output()
 	public advert?: Advert;
 
 	private advertId: string | null;
@@ -59,4 +68,18 @@ export class AdvertDetailPageComponent {
 		this.router.navigate([`advert/${this.advertId}`]);
 	}
 
+
+    async copyHref() {
+		const url = window.location.href;
+        try {
+            await navigator.clipboard.writeText(url);
+            alert('Odkaz na inzerát bol úspešne skopírovaný.');
+        } catch (err) {
+            alert('Nepodarilo sa skopírovať odkaz na inzerát!')
+        }
+    }
+
+	editAdvert() {
+		this.router.navigate([`/advert/edit/${this.advertId}`]);
+	}
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { faLocationArrow, faExclamationCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+import { faLocationArrow, faExclamationCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Advert } from 'src/app/common/model/advert.model';
 
 @Component({

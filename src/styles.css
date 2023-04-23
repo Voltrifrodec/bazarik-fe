@@ -141,6 +141,9 @@ h1 {
     display: block;
     width: 25%;
 }
+.advert-link:hover {
+    filter: brightness(300%);
+} 
 /* .admin-panel > button:has(fa-icon) {
     font-size: xx-small;
     margin: 0.4rem;
@@ -170,14 +173,14 @@ h1 {
     width: 100%;
     box-shadow: 0 0 2.5rem var(--paletteBorderColorPrimary);
 }
-.QuickNavFooter button {
+.FooterContainer div > a {
     display: block;
     padding: 5px 0;
     border: none;
     background: none;
     transition: color .1s linear, font-weight .1s linear;
 }
-.QuickNavFooter button:hover {
+.FooterContainer div > a:hover {
     color: #1B3280;
     font-weight: bold;
 }
