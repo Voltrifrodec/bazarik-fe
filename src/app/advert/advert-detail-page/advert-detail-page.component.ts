@@ -70,21 +70,16 @@ export class AdvertDetailPageComponent {
 
 
     async copyHref() {
-        console.log(this.router.url);
+		const url = window.location.href;
         try {
-            await navigator.clipboard.writeText('localhost:4200' + this.router.url.toString()); // TODO: Nahradiť localhost názvom domény
+            await navigator.clipboard.writeText(url);
             alert('Odkaz na inzerát bol úspešne skopírovaný.');
-        }
-        catch (err) {
+        } catch (err) {
             alert('Nepodarilo sa skopírovať odkaz na inzerát!')
         }
     }
 
 	editAdvert() {
 		this.router.navigate([`/advert/edit/${this.advertId}`]);
-	}
-
-	deleteAdvert() {
-
 	}
 }
