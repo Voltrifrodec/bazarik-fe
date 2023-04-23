@@ -191,6 +191,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 	prepareAdvert(): any {
 		return {
+			id: this.advertForm.controls['id'].value,
 			name: this.advertForm.controls['name'].value,
 			description: this.advertForm.controls['description'].value,
 			keywords: this.advertForm.controls['keywords'].value,

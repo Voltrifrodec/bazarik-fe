@@ -2,7 +2,9 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 import { FormControl, FormGroup } from '@angular/forms';
 import { Route, Router, RouterLink } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { ToastService } from 'angular-toastify';
 import { Advert } from 'src/app/common/model/advert.model';
+import { SecurityUpdate } from 'src/app/common/model/security-update.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
 import { ImageService } from 'src/app/common/service/image.service';
 import { SecurityService } from 'src/app/common/service/security.service';
@@ -29,7 +31,8 @@ export class SecurityFormComponent implements OnInit{
 		private router: Router,
 		private securityService: SecurityService,
 		private imageService: ImageService,
-		private advertService: AdvertService
+		private advertService: AdvertService,
+		private toastService: ToastService
 	) {
 		this.securityForm = new FormGroup({
 			code: new FormControl(),
@@ -42,10 +45,21 @@ export class SecurityFormComponent implements OnInit{
 	}
 
 	createHash() {
-		this.advert.imageId = 0;
-		this.securityService.createHashFromAdvert(this.advert).pipe(untilDestroyed(this)).subscribe((hash: string) => {
-			this.hash = hash;
-		});
+		console.log(this.advert);
+		if (this.router.url.includes('advert/edit')) {
+			let securityUpdate: SecurityUpdate = {
+				advertId: this.advert.id,
+				email: this.advert.contactEmail
+			}
+			this.securityService.createHashForUpdate(securityUpdate).pipe(untilDestroyed(this)).subscribe((hash: string) => {
+				this.hash = hash;
+			})
+		} else {
+			this.advert.imageId = 0;
+			this.securityService.createHashFromAdvert(this.advert).pipe(untilDestroyed(this)).subscribe((hash: string) => {
+				this.hash = hash;
+			});
+		}
 	}
 
 	saveAdvert() {
