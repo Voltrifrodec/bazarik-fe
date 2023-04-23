@@ -23,7 +23,7 @@ dialog {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	height: 80%;
-	width: 35%;
+	width: 50%;
 	border: black 1px solid;
 }
 

@@ -156,12 +156,13 @@
 		</h5>
     </div>
     <!-- phone number -->
+
+	<h5 *ngIf="advertForm.invalid" class="text-danger">
+		Je nutné vyplniť celý formulár pre úspešné pridanie inzerátu.
+	</h5>
     <div class="d-flex justify-content-between mt-3">
         <!-- <input class="btn btn-primary" type="submit" value="Odoslať inzerát" [disabled]="advertForm.invalid"> -->
 		<button class="btn btn-primary" (click)="addAdvertDialog.showModal()">Pridať inzerát</button>
-		<h5 *ngIf="advertForm.invalid" class="text-danger">
-			Je nutné vyplniť formulár na pridanie inzerátu správne.
-		</h5>
         <input class="btn btn-danger" type="button" value="Zrušiť inzerát" (click)="leaveDialog()">
     </div>
 

@@ -60,11 +60,15 @@ export class SecurityFormComponent implements OnInit, OnDestroy {
 			}
 			this.securityService.createHashForUpdate(securityUpdate).pipe(untilDestroyed(this)).subscribe((hash: string) => {
 				this.hash = hash;
+			}, (err: Error) => {
+				this.toastService.error(err.message);
 			})
 		} else {
 			this.advert.imageId = 0;
 			this.securityService.createHashFromAdvert(this.advert).pipe(untilDestroyed(this)).subscribe((hash: string) => {
 				this.hash = hash;
+			}, (err: Error) => {
+				this.toastService.error(err.message);
 			});
 		}
 	}
