@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, S
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { ToastService } from 'angular-toastify';
 import { Advert } from 'src/app/common/model/advert.model';
 import { Category } from 'src/app/common/model/category.model';
 import { Country } from 'src/app/common/model/country.model';
@@ -63,7 +64,8 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		private regionService: RegionService,
 		private imageService: ImageService,
 		private advertService: AdvertService,
-		private securityService: SecurityService
+		private securityService: SecurityService,
+		private toastService: ToastService
 	) {
 		this.advertForm = new FormGroup({
 			id: new FormControl(null, []),

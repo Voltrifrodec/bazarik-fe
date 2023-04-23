@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Route, Router, RouterLink } from '@angular/router';
+import { Router} from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ToastService } from 'angular-toastify';
 import { Advert } from 'src/app/common/model/advert.model';
@@ -71,7 +71,7 @@ export class SecurityFormComponent implements OnInit, OnDestroy {
 
 	saveAdvert() {
 		if (!this.advert) {
-			// TODO: Toast service error => nemožno vytvoriť prázdny inzerát
+			this.toastService.error(`Nemožno vytvoriť prázdny inzerát.`);
 			return;
 		}
 
@@ -90,13 +90,10 @@ export class SecurityFormComponent implements OnInit, OnDestroy {
 			if (codeCheck) {
 				this.sendFile();
 			} else {
-				// TODO: ToastService na zlé overenie.
-				window.alert('Overenie nebolo úspešné.');
+				this.toastService.error(`Overenie nebolo úspešné. Skúste to znova.`);
 			}
-		}, () => {
-			console.log('error');
-			// TODO: ToastService pre error
-			return;
+		}, (error: Error) => {
+			this.toastService.error('Nastala chyba pri overovaní. Skúste to znova.');
 		});
 	}
 
@@ -126,8 +123,7 @@ export class SecurityFormComponent implements OnInit, OnDestroy {
 			this.clearForm.emit();
 			this.redirectToHomePage(advertId);
 		}, (error: Error) => {
-			// TODO: ToastService pre error
-			console.error(error);
+			this.toastService.error(`Nastala chyba pri vytváraní inzerátu.\n${error}`);
 		})
 	}
 
@@ -137,7 +133,6 @@ export class SecurityFormComponent implements OnInit, OnDestroy {
 		window.scrollTo(0, 0);
 
 		this.router.navigate([`/advert/${advertId}`]);
-
 	}
 
 }
