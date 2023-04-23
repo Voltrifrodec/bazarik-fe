@@ -15,6 +15,7 @@ import { AdvertService } from 'src/app/common/service/advert.service';
 import { CategoryService } from 'src/app/common/service/category.service';
 import { ImageService } from 'src/app/common/service/image.service';
 import { RegionService } from 'src/app/common/service/region.service';
+import { SecurityService } from 'src/app/common/service/security.service';
 import { SubcategoryService } from 'src/app/common/service/subcategory.service';
 import { SubsubcategoryService } from 'src/app/common/service/subsubcategory.service';
 
@@ -26,8 +27,7 @@ import { SubsubcategoryService } from 'src/app/common/service/subsubcategory.ser
 })
 export class AdvertFormComponent implements OnInit, OnDestroy {
 
-	title = 'Nový inzerát';
-
+	advertId: string = "";
 	advertForm: FormGroup;
 
 	@Input()
@@ -36,6 +36,12 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			this.advertForm.setValue(advert);
 		}
 	}
+
+	@Input()
+	formCreate = new EventEmitter<Advert>();
+
+	@Output()
+	formCancel = new EventEmitter<void>();
 
 	categories?: Category[];
 	subcategories?: Subcategory[];
@@ -53,7 +59,8 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		private subsubcategoryService: SubsubcategoryService,
 		private regionService: RegionService,
 		private imageService: ImageService,
-		private advertService: AdvertService
+		private advertService: AdvertService,
+		private securityService: SecurityService
 	) {
 		this.advertForm = new FormGroup({
 			id: new FormControl(null, []),
@@ -62,20 +69,20 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			keywords: new FormControl(null, []),
 
 			priceEur: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(50000)]),
-			currency: new FormControl(null, []),
+			currency: new FormControl(1, []),
 			fixedPrice: new FormControl(true, [Validators.required]),
 
-			category: new FormControl(null, [Validators.required]),
+			category: new FormControl(50502, [Validators.required]),
 			subcategory: new FormControl(null, []),
 			subsubcategory: new FormControl(null, []),
 
 			contactEmail: new FormControl(null, [Validators.required, Validators.email]),
 
-			region: new FormControl(null, [Validators.required]),
-			district: new FormControl(null, [Validators.required]),
+			region: new FormControl(1, [Validators.required]),
+			district: new FormControl(1, [Validators.required]),
 
 			image: new FormControl(null, [])
-		})
+		});
 	}
 
 	ngOnDestroy(): void {
@@ -91,11 +98,15 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			this.regions = regions;
 		});
 
-		this.loadFromLocalStorage()
+		this.loadFromLocalStorage();
+
+		this.advertId = this.route.snapshot.paramMap.get('advertId')!;
+		this.getAdvert();
 	}
 
 	loadSubcategories(): void {
 		let categoryId = Number(this.advertForm.controls['category'].value);
+		if (! categoryId) return;
 
 		this.categoryService.getSubcategoriesByCategoryId(categoryId).pipe(untilDestroyed(this))
 			.subscribe((subcategories: Subcategory[]) => {
@@ -105,6 +116,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 	loadSubsubcategories(): void {
 		let subcategoryId = Number(this.advertForm.controls['subcategory'].value);
+		if (! subcategoryId) return;
 
 		this.subcategoryService.getSubsubcategoriesBySubcategoryId(subcategoryId).pipe(untilDestroyed(this))
 			.subscribe((subsubcategories: Subsubcategory[]) => {
@@ -113,8 +125,9 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	}
 
 	loadDistricts(): void {
+		console.log("KLIKOL SI NA SELECT");
 		let regionId = Number(this.advertForm.controls['region'].value);
-		
+
 		this.regionService.getAllDistrictsByRegionId(regionId).pipe(untilDestroyed(this))
 			.subscribe((districts: District[]) => {
 				this.districts = districts;
@@ -136,76 +149,47 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	checkWhichFormControlIsInvalid(): void {
 		if (this.advertForm.invalid) {
 			const invalid = [];
-	        const controls = this.advertForm.controls;
-	        for (const name in controls) {
-	            if (controls[name].invalid) {
-	                invalid.push(name);
-	            }
-	        }
-	        // console.log(invalid);
-			return;
-		}
-	}
-
-	saveAdvert(): void {
-		// https://stackoverflow.com/questions/51578629/how-can-i-put-an-input-in-the-alert-box
-		let confirmationNumber = this.getRandomInt(10, 99);
-
-		let userResponse = window.prompt(`Pre overenie inzerátu zadajte číslo: ${confirmationNumber}`);
-
-		if (userResponse == null) return;
-		if (Number(userResponse) !== confirmationNumber) {
-			window.alert("Overenie nebolo úspešné.");
-			this.saveAdvert();
-			return;
-		}
-
-		let advert = this.prepareAdvert();
-
-		this.saveToLocalStorage();
-
-		let fileElement = document.querySelector('#file') as HTMLInputElement;
-		let files = fileElement.files as FileList | undefined;
-		let file = files![0] as File;
-
-		if (! file) {
-			advert.imageId = 0;
-			this.advertService.createAdvert(advert).pipe(untilDestroyed(this)).subscribe((advertId: string) => {
-				this.redirectToHomePage(advertId);
-				this.clearLocalStorage();
-			}, (error: Error) => {
-				console.error(error);
-			})
-		}
-
-		if (file) {
-			// console.log(file);
-			this.imageService.uploadImage(file).pipe(untilDestroyed(this)).subscribe((imageId: number) => {
-				if (imageId) {
-					advert.imageId = imageId;
-
-					this.advertService.createAdvert(advert).pipe(untilDestroyed(this)).subscribe((advertId: string) => {
-						this.redirectToHomePage(advertId);
-						this.clearLocalStorage();
-
-					}, (error: Error) => {
-						console.error(error);
-					})
+			const controls = this.advertForm.controls;
+			for (const name in controls) {
+				if (controls[name].invalid) {
+					invalid.push(name);
 				}
+			}
+			// console.log(invalid);
+			return;
+		}
+	}
+
+	getAdvert() {
+		if (this.advertId) {
+			this.advertService.getAdvertById(this.advertId).pipe(untilDestroyed(this)).subscribe((advert: Advert) => {
+				this.advertForm.controls['id'].setValue(advert.id);
+				this.advertForm.controls['name'].setValue(advert.name);
+				this.advertForm.controls['description'].setValue(advert.description);
+				this.advertForm.controls['keywords'].setValue(advert.keywords);
+
+				this.advertForm.controls['priceEur'].setValue(advert.priceEur);
+				this.advertForm.controls['currency'].setValue(advert.currency.id);
+				this.advertForm.controls['fixedPrice'].setValue(advert.fixedPrice);
+
+				this.advertForm.controls['category'].setValue(advert.category.id);
+
+				this.loadSubcategories();
+				this.advertForm.controls['subcategory'].setValue(advert.subcategory?.id!);
+
+				this.loadSubsubcategories();
+				this.advertForm.controls['subsubcategory'].setValue(advert.subsubcategory?.id);
+
+				this.advertForm.controls['contactEmail'].setValue(advert.contact.email);
+
+				this.advertForm.controls['region'].setValue(advert.district.region.id);
+				this.loadDistricts();
+				this.advertForm.controls['district'].setValue(advert.district.id);
 			})
 		}
 	}
 
-	private redirectToHomePage(advertId?: string): void {
-		window.confirm("Inzerát bol úspešne pridaný.\nBudete presmerovaný na stránku inzerátu.");
-		window.scrollTo(0, 0);
-
-		this.router.navigate([`/advert/${advertId}`]);
-		
-		this.clearLocalStorage();
-	}
-
-	private prepareAdvert(): any {
+	prepareAdvert(): any {
 		return {
 			name: this.advertForm.controls['name'].value,
 			description: this.advertForm.controls['description'].value,
@@ -239,7 +223,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			window.scrollTo(0, 0);
 		}
 	}
-	
+
 	saveToLocalStorage(): void {
 		let advert = this.prepareAdvert();
 
@@ -254,12 +238,12 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	loadFromLocalStorage(): void {
 		for (let i = 0; localStorage.key(i) != null; i++) {
 			let key: string = localStorage.key(i)!;
-			if (! key) continue;
+			if (!key) continue;
 
 			let value: string = localStorage.getItem(key!)!;
-			if (! value) continue;
+			if (!value) continue;
 
-			if (! this.advertForm.controls[key]) continue;
+			if (!this.advertForm.controls[key]) continue;
 
 			this.advertForm.controls[key].setValue(value);
 		}
@@ -270,7 +254,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	}
 
 
-	
+
 	getRandomInt(min: number, max: number): number {
 		min = Math.ceil(min);
 		max = Math.floor(max);

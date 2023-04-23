@@ -1,17 +1,40 @@
 form {
-    margin: auto 10%;
-    margin-bottom: 42pt;
+	margin: auto 10%;
+	margin-bottom: 42pt;
 }
 
 .form-group {
-    margin-top: 8pt;
-    padding-bottom: 12pt;
-    /* border-bottom: 1px solid rgb(155, 155, 155); */
-    /* max-width: 80%; */
+	margin-top: 8pt;
+	padding-bottom: 12pt;
+	/* border-bottom: 1px solid rgb(155, 155, 155); */
+	/* max-width: 80%; */
 }
 
 .group {
-    margin-top: 12pt;
-    /* border: 1px solid black; */
-    /* border-top: 1px solid black; */
+	margin-top: 12pt;
+	/* border: 1px solid black; */
+	/* border-top: 1px solid black; */
+}
+
+/* Modal window */
+dialog {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 80%;
+	width: 35%;
+	border: black 1px solid;
+}
+
+dialog input {
+	width: 100%;
+}
+
+dialog > .header {
+	padding: 18px;
+}
+
+dialog > .content {
+	padding: 18px;
 }

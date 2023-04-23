@@ -29,6 +29,8 @@ import { ErrorsComponent } from './errors/errors.component';
 import { SearchListComponent } from './core/search/search-list/search-list.component';
 import { EmptyAdvertListComponent } from './core/exceptions/empty-advert-list/empty-advert-list.component';
 import { FooterComponent } from './footer/footer.component';
+import { SecurityComponent } from './security/security.component';
+import { SecurityFormComponent } from './security/security-form/security-form.component';
 
 @NgModule({
 	declarations: [
@@ -54,7 +56,9 @@ import { FooterComponent } from './footer/footer.component';
         ErrorsComponent,
         SearchListComponent,
         EmptyAdvertListComponent,
-        FooterComponent
+        FooterComponent,
+        SecurityComponent,
+        SecurityFormComponent
 	],
 	imports: [
 		BrowserModule,

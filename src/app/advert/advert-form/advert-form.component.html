@@ -1,4 +1,4 @@
-<form [formGroup]="advertForm" (submit)="saveAdvert()" ng-attr-title="Nový inzerát">
+<form [formGroup]="advertForm" ng-attr-title="Nový inzerát" >
     <h1 class="display-4 underline mt-3">Pridať inzerát</h1>
     <!-- name -->
     <div class="form-group">
@@ -115,7 +115,7 @@
         </div>
 
         <!-- district -->
-        <div class="form-group" *ngIf="advertForm.controls['region'].value">
+        <div class="form-group" *ngIf="advertForm.controls['region']">
             <label class="h3">
                 Okres
                 <!-- <small class="text-muted h6">Kliknite sem, pre návrh chýbajúceho okresu.</small> -->
@@ -157,12 +157,24 @@
     </div>
     <!-- phone number -->
     <div class="d-flex justify-content-between mt-3">
-        <input class="btn btn-primary" type="submit" value="Odoslať inzerát" [disabled]="advertForm.invalid">
+        <!-- <input class="btn btn-primary" type="submit" value="Odoslať inzerát" [disabled]="advertForm.invalid"> -->
+		<button class="btn btn-primary" (click)="addAdvertDialog.showModal()">Pridať inzerát</button>
 		<h5 *ngIf="advertForm.invalid" class="text-danger">
 			Je nutné vyplniť formulár na pridanie inzerátu správne.
 		</h5>
         <input class="btn btn-danger" type="button" value="Zrušiť inzerát" (click)="leaveDialog()">
     </div>
 
+	<dialog #addAdvertDialog>
+		<div class="header display-5 text-center">
+			Overenie inzerátu
+		</div>
+		<div class="content">
+			<app-security-form
+				[advert]="this.prepareAdvert()"
+				(formCancel)="addAdvertDialog.close()"
+			></app-security-form>
+		</div>
+	</dialog>
 
 </form>

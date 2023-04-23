@@ -14,7 +14,7 @@ export class SecurityService {
 
 	constructor(private http: HttpClient) { }
 
-	createHasFromAdvert(advert: Advert): Observable<string> {
+	createHashFromAdvert(advert: Advert): Observable<string> {
 		return this.http.post<string>(`${this.securityUrl}/create`, advert);
 	}
 
