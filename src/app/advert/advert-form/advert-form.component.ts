@@ -294,7 +294,16 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 		this.fileSizeMB = Number((file.size / 1024 / 1024).toFixed(1));
 
-		this.advertForm.controls['image'].setErrors({'maximumFileSize': (this.fileSizeMB > this.maximumFileSizeMB)});
+		console.log(this.fileSizeMB, this.maximumFileSizeMB);
+
+		if (this.fileSizeMB > this.maximumFileSizeMB) {
+			this.advertForm.controls['image'].setErrors({'maximumFileSize': true});
+		} else {
+			this.advertForm.controls['image'].setErrors(null);
+		}
+		console.log('error' + this.advertForm.controls['image'].errors);
+
+		// this.advertForm.controls['image'].setErrors({'maximumFileSize': (this.fileSizeMB > this.maximumFileSizeMB) ? true : null});
 	}
 
 	getRandomInt(min: number, max: number): number {
