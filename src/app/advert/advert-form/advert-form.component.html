@@ -5,7 +5,7 @@
         <label class="h3">Názov</label>
         <input formControlName="name" class="form-control form-control-lg" name="Názov inzerátu"
 			type="text" placeholder="Zadajte názov inzerátu" (input)="countChars()">
-		<span>{{this.nameCharacterCount}}/{{this.maximumNameCharacterCount}}</span>
+		<span>Počet znakov: {{this.nameCharacterCount}}/{{this.maximumNameCharacterCount}}</span>
 
 
         <h5 *ngIf="advertForm.controls['name'].errors?.['required']" class="text-danger">
@@ -23,7 +23,7 @@
         <textarea formControlName="description" class="form-control form-control-lg" rows="8"
 			placeholder="Zadajte opis inzerátu" (input)="countChars()">
 		</textarea>
-		<span>{{this.descriptionCharacterCount}}/{{this.maximumDescriptionCharacterCount}}</span>
+		<span>Počet znakov: {{this.descriptionCharacterCount}}/{{this.maximumDescriptionCharacterCount}}</span>
 		<h5 *ngIf="advertForm.controls['description'].errors?.['maxlength']" class="text-danger">
 			Opis musí obsahovať maximálne 1024 znakov.
 		</h5>
