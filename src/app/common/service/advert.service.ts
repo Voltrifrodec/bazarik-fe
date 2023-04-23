@@ -17,6 +17,10 @@ export class AdvertService {
 		return this.http.get<Advert[]>(this.advertsUrl);
 	}
 
+	getRecentAdverts(count: number): Observable<Advert[]> {
+		return this.http.get<Advert[]>(`${this.advertsUrl}/recent/${count}`);
+	}
+
 	getAllAdvertsByQuery(query: string): Observable<Advert[]> {
 		return this.http.get<Advert[]>(`${this.apiUrl}/search/${query}`);
 	}
