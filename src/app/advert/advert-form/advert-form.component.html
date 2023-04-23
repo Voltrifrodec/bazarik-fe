@@ -9,6 +9,9 @@
         <h5 *ngIf="advertForm.controls['name'].errors?.['required']" class="text-danger">
 			Je nutné zadať názov inzerátu
 		</h5>
+		<h5 *ngIf="advertForm.controls['name'].errors?.['maxlength']" class="text-danger">
+			Názov inzerátu musí mať maximálne {{this.maximumNameCharacterCount}} znakov;
+		</h5>
     </div>
 
 
