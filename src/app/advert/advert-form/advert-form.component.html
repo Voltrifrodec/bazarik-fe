@@ -160,8 +160,8 @@
 		Je nutné vyplniť celý formulár pre úspešné pridanie inzerátu.
 	</h5>
     <div class="d-flex justify-content-between mt-3">
-		<button class="btn btn-primary" (click)="addAdvertDialog.showModal()" [disabled]="advertForm.invalid">Pridať inzerát</button>
-        <input class="btn btn-danger" type="button" value="Zrušiť inzerát" (click)="leaveDialog()">
+		<button class="btn btn-lg btn-primary" (click)="addAdvertDialog.showModal()" [disabled]="advertForm.invalid">Pridať inzerát</button>
+        <input class="btn btn-danger" type="button" value="Vrátiť sa na domovskú stránku" (click)="leaveDialog()">
     </div>
 
 	<dialog #addAdvertDialog>
