@@ -31,6 +31,7 @@ import { EmptyAdvertListComponent } from './core/exceptions/empty-advert-list/em
 import { FooterComponent } from './footer/footer.component';
 import { SecurityComponent } from './security/security.component';
 import { SecurityFormComponent } from './security/security-form/security-form.component';
+import { AngularToastifyModule, ToastService } from 'angular-toastify';
 
 @NgModule({
 	declarations: [
@@ -66,9 +67,10 @@ import { SecurityFormComponent } from './security/security-form/security-form.co
 		NgbModule,
 		FontAwesomeModule,
 		ReactiveFormsModule,
-		HttpClientModule
+		HttpClientModule,
+		AngularToastifyModule
 	],
-	providers: [],
+	providers: [ToastService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
