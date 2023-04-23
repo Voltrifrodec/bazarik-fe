@@ -12,7 +12,7 @@
 			Je nutné zadať názov inzerátu
 		</h5>
 		<h5 *ngIf="advertForm.controls['name'].errors?.['maxlength']" class="text-danger">
-			Názov inzerátu musí mať maximálne {{this.maximumNameCharacterCount}} znakov;
+			Názov inzerátu musí mať maximálne {{this.maximumNameCharacterCount}} znakov.
 		</h5>
     </div>
 
@@ -47,7 +47,7 @@
 				placeholder="Cena pre inzerát">
 		</div>
 		<h5 *ngIf="advertForm.controls['priceEur'].invalid" class="text-danger">
-			Je nutné zadať cenu inzerátu
+			Je nutné zadať cenu inzerátu.
 		</h5>
         <!-- </div> -->
 
@@ -68,7 +68,7 @@
 			</label>
         </div>
 		<h5 *ngIf="advertForm.controls['fixedPrice'].invalid" class="text-danger">
-			Je nutné vybrať, či je cena inzerátu fixná
+			Je nutné vybrať, či je cena inzerátu fixná.
 		</h5>
     </div>
 
@@ -82,7 +82,7 @@
 				<option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
 			</select>
 			<h5 *ngIf="advertForm.controls['category'].invalid" class="text-danger">
-				Je nutné vybrať kategóriu inzerátu
+				Je nutné vybrať kategóriu inzerátu.
 			</h5>
         </div>
 
@@ -119,7 +119,7 @@
 				<option *ngFor="let region of regions" [value]="region.id">{{ region.name }}</option>
 			</select>
 			<h5 *ngIf="advertForm.controls['region'].invalid" class="text-danger">
-				Je nutné vybrať kraj
+				Je nutné vybrať kraj.
 			</h5>
         </div>
 
@@ -136,7 +136,7 @@
 				</option>
 			</select>
 			<h5 *ngIf="advertForm.controls['district'].invalid" class="text-danger">
-				Je nutné vybrať okres
+				Je nutné vybrať okres.
 			</h5>
         </div>
     </div>
@@ -150,7 +150,13 @@
             Obrázok pre inzerát
             <!-- <small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small> -->
         </p>
-        <input formControlName="image" id="file" type="file" accept="image/*" class="form-control-file form-control-lg">
+        <input formControlName="image" id="file" type="file" accept="image/*" class="form-control-file form-control-lg" (change)="checkFileSize()">
+		<!-- Veľkosť súboru -->
+		<span class="d-block">Veľkosť obrázku: {{this.fileSizeMB}}MB / {{this.maximumFileSizeMB}}MB</span>
+		
+		<h5 *ngIf="advertForm.controls['image'].errors?.['maximumFileSize']" class="text-danger">
+			Obrázok nemôže byť väčší ako 10MB.
+		</h5>
     </div>
 
 
@@ -161,7 +167,7 @@
         <input formControlName="contactEmail" type="email" class="form-control form-control-lg" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
         <small class="form-text text-muted">Na túto e-mailovú adresu Vám bude zaslaný kód na overenie.</small>
 		<h5 *ngIf="advertForm.controls['contactEmail'].invalid" class="text-danger">
-			Je nutné zadať e-mailovú adresu
+			Je nutné zadať e-mailovú adresu.
 		</h5>
     </div>
     <!-- phone number -->

@@ -34,6 +34,9 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	nameCharacterCount = 0;
 	maximumNameCharacterCount = 127;
 
+	fileSizeMB = 0;
+	maximumFileSizeMB = 10;
+
 	advertId: string = "";
 	advertForm: FormGroup;
 
@@ -284,7 +287,15 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		this.nameCharacterCount = this.advertForm.controls['name'].value.length;
 	}
 
+	checkFileSize(): void {
+		let fileElement = document.querySelector('#file') as HTMLInputElement;
+		let files = fileElement.files as FileList | undefined;
+		let file = files![0] as File;
 
+		this.fileSizeMB = Number((file.size / 1024 / 1024).toFixed(1));
+
+		this.advertForm.controls['image'].setErrors({'maximumFileSize': (this.fileSizeMB > this.maximumFileSizeMB)});
+	}
 
 	getRandomInt(min: number, max: number): number {
 		min = Math.ceil(min);
