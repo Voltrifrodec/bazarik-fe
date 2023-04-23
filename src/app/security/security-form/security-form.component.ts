@@ -4,7 +4,7 @@ import { Router} from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ToastService } from 'angular-toastify';
 import { Advert } from 'src/app/common/model/advert.model';
-import { SecurityUpdate } from 'src/app/common/model/security-update.model';
+import { SecurityUpdate, SecurityAction } from 'src/app/common/model/security.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
 import { ImageService } from 'src/app/common/service/image.service';
 import { SecurityService } from 'src/app/common/service/security.service';
@@ -15,7 +15,10 @@ import { SecurityService } from 'src/app/common/service/security.service';
 	templateUrl: './security-form.component.html',
 	styleUrls: ['./security-form.component.css']
 })
-export class SecurityFormComponent implements OnInit, OnDestroy {
+export class SecurityFormComponent implements OnDestroy {
+
+	@Input()
+	action?: SecurityAction;
 
 	@Input()
 	advert?: any;
@@ -47,29 +50,42 @@ export class SecurityFormComponent implements OnInit, OnDestroy {
 		this.clearForm.emit();
 	}
 
-	ngOnInit(): void {
-		// this.createHash();
-	}
-
 	createHash() {
-		console.log(this.advert);
-		if (this.router.url.includes('advert/edit')) {
+		if (this.action?.action === 'delete') {
 			let securityUpdate: SecurityUpdate = {
 				advertId: this.advert.id,
-				email: this.advert.contactEmail
+				email: this.advert.contact.email
 			}
+
 			this.securityService.createHashForUpdate(securityUpdate).pipe(untilDestroyed(this)).subscribe((hash: string) => {
 				this.hash = hash;
-			}, (err: Error) => {
-				this.toastService.error(err.message);
+			}, (error: Error) => {
+				this.toastService.error(error.message);
+				console.log(error);
 			})
-		} else {
+		}
+
+		if (this.action?.action === 'create') {
 			this.advert.imageId = 0;
+
 			this.securityService.createHashFromAdvert(this.advert).pipe(untilDestroyed(this)).subscribe((hash: string) => {
 				this.hash = hash;
 			}, (err: Error) => {
 				this.toastService.error(err.message);
 			});
+		}
+
+		if (this.action?.action === 'update') {
+			let securityUpdate: SecurityUpdate = {
+				advertId: this.advert.id,
+				email: this.advert.contactEmail
+			}
+
+			this.securityService.createHashForUpdate(securityUpdate).pipe(untilDestroyed(this)).subscribe((hash: string) => {
+				this.hash = hash;
+			}, (err: Error) => {
+				this.toastService.error(err.message);
+			})
 		}
 	}
 
@@ -91,13 +107,41 @@ export class SecurityFormComponent implements OnInit, OnDestroy {
 		this.securityForm.controls['code'].reset();
 
 		this.securityService.checkCode(securityRequest).pipe(untilDestroyed(this)).subscribe((codeCheck: boolean) => {
-			if (codeCheck) {
-				this.sendFile();
-			} else {
+			if (!codeCheck) {
 				this.toastService.error(`Overenie nebolo úspešné. Skúste to znova.`);
+				return;
+			}
+
+			if (this.action?.action === 'delete') {
+				this.deleteAdvert();
+				return;
+			}
+
+			if (this.action?.action === 'update') {
+				this.sendFile();
+				return;
+			}
+			
+			if (this.action?.action === 'create') {
+				this.sendFile();
+				return;
 			}
 		}, (error: Error) => {
 			this.toastService.error('Nastala chyba pri overovaní. Skúste to znova.');
+			console.error(error);
+		});
+	}
+
+	private deleteAdvert() {
+		this.advertService.deleteAdvert(this.advert.id).pipe(untilDestroyed(this)).subscribe(() => {
+			this.toastService.success(`Vymazanie inzerátu bolo úspešné.`);
+			this.toastService.success(`Budete presmerovaný na hlavnú stránku.`);
+			setTimeout(() => {
+				window.scrollTo(0, 0);
+				this.router.navigate(['/']);
+			}, 5000);
+		}, () => {
+			this.toastService.error(`Vymazanie inzerátu nebolo úspešné.`);
 		});
 	}
 
@@ -124,18 +168,26 @@ export class SecurityFormComponent implements OnInit, OnDestroy {
 
 	private sendAdvert(advert: Advert): void {
 		this.advertService.createAdvert(advert).pipe(untilDestroyed(this)).subscribe((advertId: string) => {
-			this.clearForm.emit();
-			this.redirectToHomePage(advertId);
+			this.redirectToAdvertDetail(advertId);
 		}, (error: Error) => {
 			this.toastService.error(`Nastala chyba pri vytváraní inzerátu.\n${error}`);
+			console.error(error);
 		})
 	}
 
-	private redirectToHomePage(advertId?: string): void {
-		window.confirm("Inzerát bol úspešne pridaný.\nBudete presmerovaný na stránku inzerátu.");
+	private redirectToHomePage(advertId: string, message: string): void {
+		this.clearForm.emit();
 
+		window.alert(message);
 		window.scrollTo(0, 0);
+		this.router.navigate([`/advert/${advertId}`]);
+	}
 
+	private redirectToAdvertDetail(advertId: string) {
+		this.clearForm.emit();
+
+		window.alert(`Inzerát bol úspešne pridaný.\nBudete presmerovaný na stránku inzerátu.`);
+		window.scrollTo(0, 0);
 		this.router.navigate([`/advert/${advertId}`]);
 	}
 

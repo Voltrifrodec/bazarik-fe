@@ -5,6 +5,7 @@ import { Advert } from 'src/app/common/model/advert.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
+import { SecurityAction } from 'src/app/common/model/security.model';
 
 @UntilDestroy()
 @Component({
@@ -16,7 +17,12 @@ export class AdvertDetailPageComponent {
 
     faClipboard = faClipboard;
 
-	@Input()
+	@Output()
+	action: SecurityAction = {
+		action: 'delete'
+	}
+
+	@Output()
 	public advert?: Advert;
 
 	private advertId: string | null;
@@ -76,5 +82,9 @@ export class AdvertDetailPageComponent {
 
 	editAdvert() {
 		this.router.navigate([`/advert/edit/${this.advertId}`]);
+	}
+
+	deleteAdvert() {
+
 	}
 }

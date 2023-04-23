@@ -8,8 +8,8 @@ import { Category } from 'src/app/common/model/category.model';
 import { Country } from 'src/app/common/model/country.model';
 import { Currency } from 'src/app/common/model/currency.model';
 import { District } from 'src/app/common/model/district.model';
-import { Image } from 'src/app/common/model/image.model';
 import { Region } from 'src/app/common/model/region.model';
+import { SecurityAction } from 'src/app/common/model/security.model';
 import { Subcategory } from 'src/app/common/model/subcategory.model';
 import { Subsubcategory } from 'src/app/common/model/subsubcategory.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
@@ -46,6 +46,11 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 	@Input()
 	clearForm = new EventEmitter<void>();
+
+	@Output()
+	action: SecurityAction = {
+		action: 'create'
+	}
 
 	categories?: Category[];
 	subcategories?: Subcategory[];
@@ -88,6 +93,14 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 			image: new FormControl(null, [])
 		});
+
+		if (this.router.url.includes(`/advert/edit`)) {
+			this.action.action = 'update';
+		}
+		if (this.router.url.includes('/advert/new')) {
+			this.action.action = 'create';
+
+		}
 	}
 
 	ngOnDestroy(): void {
@@ -130,7 +143,6 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	}
 
 	loadDistricts(): void {
-		console.log("KLIKOL SI NA SELECT");
 		let regionId = Number(this.advertForm.controls['region'].value);
 
 		this.regionService.getAllDistrictsByRegionId(regionId).pipe(untilDestroyed(this))

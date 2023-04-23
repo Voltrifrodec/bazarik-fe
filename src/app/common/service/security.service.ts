@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Advert } from '../model/advert.model';
 import { Observable } from 'rxjs';
-import { SecurityUpdate } from '../model/security-update.model';
-import { SecurityRequest } from '../model/security-request.model';
+import { SecurityUpdate, SecurityRequest } from '../model/security.model';
 
 @Injectable({
 	providedIn: 'root'

@@ -172,6 +172,7 @@
 		<div class="content">
 			<app-security-form
 				[advert]="this.prepareAdvert()"
+				[action]="this.action"
 				(formCancel)="addAdvertDialog.close()"
 				(clearForm)="this.clearLocalStorage()"
 			></app-security-form>
