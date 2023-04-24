@@ -111,7 +111,7 @@ export class SecurityFormComponent implements OnDestroy {
 
 		this.securityService.checkCode(securityRequest).pipe(untilDestroyed(this)).subscribe((codeCheck: boolean) => {
 			if (!codeCheck) {
-				this.toastService.error(`Overenie nebolo úspešné. Skúste to znova.`);
+				this.toastService.error(`Overenie nebolo úspešné.`);
 				return;
 			}
 
@@ -127,7 +127,6 @@ export class SecurityFormComponent implements OnDestroy {
 			
 			if (this.action?.action === 'create') {
 				this.sendFile();
-				this.createAdvert();
 				return;
 			}
 		}, (error: Error) => {
@@ -176,9 +175,12 @@ export class SecurityFormComponent implements OnDestroy {
 			this.imageService.uploadImage(file).pipe(untilDestroyed(this)).subscribe((imageId: number) => {
 				this.advert.imageId = imageId;
 				if (this.action?.action == 'update') {
+					// TODO: Implementovať vymazávanie obrázku po UPDATE
 					this.updateAdvert();
 				}
-				// TODO: Implementovať vymazávanie obrázku po UPDATE
+				if (this.action?.action == 'create') {
+					this.createAdvert();
+				}
 			})
 		}
 	}
