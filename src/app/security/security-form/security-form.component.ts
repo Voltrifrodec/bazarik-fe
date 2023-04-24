@@ -51,7 +51,6 @@ export class SecurityFormComponent implements OnDestroy {
 	}
 
 	createHash() {
-		this.toastService.success(`Overovací kód bol odoslaný na e-mail.`);
 		if (this.action?.action === 'delete') {
 			let securityUpdate: SecurityUpdate = {
 				advertId: this.advert.id,
@@ -60,6 +59,7 @@ export class SecurityFormComponent implements OnDestroy {
 
 			this.securityService.createHashForUpdate(securityUpdate).pipe(untilDestroyed(this)).subscribe((hash: string) => {
 				this.hash = hash;
+				this.toastService.success(`Overovací kód bol odoslaný na e-mail.`);
 			}, (error: Error) => {
 				this.toastService.error(error.message);
 				console.log(error);
@@ -71,6 +71,7 @@ export class SecurityFormComponent implements OnDestroy {
 
 			this.securityService.createHashFromAdvert(this.advert).pipe(untilDestroyed(this)).subscribe((hash: string) => {
 				this.hash = hash;
+				this.toastService.success(`Overovací kód bol odoslaný na e-mail.`);
 			}, (err: Error) => {
 				this.toastService.error(err.message);
 			});
@@ -84,6 +85,7 @@ export class SecurityFormComponent implements OnDestroy {
 
 			this.securityService.createHashForUpdate(securityUpdate).pipe(untilDestroyed(this)).subscribe((hash: string) => {
 				this.hash = hash;
+				this.toastService.success(`Overovací kód bol odoslaný na e-mail.`);
 			}, (err: Error) => {
 				this.toastService.error(err.message);
 			})
@@ -120,12 +122,12 @@ export class SecurityFormComponent implements OnDestroy {
 
 			if (this.action?.action === 'update') {
 				this.sendFile();
-				this.updateAdvert();
 				return;
 			}
 			
 			if (this.action?.action === 'create') {
 				this.sendFile();
+				this.createAdvert();
 				return;
 			}
 		}, (error: Error) => {
@@ -155,6 +157,8 @@ export class SecurityFormComponent implements OnDestroy {
 		if (!file) {
 			if (this.action?.action == 'create') {
 				this.advert.imageId = 0;
+				this.createAdvert();
+				return;
 			}
 
 			if (this.action?.action == 'update') {
@@ -164,22 +168,19 @@ export class SecurityFormComponent implements OnDestroy {
 					this.updateAdvert();
 					return;
 				});
+				return;
 			}
-			
-			this.createAdvert();
-			return;
 		}
 
-		this.imageService.uploadImage(file).pipe(untilDestroyed(this)).subscribe((imageId: number) => {
-			if (imageId) {
-
-				// TODO: Implementovať vymazávanie obrázku po UPDATE
-
+		if (file) {
+			this.imageService.uploadImage(file).pipe(untilDestroyed(this)).subscribe((imageId: number) => {
 				this.advert.imageId = imageId;
-
-				this.createAdvert();
-			}
-		})
+				if (this.action?.action == 'update') {
+					this.updateAdvert();
+				}
+				// TODO: Implementovať vymazávanie obrázku po UPDATE
+			})
+		}
 	}
 
 	private createAdvert(): void {

@@ -50,6 +50,8 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		}
 	}
 
+	private advert?: Advert;
+
 	@Input()
 	formCreate = new EventEmitter<Advert>();
 
@@ -111,9 +113,11 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			this.action.action = 'update';
 		}
 		if (this.router.url.includes('/advert/new')) {
-			this.action.action = 'create';
-
+			this.action.action = 'create';			
 		}
+
+		console.log(this.action.action);
+
 		this.getCurrencies();
 	}
 
@@ -213,6 +217,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		if (! this.advertId) return;
 		
 		this.advertService.getAdvertById(this.advertId).pipe(untilDestroyed(this)).subscribe((advert: Advert) => {
+			this.advert = advert;
 			this.advertForm.controls['id'].setValue(advert.id);
 			this.advertForm.controls['name'].setValue(advert.name);
 			this.advertForm.controls['description'].setValue(advert.description);
@@ -257,7 +262,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 			districtId: this.advertForm.controls['district'].value,
 
-			imageId: this.advertForm.controls['image'].value,
+			imageId: this.advert?.image.id,
 		}
 	}
 
