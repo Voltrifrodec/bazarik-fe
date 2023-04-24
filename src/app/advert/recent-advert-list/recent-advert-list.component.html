@@ -1,0 +1,24 @@
+<div class="auto m-3 p-2 bg-container">
+	<h3 class="mb-2 text-center border-bottom border-dark pb-2">
+		Naposledy pridané inzeráty
+	</h3>
+
+	<div class="d-flex justify-content-around mt-3">
+		<div *ngFor="let advert of adverts" class="d-flex justify-content-center w-100">
+			<a routerLink="advert/{{advert.id}}">
+				<h5 class="text-center">
+					{{advert.category.name}}
+				</h5>
+
+				<div class="text-center thumbnail">
+					<img class="w-100" alt="{{advert?.name}}" width="128" height="128"
+						src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}">
+				</div>
+				
+				<h6 class="text-decoration-underline text-center">
+					 {{advert.name}}
+				</h6>
+			</a>
+		</div>
+	</div>
+</div>

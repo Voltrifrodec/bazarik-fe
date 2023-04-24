@@ -150,6 +150,8 @@ export class SecurityFormComponent implements OnDestroy {
 		let files = fileElement.files as FileList | undefined;
 		let file = files![0] as File;
 
+		// TODO: Add max file size limit (10MB) = (10000kB) = (10 000 000B)
+
 		if (!file) {
 			if (this.action?.action == 'create') {
 				this.advert.imageId = 0;

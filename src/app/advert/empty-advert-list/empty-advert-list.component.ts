@@ -9,5 +9,5 @@ import { faExclamationTriangle, faPlus, faHome } from '@fortawesome/free-solid-s
 export class EmptyAdvertListComponent {
     faExclamationTriangle = faExclamationTriangle;
     faPlus = faPlus;
-    faHome = faHome
+    faHome = faHome;
 }

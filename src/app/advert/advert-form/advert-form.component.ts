@@ -14,6 +14,7 @@ import { Subcategory } from 'src/app/common/model/subcategory.model';
 import { Subsubcategory } from 'src/app/common/model/subsubcategory.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
 import { CategoryService } from 'src/app/common/service/category.service';
+import { CurrencyService } from 'src/app/common/service/currency.service';
 import { ImageService } from 'src/app/common/service/image.service';
 import { RegionService } from 'src/app/common/service/region.service';
 import { SecurityService } from 'src/app/common/service/security.service';
@@ -27,6 +28,17 @@ import { SubsubcategoryService } from 'src/app/common/service/subsubcategory.ser
 	styleUrls: ['./advert-form.component.css']
 })
 export class AdvertFormComponent implements OnInit, OnDestroy {
+
+	descriptionCharacterCount: number = 0;
+	maximumDescriptionCharacterCount: number = 1024;
+
+	nameCharacterCount = 0;
+	maximumNameCharacterCount = 127;
+
+	fileSizeMB = 0;
+	maximumFileSizeMB = 10;
+
+	maximumPriceEur = 50000;
 
 	advertId: string = "";
 	advertForm: FormGroup;
@@ -70,15 +82,16 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		private imageService: ImageService,
 		private advertService: AdvertService,
 		private securityService: SecurityService,
-		private toastService: ToastService
+		private toastService: ToastService,
+		private currencyService: CurrencyService
 	) {
 		this.advertForm = new FormGroup({
 			id: new FormControl(null, []),
-			name: new FormControl(null, [Validators.required]),
-			description: new FormControl(null, [Validators.maxLength(1024)]),
+			name: new FormControl(null, [Validators.required, Validators.maxLength(this.maximumNameCharacterCount)]),
+			description: new FormControl(null, [Validators.maxLength(this.maximumDescriptionCharacterCount)]),
 			keywords: new FormControl(null, []),
 
-			priceEur: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(50000)]),
+			priceEur: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(this.maximumPriceEur)]),
 			currency: new FormControl(null, []),
 			fixedPrice: new FormControl(true, [Validators.required]),
 
@@ -102,7 +115,6 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 		}
 		this.getCurrencies();
-
 	}
 
 	ngOnDestroy(): void {
@@ -117,6 +129,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		this.regionService.getAllRegions().pipe(untilDestroyed(this)).subscribe((regions: Region[]) => {
 			this.regions = regions;
 		});
+		
 
 		this.loadFromLocalStorage();
 
@@ -234,7 +247,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 			priceEur: this.advertForm.controls['priceEur'].value,
 			fixedPrice: this.advertForm.controls['fixedPrice'].value,
-			currencyId: this.advertForm.controls['currency'].value,
+			currencyId: this.currencies?.at(0)?.id || this.advertForm.controls['currency'].value,
 
 			categoryId: this.advertForm.controls['category'].value,
 			subcategoryId: this.advertForm.controls['subcategory'].value,
@@ -290,7 +303,29 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		localStorage.clear();
 	}
 
+	countChars(): void {
+		this.descriptionCharacterCount = this.advertForm.controls['description'].value.length;
+		this.nameCharacterCount = this.advertForm.controls['name'].value.length;
+	}
 
+	checkFileSize(): void {
+		let fileElement = document.querySelector('#file') as HTMLInputElement;
+		let files = fileElement.files as FileList | undefined;
+		let file = files![0] as File;
+
+		this.fileSizeMB = Number((file.size / 1024 / 1024).toFixed(1));
+
+		console.log(this.fileSizeMB, this.maximumFileSizeMB);
+
+		if (this.fileSizeMB > this.maximumFileSizeMB) {
+			this.advertForm.controls['image'].setErrors({'maximumFileSize': true});
+		} else {
+			this.advertForm.controls['image'].setErrors(null);
+		}
+		console.log('error' + this.advertForm.controls['image'].errors);
+
+		// this.advertForm.controls['image'].setErrors({'maximumFileSize': (this.fileSizeMB > this.maximumFileSizeMB) ? true : null});
+	}
 
 	getRandomInt(min: number, max: number): number {
 		min = Math.ceil(min);

@@ -4,10 +4,15 @@
     <div class="form-group">
         <label class="h3">Názov</label>
         <input formControlName="name" class="form-control form-control-lg" name="Názov inzerátu"
-			type="text" placeholder="Zadajte názov inzerátu">
+			type="text" placeholder="Zadajte názov inzerátu" (input)="countChars()">
+		<span>Počet znakov: {{this.nameCharacterCount}}/{{this.maximumNameCharacterCount}}</span>
 
-        <h5 *ngIf="advertForm.controls['name'].invalid" class="text-danger">
+
+        <h5 *ngIf="advertForm.controls['name'].errors?.['required']" class="text-danger">
 			Je nutné zadať názov inzerátu
+		</h5>
+		<h5 *ngIf="advertForm.controls['name'].errors?.['maxlength']" class="text-danger">
+			Názov inzerátu musí mať maximálne {{this.maximumNameCharacterCount}} znakov.
 		</h5>
     </div>
 
@@ -16,7 +21,12 @@
     <div class="form-group">
         <label class="h3">Opis</label>
         <textarea formControlName="description" class="form-control form-control-lg" rows="8"
-			placeholder="Zadajte opis inzerátu"></textarea>
+			placeholder="Zadajte opis inzerátu" (input)="countChars()">
+		</textarea>
+		<span>Počet znakov: {{this.descriptionCharacterCount}}/{{this.maximumDescriptionCharacterCount}}</span>
+		<h5 *ngIf="advertForm.controls['description'].errors?.['maxlength']" class="text-danger">
+			Opis musí obsahovať maximálne 1024 znakov.
+		</h5>
     </div>
 
 
@@ -30,14 +40,20 @@
             <div class="currency input-group-prepend">
 				<input formControlName="currency" class="d-none" [value]="this.currencies?.at(0)?.id">
 				<div class="form-control form-control-lg bg-secondary text-light rounded-left">
-					{{ '€' }}
+					{{this.currencies?.at(0)?.symbol || '€'}}
 				</div>
             </div>
             <input formControlName="priceEur" type="number" class="form-control form-control-lg"
 				placeholder="Cena pre inzerát">
 		</div>
-		<h5 *ngIf="advertForm.controls['priceEur'].invalid" class="text-danger">
+		<h5 *ngIf="advertForm.controls['priceEur'].errors?.['required']" class="text-danger">
 			Je nutné zadať cenu inzerátu
+		</h5>
+		<h5 *ngIf="advertForm.controls['priceEur'].errors?.['max']" class="text-danger">
+			Cena inzerátu nemôže byť väčšia ako {{this.maximumPriceEur}} {{this.currencies![0].symbol}}.
+		</h5>
+		<h5 *ngIf="advertForm.controls['priceEur'].errors?.['min']" class="text-danger">
+			Cena inzerátu nemôže byť menšia ako 0.
 		</h5>
         <!-- </div> -->
 
@@ -58,7 +74,7 @@
 			</label>
         </div>
 		<h5 *ngIf="advertForm.controls['fixedPrice'].invalid" class="text-danger">
-			Je nutné vybrať, či je cena inzerátu fixná
+			Je nutné vybrať, či je cena inzerátu fixná.
 		</h5>
     </div>
 
@@ -72,7 +88,7 @@
 				<option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
 			</select>
 			<h5 *ngIf="advertForm.controls['category'].invalid" class="text-danger">
-				Je nutné vybrať kategóriu inzerátu
+				Je nutné vybrať kategóriu inzerátu.
 			</h5>
         </div>
 
@@ -109,7 +125,7 @@
 				<option *ngFor="let region of regions" [value]="region.id">{{ region.name }}</option>
 			</select>
 			<h5 *ngIf="advertForm.controls['region'].invalid" class="text-danger">
-				Je nutné vybrať kraj
+				Je nutné vybrať kraj.
 			</h5>
         </div>
 
@@ -126,7 +142,7 @@
 				</option>
 			</select>
 			<h5 *ngIf="advertForm.controls['district'].invalid" class="text-danger">
-				Je nutné vybrať okres
+				Je nutné vybrať okres.
 			</h5>
         </div>
     </div>
@@ -140,7 +156,13 @@
             Obrázok pre inzerát
             <!-- <small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small> -->
         </p>
-        <input formControlName="image" id="file" type="file" accept="image/*" class="form-control-file form-control-lg">
+        <input formControlName="image" id="file" type="file" accept="image/*" class="form-control-file form-control-lg" (change)="checkFileSize()">
+		<!-- Veľkosť súboru -->
+		<span class="d-block">Veľkosť obrázku: {{this.fileSizeMB}}MB / {{this.maximumFileSizeMB}}MB</span>
+		
+		<h5 *ngIf="advertForm.controls['image'].errors?.['maximumFileSize']" class="text-danger">
+			Obrázok nemôže byť väčší ako 10MB.
+		</h5>
     </div>
 
 
@@ -151,7 +173,7 @@
         <input formControlName="contactEmail" type="email" class="form-control form-control-lg" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
         <small class="form-text text-muted">Na túto e-mailovú adresu Vám bude zaslaný kód na overenie.</small>
 		<h5 *ngIf="advertForm.controls['contactEmail'].invalid" class="text-danger">
-			Je nutné zadať e-mailovú adresu
+			Je nutné zadať správnu e-mailovú adresu
 		</h5>
     </div>
     <!-- phone number -->
@@ -160,8 +182,8 @@
 		Je nutné vyplniť celý formulár pre úspešné pridanie inzerátu.
 	</h5>
     <div class="d-flex justify-content-between mt-3">
-		<button class="btn btn-primary" (click)="addAdvertDialog.showModal()" [disabled]="advertForm.invalid">Pridať inzerát</button>
-        <input class="btn btn-danger" type="button" value="Zrušiť inzerát" (click)="leaveDialog()">
+		<button class="btn btn-lg btn-primary" (click)="addAdvertDialog.showModal()" [disabled]="advertForm.invalid">Pridať inzerát</button>
+        <input class="btn btn-danger" type="button" value="Vrátiť sa na domovskú stránku" (click)="leaveDialog()">
     </div>
 
 	<dialog #addAdvertDialog>

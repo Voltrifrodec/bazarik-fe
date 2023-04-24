@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HomeComponent } from './core/home/home.component';
+import { MainComponent } from './main/main.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { AdvertComponent } from './advert/advert.component';
 import { AdvertFormComponent } from './advert/advert-form/advert-form.component';
@@ -16,8 +16,8 @@ import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.compone
 import { SearchComponent } from './core/search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PagenotfoundComponent } from './errors/pagenotfound/pagenotfound.component';
-import { RecentAdvertListComponent } from './core/home/recent-advert-list/recent-advert-list.component';
-import { CategoryListComponent } from './core/home/category-list/category-list.component';
+import { RecentAdvertListComponent } from './advert/recent-advert-list/recent-advert-list.component';
+import { CategoryListComponent } from './categories/category-list/category-list.component';
 import { CategorySectionListComponent } from './categories/category-section-list/category-section-list.component';
 import { CategoryAdvertListComponent } from './categories/category-advert-list/category-advert-list.component';
 import { SubcategorySectionListComponent } from './subcategory/subcategory-section-list/subcategory-section-list.component';
@@ -27,7 +27,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AdvertTileComponent } from './advert/advert-tile/advert-tile.component';
 import { ErrorsComponent } from './errors/errors.component';
 import { SearchListComponent } from './core/search/search-list/search-list.component';
-import { EmptyAdvertListComponent } from './core/exceptions/empty-advert-list/empty-advert-list.component';
+import { EmptyAdvertListComponent } from './advert/empty-advert-list/empty-advert-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { SecurityComponent } from './security/security.component';
 import { SecurityFormComponent } from './security/security-form/security-form.component';
@@ -36,7 +36,7 @@ import { AngularToastifyModule, ToastService } from 'angular-toastify';
 @NgModule({
 	declarations: [
 		AppComponent,
-		HomeComponent,
+		MainComponent,
 		CategoriesComponent,
 		AdvertComponent,
 		AdvertFormComponent,
