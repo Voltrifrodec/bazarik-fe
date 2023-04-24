@@ -51,6 +51,7 @@ export class SecurityFormComponent implements OnDestroy {
 	}
 
 	createHash() {
+		this.toastService.success(`Overovací kód bol odoslaný na e-mail.`);
 		if (this.action?.action === 'delete') {
 			let securityUpdate: SecurityUpdate = {
 				advertId: this.advert.id,
@@ -119,6 +120,7 @@ export class SecurityFormComponent implements OnDestroy {
 
 			if (this.action?.action === 'update') {
 				this.sendFile();
+				this.updateAdvert();
 				return;
 			}
 			
@@ -135,10 +137,8 @@ export class SecurityFormComponent implements OnDestroy {
 	private deleteAdvert() {
 		this.advertService.deleteAdvert(this.advert.id).pipe(untilDestroyed(this)).subscribe(() => {
 			this.toastService.success(`Vymazanie inzerátu bolo úspešné.`);
-			this.toastService.success(`Budete presmerovaný na hlavnú stránku.`);
 			setTimeout(() => {
-				window.scrollTo(0, 0);
-				this.router.navigate(['/']);
+				this.redirectToHomePage('Budete presmerovaný na domovskú stránku.');
 			}, 5000);
 		}, () => {
 			this.toastService.error(`Vymazanie inzerátu nebolo úspešné.`);
@@ -151,42 +151,64 @@ export class SecurityFormComponent implements OnDestroy {
 		let file = files![0] as File;
 
 		if (!file) {
-			this.advert.imageId = 0;
+			if (this.action?.action == 'create') {
+				this.advert.imageId = 0;
+			}
 
-			this.sendAdvert(this.advert);
+			if (this.action?.action == 'update') {
+				this.advertService.getAdvertById(this.advert.id).pipe(untilDestroyed(this)).subscribe((advert: Advert) => {
+					this.advert.imageId = advert.image.id;
+				}, null, () => {
+					this.updateAdvert();
+					return;
+				});
+			}
+			
+			this.createAdvert();
 			return;
 		}
 
 		this.imageService.uploadImage(file).pipe(untilDestroyed(this)).subscribe((imageId: number) => {
 			if (imageId) {
+
+				// TODO: Implementovať vymazávanie obrázku po UPDATE
+
 				this.advert.imageId = imageId;
 
-				this.sendAdvert(this.advert);
+				this.createAdvert();
 			}
 		})
 	}
 
-	private sendAdvert(advert: Advert): void {
-		this.advertService.createAdvert(advert).pipe(untilDestroyed(this)).subscribe((advertId: string) => {
-			this.redirectToAdvertDetail(advertId);
+	private createAdvert(): void {
+		console.log(this.advert);
+		this.advertService.createAdvert(this.advert).pipe(untilDestroyed(this)).subscribe((advertId: string) => {
+			this.redirectToAdvertDetail(advertId, `pridaný`);
 		}, (error: Error) => {
 			this.toastService.error(`Nastala chyba pri vytváraní inzerátu.\n${error}`);
 			console.error(error);
 		})
 	}
 
-	private redirectToHomePage(advertId: string, message: string): void {
+	private updateAdvert(): void {
+		console.log(`Update advert was called`);
+		this.advertService.updateAdvert(this.advert).pipe(untilDestroyed(this)).subscribe(() => {
+			this.redirectToAdvertDetail(this.advert.id, `upravený`);
+		});
+	}
+
+	private redirectToHomePage(message: string): void {
 		this.clearForm.emit();
 
 		window.alert(message);
 		window.scrollTo(0, 0);
-		this.router.navigate([`/advert/${advertId}`]);
+		this.router.navigate([`/`]);
 	}
 
-	private redirectToAdvertDetail(advertId: string) {
+	private redirectToAdvertDetail(advertId: string, message: string) {
 		this.clearForm.emit();
 
-		window.alert(`Inzerát bol úspešne pridaný.\nBudete presmerovaný na stránku inzerátu.`);
+		window.alert(`Inzerát bol úspešne ${message}.\nBudete presmerovaný na stránku inzerátu.`);
 		window.scrollTo(0, 0);
 		this.router.navigate([`/advert/${advertId}`]);
 	}

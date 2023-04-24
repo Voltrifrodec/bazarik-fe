@@ -101,6 +101,8 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			this.action.action = 'create';
 
 		}
+		this.getCurrencies();
+
 	}
 
 	ngOnDestroy(): void {
@@ -120,6 +122,23 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 		this.advertId = this.route.snapshot.paramMap.get('advertId')!;
 		this.getAdvert();
+
+		this.countChars();
+
+		console.log(this.advertForm.controls['currency'].value);
+
+		window.scrollTo(0, 0);
+
+		console.log(this.advertData);
+
+
+	}
+
+	getCurrencies(): void {
+		this.currencyService.getAllCurrencies().pipe(untilDestroyed(this)).subscribe((currencies: Currency[]) => {
+			this.currencies = currencies;
+			this.advertForm.controls['currency'].setValue(this.currencies?.at(0)?.id);
+		});
 	}
 
 	loadSubcategories(): void {
