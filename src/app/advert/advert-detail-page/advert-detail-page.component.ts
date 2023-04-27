@@ -81,5 +81,6 @@ export class AdvertDetailPageComponent {
 
 	editAdvert() {
 		this.router.navigate([`/advert/edit/${this.advertId}`]);
+		window.scrollTo(0, 0);
 	}
 }

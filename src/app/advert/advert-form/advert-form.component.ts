@@ -115,10 +115,6 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		if (this.router.url.includes('/advert/new')) {
 			this.action.action = 'create';			
 		}
-
-		console.log(this.action.action);
-
-		this.getCurrencies();
 	}
 
 	ngOnDestroy(): void {
@@ -126,14 +122,11 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
-		this.categoryService.getAllCategories().pipe(untilDestroyed(this)).subscribe((categories: Category[]) => {
-			this.categories = categories;
-		});
+		this.getAllCategories();
 
-		this.regionService.getAllRegions().pipe(untilDestroyed(this)).subscribe((regions: Region[]) => {
-			this.regions = regions;
-		});
+		this.getRegions();
 		
+		this.getCurrencies();
 
 		this.loadFromLocalStorage();
 
@@ -141,14 +134,18 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		this.getAdvert();
 
 		this.countChars();
+	}
 
-		console.log(this.advertForm.controls['currency'].value);
+	getAllCategories(): void {
+		this.categoryService.getAllCategories().pipe(untilDestroyed(this)).subscribe((categories: Category[]) => {
+			this.categories = categories;
+		});
+	}
 
-		window.scrollTo(0, 0);
-
-		console.log(this.advertData);
-
-
+	getRegions(): void {
+		this.regionService.getAllRegions().pipe(untilDestroyed(this)).subscribe((regions: Region[]) => {
+			this.regions = regions;
+		});
 	}
 
 	getCurrencies(): void {
@@ -309,8 +306,8 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	}
 
 	countChars(): void {
-		this.descriptionCharacterCount = this.advertForm.controls['description'].value.length;
-		this.nameCharacterCount = this.advertForm.controls['name'].value.length;
+		this.descriptionCharacterCount = this.advertForm.controls['description'].value?.length | 0;
+		this.nameCharacterCount = this.advertForm.controls['name'].value?.length | 0;
 	}
 
 	checkFileSize(): void {
@@ -327,9 +324,6 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		} else {
 			this.advertForm.controls['image'].setErrors(null);
 		}
-		console.log('error' + this.advertForm.controls['image'].errors);
-
-		// this.advertForm.controls['image'].setErrors({'maximumFileSize': (this.fileSizeMB > this.maximumFileSizeMB) ? true : null});
 	}
 
 	getRandomInt(min: number, max: number): number {
