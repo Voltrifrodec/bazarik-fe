@@ -114,7 +114,6 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			this.action.action = 'create';
 
 		}
-		this.getCurrencies();
 	}
 
 	ngOnDestroy(): void {
@@ -122,14 +121,11 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
-		this.categoryService.getAllCategories().pipe(untilDestroyed(this)).subscribe((categories: Category[]) => {
-			this.categories = categories;
-		});
+		this.getAllCategories();
 
-		this.regionService.getAllRegions().pipe(untilDestroyed(this)).subscribe((regions: Region[]) => {
-			this.regions = regions;
-		});
+		this.getRegions();
 		
+		this.getCurrencies();
 
 		this.loadFromLocalStorage();
 
@@ -137,9 +133,18 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		this.getAdvert();
 
 		this.countChars();
+	}
 
-		console.log(this.advertForm.controls['currency'].value);
+	getAllCategories(): void {
+		this.categoryService.getAllCategories().pipe(untilDestroyed(this)).subscribe((categories: Category[]) => {
+			this.categories = categories;
+		});
+	}
 
+	getRegions(): void {
+		this.regionService.getAllRegions().pipe(untilDestroyed(this)).subscribe((regions: Region[]) => {
+			this.regions = regions;
+		});
 	}
 
 	getCurrencies(): void {
