@@ -51,6 +51,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	}
 
 	private advert?: Advert;
+	private imageId?: number;
 
 	@Input()
 	formCreate = new EventEmitter<Advert>();
@@ -112,9 +113,11 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		if (this.router.url.includes(`/advert/edit`)) {
 			this.action.action = 'update';
 		}
+
 		if (this.router.url.includes('/advert/new')) {
 			this.action.action = 'create';			
 		}
+
 	}
 
 	ngOnDestroy(): void {
@@ -125,26 +128,28 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		this.getAllCategories();
 
 		this.getRegions();
-		
-		this.getCurrencies();
 
-		this.loadFromLocalStorage();
+		this.getCurrencies();
 
 		this.advertId = this.route.snapshot.paramMap.get('advertId')!;
 		this.getAdvert();
-
-		this.countChars();
+		
+		if (this.action.action === 'create') {
+			this.loadFromLocalStorage();
+		}
 	}
 
 	getAllCategories(): void {
 		this.categoryService.getAllCategories().pipe(untilDestroyed(this)).subscribe((categories: Category[]) => {
 			this.categories = categories;
+			this.loadSubcategories();
 		});
 	}
 
 	getRegions(): void {
 		this.regionService.getAllRegions().pipe(untilDestroyed(this)).subscribe((regions: Region[]) => {
 			this.regions = regions;
+			this.loadDistricts();
 		});
 	}
 
@@ -159,10 +164,10 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		let categoryId = Number(this.advertForm.controls['category'].value);
 		if (! categoryId) return;
 
-		this.categoryService.getSubcategoriesByCategoryId(categoryId)
-			.subscribe((subcategories: Subcategory[]) => {
-				this.subcategories = subcategories;
-			})
+		this.categoryService.getSubcategoriesByCategoryId(categoryId).subscribe((subcategories: Subcategory[]) => {
+			this.subcategories = subcategories;
+			this.loadSubsubcategories();
+		});
 	}
 
 	loadSubsubcategories(): void {
@@ -237,7 +242,11 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			this.advertForm.controls['region'].setValue(advert.district.region.id);
 			this.loadDistricts();
 			this.advertForm.controls['district'].setValue(advert.district.id);
-		})
+
+			this.imageId = advert.image.id;
+
+			this.countChars();
+		});
 	}
 
 	prepareAdvert(): any {
@@ -257,9 +266,10 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 			contactEmail: this.advertForm.controls['contactEmail'].value,
 
+			regionId: this.advertForm.controls['region'].value,
 			districtId: this.advertForm.controls['district'].value,
 
-			imageId: this.advert?.image.id,
+			imageId: this.imageId,
 		}
 	}
 
@@ -280,7 +290,8 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		let advert = this.prepareAdvert();
 
 		for (const [key, value] of Object.entries(advert)) {
-			if (value == null) continue;
+			if (null == value) continue;
+
 			if (String(value).trim() != null) {
 				localStorage.setItem(key, String(value));
 			}
@@ -288,17 +299,26 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	}
 
 	loadFromLocalStorage(): void {
-		for (let i = 0; localStorage.key(i) != null; i++) {
-			let key: string = localStorage.key(i)!;
-			if (!key) continue;
+		for (let i = 0; i < localStorage.length; i++) {
+			let key = localStorage.key(i);
+			if (null == key) continue;
 
-			let value: string = localStorage.getItem(key!)!;
-			if (!value) continue;
+			let value = localStorage.getItem(key);
+			if (null == value) continue;
 
-			if (!this.advertForm.controls[key]) continue;
+			key = key.replace('Id', '');
 
-			this.advertForm.controls[key].patchValue(value);
+			if (key == 'imageId') {
+				if (this.advert != null) {
+					this.advert.image.id = Number(value);
+					continue;
+				}
+			};
+			
+			this.advertForm.controls[key].patchValue(String(value));
 		}
+
+		this.countChars();
 	}
 
 	clearLocalStorage(): void {
@@ -317,13 +337,9 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 		this.fileSizeMB = Number((file.size / 1024 / 1024).toFixed(1));
 
-		console.log(this.fileSizeMB, this.maximumFileSizeMB);
-
-		if (this.fileSizeMB > this.maximumFileSizeMB) {
-			this.advertForm.controls['image'].setErrors({'maximumFileSize': true});
-		} else {
-			this.advertForm.controls['image'].setErrors(null);
-		}
+		this.advertForm.controls['image'].setErrors(
+			(this.fileSizeMB > this.maximumFileSizeMB) ? {'maximumFileSize' : true} : null
+		);
 	}
 
 	getRandomInt(min: number, max: number): number {
