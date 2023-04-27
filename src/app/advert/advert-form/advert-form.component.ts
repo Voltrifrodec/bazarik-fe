@@ -317,9 +317,6 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		} else {
 			this.advertForm.controls['image'].setErrors(null);
 		}
-		console.log('error' + this.advertForm.controls['image'].errors);
-
-		// this.advertForm.controls['image'].setErrors({'maximumFileSize': (this.fileSizeMB > this.maximumFileSizeMB) ? true : null});
 	}
 
 	getRandomInt(min: number, max: number): number {
