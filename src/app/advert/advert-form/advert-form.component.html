@@ -4,7 +4,7 @@
     <div class="form-group">
         <label class="h3">Názov</label>
         <input formControlName="name" class="form-control form-control-lg" name="Názov inzerátu"
-			type="text" placeholder="Zadajte názov inzerátu" (input)="countChars()">
+			type="search" placeholder="Zadajte názov inzerátu" (input)="countChars()">
 		<span>Počet znakov: {{this.nameCharacterCount}}/{{this.maximumNameCharacterCount}}</span>
 
 
@@ -170,7 +170,8 @@
     <!-- e-mail -->
     <div class="form-group">
         <p class="h3">E-mailová adresa</p>
-        <input formControlName="contactEmail" type="email" class="form-control form-control-lg" placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
+        <input formControlName="contactEmail" type="search" class="form-control form-control-lg"
+			placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
         <small class="form-text text-muted">Na túto e-mailovú adresu Vám bude zaslaný kód na overenie.</small>
 		<h5 *ngIf="advertForm.controls['contactEmail'].invalid" class="text-danger">
 			Je nutné zadať správnu e-mailovú adresu
@@ -179,7 +180,7 @@
     <!-- phone number -->
 
 	<h5 *ngIf="advertForm.invalid" class="text-danger">
-		Je nutné vyplniť celý formulár pre úspešné pridanie inzerátu.
+		Je nutné správne vyplniť celý formulár.
 	</h5>
     <div class="d-flex justify-content-between mt-3">
 		<button class="btn btn-lg btn-primary" (click)="addAdvertDialog.showModal()" [disabled]="advertForm.invalid">Pridať inzerát</button>
