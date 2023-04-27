@@ -299,8 +299,8 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	}
 
 	countChars(): void {
-		this.descriptionCharacterCount = this.advertForm.controls['description'].value.length;
-		this.nameCharacterCount = this.advertForm.controls['name'].value.length;
+		this.descriptionCharacterCount = this.advertForm.controls['description'].value?.length | 0;
+		this.nameCharacterCount = this.advertForm.controls['name'].value?.length | 0;
 	}
 
 	checkFileSize(): void {
