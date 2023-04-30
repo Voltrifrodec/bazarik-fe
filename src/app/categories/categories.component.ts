@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Advert } from '../common/model/advert.model';
+import { Advert, AdvertResponse } from '../common/model/advert.model';
 import { Category } from '../common/model/category.model';
+import { Pagination } from '../common/model/pagination';
 import { Subcategory } from '../common/model/subcategory.model';
 import { AdvertService } from '../common/service/advert.service';
 import { CategoryService } from '../common/service/category.service';
@@ -16,9 +17,10 @@ import { CategoryService } from '../common/service/category.service';
 export class CategoriesComponent {
     categoryId: number;
     category?: Category;
+    isLoaded: boolean = false;
 
     subcategories?: Subcategory[];
-    adverts?: Advert[];
+    adverts?: AdvertResponse;
 
     // TODO: Prehodiť advert funkcie do category-advert-list
     constructor(private categoryService: CategoryService, private advertService: AdvertService, private route: ActivatedRoute) {
@@ -39,10 +41,11 @@ export class CategoriesComponent {
         });
     }
 
-    getAdverts(): void {
-        this.advertService.getAllAdvertsByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
+    getAdverts(pagination?: Pagination): void {
+        this.advertService.getAllAdvertsByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((adverts: AdvertResponse) => {
             this.adverts = adverts;
-            // console.log('Received adverts for the category:', this.adverts);
+            let date = new Date().toUTCString();
+            console.log(date, 'Received adverts for the category:', this.adverts);
         })
     }
 
@@ -52,5 +55,6 @@ export class CategoriesComponent {
         this.categoryService.getCategoryById(this.categoryId).pipe(untilDestroyed(this)).subscribe((category: Category) => {
             this.category = category;
         });
+        this.isLoaded = true;
     }
 }

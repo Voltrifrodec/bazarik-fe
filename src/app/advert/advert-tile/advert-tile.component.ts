@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Advert } from 'src/app/common/model/advert.model';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,12 +7,17 @@ import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './advert-tile.component.html',
   styleUrls: ['./advert-tile.component.css']
 })
-export class AdvertTileComponent {
+export class AdvertTileComponent implements OnInit {
 
     faLocationArrow = faLocationArrow;
 
 	@Input()
 	advert?: Advert;
 
-	constructor() {}
+	constructor() {
+  }
+
+  ngOnInit(): void {
+      console.log('Advert:',this.advert);
+  }
 }
