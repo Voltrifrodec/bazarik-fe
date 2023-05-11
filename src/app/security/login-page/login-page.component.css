@@ -1,0 +1,35 @@
+.LoginForm {
+    background-color: #CCCCCC;
+    margin: 20vh auto;
+    min-height: 50vh;
+    width: 50vmin;
+}
+.LoginFormHeader {
+    background-color: #FFCC66;
+}
+.LoginFormSection {
+    margin: 0 auto;
+}
+.ErrorMessage {
+    min-height: 24px !important;
+}
+
+
+/* TODO: Vymazať v produkcii */
+.TODOJoke {
+    padding-top: 20px;
+    font-size: x-small;
+}
+
+@media screen and (max-width: 850px) {
+    .LoginForm {
+        width: 90%;
+        margin: 5vh auto;
+    }
+    input {
+        font-size: small !important;
+    }
+    .LoginFormSection {
+        padding: 0;
+    }
+}

@@ -1,0 +1,29 @@
+<div class="LoginForm border-dark border border-dark">
+    <div class="LoginFormHeader p-3 border-bottom border-dark">
+        <p class="h5">Prihlásiť sa ako administrátor</p>
+    </div>
+    <form [formGroup]="loginForm" class="form-group p-md-2 p-1 w-75 LoginFormSection">
+        <div class="FormItem">
+            <label class="h5 pt-4 pb-2">Emailová adresa</label>
+            <input formControlName="email" type="text" class="form-control from-control-sm" placeholder="Zadajte emailovú adresu">
+            <p class="text-danger ErrorMessage">
+                {{loginForm.controls['email'].errors?.['required'] ? 'Tento údaj je povinný!' : ''}}
+            </p>
+        </div>
+        <div class="FormItem">
+            <label class="h5 pt-4 pb-2">Heslo</label>
+            <input formControlName="password" type="password" class="form-control form-control-sm" placeholder="Zadajte heslo">
+            <p class="text-danger ErrorMessage">
+                {{loginForm.controls['password'].errors?.['required'] ? 'Tento údaj je povinný!' : ''}}
+            </p>
+        </div>
+        <div class="d-flex justify-content-center align-items-bottom mt-4">
+            <button class="btn btn-success mt-4 mb-md-1 mb-4" [disabled]="loginForm.invalid">Prihlásiť sa</button>
+        </div>
+        <!-- <div class="TODOJoke">
+            V rámci Zákona č. 300/2005 (Trestný zákon) § 212 mám plnú právomoc učiniť trest odňatia slobody na 15 rokov a pokutu vo výške 200,000 € v prípade, že zadáte nesprávne prihlasovacie údaje tri krát za sebou. Buďte opatrný :•)
+            <br>
+            Zostavajúce pokusy: 3
+        </div> -->
+    </form>
+</div>
