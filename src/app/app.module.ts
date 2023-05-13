@@ -14,7 +14,7 @@ import { AdvertDetailPageComponent } from './advert/advert-detail-page/advert-de
 import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
 import { SearchComponent } from './core/search/search.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PagenotfoundComponent } from './errors/pagenotfound/pagenotfound.component';
 import { RecentAdvertListComponent } from './advert/recent-advert-list/recent-advert-list.component';
 import { CategoryListComponent } from './categories/category-list/category-list.component';
@@ -32,7 +32,8 @@ import { FooterComponent } from './footer/footer.component';
 import { SecurityComponent } from './security/security.component';
 import { SecurityFormComponent } from './security/security-form/security-form.component';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
-import { LoginPageComponent } from './security/login-page/login-page.component';
+import { LoginPageComponent } from './authentication/login-page/login-page.component';
+import { AuthHeaderInterceptor } from './authentication/interceptor/auth-header.interceptor';
 
 @NgModule({
 	declarations: [
@@ -72,7 +73,13 @@ import { LoginPageComponent } from './security/login-page/login-page.component';
 		HttpClientModule,
 		AngularToastifyModule
 	],
-	providers: [ToastService],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthHeaderInterceptor,
+			multi: true
+		},
+		ToastService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

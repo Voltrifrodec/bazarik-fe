@@ -9,7 +9,7 @@ import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
 import { SearchComponent } from './core/search/search.component';
 import { PagenotfoundComponent } from './errors/pagenotfound/pagenotfound.component';
-import { LoginPageComponent } from './security/login-page/login-page.component';
+import { LoginPageComponent } from './authentication/login-page/login-page.component';
 
 const routes: Routes = [
 	{

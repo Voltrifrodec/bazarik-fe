@@ -2,12 +2,12 @@
     <div class="LoginFormHeader p-3 border-bottom border-dark">
         <p class="h5">Prihlásiť sa ako administrátor</p>
     </div>
-    <form [formGroup]="loginForm" class="form-group p-md-2 p-1 w-75 LoginFormSection">
+    <form [formGroup]="loginForm" (submit)="login()" class="form-group p-md-2 p-1 w-75 LoginFormSection">
         <div class="FormItem">
-            <label class="h5 pt-4 pb-2">Emailová adresa</label>
-            <input formControlName="email" type="text" class="form-control from-control-sm" placeholder="Zadajte emailovú adresu">
+            <label class="h5 pt-4 pb-2">Používateľské meno</label>
+            <input formControlName="username" type="text" class="form-control from-control-sm" placeholder="Zadajte používateľské meno">
             <p class="text-danger ErrorMessage">
-                {{loginForm.controls['email'].errors?.['required'] ? 'Tento údaj je povinný!' : ''}}
+                {{loginForm.controls['username'].errors?.['required'] ? 'Tento údaj je povinný!' : ''}}
             </p>
         </div>
         <div class="FormItem">
@@ -18,7 +18,7 @@
             </p>
         </div>
         <div class="d-flex justify-content-center align-items-bottom mt-4">
-            <button class="btn btn-success mt-4 mb-md-1 mb-4" [disabled]="loginForm.invalid">Prihlásiť sa</button>
+            <button class="btn btn-success mt-4 mb-md-1 mb-4" [disabled]="loginForm.invalid" type="submit">Prihlásiť sa</button>
         </div>
         <!-- <div class="TODOJoke">
             V rámci Zákona č. 300/2005 (Trestný zákon) § 212 mám plnú právomoc učiniť trest odňatia slobody na 15 rokov a pokutu vo výške 200,000 € v prípade, že zadáte nesprávne prihlasovacie údaje tri krát za sebou. Buďte opatrný :•)
