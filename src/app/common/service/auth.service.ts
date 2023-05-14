@@ -17,16 +17,10 @@ export class AuthService {
 			'Content-Type': 'application/json',
 			'Authorization': 'Basic ' + btoa(user.username + ':' + user.password)
 		});
-		console.log('Authorization:', headers.get('Authorization'));  // Tu to vypíše správne (Basic: hash)
 		return this.http.post<any>(this.apiUrl, null, { headers, observe: 'response' }).pipe(
 			tap((response: any) => {
 				const authToken = response.headers.get('Authorization'); // Tu to už nevypíše správne (null)
-				if (!authToken) {
-					console.warn('Server did not return Authorization token with header!');
-				} else {
-					console.log('Authorization header:', authToken);
-					this.setToken(authToken);
-				}
+				this.setToken(authToken);
 			})
 		);
 	}
