@@ -28,7 +28,6 @@ export class LoginPageComponent {
 					username: this.loginForm.controls['username'].value,
 					password: this.loginForm.controls['password'].value
 				};
-				console.log(auth);
 				this.authService.login(auth).subscribe(() => {
 					this.router.navigate(['/']);
 				});
