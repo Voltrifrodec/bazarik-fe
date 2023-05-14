@@ -2,34 +2,40 @@
     <div class="LoginFormHeader p-3 border-bottom border-dark">
         <p class="h5">Prihlásiť sa ako administrátor</p>
     </div>
-    <form [formGroup]="loginForm" (submit)="login()" class="form-group p-md-2 p-1 w-75 LoginFormSection">
-        <div class="FormItem">
-            <label class="h5 pt-4 pb-2">
-				Používateľské meno
-			</label>
-            <input formControlName="username" type="text" class="form-control from-control-sm" placeholder="Zadajte používateľské meno">
-            <p class="text-danger ErrorMessage">
-                {{loginForm.controls['username'].errors?.['required'] ? 'Tento údaj je povinný!' : ''}}
-            </p>
-        </div>
-        <div class="FormItem">
-            <label class="h5 pt-4 pb-2">
-				Heslo
-			</label>
-            <input formControlName="password" type="password" class="form-control form-control-sm" placeholder="Zadajte heslo">
-            <p class="text-danger ErrorMessage">
-                {{loginForm.controls['password'].errors?.['required'] ? 'Tento údaj je povinný!' : ''}}
-            </p>
-        </div>
-        <div class="d-flex justify-content-center align-items-bottom mt-4">
-            <button class="btn btn-success mt-4 mb-md-1 mb-4" [disabled]="loginForm.invalid" type="submit">
-				Prihlásiť sa
-			</button>
-        </div>
-        <!-- <div class="TODOJoke">
-            V rámci Zákona č. 300/2005 (Trestný zákon) § 212 mám plnú právomoc učiniť trest odňatia slobody na 15 rokov a pokutu vo výške 200,000 € v prípade, že zadáte nesprávne prihlasovacie údaje tri krát za sebou. Buďte opatrný :•)
-            <br>
-            Zostavajúce pokusy: 3
-        </div> -->
-    </form>
+    <div *ngIf="!isLogged()">
+        <form [formGroup]="loginForm" (submit)="login()" class="form-group p-md-2 p-1 w-75 LoginFormSection">
+            <div class="FormItem">
+                <label class="h5 pt-4 pb-2">
+                    Používateľské meno
+                </label>
+                <input formControlName="username" type="text" class="form-control from-control-sm" placeholder="Zadajte používateľské meno">
+                <p class="text-danger ErrorMessage">
+                    {{loginForm.controls['username'].errors?.['required'] ? 'Tento údaj je povinný!' : ''}}
+                </p>
+            </div>
+            <div class="FormItem">
+                <label class="h5 pt-4 pb-2">
+                    Heslo
+                </label>
+                <input formControlName="password" type="password" class="form-control form-control-sm" placeholder="Zadajte heslo">
+                <p class="text-danger ErrorMessage">
+                    {{loginForm.controls['password'].errors?.['required'] ? 'Tento údaj je povinný!' : ''}}
+                </p>
+            </div>
+            <div class="d-flex justify-content-center align-items-bottom mt-4">
+                <button class="btn btn-success mt-4 mb-md-1 mb-4" [disabled]="loginForm.invalid" type="submit">
+                    Prihlásiť sa
+                </button>
+            </div>
+            <!-- <div class="TODOJoke">
+                V rámci Zákona č. 300/2005 (Trestný zákon) § 212 mám plnú právomoc učiniť trest odňatia slobody na 15 rokov a pokutu vo výške 200,000 € v prípade, že zadáte nesprávne prihlasovacie údaje tri krát za sebou. Buďte opatrný :•)
+                <br>
+                Zostavajúce pokusy: 3
+            </div> -->
+        </form>
+    </div>
+    <div *ngIf="isLogged()" class="d-flex justify-content-center flex-column align-items-center">
+        <p class="h4 text-danger text-center p-4">Už ste prihlásený ako administrátor!</p>
+        <button routerLink="/" class="btn btn-success w-50">Domovská stránka</button>
+    </div>
 </div>

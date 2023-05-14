@@ -34,5 +34,8 @@ export class LoginPageComponent {
 			}
 		}
 	}
+	isLogged(): boolean {
+		return this.authService.isLogged();
+	}
 
 }

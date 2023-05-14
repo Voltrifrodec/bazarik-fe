@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="navbar-item text-true-right">
+<div class="navbar-item text-true-right" *ngIf="isLogged()">
 	<button class="btn btn-danger me-3" (click)="logout()">Odhlásiť sa</button>
 </div>
 <div class="RouterContainer container-fluid">

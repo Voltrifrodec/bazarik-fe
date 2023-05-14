@@ -15,6 +15,9 @@ export class AppComponent {
 		private router: Router
 	) {}
 
+	isLogged(): boolean {
+		return this.authService.isLogged(); 
+	}
 
 	logout(): void  {
 		this.authService.logout().subscribe(() => {
