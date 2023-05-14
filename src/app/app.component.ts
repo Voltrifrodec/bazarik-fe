@@ -10,13 +10,16 @@ import { AuthService } from './authentication/service/auth.service';
 export class AppComponent {
 	title = 'bazarik-fe';
 
-	constructor(private authService: AuthService, private router: Router) {}
+	constructor(private authService: AuthService, private router: Router) {
+		console.log('User is logged? → ', this.authService.isLogged());
+	}
+
 
 	logout(): void  {
 		this.authService.logout().subscribe(() => {
 			this.router.navigate(['/login']);
 			localStorage.removeItem('token');
-			// localStorage.clear(); //? Skôr nie?
+			localStorage.clear(); //? Skôr nie?
 		});
 	}
 

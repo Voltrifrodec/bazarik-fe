@@ -11,14 +11,12 @@ import { AuthService } from '../service/auth.service';
 })
 export class LoginPageComponent {
 
-  loginForm: FormGroup;
+  loginForm: FormGroup = new FormGroup({
+    username: new FormControl(undefined, [Validators.required]),
+    password: new FormControl(undefined, [Validators.required])
+  });
 
-  constructor(private authService: AuthService, private router: Router) {
-    this.loginForm = new FormGroup({
-      username: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required])
-    });
-  }
+  constructor(private authService: AuthService, private router: Router) {}
  
   login(): void {
     if(this.loginForm.valid) {
@@ -27,6 +25,7 @@ export class LoginPageComponent {
           username: this.loginForm.controls['username'].value,
           password: this.loginForm.controls['password'].value
         };
+        console.log(auth);
         this.authService.login(auth).subscribe(() => { this.router.navigate(['/']); });
       }
     }

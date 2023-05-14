@@ -18,11 +18,12 @@ export class AuthHeaderInterceptor implements HttpInterceptor {
     if(request.url.search(exclude) === -1) {
       const token = this.auth.getToken();
       if(token !== null) {
-        request = request.clone({
-          headers: request.headers.append('Authorization', token)
-        });
+          request = request.clone({
+            headers: request.headers.append('Authorization', token)
+          });
       }
     }
     return next.handle(request);
   }
 }
+
