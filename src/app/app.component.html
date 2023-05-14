@@ -1,12 +1,12 @@
 <app-navbar></app-navbar>
+<div class="navbar-item text-true-right">
+	<button class="btn btn-danger me-3" (click)="logout()">Odhlásiť sa</button>
+</div>
 <div class="RouterContainer container-fluid">
     <div class="row">
         <div class="RouterContainerFix col-8 mx-auto">
             <router-outlet></router-outlet>
         </div>
     </div>
-</div>
-<div class="navbar-item col-3 text-true-right">
-    <button class="btn btn-danger" (click)="logout()">Odhlásiť sa</button>
 </div>
 <app-footer></app-footer>

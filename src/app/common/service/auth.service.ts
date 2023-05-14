@@ -32,16 +32,17 @@ export class AuthService {
 	}
 
 	logout(): Observable<any> {
-		return this.http.delete(this.apiUrl, {});
+		const headers = new HttpHeaders({
+			'Authorization': '' + this.getToken()
+		});
+		return this.http.delete(this.apiUrl, { headers });
 	}
 
 	isLogged(): boolean {
 		return this.getToken() !== null;
 	}
 
-
-	setToken(token: string) {
-		console.log('Setting token', token);
+	setToken(token: string): void {
 		localStorage.setItem('token', token);
 	}
 
