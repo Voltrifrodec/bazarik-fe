@@ -37,8 +37,9 @@ export class MainComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.getCategories();
-		this.getRecentAdverts();
+		// REDUNDANTNÉ
+		// this.getCategories();
+		// this.getRecentAdverts();
 	}
 
 }
