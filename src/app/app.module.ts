@@ -79,7 +79,8 @@ import { AuthHeaderInterceptor } from './authentication/interceptor/auth-header.
 			useClass: AuthHeaderInterceptor,
 			multi: true
 		},
-		ToastService],
+		ToastService
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
