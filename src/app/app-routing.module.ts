@@ -66,6 +66,10 @@ const routes: Routes = [
 		component: PagenotfoundComponent
 	},
 	{
+		path: 'admin',
+		component: AdminComponent
+	},
+	{
 		path: '**',
 		redirectTo: '404',
 		pathMatch: 'full'
