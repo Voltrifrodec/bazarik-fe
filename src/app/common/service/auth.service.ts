@@ -32,6 +32,14 @@ export class AuthService {
 		return this.http.delete(this.tokenUrl, { headers });
 	}
 
+	validateToken(): Observable<boolean> {
+		const headers = new HttpHeaders({
+			'Content-Type': 'application/json',
+			'Authorization': '' + this.getToken()
+		});
+		return this.http.post<boolean>(`${this.tokenUrl}/check`, null, { headers });
+	}
+
 	isLogged(): boolean {
 		return this.getToken() !== null;
 	}
@@ -41,8 +49,7 @@ export class AuthService {
 	}
 
 	getToken(): string | null {
-		const item = localStorage.getItem('token');
-		return item;
+		return localStorage.getItem('token');
 	}
 
 }

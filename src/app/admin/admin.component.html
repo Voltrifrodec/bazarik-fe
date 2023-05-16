@@ -29,10 +29,10 @@
 		<!-- <th>Kontakt</th> -->
 	</thead>
 	<tbody *ngIf="adverts">
-		<tr *ngFor="let advert of adverts" class="" style="height: 20pt;" role="button" (click)="toggleAdvertDetail()">
-			
-			<td title="{{advert.id}}" (click)="copy(advert.id);">
-				UUID
+		<tr *ngFor="let advert of adverts">
+
+			<td title="Kliknite pre skopírovanie" (click)="copy(advert.id);">
+				UUID [?]
 			</td>
 
 			<td title="{{advert.name}}" (click)="copy(advert.name);">

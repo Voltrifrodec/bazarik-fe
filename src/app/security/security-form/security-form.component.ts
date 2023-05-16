@@ -52,6 +52,10 @@ export class SecurityFormComponent implements OnDestroy {
 		this.clearForm.emit();
 	}
 
+	public validateToken() {
+		return this.authService.isLogged();
+	}
+
 	createHash() {
 		if (this.action?.action === 'delete') {
 			let securityUpdate: SecurityUpdate = {
@@ -95,7 +99,7 @@ export class SecurityFormComponent implements OnDestroy {
 	}
 
 	saveAdvert() {
-		if (this.authService.isLogged()) {
+		if (this.authService.validateToken()) {
 			this.sendFile();
 			return;
 		}

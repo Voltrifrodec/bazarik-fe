@@ -41,20 +41,18 @@ export class AdminComponent {
 	}
 
 	deleteAdvertById(advertId: string) {
-		if (window.confirm(`Naozaj chcete vymazať tento inzerát?\n${advertId}`)) {
-			this.advertService.deleteAdvert(advertId).pipe(untilDestroyed(this)).subscribe(() => {
-				window.alert('Inzerát bol úspešne vymazaný.');
-			});
-		}
+		this.authService.validateToken().pipe(untilDestroyed(this)).subscribe(() => {
+			if (window.confirm(`Naozaj chcete vymazať tento inzerát?\n${advertId}`)) {
+				this.advertService.deleteAdvert(advertId).pipe(untilDestroyed(this)).subscribe(() => {
+					window.alert('Inzerát bol úspešne vymazaný.');
+				});
+			}
+		})
 	}
 
 	copy(text: any): void {
 		navigator.clipboard.writeText(text);
 		window.alert(`Text\n${text}\nbol úspešne skopírovaný.`);
-	}
-
-	toggleAdvertDetail(): void {
-
 	}
 
 	getDateFromTimestamp(timestamp: any) {
