@@ -3,15 +3,15 @@ import { faLocationArrow, faExclamationCircle, faCheckCircle } from '@fortawesom
 import { Advert } from 'src/app/common/model/advert.model';
 
 @Component({
-  selector: 'app-subcategory-advert-list',
-  templateUrl: './subcategory-advert-list.component.html',
-  styleUrls: ['./subcategory-advert-list.component.css']
+	selector: 'app-subcategory-advert-list',
+	templateUrl: './subcategory-advert-list.component.html',
+	styleUrls: ['./subcategory-advert-list.component.css']
 })
 export class SubcategoryAdvertListComponent {
-    faLocationArrow = faLocationArrow;
-    faExclamationCircle = faExclamationCircle;
-    faCheckCircle = faCheckCircle;
+	faLocationArrow = faLocationArrow;
+	faExclamationCircle = faExclamationCircle;
+	faCheckCircle = faCheckCircle;
 
-    @Input()
-    adverts?: Advert[];
+	@Input()
+	adverts?: Advert[];
 }

@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { Subsubcategory } from '../model/subsubcategory.model';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class SubsubcategoryService {
 
 	private subsubcategoryUrl = 'http://localhost:8080/api/subsubcategories';
-	
+
 	constructor(private http: HttpClient) { }
 
 	getAllSubsubcategories(): Observable<Subsubcategory[]> {

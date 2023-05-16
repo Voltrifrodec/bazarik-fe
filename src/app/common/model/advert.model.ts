@@ -19,7 +19,7 @@ export interface Advert {
 	priceEur: number;
 	fixedPrice: boolean;
 	currency: Currency;
-	
+
 	category: Category;
 	subcategory?: Subcategory;
 	subsubcategory?: Subsubcategory;

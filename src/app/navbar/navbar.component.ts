@@ -33,7 +33,7 @@ export class NavbarComponent {
 		}
 
 		if (query.trim().length < 3) {
-			window.alert("Pre vyhľadávanie sú nutné aspoň tri znaky.");
+			window.alert("Pre vyhľadávanie je nutné zadať aspoň tri znaky.");
 			return;
 		}
 

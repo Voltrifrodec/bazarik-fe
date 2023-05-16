@@ -7,10 +7,10 @@ import { HttpClient } from '@angular/common/http';
 	providedIn: 'root'
 })
 export class AdvertService {
-	
+
 	private apiUrl = `http://localhost:8080/api`;
 	private advertsUrl = 'http://localhost:8080/api/adverts';
-	
+
 	constructor(private http: HttpClient) { }
 
 	getAllAdverts(): Observable<Advert[]> {

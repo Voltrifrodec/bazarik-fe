@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ToastService } from 'angular-toastify';
 import { Advert } from 'src/app/common/model/advert.model';
@@ -124,7 +124,7 @@ export class SecurityFormComponent implements OnDestroy {
 				this.sendFile();
 				return;
 			}
-			
+
 			if (this.action?.action === 'create') {
 				this.sendFile();
 				return;
