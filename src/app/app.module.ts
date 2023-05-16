@@ -32,6 +32,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SecurityComponent } from './security/security.component';
 import { SecurityFormComponent } from './security/security-form/security-form.component';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
+import { CategoryTileComponent } from './categories/category-tile/category-tile.component';
 
 @NgModule({
 	declarations: [
@@ -59,7 +60,8 @@ import { AngularToastifyModule, ToastService } from 'angular-toastify';
         EmptyAdvertListComponent,
         FooterComponent,
         SecurityComponent,
-        SecurityFormComponent
+        SecurityFormComponent,
+        CategoryTileComponent
 	],
 	imports: [
 		BrowserModule,
