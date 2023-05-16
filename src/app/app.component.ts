@@ -21,9 +21,12 @@ export class AppComponent {
 
 	logout(): void  {
 		this.authService.logout().subscribe(() => {
-			localStorage.removeItem('token');
 			// localStorage.clear(); //? Skôr nie?
-			this.router.navigate(['/login']);
+			this.router.navigate(['']);
+		}, (error) => {
+			window.alert(error);
+		}, () => {
+			localStorage.removeItem('token');
 		});
 	}
 
