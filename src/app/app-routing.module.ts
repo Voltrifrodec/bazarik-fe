@@ -11,6 +11,7 @@ import { SearchComponent } from './core/search/search.component';
 import { PagenotfoundComponent } from './errors/pagenotfound/pagenotfound.component';
 import { LoginPageComponent } from './authentication/login-page/login-page.component';
 import { AdminComponent } from './admin/admin.component';
+import { AuthGuard } from './authentication/auth.guard';
 
 const routes: Routes = [
 	{
@@ -74,6 +75,7 @@ const routes: Routes = [
 	},
 	{
 		path: 'admin',
+		canActivate: [AuthGuard],
 		component: AdminComponent
 	},
 	{
