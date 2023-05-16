@@ -11,7 +11,7 @@ import { faBox }from '@fortawesome/free-solid-svg-icons';
   templateUrl: './category-tile.component.html',
   styleUrls: ['./category-tile.component.css']
 })
-export class CategoryTileComponent implements OnChanges {
+export class CategoryTileComponent implements OnInit {
 
 	faBox = faBox;
 
@@ -26,22 +26,20 @@ export class CategoryTileComponent implements OnChanges {
 		private advertService: AdvertService
 	) {}
 
-	ngOnChanges(changes: SimpleChanges): void {
-		this.getNumberOfAdvertsInCategoryByCategoryId();
+	ngOnInit(): void {
+		this.getNumberOfAdvertsInCategoryByCategoryId();		
 	}
 
 	count(): void {
 		if (this.counter < this.numberOfAdvertsInCategory) {
 			this.counter++;
-			this.count();
 			setTimeout(() => {
 				this.count();
-			}, 10 / this.numberOfAdvertsInCategory);
-			// }, /* this.numberOfAdvertsInCategory /  */1.618034 / this.numberOfAdvertsInCategory);
+			}, 2 / this.numberOfAdvertsInCategory ** 4);
 		}
 	}
 
-	getRightWordForm(): void {
+	getRightWordDeclension(): void {
 		if (this.numberOfAdvertsInCategory == 1) {
 			this.numberOfAdvertsWordDeclension = 'inzerát';
 		}
@@ -57,10 +55,11 @@ export class CategoryTileComponent implements OnChanges {
 
 	getNumberOfAdvertsInCategoryByCategoryId(): void {
 		if (! this.category) return;
+		
 		this.advertService.getNumberOfAdvertsInCategoryByCategoryId(this.category.id).pipe(untilDestroyed(this)).subscribe((numberOfAdvertsInCategory: number) => {
 			this.numberOfAdvertsInCategory = numberOfAdvertsInCategory;
 			this.count();
-			this.getRightWordForm();
+			this.getRightWordDeclension();
 		});
 	}
 }
