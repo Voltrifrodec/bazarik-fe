@@ -25,6 +25,10 @@ export class AdvertService {
 		return this.http.get<Advert[]>(`${this.apiUrl}/search/${query}`);
 	}
 
+	getNumberOfAdvertsInCategoryByCategoryId(categoryId: number): Observable<number> {
+		return this.http.get<number>(`${this.apiUrl}/categories/${categoryId}/adverts/count`);
+	}
+
 	getAllAdvertsByCategoryId(categoryId: number): Observable<Advert[]> {
 		return this.http.get<Advert[]>(`${this.apiUrl}/categories/${categoryId}/adverts`);
 	}
