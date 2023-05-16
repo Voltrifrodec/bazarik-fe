@@ -2,19 +2,25 @@ import { Component, OnChanges, Output, SimpleChanges, destroyPlatform } from '@a
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../common/service/auth.service';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+	selector: 'app-navbar',
+	templateUrl: './navbar.component.html',
+	styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-    faSearch = faSearch;
-    faPlus = faPlus;
+	faSearch = faSearch;
+	faPlus = faPlus;
+
+	adminDropdown: boolean = !true;
 
 	searchForm: FormGroup;
 
-	constructor(private router: Router) {
+	constructor(
+		private authService: AuthService,
+		private router: Router
+	) {
 		this.searchForm = new FormGroup({
 			query: new FormControl("", [Validators.required])
 		});
@@ -38,5 +44,22 @@ export class NavbarComponent {
 		}
 
 		this.router.navigate([`search/${query}`]);
+	}
+
+	isLogged(): boolean {
+		return this.authService.isLogged();
+	}
+
+	logout(): void {
+		this.authService.logout().subscribe(() => {
+			this.router.navigate(['']);
+		}, (error) => {
+			window.alert(JSON.stringify(error));
+		});
+		localStorage.removeItem('token');
+	}
+
+	toggleDropdown(): void {
+		this.adminDropdown = this.adminDropdown ? false : true;
 	}
 }

@@ -29,7 +29,7 @@ export class LoginPageComponent {
 					password: this.loginForm.controls['password'].value
 				};
 				this.authService.login(auth).subscribe(() => {
-					this.router.navigate(['/']);
+					this.router.navigate(['/admin']);
 				});
 			}
 		}
