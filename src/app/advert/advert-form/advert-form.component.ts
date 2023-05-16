@@ -121,7 +121,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		this.saveToLocalStorage();
+		// this.saveToLocalStorage();
 	}
 
 	ngOnInit(): void {
@@ -135,7 +135,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		this.getAdvert();
 		
 		if (this.action.action === 'create') {
-			this.loadFromLocalStorage();
+			// this.loadFromLocalStorage();
 		}
 	}
 
@@ -280,13 +280,13 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		);
 
 		if (userResponse) {
-			this.saveToLocalStorage();
+			// this.saveToLocalStorage();
 			this.router.navigate(['/'])
 			window.scrollTo(0, 0);
 		}
 	}
 
-	saveToLocalStorage(): void {
+	/* saveToLocalStorage(): void {
 		let advert = this.prepareAdvert();
 
 		for (const [key, value] of Object.entries(advert)) {
@@ -319,11 +319,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		}
 
 		this.countChars();
-	}
-
-	clearLocalStorage(): void {
-		localStorage.clear();
-	}
+	} */
 
 	countChars(): void {
 		this.descriptionCharacterCount = this.advertForm.controls['description'].value?.length | 0;
