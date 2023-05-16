@@ -9,6 +9,7 @@ import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
 import { SearchComponent } from './core/search/search.component';
 import { PagenotfoundComponent } from './errors/pagenotfound/pagenotfound.component';
+import { LoginPageComponent } from './authentication/login-page/login-page.component';
 import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
@@ -61,6 +62,11 @@ const routes: Routes = [
 		path: 'subsubcategories',
 		pathMatch: 'full',
 		component: SubsubcategoryComponent
+	},
+	{
+		path: 'login',
+		pathMatch: 'full',
+		component: LoginPageComponent
 	},
 	{
 		path: '404',

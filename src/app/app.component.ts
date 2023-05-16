@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from './common/service/auth.service';
 
 @Component({
 	selector: 'app-root',
@@ -7,5 +9,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 	title = 'bazarik-fe';
+
+	constructor(
+		private authService: AuthService,
+		private router: Router
+	) {}
+
+	isLogged(): boolean {
+		return this.authService.isLogged(); 
+	}
+
+	logout(): void  {
+		this.authService.logout().subscribe(() => {
+			localStorage.removeItem('token');
+			// localStorage.clear(); //? Skôr nie?
+			this.router.navigate(['/login']);
+		});
+	}
 
 }
