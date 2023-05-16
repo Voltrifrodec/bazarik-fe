@@ -1,1 +1,62 @@
-<p>admin works!</p>
+<h1 class="display-5 underline mt-3">
+	Admin panel
+</h1>
+
+<hr>
+
+<span class="h5">Vyhľadávanie inzerátov</span>
+<form [formGroup]="searchForm" class="input-group w-50 flex-grow-1" (submit)="search()">
+	<input formControlName="query" type="search" class="form-control rounded d-inline-block" placeholder="Hľadajte inzerát..." />
+	<button type="submit" class="btn btn-success d-inline">
+		<fa-icon [icon]="faSearch"></fa-icon>
+	</button>
+</form>
+
+<br>
+
+<table class="table table-bordered border-primary">
+	<thead class="text-center">
+		<th scope="col">ID</th>
+		<th>Názov</th>
+		<!-- <th>Opis</th> -->
+		<!-- <th>kľúčové slová</th> -->
+		<th>Dátum pridania</th>
+		<th>Dátum úpravy</th>
+		<th>Cena (€)</th>
+		<th>Kategória</th>
+		<!-- <th>Podkategória</th> -->
+		<!-- <th>Podpodkategória</th> -->
+		<!-- <th>Kontakt</th> -->
+	</thead>
+	<tbody>
+		<tr *ngFor="let advert of adverts" class="" style="height: 20pt;" role="button" (click)="toggleAdvertDetail()">
+			<td title="{{advert.id}}" (click)="copy(advert.id);">UUID</td>
+			<td>{{ advert.name }}</td>
+			<!-- <td class="overflow-hidden">{{ advert.description }}</td> -->
+			<!-- <td>{{ advert.keywords }}</td> -->
+
+			<td>{{ getDateFromTimestamp(advert.dateAdded) }}</td>
+			<td>{{ getDateFromTimestamp(advert.dateModified) }}</td>
+
+			<td>{{ advert.priceEur }}</td>
+
+			<td>{{ advert.category.name }}</td>
+
+			<td>
+				<img width="32" height="32" src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}">
+			</td>
+
+			<td>
+				<button class="btn btn-primary" routerLink="/advert/edit/{{advert.id}}">
+					UPRAVIŤ
+				</button>
+			</td>
+
+			<td>
+				<button class="btn btn-danger" (click)="deleteAdvertById(advert.id)">
+					VYMAZAŤ
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

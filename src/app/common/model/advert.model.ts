@@ -13,8 +13,8 @@ export interface Advert {
 	description: string;
 	keywords: string;
 
-	dateAdded?: Date;
-	dateModified?: Date;
+	dateAdded: Date;
+	dateModified: Date;
 
 	priceEur: number;
 	fixedPrice: boolean;

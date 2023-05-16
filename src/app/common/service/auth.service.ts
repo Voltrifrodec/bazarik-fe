@@ -8,7 +8,7 @@ import { Auth } from '../model/auth.model';
 })
 export class AuthService {
 
-	private apiUrl = 'http://localhost:8080/api/token';
+	private tokenUrl = 'http://localhost:8080/api/token';
 
 	constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class AuthService {
 			'Content-Type': 'application/json',
 			'Authorization': 'Basic ' + btoa(user.username + ':' + user.password)
 		});
-		return this.http.post<any>(this.apiUrl, null, { headers, observe: 'response' }).pipe(
+		return this.http.post<any>(this.tokenUrl, null, { headers, observe: 'response' }).pipe(
 			tap((response: any) => {
 				const authToken = response.headers.get('Authorization'); // Tu to už nevypíše správne (null)
 				this.setToken(authToken);
@@ -29,7 +29,7 @@ export class AuthService {
 		const headers = new HttpHeaders({
 			'Authorization': '' + this.getToken()
 		});
-		return this.http.delete(this.apiUrl, { headers });
+		return this.http.delete(this.tokenUrl, { headers });
 	}
 
 	isLogged(): boolean {
