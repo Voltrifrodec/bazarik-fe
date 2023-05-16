@@ -9,6 +9,7 @@ import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
 import { SearchComponent } from './core/search/search.component';
 import { PagenotfoundComponent } from './errors/pagenotfound/pagenotfound.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
 	{

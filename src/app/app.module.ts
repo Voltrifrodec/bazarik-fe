@@ -33,6 +33,9 @@ import { SecurityComponent } from './security/security.component';
 import { SecurityFormComponent } from './security/security-form/security-form.component';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
 import { CategoryTileComponent } from './categories/category-tile/category-tile.component';
+import { LoginPageComponent } from './authentication/login-page/login-page.component';
+import { AuthHeaderInterceptor } from './authentication/interceptor/auth-header.interceptor';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
 	declarations: [
@@ -61,7 +64,9 @@ import { CategoryTileComponent } from './categories/category-tile/category-tile.
 		FooterComponent,
 		SecurityComponent,
 		SecurityFormComponent,
-		CategoryTileComponent
+		CategoryTileComponent,
+        LoginPageComponent,
+        AdminComponent
 	],
 	imports: [
 		BrowserModule,
