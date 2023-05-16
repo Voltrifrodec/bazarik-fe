@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 import { Subcategory } from '../model/subcategory.model';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class CategoryService {
 
 	private categoryUrl = 'http://localhost:8080/api/categories';
-	
+
 	constructor(private http: HttpClient) { }
 
 	getAllCategories(): Observable<Category[]> {

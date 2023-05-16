@@ -5,12 +5,12 @@ import { Subcategory } from '../model/subcategory.model';
 import { Subsubcategory } from '../model/subsubcategory.model';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class SubcategoryService {
 
 	private subcategoryUrl = 'http://localhost:8080/api/subcategories';
-	
+
 	constructor(private http: HttpClient) { }
 
 	getAllSubcategories(): Observable<Subcategory[]> {

@@ -32,6 +32,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SecurityComponent } from './security/security.component';
 import { SecurityFormComponent } from './security/security-form/security-form.component';
 import { AngularToastifyModule, ToastService } from 'angular-toastify';
+import { CategoryTileComponent } from './categories/category-tile/category-tile.component';
 import { LoginPageComponent } from './authentication/login-page/login-page.component';
 import { AuthHeaderInterceptor } from './authentication/interceptor/auth-header.interceptor';
 
@@ -42,26 +43,27 @@ import { AuthHeaderInterceptor } from './authentication/interceptor/auth-header.
 		CategoriesComponent,
 		AdvertComponent,
 		AdvertFormComponent,
-  		AdvertDetailPageComponent,
+		AdvertDetailPageComponent,
 		SubcategoryComponent,
 		SubsubcategoryComponent,
 		SearchComponent,
-  		PagenotfoundComponent,
+		PagenotfoundComponent,
 		CategoryListComponent,
 		RecentAdvertListComponent,
 		CategorySectionListComponent,
 		CategoryAdvertListComponent,
 		SubcategorySectionListComponent,
 		SubcategoryAdvertListComponent,
-  		SubsubcategoryAdvertListComponent,
-        NavbarComponent,
-        AdvertTileComponent,
-        ErrorsComponent,
-        SearchListComponent,
-        EmptyAdvertListComponent,
-        FooterComponent,
-        SecurityComponent,
-        SecurityFormComponent,
+		SubsubcategoryAdvertListComponent,
+		NavbarComponent,
+		AdvertTileComponent,
+		ErrorsComponent,
+		SearchListComponent,
+		EmptyAdvertListComponent,
+		FooterComponent,
+		SecurityComponent,
+		SecurityFormComponent,
+		CategoryTileComponent,
         LoginPageComponent
 	],
 	imports: [

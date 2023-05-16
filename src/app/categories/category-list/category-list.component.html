@@ -1,9 +1,8 @@
 <div class="categories-grid m-3" *ngIf="categories">
     <a class="categories-grid-item bg-container-alt-2 border border-dark" routerLink="/categories/{{category.id}}"
 		*ngFor="let category of categories">
-        <div class="p-2 d-flex flex-column align-items-center justify-content mb-2">
-            <fa-icon [icon]="faBox" class="h2 d-block pt-2"></fa-icon>
-            <span>{{ category.name }}</span>
-        </div>
+        <app-category-tile
+			[category]="category"
+		></app-category-tile>
     </a>
 </div>

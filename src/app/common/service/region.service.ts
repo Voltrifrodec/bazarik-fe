@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 import { District } from '../model/district.model';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class RegionService {
-	  
+
 	private regionUrl = 'http://localhost:8080/api/regions';
-	
+
 	constructor(private http: HttpClient) { }
 
 	getAllRegions(): Observable<Region[]> {

@@ -7,10 +7,10 @@ import { HttpClient } from '@angular/common/http';
 	providedIn: 'root'
 })
 export class AdvertService {
-	
+
 	private apiUrl = `http://localhost:8080/api`;
 	private advertsUrl = 'http://localhost:8080/api/adverts';
-	
+
 	constructor(private http: HttpClient) { }
 
 	getAllAdverts(): Observable<Advert[]> {
@@ -23,6 +23,10 @@ export class AdvertService {
 
 	getAllAdvertsByQuery(query: string): Observable<Advert[]> {
 		return this.http.get<Advert[]>(`${this.apiUrl}/search/${query}`);
+	}
+
+	getNumberOfAdvertsInCategoryByCategoryId(categoryId: number): Observable<number> {
+		return this.http.get<number>(`${this.apiUrl}/categories/${categoryId}/adverts/count`);
 	}
 
 	getAllAdvertsByCategoryId(categoryId: number): Observable<Advert[]> {

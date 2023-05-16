@@ -9,22 +9,20 @@ import { CategoryService } from '../common/service/category.service';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+	selector: 'app-categories',
+	templateUrl: './categories.component.html',
+	styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent {
-    categoryId: number;
-    category?: Category;
+	categoryId: number;
+	category?: Category;
 
-    subcategories?: Subcategory[];
-    adverts?: Advert[];
+	subcategories?: Subcategory[];
+	adverts?: Advert[];
 
-    // TODO: Prehodiť advert funkcie do category-advert-list
-    constructor(private categoryService: CategoryService, private advertService: AdvertService, private route: ActivatedRoute) {
-        this.categoryId = this.route.snapshot.params['categoryId'];
-		this.getCategoryById();
-    }
+	constructor(private categoryService: CategoryService, private advertService: AdvertService, private route: ActivatedRoute) {
+		this.categoryId = this.route.snapshot.params['categoryId'];
+	}
 
 	getCategoryById(): void {
 		this.categoryService.getCategoryById(this.categoryId).pipe(untilDestroyed(this)).subscribe((category: Category) => {
@@ -32,21 +30,21 @@ export class CategoriesComponent {
 		});
 	}
 
-    getSubcategories(): void {
-        this.categoryService.getSubcategoriesByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((subcategories: Subcategory[]) => {
-            this.subcategories = subcategories;
-        });
-    }
+	getSubcategories(): void {
+		this.categoryService.getSubcategoriesByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((subcategories: Subcategory[]) => {
+			this.subcategories = subcategories;
+		});
+	}
 
-    getAdverts(): void {
-        this.advertService.getAllAdvertsByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
-            this.adverts = adverts;
-        })
-    }
+	getAdverts(): void {
+		this.advertService.getAllAdvertsByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
+			this.adverts = adverts;
+		})
+	}
 
-    ngOnInit(): void {
-        this.getSubcategories();
-        this.getAdverts();
-        this.getCategoryById();
-    }
+	ngOnInit(): void {
+		this.getSubcategories();
+		this.getAdverts();
+		this.getCategoryById();
+	}
 }

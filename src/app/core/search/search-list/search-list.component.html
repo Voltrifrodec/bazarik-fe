@@ -7,7 +7,7 @@
 
 	<small *ngIf="adverts?.length! == 1" class="h5">Našiel sa {{ adverts?.length }} inzerát.</small>
 	<small *ngIf="(adverts?.length! > 1) && (adverts?.length! < 5)" class="h5">Našli sa {{ adverts?.length }} inzeráty.</small>
-	<small *ngIf="(adverts?.length! >= 5)" class="h5">Bolo nájdených {{ adverts?.length }} inzerátov.</small>
+	<small *ngIf="(adverts?.length! >= 5 || adverts?.length! <= 0)" class="h5">Bolo nájdených {{ adverts?.length }} inzerátov.</small>
 	
 	<div class="d-flex">
 		<div class="row row-cols-2 g-3 mt-0">
