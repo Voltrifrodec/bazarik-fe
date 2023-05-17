@@ -14,6 +14,9 @@ export class CategoryTileComponent implements OnInit {
 	@Input()
 	category?: Category;
 
+	emoji?: string;
+
+
 	numberOfAdvertsWordDeclension: string = '';
 	counter = 0;
 
@@ -22,8 +25,9 @@ export class CategoryTileComponent implements OnInit {
 	ngOnInit(): void {
 		this.count();
 		this.getRightWordDeclension();
+		this.setEmoji();
 	}
-
+	
 	count(): void {
 		if (! this.category?.numberOfAdverts) return;
 
@@ -32,6 +36,17 @@ export class CategoryTileComponent implements OnInit {
 			setTimeout(() => {
 				this.count();
 			}, 2 / this.category.numberOfAdverts ** 4);
+		}
+	}
+
+
+	setEmoji(): void {
+		if(this.category?.emoji) {
+			let codePoint: number = parseInt(this.category.emoji.substring(1), 16);
+			this.emoji = String.fromCodePoint(codePoint);
+		}
+		else {
+			this.emoji = '\u{1F4E6}';
 		}
 	}
 
