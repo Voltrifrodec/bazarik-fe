@@ -4,7 +4,6 @@ import { Category } from 'src/app/common/model/category.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
 
 import { faBox } from '@fortawesome/free-solid-svg-icons';
-import { CategoryService } from 'src/app/common/service/category.service';
 
 @UntilDestroy()
 @Component({
@@ -26,9 +25,7 @@ export class CategoryTileComponent implements OnInit {
 	counter = 0;
 	
 
-
-	constructor(private advertService: AdvertService, private categoryService: CategoryService) {
-	}
+	constructor(private advertService: AdvertService) {}
 
 	ngOnInit(): void {
 		this.getNumberOfAdvertsInCategoryByCategoryId();

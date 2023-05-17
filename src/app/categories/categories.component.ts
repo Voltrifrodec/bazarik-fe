@@ -19,11 +19,9 @@ export class CategoriesComponent {
 
 	subcategories?: Subcategory[];
 	adverts?: Advert[];
-	emoji ?: string;
 
 	constructor(private categoryService: CategoryService, private advertService: AdvertService, private route: ActivatedRoute) {
 		this.categoryId = this.route.snapshot.params['categoryId'];
-		this.emoji = this.category?.emoji == undefined ? '\u{1F697}' : this.category.emoji;
 	}
 	
 	getCategoryById(): void {
