@@ -14,9 +14,22 @@
 
 <br>
 
-<table class="table table-bordered table-striped table-success border-primary ">
-	<thead class="">
-		<th>Označenie</th>
+<div>
+	<h3>Hromadné akcie</h3>
+
+	<button class="btn btn-sm btn-danger" title="VYMAZAŤ" (click)="bulkDelete()">
+		<fa-icon [icon]="faBin"></fa-icon>
+		Vymazať
+	</button>
+</div>
+
+<br>
+
+<table class="table table-bordered table-striped table-success border-success">
+	<thead>
+		<th class="p-0 text-center">
+			<input class="form-check-input" type="checkbox" name="checkbox" disabled>
+		</th>
 		<th scope="col">ID</th>
 		<th>Názov</th>
 		<th>Dátum úpravy</th>
@@ -30,8 +43,8 @@
 	<tbody *ngIf="adverts">
 		<tr *ngFor="let advert of adverts">
 
-			<td>
-				<input type="checkbox" name="checkbox" id="{{advert.id}}">
+			<td class="text-center">
+				<input class="form-check-input" type="checkbox" name="checkbox" value="{{advert.id}}">
 			</td>
 
 			<td title="Kliknite pre skopírovanie:&NewLine;{{advert.id}}" (click)="copy(advert.id);" role="button">

@@ -6,6 +6,7 @@ import { faArrowAltCircleUp, faCaretSquareDown, faExpandArrowsAlt, faPen, faSear
 import { AdvertService } from '../common/service/advert.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Advert } from '../common/model/advert.model';
+import { CategoryTileComponent } from '../categories/category-tile/category-tile.component';
 
 @UntilDestroy()
 @Component({
@@ -26,7 +27,7 @@ export class AdminComponent {
 
 	adverts?: Advert[];
 
-	checked: Array<string> = [];
+	uuids: Array<string> = [];
 
 	constructor(
 		private advertService: AdvertService,
@@ -56,15 +57,52 @@ export class AdminComponent {
 	}
 
 	bulkDelete(): void {
+		this.addToList();
+
+		if (this.checkEmptyList()) {
+			window.alert('Na vymazanie inzerátov je nutné označiť aspoň jeden inzerát.');
+			return;
+		}
+
+		console.log(this.uuids);
+
+		if (window.confirm(`Počet inzerátov na vymazanie: ${this.uuids.length}\nSte si istí?`)) {
+			if (! this.checkLogged()) {
+				window.alert('Na vymazanie inzerátov musíte byť prihlásení ako administrátor.');
+				this.uuids = [];
+				return;
+			}
+
+			this.uuids.forEach((uuid) => {
+				console.log(uuid);
+				this.advertService.deleteAdvert(uuid).pipe(untilDestroyed(this)).subscribe(() => {
+					console.log(`Deleted advert, ${uuid}`);
+				});
+			});
+			// console.log(this.router.url);
+			this.router.navigate([this.router.url]);
+		} else {
+			this.uuids = [];
+		}
+	}
+
+	checkEmptyList(): boolean {
+		return this.uuids.length === 0 ? true : false;
+	}
+
+	checkLogged(): boolean {
+		return this.authService.isLogged() ? true : false;
+	}
+
+	addToList(): void {
 		let checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
 
 		checkboxes.forEach((checkbox) => {
 			let s = checkbox as HTMLInputElement;
 			if (s.checked) {
-				this.checked.push(s.value);
+				this.uuids.push(s.value);
 			}
 		});
-		console.log(this.checked);
 	}
 
 	copy(text: any): void {
