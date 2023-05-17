@@ -25,10 +25,10 @@
 
 <br>
 
-<table class="table table-bordered table-striped table-success border-success">
+<table class="table table-bordered table-striped table-success border-success" [formGroup]="form">
 	<thead>
 		<th class="p-0 text-center">
-			<input class="form-check-input" type="checkbox" name="checkbox" disabled>
+			<input formControlName="checkboxToggle" class="form-check-input" type="checkbox" (click)="toggleAllCheckboxes()">
 		</th>
 		<th scope="col">ID</th>
 		<th>Názov</th>

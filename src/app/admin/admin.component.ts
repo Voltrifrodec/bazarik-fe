@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../common/service/auth.service';
-import { faArrowAltCircleUp, faCaretSquareDown, faExpandArrowsAlt, faPen, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faExpandArrowsAlt, faPen, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AdvertService } from '../common/service/advert.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Advert } from '../common/model/advert.model';
-import { CategoryTileComponent } from '../categories/category-tile/category-tile.component';
 
 @UntilDestroy()
 @Component({
@@ -29,6 +28,8 @@ export class AdminComponent {
 
 	uuids: Array<string> = [];
 
+	form: FormGroup;
+
 	constructor(
 		private advertService: AdvertService,
 		private authService: AuthService,
@@ -38,6 +39,16 @@ export class AdminComponent {
 			query: new FormControl("", [Validators.required])
 		});
 		this.getAllAdverts();
+
+		this.form = new FormGroup({
+			checkboxToggle: new FormControl(false, [])
+		})
+
+		if (! this.checkLogged()) {
+			window.alert(`Na túto stránku majú prístup len prihlásení administrátori.`);
+			this.router.navigate(['/'])
+			return;
+		}
 	}
 
 	private getAllAdverts(): void {
@@ -56,6 +67,17 @@ export class AdminComponent {
 		})
 	}
 
+	toggleAllCheckboxes(): void {
+		let toCheck = this.form.controls['checkboxToggle'].value
+
+		let checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+
+		checkboxes.forEach((checkbox) => {
+			let s = checkbox as HTMLInputElement;
+			s.checked = toCheck ? false : true;
+		});
+	}
+
 	bulkDelete(): void {
 		this.addToList();
 
@@ -64,26 +86,31 @@ export class AdminComponent {
 			return;
 		}
 
-		console.log(this.uuids);
-
-		if (window.confirm(`Počet inzerátov na vymazanie: ${this.uuids.length}\nSte si istí?`)) {
-			if (! this.checkLogged()) {
-				window.alert('Na vymazanie inzerátov musíte byť prihlásení ako administrátor.');
-				this.uuids = [];
-				return;
-			}
-
-			this.uuids.forEach((uuid) => {
-				console.log(uuid);
-				this.advertService.deleteAdvert(uuid).pipe(untilDestroyed(this)).subscribe(() => {
-					console.log(`Deleted advert, ${uuid}`);
-				});
-			});
-			// console.log(this.router.url);
-			this.router.navigate([this.router.url]);
-		} else {
-			this.uuids = [];
+		if (! window.confirm(`Počet inzerátov na vymazanie: ${this.uuids.length}\nSte si istí?`)) {
+			this.removeUuidsFromList();
+			return;
 		}
+
+		if (! this.checkLogged()) {
+			window.alert('Na vymazanie inzerátov musíte byť prihlásení ako administrátor.');
+			this.removeUuidsFromList();
+			return;
+		}
+
+		this.uuids.forEach((uuid) => {
+			console.log(`Deleting advert, ${uuid}`);
+			this.advertService.deleteAdvert(uuid).pipe(untilDestroyed(this)).subscribe(() => {
+				console.log(`Deleted advert, ${uuid}`);
+			});
+		});
+
+		this.removeUuidsFromList()
+
+		window.location.reload();
+	}
+
+	removeUuidsFromList(): void {
+		this.uuids = [];
 	}
 
 	checkEmptyList(): boolean {
@@ -95,7 +122,7 @@ export class AdminComponent {
 	}
 
 	addToList(): void {
-		let checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+		let checkboxes = document.getElementsByName('checkbox');
 
 		checkboxes.forEach((checkbox) => {
 			let s = checkbox as HTMLInputElement;
@@ -115,6 +142,11 @@ export class AdminComponent {
 	}
 
 	public search(): void {
+		if (true) {
+			window.alert(`Táto funkcia nie je zatiaľ implementovaná.`);
+			return;
+		}
+
 		if (this.searchForm.invalid) {
 			window.alert("Pre vyhľadávanie je nutné zadať text.");
 			return;
