@@ -53,6 +53,18 @@ export class AdminComponent {
 		})
 	}
 
+	bulkDelete(): void {
+		let checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+
+		checkboxes.forEach((checkbox) => {
+			let s = checkbox as HTMLInputElement;
+			if (s.checked) {
+				this.checked.push(s.value);
+			}
+		});
+		console.log(this.checked);
+	}
+
 	copy(text: any): void {
 		navigator.clipboard.writeText(text);
 		window.alert(`Text\n${text}\nbol úspešne skopírovaný.`);
