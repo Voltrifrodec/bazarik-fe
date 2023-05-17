@@ -14,43 +14,40 @@
 
 <br>
 
-<table class="table table-bordered border-primary">
-	<thead class="text-center">
+<table class="table table-bordered table-striped table-success border-primary ">
+	<thead class="">
+		<th>Označenie</th>
 		<th scope="col">ID</th>
 		<th>Názov</th>
-		<!-- <th>Opis</th> -->
-		<!-- <th>kľúčové slová</th> -->
-		<th>Dátum pridania</th>
 		<th>Dátum úpravy</th>
-		<th>Cena (€)</th>
+		<th>Cena</th>
 		<th>Kategória</th>
-		<!-- <th>Podkategória</th> -->
-		<!-- <th>Podpodkategória</th> -->
-		<!-- <th>Kontakt</th> -->
+		<th>Obrázok</th>
+		<th>Otvoriť</th>
+		<th>Upraviť</th>
+		<th>Vymazať</th>
 	</thead>
 	<tbody *ngIf="adverts">
 		<tr *ngFor="let advert of adverts">
 
-			<td title="Kliknite pre skopírovanie" (click)="copy(advert.id);">
-				UUID [?]
+			<td>
+				<input type="checkbox" name="checkbox" id="{{advert.id}}">
 			</td>
 
-			<td title="{{advert.name}}" (click)="copy(advert.name);">
-				{{ advert.name }}
+			<td title="Kliknite pre skopírovanie:&NewLine;{{advert.id}}" (click)="copy(advert.id);" role="button">
+				UUID<sup>?</sup>
 			</td>
-			<!-- <td class="overflow-hidden">{{ advert.description }}</td> -->
-			<!-- <td>{{ advert.keywords }}</td> -->
 
-			<td title="{{ getDateFromTimestamp(advert.dateAdded) }}">
-				{{ getDateFromTimestamp(advert.dateAdded) }}
+			<td>
+				{{ advert.name.slice(0,20) }}<span *ngIf="advert.name.length > 20">...</span>
 			</td>
 
 			<td title="{{ getDateFromTimestamp(advert.dateModified) }}">
-				{{ getDateFromTimestamp(advert.dateModified) }}
+				{{ getDateFromTimestamp(advert.dateModified).replaceAll('. ', '.') }}
 			</td>
 
-			<td title="{{advert.priceEur}}">
-				{{ advert.priceEur }}
+			<td class="" title="{{advert.priceEur}} {{advert.currency.symbol}}">
+				{{advert.currency.symbol}} {{advert.priceEur}}
 			</td>
 
 			<td title="{{advert.category.name}}">
@@ -61,21 +58,21 @@
 				<img width="32" height="32" src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}">
 			</td>
 
-			<td>
-				<button class="btn btn-primary" routerLink="/advert/{{advert.id}}">
-					OTVORIŤ
+			<td class="text-center">
+				<button class="btn btn-sm btn-primary" title="OTVORIŤ" routerLink="/advert/{{advert.id}}">
+					<fa-icon [icon]="faArrow"></fa-icon>
 				</button>
 			</td>
 
-			<td>
-				<button class="btn btn-warning" routerLink="/advert/edit/{{advert.id}}">
-					UPRAVIŤ
+			<td class="text-center p-0">
+				<button class="btn btn-sm btn-warning" title="UPRAVIŤ" routerLink="/advert/edit/{{advert.id}}">
+					<fa-icon [icon]="faPen"></fa-icon>
 				</button>
 			</td>
 
-			<td>
-				<button class="btn btn-danger" (click)="deleteAdvertById(advert.id)">
-					VYMAZAŤ
+			<td class="text-center">
+				<button class="btn btn-sm btn-danger" title="VYMAZAŤ" (click)="deleteAdvertById(advert.id)">
+					<fa-icon [icon]="faBin"></fa-icon>
 				</button>
 			</td>
 

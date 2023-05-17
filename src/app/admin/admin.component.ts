@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../common/service/auth.service';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleUp, faCaretSquareDown, faExpandArrowsAlt, faPen, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AdvertService } from '../common/service/advert.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Advert } from '../common/model/advert.model';
@@ -15,6 +15,9 @@ import { Advert } from '../common/model/advert.model';
 })
 export class AdminComponent {
 
+	faBin = faTrash;
+	faArrow = faExpandArrowsAlt;
+	faPen = faPen;
 	faSearch = faSearch;
 
 	adminDropdown: boolean = !true;
