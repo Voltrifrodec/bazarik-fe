@@ -1,9 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Category } from 'src/app/common/model/category.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
 
 import { faBox } from '@fortawesome/free-solid-svg-icons';
+import { CategoryService } from 'src/app/common/service/category.service';
 
 @UntilDestroy()
 @Component({
@@ -18,24 +19,38 @@ export class CategoryTileComponent implements OnInit {
 	@Input()
 	category?: Category;
 
+	emoji?: string;
+
 	numberOfAdvertsInCategory: number = 0;
 	numberOfAdvertsWordDeclension: string = '';
 	counter = 0;
+	
 
-	constructor(
-		private advertService: AdvertService
-	) { }
+
+	constructor(private advertService: AdvertService, private categoryService: CategoryService) {
+	}
 
 	ngOnInit(): void {
 		this.getNumberOfAdvertsInCategoryByCategoryId();
+		this.setEmoji();
 	}
-
+	
 	count(): void {
 		if (this.counter < this.numberOfAdvertsInCategory) {
 			this.counter++;
 			setTimeout(() => {
 				this.count();
 			}, 2 / this.numberOfAdvertsInCategory ** 4);
+		}
+	}
+
+	setEmoji(): void {
+		if(this.category?.emoji) {
+			let codePoint: number = parseInt(this.category.emoji.substring(1), 16);
+			this.emoji = String.fromCodePoint(codePoint);
+		}
+		else {
+			this.emoji = '\u{1F4E6}';
 		}
 	}
 

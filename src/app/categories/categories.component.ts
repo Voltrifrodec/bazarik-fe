@@ -19,29 +19,31 @@ export class CategoriesComponent {
 
 	subcategories?: Subcategory[];
 	adverts?: Advert[];
+	emoji ?: string;
 
 	constructor(private categoryService: CategoryService, private advertService: AdvertService, private route: ActivatedRoute) {
 		this.categoryId = this.route.snapshot.params['categoryId'];
+		this.emoji = this.category?.emoji == undefined ? '\u{1F697}' : this.category.emoji;
 	}
-
+	
 	getCategoryById(): void {
 		this.categoryService.getCategoryById(this.categoryId).pipe(untilDestroyed(this)).subscribe((category: Category) => {
-			this.category = category;
+			this.category = category; 
 		});
 	}
-
+	
 	getSubcategories(): void {
 		this.categoryService.getSubcategoriesByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((subcategories: Subcategory[]) => {
 			this.subcategories = subcategories;
 		});
 	}
-
+	
 	getAdverts(): void {
 		this.advertService.getAllAdvertsByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
 			this.adverts = adverts;
 		})
 	}
-
+	
 	ngOnInit(): void {
 		this.getSubcategories();
 		this.getAdverts();
