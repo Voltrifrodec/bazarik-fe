@@ -51,11 +51,8 @@ export class NavbarComponent {
 	}
 
 	logout(): void {
-		this.authService.logout().subscribe(() => {
-			this.router.navigate(['']);
-		}, (error) => {
-			window.alert(JSON.stringify(error));
-		});
+		this.authService.logout().subscribe();
+		this.router.navigate(['']);
 		localStorage.removeItem('token');
 	}
 
