@@ -26,6 +26,8 @@ export class AdminComponent {
 
 	adverts?: Advert[];
 
+	checked: Array<string> = [];
+
 	constructor(
 		private advertService: AdvertService,
 		private authService: AuthService,
