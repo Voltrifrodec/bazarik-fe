@@ -1,9 +1,7 @@
-import { Component, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Component, Input, OnInit } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { Category } from 'src/app/common/model/category.model';
-import { AdvertService } from 'src/app/common/service/advert.service';
 
-import { faBox } from '@fortawesome/free-solid-svg-icons';
 
 @UntilDestroy()
 @Component({
@@ -13,33 +11,34 @@ import { faBox } from '@fortawesome/free-solid-svg-icons';
 })
 export class CategoryTileComponent implements OnInit {
 
-	faBox = faBox;
-
 	@Input()
 	category?: Category;
 
 	emoji?: string;
 
-	numberOfAdvertsInCategory: number = 0;
+
 	numberOfAdvertsWordDeclension: string = '';
 	counter = 0;
-	
 
-	constructor(private advertService: AdvertService) {}
+	constructor() {}
 
 	ngOnInit(): void {
-		this.getNumberOfAdvertsInCategoryByCategoryId();
+		this.count();
+		this.getRightWordDeclension();
 		this.setEmoji();
 	}
 	
 	count(): void {
-		if (this.counter < this.numberOfAdvertsInCategory) {
+		if (! this.category?.numberOfAdverts) return;
+
+		if (this.counter < this.category.numberOfAdverts) {
 			this.counter++;
 			setTimeout(() => {
 				this.count();
-			}, 2 / this.numberOfAdvertsInCategory ** 4);
+			}, 2 / this.category.numberOfAdverts ** 4);
 		}
 	}
+
 
 	setEmoji(): void {
 		if(this.category?.emoji) {
@@ -52,26 +51,22 @@ export class CategoryTileComponent implements OnInit {
 	}
 
 	getRightWordDeclension(): void {
-		if (this.numberOfAdvertsInCategory == 1) {
+		if (! this.category?.numberOfAdverts) {
+			this.numberOfAdvertsWordDeclension = 'inzerátov';
+			return;
+		};
+
+		if (this.category.numberOfAdverts == 1) {
 			this.numberOfAdvertsWordDeclension = 'inzerát';
 		}
 
-		if (this.numberOfAdvertsInCategory >= 2 && this.numberOfAdvertsInCategory <= 4) {
+		if (this.category.numberOfAdverts >= 2 && this.category.numberOfAdverts <= 4) {
 			this.numberOfAdvertsWordDeclension = 'inzeráty';
 		}
 
-		if (this.numberOfAdvertsInCategory >= 5 || this.numberOfAdvertsInCategory <= 0) {
+		if (this.category.numberOfAdverts >= 5 || this.category.numberOfAdverts <= 0) {
 			this.numberOfAdvertsWordDeclension = 'inzerátov';
 		}
 	}
 
-	getNumberOfAdvertsInCategoryByCategoryId(): void {
-		if (!this.category) return;
-
-		this.advertService.getNumberOfAdvertsInCategoryByCategoryId(this.category.id).pipe(untilDestroyed(this)).subscribe((numberOfAdvertsInCategory: number) => {
-			this.numberOfAdvertsInCategory = numberOfAdvertsInCategory;
-			this.count();
-			this.getRightWordDeclension();
-		});
-	}
 }

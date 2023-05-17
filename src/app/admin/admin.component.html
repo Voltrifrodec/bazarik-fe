@@ -1,0 +1,85 @@
+<h1 class="display-5 underline mt-3">
+	Admin panel
+</h1>
+
+<hr>
+
+<span class="h5">Vyhľadávanie inzerátov</span>
+<form [formGroup]="searchForm" class="input-group w-50 flex-grow-1" (submit)="search()">
+	<input formControlName="query" type="search" class="form-control rounded d-inline-block" placeholder="Hľadajte inzerát..." />
+	<button type="submit" class="btn btn-success d-inline">
+		<fa-icon [icon]="faSearch"></fa-icon>
+	</button>
+</form>
+
+<br>
+
+<table class="table table-bordered border-primary">
+	<thead class="text-center">
+		<th scope="col">ID</th>
+		<th>Názov</th>
+		<!-- <th>Opis</th> -->
+		<!-- <th>kľúčové slová</th> -->
+		<th>Dátum pridania</th>
+		<th>Dátum úpravy</th>
+		<th>Cena (€)</th>
+		<th>Kategória</th>
+		<!-- <th>Podkategória</th> -->
+		<!-- <th>Podpodkategória</th> -->
+		<!-- <th>Kontakt</th> -->
+	</thead>
+	<tbody *ngIf="adverts">
+		<tr *ngFor="let advert of adverts">
+
+			<td title="Kliknite pre skopírovanie" (click)="copy(advert.id);">
+				UUID [?]
+			</td>
+
+			<td title="{{advert.name}}" (click)="copy(advert.name);">
+				{{ advert.name }}
+			</td>
+			<!-- <td class="overflow-hidden">{{ advert.description }}</td> -->
+			<!-- <td>{{ advert.keywords }}</td> -->
+
+			<td title="{{ getDateFromTimestamp(advert.dateAdded) }}">
+				{{ getDateFromTimestamp(advert.dateAdded) }}
+			</td>
+
+			<td title="{{ getDateFromTimestamp(advert.dateModified) }}">
+				{{ getDateFromTimestamp(advert.dateModified) }}
+			</td>
+
+			<td title="{{advert.priceEur}}">
+				{{ advert.priceEur }}
+			</td>
+
+			<td title="{{advert.category.name}}">
+				{{ advert.category.name }}
+			</td>
+
+			<td>
+				<img width="32" height="32" src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}">
+			</td>
+
+			<td>
+				<button class="btn btn-primary" routerLink="/advert/{{advert.id}}">
+					OTVORIŤ
+				</button>
+			</td>
+
+			<td>
+				<button class="btn btn-warning" routerLink="/advert/edit/{{advert.id}}">
+					UPRAVIŤ
+				</button>
+			</td>
+
+			<td>
+				<button class="btn btn-danger" (click)="deleteAdvertById(advert.id)">
+					VYMAZAŤ
+				</button>
+			</td>
+
+			<!-- TODO: Odoslať e-mail na e-mailovú adresu inzerátu -->
+		</tr>
+	</tbody>
+</table>

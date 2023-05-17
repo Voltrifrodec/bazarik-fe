@@ -1,23 +1,41 @@
-<div class="container-fluid bg-banner border-bottom border-dark py-3">
+<div class="container-fluid bg-banner border-bottom border-dark py-3 NavbarContainer">
     <div class="col-lg-8 mx-auto">
         <nav class="navbar navbar-expand-lg navbar-light justify-content-lg-between px-3 px-lg-0">
-            <div class="navbar-item col-3">
+
+            <div class="navbar-item col-2">
                 <a routerLink="/" class="navbar-brand fw-bold">Bazarik</a>
             </div>
 
-            <form [formGroup]="searchForm" class="input-group w-50 col-6" (submit)="search()">
+            <form [formGroup]="searchForm" class="input-group w-25 col-3 flex-grow-1" (submit)="search()">
                 <input formControlName="query" type="search" class="form-control rounded d-inline-block" placeholder="Hľadajte inzerát..." />
                 <button type="submit" class="btn btn-success d-inline">
 					<fa-icon [icon]="faSearch"></fa-icon>
 				</button>
             </form>
 
-            <div class="navbar-item col-3 text-true-right">
+            <div class="navbar-item col-3 text-center">
                 <button class="btn btn-success" routerLink="/advert/new">
 					<fa-icon [icon]="faPlus"></fa-icon>
 					<span>Nový inzerát</span>
 				</button>
             </div>
+
+			<!-- <div class="ms-auto navbar-item text-true-right" *ngIf="isLogged()">
+				<button class="btn btn-danger" ">ADMIN</button>
+				
+			</div> -->
+			<div class="" *ngIf="isLogged()">
+				<button type="button" class="btn btn-danger dropdown-toggle" (click)="toggleDropdown()"
+					aria-expanded="false">
+				  	ADMIN
+				</button>
+
+				<div *ngIf="this.adminDropdown" class="position-absolute bg-light p-1">
+					<button class="d-block text-nowrap btn btn-primary w-100" routerLink="/admin" (click)="toggleDropdown()">ADMIN PANEL</button>
+					<button class="d-block text-nowrap btn btn-danger w-100" (click)="logout(); toggleDropdown()">ODHLÁSIŤ SA</button>
+				</div>
+			</div>
+			
         </nav>
     </div>
 </div>

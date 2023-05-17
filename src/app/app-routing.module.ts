@@ -9,6 +9,9 @@ import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { SubsubcategoryComponent } from './subsubcategory/subsubcategory.component';
 import { SearchComponent } from './core/search/search.component';
 import { PagenotfoundComponent } from './errors/pagenotfound/pagenotfound.component';
+import { LoginPageComponent } from './authentication/login-page/login-page.component';
+import { AdminComponent } from './admin/admin.component';
+import { AuthGuard } from './authentication/auth.guard';
 
 const routes: Routes = [
 	{
@@ -62,8 +65,18 @@ const routes: Routes = [
 		component: SubsubcategoryComponent
 	},
 	{
+		path: 'login',
+		pathMatch: 'full',
+		component: LoginPageComponent
+	},
+	{
 		path: '404',
 		component: PagenotfoundComponent
+	},
+	{
+		path: 'admin',
+		canActivate: [AuthGuard],
+		component: AdminComponent
 	},
 	{
 		path: '**',

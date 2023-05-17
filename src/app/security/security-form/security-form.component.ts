@@ -6,6 +6,7 @@ import { ToastService } from 'angular-toastify';
 import { Advert } from 'src/app/common/model/advert.model';
 import { SecurityUpdate, SecurityAction } from 'src/app/common/model/security.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
+import { AuthService } from 'src/app/common/service/auth.service';
 import { ImageService } from 'src/app/common/service/image.service';
 import { SecurityService } from 'src/app/common/service/security.service';
 
@@ -38,7 +39,8 @@ export class SecurityFormComponent implements OnDestroy {
 		private securityService: SecurityService,
 		private imageService: ImageService,
 		private advertService: AdvertService,
-		private toastService: ToastService
+		private toastService: ToastService,
+		private authService: AuthService
 	) {
 		this.securityForm = new FormGroup({
 			code: new FormControl(),
@@ -48,6 +50,10 @@ export class SecurityFormComponent implements OnDestroy {
 
 	ngOnDestroy() {
 		this.clearForm.emit();
+	}
+
+	public validateToken() {
+		return this.authService.isLogged();
 	}
 
 	createHash() {
@@ -93,6 +99,11 @@ export class SecurityFormComponent implements OnDestroy {
 	}
 
 	saveAdvert() {
+		if (this.authService.validateToken()) {
+			this.sendFile();
+			return;
+		}
+		
 		if (!this.advert) {
 			this.toastService.error(`Nemožno vytvoriť prázdny inzerát.`);
 			return;
