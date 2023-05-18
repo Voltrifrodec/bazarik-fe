@@ -56,9 +56,8 @@
 		<th class="border-0">Upraviť</th>
 		<th class="border-0">Vymazať</th>
 	</thead>
-	<tbody *ngIf="adverts?.content">
-		<tr *ngFor="let advert of adverts!.content">
-		<!-- <tr *ngFor="let advert of adverts?.content"> -->
+	<tbody *ngIf="adverts">
+		<tr *ngFor="let advert of adverts.content">
 			<td class="text-center">
 				<input class="form-check-input" type="checkbox" name="checkbox" value="{{advert.id}}">
 			</td>
@@ -110,16 +109,12 @@
 	</tbody>
 </table>
 
-
-
-
-
-	<div class="d-flex justify-content-center">
-		<ngb-pagination
-			[collectionSize]="getTotalElements()"
-			[page]="getPageNumber()"
-			[pageSize]="getPageSize()"
-			(pageChange)="changePage($event)"
-		></ngb-pagination>
-	</div>
+<div class="d-flex justify-content-center">
+	<ngb-pagination
+		[collectionSize]="getTotalElements()"
+		[page]="getPageNumber()"
+		[pageSize]="getPageSize()"
+		(pageChange)="changePage($event)"
+	></ngb-pagination>
+</div>
 	

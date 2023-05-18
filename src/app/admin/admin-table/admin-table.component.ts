@@ -52,7 +52,9 @@ export class AdminTableComponent {
 	}
 	
 	filter(): void {
-		this.defaultPageNumber = 0;
+		// TODO: Filter
+		window.alert(`Táto funkcia zatiaľ nie je implementovaná`);
+		/* this.defaultPageNumber = 0;
 		this.defaultFilter = this.searchForm.controls['query'].value;
 		this.pageChange.emit({
 			page: this.defaultPageNumber,
@@ -60,7 +62,7 @@ export class AdminTableComponent {
 			filter: {
 				query: this.defaultFilter
 			}
-		})
+		}) */
 	}
 
 	changePage(pageNumber: number): void {
