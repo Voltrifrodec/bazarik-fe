@@ -1,6 +1,6 @@
 <ng-container *ngIf="adverts?.length; then advertsExist; else advertsMissing"></ng-container>
 <ng-template #advertsExist>
-	<div class="container px-0 my-3 border border-dark">
+	<div class="container px-0 border border-dark">
 		<div class="row row-cols-1 g-3 p-1">
 			<app-advert-tile
 				role="button"
