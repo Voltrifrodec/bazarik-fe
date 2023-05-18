@@ -19,7 +19,7 @@
 
 	<app-subcategory-section-list [subsubcategories]="subsubcategories"></app-subcategory-section-list>
 
-	<h6 class="mt-3">V tejto kategórii sa nachádza {{ adverts?.length }} {{ numberOfAdvertsWordDeclension }}</h6>
+	<app-advert-number [advertNumber]="adverts?.length"></app-advert-number>
 
 	<app-subcategory-advert-list [adverts]="adverts"></app-subcategory-advert-list>
 </div>
