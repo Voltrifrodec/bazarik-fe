@@ -20,6 +20,8 @@ export class CategoriesComponent {
 	subcategories?: Subcategory[];
 	adverts?: Advert[];
 
+	levelWord = 'kategórii';
+
 	numberOfAdvertsWordDeclension = '';
 
 	constructor(private categoryService: CategoryService, private advertService: AdvertService, private route: ActivatedRoute) {

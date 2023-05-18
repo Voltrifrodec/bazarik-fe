@@ -20,6 +20,7 @@ export class SubsubcategoryComponent implements OnInit {
 	adverts?: Advert[];
 
 	numberOfAdvertsWordDeclension = '';
+	levelWord = 'podpodkategórii';
 
 	constructor(private subsubcategoryService: SubsubcategoryService, private advertService: AdvertService, private route: ActivatedRoute) {
 		this.subsubcategoryId = this.route.snapshot.params['subsubcategoryId'];

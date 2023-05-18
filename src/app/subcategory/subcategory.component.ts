@@ -22,6 +22,8 @@ export class SubcategoryComponent implements OnInit {
 	subsubcategories?: Subsubcategory[];
 	adverts?: Advert[];
 
+	levelWord = 'podkategórii';
+
 	numberOfAdvertsWordDeclension = '';
 
 	constructor(private subcategoryService: SubcategoryService, private advertService: AdvertService, private route: ActivatedRoute) {
