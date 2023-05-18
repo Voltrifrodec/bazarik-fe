@@ -8,14 +8,12 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 export class AdvertNumberComponent implements OnChanges {
 
 	@Input()
-	advertNumber? = 0;
+	advertNumber?: number;
 
 	numberOfAdvertsWordDeclension = '';
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if (this.advertNumber) {
-			this.getRightWordDeclension();
-		}
+		this.getRightWordDeclension();
 	}
 	
 	getRightWordDeclension(): void {
