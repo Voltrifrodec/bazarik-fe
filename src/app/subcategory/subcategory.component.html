@@ -21,6 +21,11 @@
 
 	<app-advert-number [advertNumber]="adverts?.content?.length || 0" [levelWord]="levelWord"></app-advert-number>
 
+	<app-page-size-form
+		[pageSize]="getPageSize()"
+		(pageSizeOutput)="changePageSize($event)"
+	></app-page-size-form>
+
 	<app-subcategory-advert-list [adverts]="adverts"></app-subcategory-advert-list>
 
 	

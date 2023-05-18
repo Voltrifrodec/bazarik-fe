@@ -16,7 +16,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 	templateUrl: './subcategory.component.html',
 	styleUrls: ['./subcategory.component.css']
 })
-export class SubcategoryComponent implements OnInit {
+export class SubcategoryComponent {
 
 	subcategoryId: number;
 	subcategory?: Subcategory;
@@ -25,7 +25,6 @@ export class SubcategoryComponent implements OnInit {
 	adverts?: AdvertResponse;
 
 	levelWord = 'podkategórii';
-
 	numberOfAdvertsWordDeclension = '';
 
 	constructor(
@@ -57,12 +56,17 @@ export class SubcategoryComponent implements OnInit {
 		this.defaultPageNumber = ((pageNumber <= 1) ? 1 : pageNumber) - 1;
 		let page: Pagination = {
 			page: this.defaultPageNumber,
-			size: this.adverts?.pageable?.pageSize ? this.adverts?.pageable?.pageSize : this.defaultPageSize,
+			size: this.defaultPageSize,
 			filter: {
 				query: this.defaultFilter
 			}
 		}
-		this.pageChange.emit(page);
+		this.getAdvertsBySubcategoryId(page);
+	}
+
+	changePageSize(pageSize: number) {
+		this.defaultPageSize = pageSize;
+		this.changePage(this.defaultPageNumber);
 	}
 
 	setPageSize(): void {
@@ -99,21 +103,11 @@ export class SubcategoryComponent implements OnInit {
 		});
 	}
 
-	getAllAdverts(pagination?: Pagination): void {
-		this.advertService.getAllAdverts(pagination).pipe(untilDestroyed(this)).subscribe((adverts: AdvertResponse) => {
-			this.adverts = adverts;
-		});
-	}
-
-	/* getAdverts(): void {
-		this.advertService.getAllAdvertsBySubcategoryId(this.subcategoryId).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
+	getAdvertsBySubcategoryId(pagination?: Pagination): void {
+		this.advertService.getAllAdvertsBySubcategoryId(this.subcategoryId, pagination).pipe(untilDestroyed(this)).subscribe((adverts: AdvertResponse) => {
 			this.adverts = adverts;
 			this.getRightWordDeclension();
 		});
-	} */
-
-	ngOnInit(): void {
-		this.getAllAdverts();
 	}
 
 	getRightWordDeclension(): void {

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { faLocationArrow, faExclamationCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { Advert } from 'src/app/common/model/advert.model';
+import { Advert, AdvertResponse } from 'src/app/common/model/advert.model';
 
 @Component({
 	selector: 'app-subsubcategory-advert-list',
@@ -13,5 +13,5 @@ export class SubsubcategoryAdvertListComponent {
 	faCheckCircle = faCheckCircle;
 
 	@Input()
-	adverts?: Advert[];
+	adverts?: AdvertResponse;
 }

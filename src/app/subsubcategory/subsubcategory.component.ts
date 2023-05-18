@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Advert } from '../common/model/advert.model';
+import { Advert, AdvertResponse } from '../common/model/advert.model';
 import { Subsubcategory } from '../common/model/subsubcategory.model';
 import { AdvertService } from '../common/service/advert.service';
 import { SubsubcategoryService } from '../common/service/subsubcategory.service';
@@ -17,7 +17,7 @@ export class SubsubcategoryComponent implements OnInit {
 	subsubcategoryId: number;
 	subsubcategory?: Subsubcategory;
 
-	adverts?: Advert[];
+	adverts?: AdvertResponse;
 
 	numberOfAdvertsWordDeclension = '';
 	levelWord = 'podpodkategórii';
@@ -42,7 +42,7 @@ export class SubsubcategoryComponent implements OnInit {
 	}
 
 	getAdverts(): void {
-		this.advertService.getAllAdvertsBySubsubcategoryId(this.subsubcategoryId).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
+		this.advertService.getAllAdvertsBySubsubcategoryId(this.subsubcategoryId).pipe(untilDestroyed(this)).subscribe((adverts: AdvertResponse) => {
 			this.adverts = adverts;
 			this.getRightWordDeclension();
 		});
@@ -53,20 +53,20 @@ export class SubsubcategoryComponent implements OnInit {
 	}
 
 	getRightWordDeclension(): void {
-		if (! this.adverts?.length) {
+		if (!this.adverts?.content.length) {
 			this.numberOfAdvertsWordDeclension = 'inzerátov';
 			return;
 		};
 
-		if (this.adverts?.length == 1) {
+		if (this.adverts?.content.length == 1) {
 			this.numberOfAdvertsWordDeclension = 'inzerát';
 		}
 
-		if (this.adverts?.length >= 2 && this.adverts?.length <= 4) {
+		if (this.adverts?.content.length >= 2 && this.adverts?.content.length <= 4) {
 			this.numberOfAdvertsWordDeclension = 'inzeráty';
 		}
 
-		if (this.adverts?.length >= 5 || this.adverts?.length <= 0) {
+		if (this.adverts?.content.length >= 5 || this.adverts?.content.length <= 0) {
 			this.numberOfAdvertsWordDeclension = 'inzerátov';
 		}
 	}
