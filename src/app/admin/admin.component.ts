@@ -74,8 +74,6 @@ export class AdminComponent {
 		});
 
 		window.alert(`Počet vymazaných inzerátov: ${advertIds.length}`);
-
-		// this.getAllAdverts();
 	}
 
 	checkLogged(): boolean {
