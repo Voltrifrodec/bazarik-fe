@@ -36,6 +36,8 @@ export class CategoriesComponent {
 	getCategoryById(): void {
 		this.categoryService.getCategoryById(this.categoryId).pipe(untilDestroyed(this)).subscribe((category: Category) => {
 			this.category = category; 
+		}, () => {
+			this.router.navigate(['404']);
 		});
 	}
 	
