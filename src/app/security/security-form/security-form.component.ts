@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ToastService } from 'angular-toastify';
@@ -37,6 +37,8 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 
 	hash?: string;
 
+	email: string = '';
+
 	constructor(
 		private router: Router,
 		private securityService: SecurityService,
@@ -46,16 +48,23 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 		private authService: AuthService
 	) {
 		this.securityForm = new FormGroup({
-			code: new FormControl(),
+			code: new FormControl(null, [Validators.required]),
 			hash: new FormControl()
 		});
 	}
-
+	
 	ngOnChanges(changes: SimpleChanges): void {
 		if (this.send != '') {
 			this.createHash();
 			this.send = '';
+			this.getEmail();
 		}
+	}
+
+	getEmail(): void {
+		this.advertService.getAdvertById(this.advert.id).subscribe((advert: Advert) => {
+			this.email = this.partiallyHideEmail(advert.contact.email);
+		})
 	}
 
 	ngOnDestroy() {
@@ -80,7 +89,7 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 				this.toastService.success(`Overovací kód bol odoslaný na e-mail.`);
 			}, (error: Error) => {
 				this.toastService.error(error.message);
-				console.log(error);
+				// console.log(error);
 			})
 		}
 
@@ -101,9 +110,15 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 				email: this.advert.contactEmail
 			}
 
-			this.securityService.createHashForUpdate(securityUpdate).pipe(untilDestroyed(this)).subscribe((hash: SecurityDetail) => {
-				this.hash = hash.hash;
-				this.toastService.success(`Overovací kód bol odoslaný na e-mail.`);
+			this.advertService.getAdvertById(this.advert.id).subscribe((advert: Advert) => {
+				securityUpdate.email = advert.contact.email;
+				this.email = this.partiallyHideEmail(securityUpdate.email);
+				this.securityService.createHashForUpdate(securityUpdate).pipe(untilDestroyed(this)).subscribe((hash: SecurityDetail) => {
+					this.hash = hash.hash;
+					this.toastService.success(`Overovací kód bol odoslaný na e-mail.`);
+				}, (res) => {
+					this.toastService.error(res.error.error);
+				});
 			})
 		}
 	}
@@ -127,8 +142,6 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 			code: this.securityForm.controls['code'].value,
 			hash: this.hash || ''
 		};
-
-		console.log(securityRequest);
 
 		this.securityForm.controls['code'].reset();
 
@@ -154,7 +167,6 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 			}
 		}, (error: Error) => {
 			this.toastService.error('Nastala chyba pri overovaní. Skúste to znova.');
-			console.error(error);
 		});
 	}
 
@@ -209,17 +221,15 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 	}
 
 	private createAdvert(): void {
-		console.log(this.advert);
 		this.advertService.createAdvert(this.advert).pipe(untilDestroyed(this)).subscribe((advertId: string) => {
 			this.redirectToAdvertDetail(advertId, `pridaný`);
 		}, (error: Error) => {
 			this.toastService.error(`Nastala chyba pri vytváraní inzerátu.\n${error}`);
-			console.error(error);
 		})
 	}
 
 	private updateAdvert(): void {
-		console.log(`Update advert was called`);
+		// console.log(`Update advert was called`);
 		this.advertService.updateAdvert(this.advert).pipe(untilDestroyed(this)).subscribe(() => {
 			this.redirectToAdvertDetail(this.advert.id, `upravený`);
 		});

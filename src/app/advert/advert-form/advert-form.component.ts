@@ -272,6 +272,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			subsubcategoryId: this.advertForm.controls['subsubcategory'].value,
 
 			contactEmail: this.advertForm.controls['contactEmail'].value,
+			// contactEmail: this.advertForm.controls['contactEmail'].value,
 
 			regionId: this.advertForm.controls['region'].value,
 			districtId: this.advertForm.controls['district'].value,

@@ -1,24 +1,32 @@
 <lib-toastify-toast-container class="container" position="top-left">
 </lib-toastify-toast-container>
-<form [formGroup]="securityForm" (submit)="saveAdvert()" class="p-3"  *ngIf="advert">
+<form [formGroup]="securityForm" (submit)="saveAdvert()" class="p-3 col-lg-10 col-xl-9 text-center mx-auto"  *ngIf="advert">
 
-	<h5 class="h5">
-		Zadajte overovací kód odoslaný na e-mail
-	</h5>
-	<h5 class="h5">
-		<!-- {{ partiallyHideEmail(advert.contactEmail) }} -->
+	<h4 class="display-7 text-center">
+		Zadajte overovací kód odoslaný na e-mail:
+	</h4>
+	<h5 class="text-center my-4">
+		{{ email }}
 	</h5>
 
-	<input class="form-control form-control-lg ps-2" formControlName="code" type="number">
+	<div class="my-3">
+		<input class="form-control form-control-lg my-4 mb-0 text-center" formControlName="code" type="number" placeholder="Overovací kód">
+		
+		<h6 *ngIf="securityForm.controls['code'].invalid" class="text-danger mt-0 mb-2">
+			Zadajte overovací kód
+		</h6>
+	</div>
+
 	
-	<div class="d-flex justify-content-between mt-3">
-		<input class="btn btn-primary" type="submit" value="Overiť" [disabled]="securityForm.invalid">
+	<div class="d-flex justify-content-between mt-1">
+		<!-- <input class="btn btn-primary" type="submit" value="Overiť" [disabled]="securityForm.invalid"> -->
+		<button class="btn btn-primary" type="submit" [disabled]="securityForm.invalid">Overiť</button>
 		
 		<!-- ADMIN -->
 		<input *ngIf="validateToken()" class="btn btn-primary" type="submit" value="Odoslať (ADMIN)" [disabled]="securityForm.invalid">
 
 		<button class="btn btn-primary" type="button" (click)="this.createHash()">
-			Znovu odoslať overovací kód na e-mail
+			Znova odoslať overovací kód
 		</button>
 
 		<input class="btn btn-danger" type="button" (click)="formCancel.emit()" value="Zrušiť">

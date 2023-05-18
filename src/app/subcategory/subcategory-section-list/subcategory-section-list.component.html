@@ -1,11 +1,11 @@
 <div class="mt-3">
     <h5>Podpodkategórie</h5>
 </div>
-<div class="bg-container-alt categories-alt-grid" *ngIf="subsubcategories?.length">
-    <div *ngFor="let subsubcategory of subsubcategories" class="p-2">
-        <a href="/subsubcategories/{{subsubcategory.id}}" class="color-light">{{subsubcategory.name}}</a>
+<div class="bg-container-alt categories-alt-grid border border-dark" *ngIf="subsubcategories?.length">
+    <div *ngFor="let subsubcategory of subsubcategories" class="p-2 bg-success m-1" routerLink="/subsubcategories/{{subsubcategory.id}}" role="button">
+        <a class="text-light">{{subsubcategory.name}}</a>
     </div>
 </div>
-<div class="bg-container-alt p-2" *ngIf="!subsubcategories?.length">
-    <span class="text-warning fw-bold d-block">V tejto podkategórii sa už nenachádzajú žiadne podpodkategórie!</span>
+<div class="bg-container-alt p-2 border border-dark" *ngIf="!subsubcategories?.length">
+    <span class="text-dark fw-bold d-block">V tejto podkategórii sa už nenachádzajú žiadne podpodkategórie!</span>
 </div>

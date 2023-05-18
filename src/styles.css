@@ -2,10 +2,10 @@
 :root {
 
     /* Farby pozadia */
-    --paletteColorBackgroundPage: #CCCCCC; /* Pozadie pre body */
+    --paletteColorBackgroundPage: #ffffff; /* Pozadie pre body */
     --paletteColorBanner:#FFCC66; /* Napr. na header, footer, ... */
     --paletteColorContainer: #FFCC99; /* Napr. ako pozadie inzeratu v liste */
-    --paletteColorContainerAlt: #666666; /* Napr. ako druhotne pozadie stranky, pozadie podkategorii, etc. */
+    --paletteColorContainerAlt: #ffffff; /* Napr. ako druhotne pozadie stranky, pozadie podkategorii, etc. */
     --paletteColorContainerAlt2: #CC6B5C; /* Napr. ako druhotne pozadie stranky, pozadie podkategorii, etc. */
 
     /* Farby textu */
@@ -69,7 +69,7 @@ h1 {
     background-color: var(--paletteColorContainer);
 }
 .bg-container-alt {
-    background-color: var(--paletteColorContainerAlt);
+    background-color: var(--paletteColorContainer);
 }
 .bg-container-alt-2 {
     background-color: var(--paletteColorContainerAlt2);
@@ -113,7 +113,7 @@ h1 {
     border-radius: 20px;
 } */
 .color-light {
-    color: #CCCCCC;
+    color: #000000;
 }
 .color-light:hover {
     color: #000000;
@@ -157,12 +157,11 @@ h1 {
 .RouterContainerFix {
     min-height: 90vh;
     margin: 0 auto;
+	/* border: solid black; */
     
-    border-left: .15rem solid;
-    border-right: .15rem solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
     background-color: var(--paletteColorBackgroundPage);
-    box-shadow: 2rem 0 2.5rem -2rem #000000,
-                -2rem 0 2.5rem -2rem #000000;
 }
 .RouterContainerFix:has(.LoginForm) {
     background-color: inherit;
@@ -178,7 +177,7 @@ h1 {
     padding: 5vh;
     min-height: 10vh;
     width: 100%;
-    box-shadow: 0 0 2.5rem var(--paletteBorderColorPrimary);
+    /* box-shadow: 0 0 2.5rem var(--paletteBorderColorPrimary); */
 }
 .FooterContainer div > a {
     display: block;
