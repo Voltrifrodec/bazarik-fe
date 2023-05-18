@@ -73,6 +73,16 @@ export class AdminComponent {
 		});
 
 		window.alert(`Počet vymazaných inzerátov: ${advertIds.length}`);
+
+		let pagination: Pagination = {
+			page: this.adverts?.pageable.pageNumber || 0,
+			size: this.adverts?.pageable.pageSize || 10,
+			filter: {
+				query: ''
+			}
+		}
+		
+		this.getAllAdverts(pagination);
 	}
 
 	checkLogged(): boolean {
