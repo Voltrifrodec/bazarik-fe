@@ -89,7 +89,6 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 				this.toastService.success(`Overovací kód bol odoslaný na e-mail.`);
 			}, (error: Error) => {
 				this.toastService.error(error.message);
-				// console.log(error);
 			})
 		}
 
