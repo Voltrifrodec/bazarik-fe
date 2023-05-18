@@ -1,12 +1,10 @@
 <ng-container *ngIf="adverts?.length; then advertsExist; else advertsMissing"></ng-container>
 <ng-template #advertsExist>
-	<div class="container px-0 border border-dark">
-		<div class="row row-cols-1 g-3 p-1">
+	<div class="container px-0">
+		<div class="row g-2">
 			<app-advert-tile
-				role="button"
 				*ngFor="let advert of adverts"
 				[advert]="advert"
-				routerLink="/advert/{{ advert.id }}"
 				class="col-xl-3 col-lg-4 col-md-6 col-sm-6"></app-advert-tile>
 		</div>
 	</div>
