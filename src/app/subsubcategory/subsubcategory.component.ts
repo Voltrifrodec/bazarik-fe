@@ -19,30 +19,50 @@ export class SubsubcategoryComponent implements OnInit {
 
 	adverts?: Advert[];
 
+	numberOfAdvertsWordDeclension = '';
+
 	constructor(private subsubcategoryService: SubsubcategoryService, private advertService: AdvertService, private route: ActivatedRoute) {
 		this.subsubcategoryId = this.route.snapshot.params['subsubcategoryId'];
-		this.subsubcategoryService.getSubsubcategoryById(this.subsubcategoryId).pipe(untilDestroyed(this)).subscribe((subsubcategory: Subsubcategory) => {
-			this.subsubcategory = subsubcategory;
-			// console.log('Received subsubcategory:', this.subsubcategory);
-		});
+		this.getSubsubcategoryById();
 		this.getAdverts();
 	}
 
+	getSubsubcategoryById(): void {
+		this.subsubcategoryService.getSubsubcategoryById(this.subsubcategoryId).pipe(untilDestroyed(this)).subscribe((subsubcategory: Subsubcategory) => {
+			this.subsubcategory = subsubcategory;
+		});
+	}
 
 	getAdverts(): void {
 		this.advertService.getAllAdvertsBySubsubcategoryId(this.subsubcategoryId).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
 			this.adverts = adverts;
-			// console.log('Received adverts for the subsubcategory:', this.adverts);
+			this.getRightWordDeclension();
 		});
 	}
 
 	ngOnInit(): void {
 		this.subsubcategoryId = this.route.snapshot.params['subsubcategoryId'];
-		this.subsubcategoryService.getSubsubcategoryById(this.subsubcategoryId).pipe(untilDestroyed(this)).subscribe((subsubcategory: Subsubcategory) => {
-			this.subsubcategory = subsubcategory;
-			// console.log('Received subsubcategory:', this.subsubcategory);
-		});
+		this.getSubsubcategoryById();
 		this.getAdverts();
+	}
+
+	getRightWordDeclension(): void {
+		if (! this.adverts?.length) {
+			this.numberOfAdvertsWordDeclension = 'inzerátov';
+			return;
+		};
+
+		if (this.adverts?.length == 1) {
+			this.numberOfAdvertsWordDeclension = 'inzerát';
+		}
+
+		if (this.adverts?.length >= 2 && this.adverts?.length <= 4) {
+			this.numberOfAdvertsWordDeclension = 'inzeráty';
+		}
+
+		if (this.adverts?.length >= 5 || this.adverts?.length <= 0) {
+			this.numberOfAdvertsWordDeclension = 'inzerátov';
+		}
 	}
 
 }
