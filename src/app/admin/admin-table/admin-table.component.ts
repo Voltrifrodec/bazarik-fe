@@ -27,8 +27,10 @@ export class AdminTableComponent {
 	});
 
 	searchForm: FormGroup = new FormGroup({
-		query: new FormControl('', [Validators.required])
+		query: new FormControl('', [Validators.required]),
 	})
+	
+	paginationForm: FormGroup; 
 
 	@Input()
 	adverts?: AdvertResponse;
@@ -40,10 +42,16 @@ export class AdminTableComponent {
 	private defaultTotalElements = 10;
 	private defaultPageSize = 10;
 	private defaultFilter = '';
+
+	constructor() {
+		this.paginationForm = new FormGroup({
+			pageSize: new FormControl(this.defaultPageSize, [Validators.required])
+		})
+	}
 	
 	filter(): void {
 		this.defaultPageNumber = 0;
-		this.defaultFilter = this.advertTableForm.controls['query'].value;
+		this.defaultFilter = this.searchForm.controls['query'].value;
 		this.pageChange.emit({
 			page: this.defaultPageNumber,
 			size: this.adverts?.pageable?.pageSize ? this.adverts?.pageable?.pageSize : this.defaultPageSize,
@@ -88,6 +96,7 @@ export class AdminTableComponent {
 	}
 
 	deleteAdverts(): void {
+		// if (window.confirm(``)) {}
 		// TODO: Zozbierať všetky Idečka inzerátov
 		let checkboxes = document.getElementsByName('checkbox');
 		let advertsIds: string[] = [];
@@ -98,6 +107,17 @@ export class AdminTableComponent {
 				advertsIds.push(s.value);
 			}
 		});
+
+		if (advertsIds.length == 0) {
+			window.alert('Na vymazanie inzerátov je nutné označiť aspoň jeden inzerát.');
+			return;
+		}
+
+		if (!window.confirm(`Počet inzerátov na vymazanie: ${advertsIds.length}\nSte si istí?`)) {
+			return;
+		}
+
+		this.advertsToDelete.emit(advertsIds);
 	}
 
 	getDateFromTimestamp(timestamp: any) {

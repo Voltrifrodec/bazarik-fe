@@ -23,7 +23,6 @@ export class AdvertService {
 			}
 		}
 	): Observable<AdvertResponse> {
-		console.log(pagination);
 		const params = new HttpParams().appendAll({
 			page: pagination.page,
 			size: pagination.size,

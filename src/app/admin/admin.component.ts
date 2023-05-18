@@ -47,8 +47,8 @@ export class AdminComponent {
 		})
 		
 		if (!this.checkLogged()) {
-			window.alert(`Na túto stránku majú prístup len prihlásení administrátori.`);
 			this.router.navigate(['/'])
+			window.alert(`Na túto stránku majú prístup len prihlásení administrátori.`);
 			return;
 		}
 	}
@@ -73,10 +73,17 @@ export class AdminComponent {
 
 	deleteAdvertsByIds(advertIds: string[]) {
 		console.log(advertIds);
+
 		if (! advertIds) {
 			window.alert(`Neboli poslané žiadne Idečka`);
 			return;
 		}
+		
+		if (!this.checkLogged()) {
+			window.alert('Na vymazanie inzerátov musíte byť prihlásení ako administrátor.');
+			return;
+		}
+
 		advertIds.forEach((advertId) => {
 			console.log(`Deleting advert, ${advertId}`);
 			/* this.advertService.deleteAdvert(advertId).pipe(untilDestroyed(this)).subscribe(() => {
@@ -85,58 +92,8 @@ export class AdminComponent {
 		});
 	}
 
-	bulkDelete(): void {
-		this.addToList();
-
-		if (this.checkEmptyList()) {
-			window.alert('Na vymazanie inzerátov je nutné označiť aspoň jeden inzerát.');
-			return;
-		}
-
-		if (!window.confirm(`Počet inzerátov na vymazanie: ${this.uuids.length}\nSte si istí?`)) {
-			this.removeUuidsFromList();
-			return;
-		}
-
-		if (!this.checkLogged()) {
-			window.alert('Na vymazanie inzerátov musíte byť prihlásení ako administrátor.');
-			this.removeUuidsFromList();
-			return;
-		}
-
-		this.uuids.forEach((uuid) => {
-			console.log(`Deleting advert, ${uuid}`);
-			this.advertService.deleteAdvert(uuid).pipe(untilDestroyed(this)).subscribe(() => {
-				console.log(`Deleted advert, ${uuid}`);
-			});
-		});
-
-		this.removeUuidsFromList()
-
-		window.location.reload();
-	}
-
-	removeUuidsFromList(): void {
-		this.uuids = [];
-	}
-
-	checkEmptyList(): boolean {
-		return this.uuids.length === 0 ? true : false;
-	}
-
 	checkLogged(): boolean {
 		return this.authService.isLogged() ? true : false;
-	}
-
-	addToList(): void {
-		let checkboxes = document.getElementsByName('checkbox');
-
-		checkboxes.forEach((checkbox) => {
-			let s = checkbox as HTMLInputElement;
-			if (s.checked) {
-				this.uuids.push(s.value);
-			}
-		});
 	}
 
 	public search(): void {

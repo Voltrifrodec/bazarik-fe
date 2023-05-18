@@ -22,24 +22,39 @@
 			</button>
 		</form>
 	</div>
+
+	
 </div>
+
+
+<form [formGroup]="paginationForm" class="" (submit)="filter()">
+	<div class="mt-2 d-flex justify-content-end">
+		<span>Veľkosť stránky:&nbsp;</span>
+		<select class="" formControlName="pageSize" [selectedIndex]="1" title="Page size" (change)="setPageSize()">
+			<option value="5">5</option>
+			<option selected value="10">10</option>
+			<option value="25">25</option>
+		</select>
+	</div>
+</form>
+
 
 <br>
 
-<table class="table table-bordered table-border-top-0 table-striped table-success border-success" [formGroup]="advertTableForm">
+<table class="table table-bordered table-striped table-success border-success" [formGroup]="advertTableForm">
 	<thead>
-		<th class="p-0 text-center">
+		<th class="p-0 text-center border-0">
 			<input formControlName="checkboxToggle" class="form-check-input" type="checkbox" (click)="toggleAllCheckboxes()">
 		</th>
-		<th scope="col">ID</th>
-		<th>Názov</th>
-		<th>Dátum úpravy</th>
-		<th>Cena</th>
-		<th>Kategória</th>
-		<th>Obrázok</th>
-		<th>Otvoriť</th>
-		<th>Upraviť</th>
-		<th>Vymazať</th>
+		<th scope="col" class="border-0">ID</th>
+		<th class="border-0">Názov</th>
+		<th class="border-0">Dátum úpravy</th>
+		<th class="border-0">Cena</th>
+		<th class="border-0">Kategória</th>
+		<th class="border-0">Obrázok</th>
+		<th class="border-0">Otvoriť</th>
+		<th class="border-0">Upraviť</th>
+		<th class="border-0">Vymazať</th>
 	</thead>
 	<tbody *ngIf="adverts?.content">
 		<tr *ngFor="let advert of adverts!.content">
@@ -52,7 +67,7 @@
 				UUID<sup>?</sup>
 			</td>
 
-			<td>
+			<td class="overflow-hidden">
 				{{ advert.name.slice(0,20) }}<span *ngIf="advert.name.length > 20">...</span>
 			</td>
 
@@ -95,11 +110,16 @@
 	</tbody>
 </table>
 
-<div class="d-flex justify-content-center">
-	<ngb-pagination
-		[collectionSize]="getTotalElements()"
-		[page]="getPageNumber()"
-		[pageSize]="getPageSize()"
-		(pageChange)="changePage($event)"
-	></ngb-pagination>
-</div>
+
+
+
+
+	<div class="d-flex justify-content-center">
+		<ngb-pagination
+			[collectionSize]="getTotalElements()"
+			[page]="getPageNumber()"
+			[pageSize]="getPageSize()"
+			(pageChange)="changePage($event)"
+		></ngb-pagination>
+	</div>
+	
