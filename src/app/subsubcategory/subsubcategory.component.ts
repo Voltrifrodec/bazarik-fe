@@ -36,6 +36,8 @@ export class SubsubcategoryComponent implements OnInit {
 	getSubsubcategoryById(): void {
 		this.subsubcategoryService.getSubsubcategoryById(this.subsubcategoryId).pipe(untilDestroyed(this)).subscribe((subsubcategory: Subsubcategory) => {
 			this.subsubcategory = subsubcategory;
+		}, () => {
+			this.router.navigate(['404']);
 		});
 	}
 
