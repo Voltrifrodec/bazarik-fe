@@ -41,7 +41,6 @@ export class CategoriesComponent {
 	getAdverts(): void {
 		this.advertService.getAllAdvertsByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
 			this.adverts = adverts;
-			this.getRightWordDeclension();
 		})
 	}
 	
@@ -49,25 +48,6 @@ export class CategoriesComponent {
 		this.getSubcategories();
 		this.getAdverts();
 		this.getCategoryById();
-	}
-
-	getRightWordDeclension(): void {
-		if (! this.category?.numberOfAdverts) {
-			this.numberOfAdvertsWordDeclension = 'inzerátov';
-			return;
-		};
-
-		if (this.category.numberOfAdverts == 1) {
-			this.numberOfAdvertsWordDeclension = 'inzerát';
-		}
-
-		if (this.category.numberOfAdverts >= 2 && this.category.numberOfAdverts <= 4) {
-			this.numberOfAdvertsWordDeclension = 'inzeráty';
-		}
-
-		if (this.category.numberOfAdverts >= 5 || this.category.numberOfAdverts <= 0) {
-			this.numberOfAdvertsWordDeclension = 'inzerátov';
-		}
 	}
 
 }
