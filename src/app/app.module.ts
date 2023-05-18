@@ -37,6 +37,8 @@ import { LoginPageComponent } from './authentication/login-page/login-page.compo
 import { AuthHeaderInterceptor } from './authentication/interceptor/auth-header.interceptor';
 import { AdminComponent } from './admin/admin.component';
 import { AdvertNumberComponent } from './advert/advert-number/advert-number.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AdminTableComponent } from './admin/admin-table/admin-table.component';
 
 @NgModule({
 	declarations: [
@@ -68,7 +70,8 @@ import { AdvertNumberComponent } from './advert/advert-number/advert-number.comp
 		CategoryTileComponent,
         LoginPageComponent,
         AdminComponent,
-        AdvertNumberComponent
+        AdvertNumberComponent,
+        AdminTableComponent
 	],
 	imports: [
 		BrowserModule,
@@ -77,7 +80,8 @@ import { AdvertNumberComponent } from './advert/advert-number/advert-number.comp
 		FontAwesomeModule,
 		ReactiveFormsModule,
 		HttpClientModule,
-		AngularToastifyModule
+		AngularToastifyModule,
+		NgxPaginationModule
 	],
 	providers: [
 		{
