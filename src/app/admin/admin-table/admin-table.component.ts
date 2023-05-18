@@ -118,6 +118,8 @@ export class AdminTableComponent {
 		}
 
 		this.advertsToDelete.emit(advertsIds);
+		
+		this.advertTableForm.controls['checkboxToggle'].setValue(false);
 	}
 
 	getDateFromTimestamp(timestamp: any) {
