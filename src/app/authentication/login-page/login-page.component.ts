@@ -11,10 +11,16 @@ import { AuthService } from '../../common/service/auth.service';
 })
 export class LoginPageComponent {
 
-	loginForm: FormGroup = new FormGroup({
-		username: new FormControl(undefined, [Validators.required]),
-		password: new FormControl(undefined, [Validators.required])
-	});
+	loginForm: FormGroup; 
+
+	constructor(
+		private authService: AuthService,
+		private router: Router
+	) {
+		this.loginForm = new FormGroup({
+			username: new FormControl(undefined, [Validators.required]),
+			password: new FormControl(undefined, [Validators.required])
+		});
 
 	constructor(
 		private authService: AuthService,
