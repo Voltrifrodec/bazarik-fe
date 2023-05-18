@@ -23,13 +23,7 @@ export class AdminComponent {
 
 	adminDropdown: boolean = !true;
 
-	searchForm: FormGroup;
-
 	adverts?: AdvertResponse;
-
-	uuids: Array<string> = [];
-
-	form: FormGroup;
 
 	constructor(
 		private advertService: AdvertService,
@@ -37,14 +31,6 @@ export class AdminComponent {
 		private router: Router
 	) {
 		this.getAllAdverts();
-
-		this.searchForm = new FormGroup({
-			query: new FormControl("", [Validators.required])
-		});
-		
-		this.form = new FormGroup({
-			checkboxToggle: new FormControl(false, [])
-		})
 		
 		if (!this.checkLogged()) {
 			this.router.navigate(['/'])
@@ -54,7 +40,6 @@ export class AdminComponent {
 	}
 
 	getAllAdverts(pagination?: Pagination): void {
-		console.log(pagination);
 		this.advertService.getAllAdverts(pagination).pipe(untilDestroyed(this)).subscribe((adverts: AdvertResponse) => {
 			this.adverts = adverts;
 		});
@@ -72,8 +57,6 @@ export class AdminComponent {
 	}
 
 	deleteAdvertsByIds(advertIds: string[]) {
-		console.log(advertIds);
-
 		if (! advertIds) {
 			window.alert(`Neboli poslané žiadne Idečka`);
 			return;
@@ -85,11 +68,14 @@ export class AdminComponent {
 		}
 
 		advertIds.forEach((advertId) => {
-			console.log(`Deleting advert, ${advertId}`);
-			/* this.advertService.deleteAdvert(advertId).pipe(untilDestroyed(this)).subscribe(() => {
+			this.advertService.deleteAdvert(advertId).pipe(untilDestroyed(this)).subscribe(() => {
 				console.log(`Deleted advert, ${advertId}`);
-			}); */
+			});
 		});
+
+		window.alert(`Počet vymazaných inzerátov: ${advertIds.length}`);
+
+		// this.getAllAdverts();
 	}
 
 	checkLogged(): boolean {
@@ -101,23 +87,5 @@ export class AdminComponent {
 			window.alert(`Táto funkcia nie je zatiaľ implementovaná.`);
 			return;
 		}
-
-		if (this.searchForm.invalid) {
-			window.alert("Pre vyhľadávanie je nutné zadať text.");
-			return;
-		}
-
-		const query = this.searchForm.controls['query'].value as string;
-
-		if (query.trim().length == 0) {
-			this.searchForm.controls['query'].setValue('');
-		}
-
-		if (query.trim().length < 3) {
-			window.alert("Pre vyhľadávanie je nutné zadať aspoň tri znaky.");
-			return;
-		}
-
-		this.router.navigate([`search/${query}`]);
 	}
 }

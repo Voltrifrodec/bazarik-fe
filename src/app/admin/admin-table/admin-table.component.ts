@@ -21,22 +21,16 @@ export class AdminTableComponent {
 
 	@Output()
 	advertsToDelete = new EventEmitter<string[]>();
-
-	advertTableForm: FormGroup = new FormGroup({
-		checkboxToggle: new FormControl(false, [])
-	});
-
-	searchForm: FormGroup = new FormGroup({
-		query: new FormControl('', [Validators.required]),
-	})
 	
-	paginationForm: FormGroup; 
-
 	@Input()
 	adverts?: AdvertResponse;
 	
 	@Output()
 	pageChange = new EventEmitter<Pagination>();
+	
+	advertTableForm: FormGroup;
+	searchForm: FormGroup; 
+	paginationForm: FormGroup; 
 
 	private defaultPageNumber = 0;
 	private defaultTotalElements = 10;
@@ -44,6 +38,14 @@ export class AdminTableComponent {
 	private defaultFilter = '';
 
 	constructor() {
+		this.advertTableForm = new FormGroup({
+			checkboxToggle: new FormControl(false, [])
+		});
+
+		this.searchForm = new FormGroup({
+			query: new FormControl('', [Validators.required]),
+		})
+
 		this.paginationForm = new FormGroup({
 			pageSize: new FormControl(this.defaultPageSize, [Validators.required])
 		})
@@ -62,8 +64,7 @@ export class AdminTableComponent {
 	}
 
 	changePage(pageNumber: number): void {
-		console.log(`Page number: ${pageNumber}`);
-		this.defaultPageNumber = pageNumber - 1;
+		this.defaultPageNumber = ((pageNumber <= 1) ? 1 : 0) - 1;
 		let page: Pagination = {
 			page: this.defaultPageNumber,
 			size: this.adverts?.pageable?.pageSize ? this.adverts?.pageable?.pageSize : this.defaultPageSize,
@@ -72,7 +73,6 @@ export class AdminTableComponent {
 			}
 		}
 		this.pageChange.emit(page);
-		console.log(this.adverts);
 	}
 
 	setPageSize(): void {
