@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Advert } from '../common/model/advert.model';
 import { Subsubcategory } from '../common/model/subsubcategory.model';
@@ -22,7 +22,12 @@ export class SubsubcategoryComponent implements OnInit {
 	numberOfAdvertsWordDeclension = '';
 	levelWord = 'podpodkategórii';
 
-	constructor(private subsubcategoryService: SubsubcategoryService, private advertService: AdvertService, private route: ActivatedRoute) {
+	constructor(
+		private subsubcategoryService: SubsubcategoryService,
+		private advertService: AdvertService,
+		private route: ActivatedRoute,
+		private router: Router
+	) {
 		this.subsubcategoryId = this.route.snapshot.params['subsubcategoryId'];
 		this.getSubsubcategoryById();
 		this.getAdverts();
