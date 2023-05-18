@@ -12,6 +12,9 @@ export class AdvertNumberComponent implements OnChanges {
 
 	numberOfAdvertsWordDeclension = '';
 
+	@Input()
+	levelWord?: string;
+
 	ngOnChanges(changes: SimpleChanges): void {
 		this.getRightWordDeclension();
 	}
