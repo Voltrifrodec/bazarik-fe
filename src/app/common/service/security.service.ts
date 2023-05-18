@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Advert } from '../model/advert.model';
 import { Observable } from 'rxjs';
-import { SecurityUpdate, SecurityRequest } from '../model/security.model';
+import { SecurityUpdate, SecurityRequest, SecurityDetail } from '../model/security.model';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,12 +13,12 @@ export class SecurityService {
 
 	constructor(private http: HttpClient) { }
 
-	createHashFromAdvert(advert: Advert): Observable<string> {
-		return this.http.post<string>(`${this.securityUrl}/create`, advert);
+	createHashFromAdvert(advert: Advert): Observable<SecurityDetail> {
+		return this.http.post<SecurityDetail>(`${this.securityUrl}/create`, advert);
 	}
 
-	createHashForUpdate(securityUpdate: SecurityUpdate): Observable<string> {
-		return this.http.post<string>(`${this.securityUrl}/update`, securityUpdate);
+	createHashForUpdate(securityUpdate: SecurityUpdate): Observable<SecurityDetail> {
+		return this.http.post<SecurityDetail>(`${this.securityUrl}/update`, securityUpdate);
 	}
 
 	checkCode(securityRequest: SecurityRequest): Observable<boolean> {
