@@ -12,7 +12,7 @@ export class AdvertService {
 	private apiUrl = `http://localhost:8080/api`;
 	private advertsUrl = 'http://localhost:8080/api/adverts';
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) {}
 
 	getAllAdverts(
 		pagination: Pagination = {
@@ -52,10 +52,6 @@ export class AdvertService {
 	getNumberOfAdvertsInCategoryByCategoryId(categoryId: number): Observable<number> {
 		return this.http.get<number>(`${this.apiUrl}/categories/${categoryId}/adverts/count`);
 	}
-
-	/* getAllAdvertsByCategoryId(categoryId: number): Observable<Advert[]> {
-		return this.http.get<Advert[]>(`${this.apiUrl}/categories/${categoryId}/adverts`);
-	} */
 
 	getAllAdvertsBySubcategoryId(subcategoryId: number): Observable<Advert[]> {
 		return this.http.get<Advert[]>(`${this.apiUrl}/subcategories/${subcategoryId}/adverts`);

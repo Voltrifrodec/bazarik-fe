@@ -19,7 +19,7 @@ export class AuthService {
 		});
 		return this.http.post<any>(this.tokenUrl, null, { headers, observe: 'response' }).pipe(
 			tap((response: any) => {
-				const authToken = response.headers.get('Authorization'); // Tu to už nevypíše správne (null)
+				const authToken = response.headers.get('Authorization');
 				this.setToken(authToken);
 			})
 		);
