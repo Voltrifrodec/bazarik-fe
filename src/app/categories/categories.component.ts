@@ -24,7 +24,12 @@ export class CategoriesComponent {
 
 	numberOfAdvertsWordDeclension = '';
 
-	constructor(private categoryService: CategoryService, private advertService: AdvertService, private route: ActivatedRoute) {
+	constructor(
+		private categoryService: CategoryService,
+		private advertService: AdvertService,
+		private route: ActivatedRoute,
+		private router: Router
+	) {
 		this.categoryId = this.route.snapshot.params['categoryId'];
 	}
 	
