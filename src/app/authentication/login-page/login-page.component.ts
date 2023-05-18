@@ -21,11 +21,7 @@ export class LoginPageComponent {
 			username: new FormControl(undefined, [Validators.required]),
 			password: new FormControl(undefined, [Validators.required])
 		});
-
-	constructor(
-		private authService: AuthService,
-		private router: Router
-	) { }
+	}
 
 	login(): void {
 		if (this.loginForm.valid) {
