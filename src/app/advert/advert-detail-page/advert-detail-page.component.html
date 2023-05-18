@@ -98,17 +98,24 @@
 				<span class="h4 d-block">
 					Kontakt:
 				</span>
-				<span class="h5">
-					E-mail:
-				</span>
-				<a *ngIf="advert?.contact?.email" class="h5 d-inline-block text-success"
-					href="mailto:{{advert?.contact?.email}}?subject=Bazarik - {{advert?.name}}">
-					{{advert?.contact?.email}}
-				</a>
-				<a *ngIf="advert?.contact?.phoneNumber" class="h5 d-block text-success text-truncate"
-					href="sms:{{advert?.contact?.phoneNumber?.replaceAll(' ', '')}}">
-					Telefónne číslo: {{advert?.contact?.phoneNumber}}
-				</a>
+				<div *ngIf="advert?.contact?.email">
+					<span class="h5">
+						E-mail:
+					</span>
+					<a class="h5 d-inline-block text-success"
+						href="mailto:{{advert?.contact?.email}}?subject=Bazarik - {{advert?.name}}">
+						{{advert?.contact?.email}}
+					</a>
+				</div>
+				<div *ngIf="advert?.contact?.phoneNumber">
+					<span class="h5">
+						Telefónne číslo:
+					</span>
+					<a class="h5 d-inline-block text-success"
+						href="sms:{{advert?.contact?.phoneNumber?.replaceAll(' ', '')}}">
+						{{advert?.contact?.phoneNumber}}
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
