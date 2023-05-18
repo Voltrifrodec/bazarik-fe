@@ -67,6 +67,14 @@ export class AdminTableComponent {
 		console.log(this.adverts);
 	}
 
+	setPageSize(): void {
+		this.defaultPageSize = this.paginationForm.controls['pageSize'].value;
+		if (this.adverts) {
+			this.adverts.pageable.pageSize = this.defaultPageSize;
+		}
+		this.changePage(this.getPageNumber());
+	}
+
 	getPageSize(): number {
 		return this.adverts?.pageable?.pageSize ? this.adverts?.pageable?.pageSize : this.defaultPageSize
 	}
