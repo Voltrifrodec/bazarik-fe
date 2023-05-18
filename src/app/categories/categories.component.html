@@ -21,6 +21,20 @@
 
 	<app-advert-number [advertNumber]="adverts?.content?.length || 0" [levelWord]="levelWord"></app-advert-number>
 
+	<app-page-size-form
+		[pageSize]="getPageSize()"
+		(pageSizeOutput)="changePageSize($event)"
+	></app-page-size-form>
+
 	<app-category-advert-list [adverts]="adverts"></app-category-advert-list>
+
+	<div class="d-flex justify-content-center mt-4">
+		<ngb-pagination
+			[collectionSize]="getTotalElements()"
+			[page]="getPageNumber()"
+			[pageSize]="getPageSize()"
+			(pageChange)="changePage($event)"
+		></ngb-pagination>
+	</div>
 
 </div>

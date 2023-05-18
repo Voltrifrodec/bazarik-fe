@@ -31,11 +31,20 @@ export class AdvertService {
 		return this.http.get<AdvertResponse>(this.advertsUrl, {params});
 	}
 
-	getAllAdvertsByCategoryId(categoryId: number): Observable<AdvertResponse> {
-		const params = new HttpParams().appendAll({
-			categoryId: categoryId,
+	getAllAdvertsByCategoryId(
+		categoryId: number,
+		pagination: Pagination = {
 			page: 0,
-			size: 3
+			size: 10,
+			filter: {
+				query: ''
+			}
+		}
+	): Observable<AdvertResponse> {
+		const params = new HttpParams().appendAll({
+			page: pagination.page,
+			size: pagination.size,
+			query: pagination.filter.query
 		});
 		return this.http.get<AdvertResponse>(`${this.apiUrl}/categories/${categoryId}/adverts`, {params});
 	}

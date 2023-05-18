@@ -39,6 +39,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdvertNumberComponent } from './advert/advert-number/advert-number.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminTableComponent } from './admin/admin-table/admin-table.component';
+import { PageSizeFormComponent } from './pagination/page-size-form/page-size-form.component';
 
 @NgModule({
 	declarations: [
@@ -71,7 +72,8 @@ import { AdminTableComponent } from './admin/admin-table/admin-table.component';
         LoginPageComponent,
         AdminComponent,
         AdvertNumberComponent,
-        AdminTableComponent
+        AdminTableComponent,
+        PageSizeFormComponent
 	],
 	imports: [
 		BrowserModule,

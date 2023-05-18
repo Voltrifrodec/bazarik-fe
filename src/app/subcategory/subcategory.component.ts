@@ -43,7 +43,7 @@ export class SubcategoryComponent implements OnInit {
 	}
 
 
-	paginationForm: FormGroup; 
+	paginationForm: FormGroup;
 
 	@Output()
 	pageChange = new EventEmitter<Pagination>();

@@ -18,6 +18,6 @@ export class AdvertTileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      console.log('Advert:',this.advert);
+    //   console.log('Advert:',this.advert);
   }
 }

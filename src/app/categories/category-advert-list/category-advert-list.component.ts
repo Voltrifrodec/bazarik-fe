@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { faLocationArrow, faExclamationCircle, faCheckCircle, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Advert, AdvertResponse } from 'src/app/common/model/advert.model';
 import { Pagination } from 'src/app/common/model/pagination.model';
@@ -8,7 +8,7 @@ import { Pagination } from 'src/app/common/model/pagination.model';
 	templateUrl: './category-advert-list.component.html',
 	styleUrls: ['./category-advert-list.component.css']
 })
-export class CategoryAdvertListComponent implements OnInit {
+export class CategoryAdvertListComponent implements OnInit, OnChanges {
 
 	faLocationArrow = faLocationArrow;
 	faExclamationCircle = faExclamationCircle;
@@ -19,22 +19,8 @@ export class CategoryAdvertListComponent implements OnInit {
 	@Input()
 	adverts?: AdvertResponse;
 
-	@Output()
-	pageChange = new EventEmitter<Pagination>();
-
-	private defaultPageNumber = 0;
-	private defaultTotalElements = 10;
-	private defaultPageSize = 10;
-
-	changePage(pageNumber: number): void {
-		this.defaultPageNumber = pageNumber - 1;
-		this.pageChange.emit({
-			page: this.defaultPageNumber,
-			size: this.adverts?.totalElements || this.defaultPageSize,
-			filter: {
-				query: ''
-			}
-	  })
+	ngOnChanges(changes: SimpleChanges): void {
+		console.log(this.adverts);
 	}
 
 	ngOnInit(): void {
