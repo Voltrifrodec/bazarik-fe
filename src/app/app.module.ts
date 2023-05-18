@@ -36,6 +36,7 @@ import { CategoryTileComponent } from './categories/category-tile/category-tile.
 import { LoginPageComponent } from './authentication/login-page/login-page.component';
 import { AuthHeaderInterceptor } from './authentication/interceptor/auth-header.interceptor';
 import { AdminComponent } from './admin/admin.component';
+import { AdvertNumberComponent } from './advert/advert-number/advert-number.component';
 
 @NgModule({
 	declarations: [
@@ -66,7 +67,8 @@ import { AdminComponent } from './admin/admin.component';
 		SecurityFormComponent,
 		CategoryTileComponent,
         LoginPageComponent,
-        AdminComponent
+        AdminComponent,
+        AdvertNumberComponent
 	],
 	imports: [
 		BrowserModule,
