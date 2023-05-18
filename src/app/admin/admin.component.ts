@@ -1,11 +1,12 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../common/service/auth.service';
 import { faExpandArrowsAlt, faPen, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AdvertService } from '../common/service/advert.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Advert } from '../common/model/advert.model';
+import { Advert, AdvertResponse } from '../common/model/advert.model';
+import { Pagination } from '../common/model/pagination.model';
 
 @UntilDestroy()
 @Component({
@@ -24,7 +25,7 @@ export class AdminComponent {
 
 	searchForm: FormGroup;
 
-	adverts?: Advert[];
+	adverts?: AdvertResponse;
 
 	uuids: Array<string> = [];
 
@@ -35,29 +36,32 @@ export class AdminComponent {
 		private authService: AuthService,
 		private router: Router
 	) {
+		this.getAllAdverts();
+
 		this.searchForm = new FormGroup({
 			query: new FormControl("", [Validators.required])
 		});
-		this.getAllAdverts();
-
+		
 		this.form = new FormGroup({
 			checkboxToggle: new FormControl(false, [])
 		})
-
-		if (! this.checkLogged()) {
+		
+		if (!this.checkLogged()) {
 			window.alert(`Na túto stránku majú prístup len prihlásení administrátori.`);
 			this.router.navigate(['/'])
 			return;
 		}
 	}
 
-	private getAllAdverts(): void {
-		this.advertService.getAllAdverts().pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
+	getAllAdverts(pagination?: Pagination): void {
+		console.log(pagination);
+		this.advertService.getAllAdverts(pagination).pipe(untilDestroyed(this)).subscribe((adverts: AdvertResponse) => {
 			this.adverts = adverts;
 		});
 	}
 
 	deleteAdvertById(advertId: string) {
+		console.log(advertId);
 		this.authService.validateToken()?.pipe(untilDestroyed(this)).subscribe(() => {
 			if (window.confirm(`Naozaj chcete vymazať tento inzerát?\n${advertId}`)) {
 				this.advertService.deleteAdvert(advertId).pipe(untilDestroyed(this)).subscribe(() => {
@@ -67,14 +71,17 @@ export class AdminComponent {
 		})
 	}
 
-	toggleAllCheckboxes(): void {
-		let toCheck = this.form.controls['checkboxToggle'].value
-
-		let checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
-
-		checkboxes.forEach((checkbox) => {
-			let s = checkbox as HTMLInputElement;
-			s.checked = toCheck ? false : true;
+	deleteAdvertsByIds(advertIds: string[]) {
+		console.log(advertIds);
+		if (! advertIds) {
+			window.alert(`Neboli poslané žiadne Idečka`);
+			return;
+		}
+		advertIds.forEach((advertId) => {
+			console.log(`Deleting advert, ${advertId}`);
+			/* this.advertService.deleteAdvert(advertId).pipe(untilDestroyed(this)).subscribe(() => {
+				console.log(`Deleted advert, ${advertId}`);
+			}); */
 		});
 	}
 
@@ -86,12 +93,12 @@ export class AdminComponent {
 			return;
 		}
 
-		if (! window.confirm(`Počet inzerátov na vymazanie: ${this.uuids.length}\nSte si istí?`)) {
+		if (!window.confirm(`Počet inzerátov na vymazanie: ${this.uuids.length}\nSte si istí?`)) {
 			this.removeUuidsFromList();
 			return;
 		}
 
-		if (! this.checkLogged()) {
+		if (!this.checkLogged()) {
 			window.alert('Na vymazanie inzerátov musíte byť prihlásení ako administrátor.');
 			this.removeUuidsFromList();
 			return;
@@ -130,15 +137,6 @@ export class AdminComponent {
 				this.uuids.push(s.value);
 			}
 		});
-	}
-
-	copy(text: any): void {
-		navigator.clipboard.writeText(text);
-		window.alert(`Text\n${text}\nbol úspešne skopírovaný.`);
-	}
-
-	getDateFromTimestamp(timestamp: any) {
-		return new Date(timestamp).toLocaleString();
 	}
 
 	public search(): void {

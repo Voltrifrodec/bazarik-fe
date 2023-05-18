@@ -6,7 +6,7 @@ import { Subcategory } from "./subcategory.model";
 import { Subsubcategory } from "./subsubcategory.model";
 import { Image } from "./image.model";
 import { Region } from "./region.model";
-import { PaginableResponse } from "./pagination";
+import { PaginableResponse } from "./pagination.model";
 
 export interface Advert {
 	id: string;

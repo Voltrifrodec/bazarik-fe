@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Advert, AdvertResponse } from '../common/model/advert.model';
 import { Category } from '../common/model/category.model';
-import { Pagination } from '../common/model/pagination';
+import { Pagination } from '../common/model/pagination.model';
 import { Subcategory } from '../common/model/subcategory.model';
 import { AdvertService } from '../common/service/advert.service';
 import { CategoryService } from '../common/service/category.service';
@@ -51,8 +51,8 @@ export class CategoriesComponent {
 	}
 	
 	getAdverts(): void {
-		this.advertService.getAllAdvertsByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((adverts: Advert[]) => {
-			this.adverts = adverts;
+		this.advertService.getAllAdvertsByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((advertResponse: AdvertResponse) => {
+			this.adverts = advertResponse;
 		})
 	}
 	

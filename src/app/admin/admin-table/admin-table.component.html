@@ -1,0 +1,105 @@
+<div class="d-flex justify-content-between">
+	<div class="col-6">
+		<h5>
+			Hromadné akcie
+		</h5>
+
+		<button class="btn btn-danger" title="VYMAZAŤ" (click)="deleteAdverts()">
+			<fa-icon [icon]="faBin"></fa-icon>
+			Vymazať
+		</button>
+	</div>
+
+	<div class="col-6">
+		<h5 class="d-flex justify-content-end">
+			Vyhľadávanie inzerátov
+		</h5>
+
+		<form [formGroup]="searchForm" class="input-group w-100" (submit)="filter()">
+			<input formControlName="query" type="search" class="form-control rounded d-inline-block" placeholder="Hľadajte inzerát..." />
+			<button type="submit" class="btn btn-success d-inline">
+				<fa-icon [icon]="faSearch"></fa-icon>
+			</button>
+		</form>
+	</div>
+</div>
+
+<br>
+
+<table class="table table-bordered table-border-top-0 table-striped table-success border-success" [formGroup]="advertTableForm">
+	<thead>
+		<th class="p-0 text-center">
+			<input formControlName="checkboxToggle" class="form-check-input" type="checkbox" (click)="toggleAllCheckboxes()">
+		</th>
+		<th scope="col">ID</th>
+		<th>Názov</th>
+		<th>Dátum úpravy</th>
+		<th>Cena</th>
+		<th>Kategória</th>
+		<th>Obrázok</th>
+		<th>Otvoriť</th>
+		<th>Upraviť</th>
+		<th>Vymazať</th>
+	</thead>
+	<tbody *ngIf="adverts?.content">
+		<tr *ngFor="let advert of adverts!.content">
+		<!-- <tr *ngFor="let advert of adverts?.content"> -->
+			<td class="text-center">
+				<input class="form-check-input" type="checkbox" name="checkbox" value="{{advert.id}}">
+			</td>
+
+			<td title="Kliknite pre skopírovanie:&NewLine;{{advert.id}}" (click)="copy(advert.id);" role="button">
+				UUID<sup>?</sup>
+			</td>
+
+			<td>
+				{{ advert.name.slice(0,20) }}<span *ngIf="advert.name.length > 20">...</span>
+			</td>
+
+			<td title="{{ getDateFromTimestamp(advert.dateModified) }}">
+				{{ getDateFromTimestamp(advert.dateModified).replaceAll('. ', '.') }}
+			</td>
+
+			<td class="" title="{{advert.priceEur}} {{advert.currency.symbol}}">
+				{{advert.currency.symbol}} {{advert.priceEur}}
+			</td>
+
+			<td title="{{advert.category.name}}">
+				{{ advert.category.name }}
+			</td>
+
+			<td>
+				<img width="32" height="32" src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}">
+			</td>
+
+			<td class="text-center">
+				<button class="btn btn-sm btn-primary" title="OTVORIŤ" routerLink="/advert/{{advert.id}}">
+					<fa-icon [icon]="faArrow"></fa-icon>
+				</button>
+			</td>
+
+			<td class="text-center">
+				<button class="btn btn-sm btn-warning" title="UPRAVIŤ" routerLink="/advert/edit/{{advert.id}}">
+					<fa-icon [icon]="faPen"></fa-icon>
+				</button>
+			</td>
+
+			<td class="text-center">
+				<button class="btn btn-sm btn-danger" title="VYMAZAŤ" (click)="deleteAdvert(advert.id);">
+					<fa-icon [icon]="faBin"></fa-icon>
+				</button>
+			</td>
+
+			<!-- TODO: Odoslať e-mail na e-mailovú adresu inzerátu -->
+		</tr>
+	</tbody>
+</table>
+
+<div class="d-flex justify-content-center">
+	<ngb-pagination
+		[collectionSize]="getTotalElements()"
+		[page]="getPageNumber()"
+		[pageSize]="getPageSize()"
+		(pageChange)="changePage($event)"
+	></ngb-pagination>
+</div>

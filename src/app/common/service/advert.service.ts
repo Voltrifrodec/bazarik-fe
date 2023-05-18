@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Advert, AdvertResponse } from '../model/advert.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Pagination } from '../model/pagination';
+import { Pagination } from '../model/pagination.model';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,8 +14,22 @@ export class AdvertService {
 
 	constructor(private http: HttpClient) { }
 
-	getAllAdverts(): Observable<Advert[]> {
-		return this.http.get<Advert[]>(this.advertsUrl);
+	getAllAdverts(
+		pagination: Pagination = {
+			page: 0,
+			size: 10,
+			filter: {
+				query: ''
+			}
+		}
+	): Observable<AdvertResponse> {
+		console.log(pagination);
+		const params = new HttpParams().appendAll({
+			page: pagination.page,
+			size: pagination.size,
+			query: pagination.filter.query
+		});
+		return this.http.get<AdvertResponse>(this.advertsUrl, {params});
 	}
 
 	getAllAdvertsByCategoryId(categoryId: number): Observable<AdvertResponse> {
@@ -40,9 +54,9 @@ export class AdvertService {
 		return this.http.get<number>(`${this.apiUrl}/categories/${categoryId}/adverts/count`);
 	}
 
-	getAllAdvertsByCategoryId(categoryId: number): Observable<Advert[]> {
+	/* getAllAdvertsByCategoryId(categoryId: number): Observable<Advert[]> {
 		return this.http.get<Advert[]>(`${this.apiUrl}/categories/${categoryId}/adverts`);
-	}
+	} */
 
 	getAllAdvertsBySubcategoryId(subcategoryId: number): Observable<Advert[]> {
 		return this.http.get<Advert[]>(`${this.apiUrl}/subcategories/${subcategoryId}/adverts`);
