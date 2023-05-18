@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ToastService } from 'angular-toastify';
 import { Advert } from 'src/app/common/model/advert.model';
-import { SecurityUpdate, SecurityAction } from 'src/app/common/model/security.model';
+import { SecurityUpdate, SecurityAction, SecurityDetail } from 'src/app/common/model/security.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
 import { AuthService } from 'src/app/common/service/auth.service';
 import { ImageService } from 'src/app/common/service/image.service';
@@ -16,7 +16,7 @@ import { SecurityService } from 'src/app/common/service/security.service';
 	templateUrl: './security-form.component.html',
 	styleUrls: ['./security-form.component.css']
 })
-export class SecurityFormComponent implements OnDestroy {
+export class SecurityFormComponent implements OnDestroy, OnChanges {
 
 	@Input()
 	action?: SecurityAction;
@@ -29,6 +29,9 @@ export class SecurityFormComponent implements OnDestroy {
 
 	@Output()
 	clearForm = new EventEmitter<void>();
+
+	@Input()
+	send = ''
 
 	securityForm: FormGroup;
 
@@ -48,6 +51,13 @@ export class SecurityFormComponent implements OnDestroy {
 		});
 	}
 
+	ngOnChanges(changes: SimpleChanges): void {
+		if (this.send != '') {
+			this.createHash();
+			this.send = '';
+		}
+	}
+
 	ngOnDestroy() {
 		this.clearForm.emit();
 	}
@@ -57,14 +67,16 @@ export class SecurityFormComponent implements OnDestroy {
 	}
 
 	createHash() {
+		this.toastService.success('Posielam požiadavku na server.');
+
 		if (this.action?.action === 'delete') {
 			let securityUpdate: SecurityUpdate = {
 				advertId: this.advert.id,
 				email: this.advert.contact.email
 			}
 
-			this.securityService.createHashForUpdate(securityUpdate).pipe(untilDestroyed(this)).subscribe((hash: string) => {
-				this.hash = hash;
+			this.securityService.createHashForUpdate(securityUpdate).pipe(untilDestroyed(this)).subscribe((hash: SecurityDetail) => {
+				this.hash = hash.hash;
 				this.toastService.success(`Overovací kód bol odoslaný na e-mail.`);
 			}, (error: Error) => {
 				this.toastService.error(error.message);
@@ -75,8 +87,8 @@ export class SecurityFormComponent implements OnDestroy {
 		if (this.action?.action === 'create') {
 			this.advert.imageId = 0;
 
-			this.securityService.createHashFromAdvert(this.advert).pipe(untilDestroyed(this)).subscribe((hash: string) => {
-				this.hash = hash;
+			this.securityService.createHashFromAdvert(this.advert).pipe(untilDestroyed(this)).subscribe((hash: SecurityDetail) => {
+				this.hash = hash.hash;
 				this.toastService.success(`Overovací kód bol odoslaný na e-mail.`);
 			}, (err: Error) => {
 				this.toastService.error(err.message);
@@ -89,17 +101,15 @@ export class SecurityFormComponent implements OnDestroy {
 				email: this.advert.contactEmail
 			}
 
-			this.securityService.createHashForUpdate(securityUpdate).pipe(untilDestroyed(this)).subscribe((hash: string) => {
-				this.hash = hash;
+			this.securityService.createHashForUpdate(securityUpdate).pipe(untilDestroyed(this)).subscribe((hash: SecurityDetail) => {
+				this.hash = hash.hash;
 				this.toastService.success(`Overovací kód bol odoslaný na e-mail.`);
-			}, (err: Error) => {
-				this.toastService.error(err.message);
 			})
 		}
 	}
 
 	saveAdvert() {
-		if (this.authService.validateToken()) {
+		if (this.validateToken()) {
 			this.sendFile();
 			return;
 		}
@@ -115,8 +125,10 @@ export class SecurityFormComponent implements OnDestroy {
 	private verifyHashCode() {
 		let securityRequest = {
 			code: this.securityForm.controls['code'].value,
-			hash: this.hash!
+			hash: this.hash || ''
 		};
+
+		console.log(securityRequest);
 
 		this.securityForm.controls['code'].reset();
 
@@ -224,9 +236,14 @@ export class SecurityFormComponent implements OnDestroy {
 	private redirectToAdvertDetail(advertId: string, message: string) {
 		this.clearForm.emit();
 
-		window.alert(`Inzerát bol úspešne ${message}.\nBudete presmerovaný na stránku inzerátu.`);
+		window.alert(`Inzerát bol úspešne ${message}.\nBudete presmerovaní na stránku inzerátu.`);
 		window.scrollTo(0, 0);
 		this.router.navigate([`/advert/${advertId}`]);
+	}
+
+	partiallyHideEmail(email: string): string {
+		if (! email) return '';
+		return email.replace(/(\w{2})[\w.-]+@([\w.]+\w)/, "$1***@$2");
 	}
 
 }

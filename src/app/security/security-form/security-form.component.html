@@ -1,22 +1,28 @@
 <lib-toastify-toast-container class="container" position="top-left">
 </lib-toastify-toast-container>
-<form [formGroup]="securityForm" (submit)="saveAdvert()" class="p-3">
+<form [formGroup]="securityForm" (submit)="saveAdvert()" class="p-3"  *ngIf="advert">
 
-	<label class="h5">
-		Zadajte overovací kód zaslaný na e-mail:
-	</label>
-		<input class="input w-100" formControlName="code" type="number">
+	<h5 class="h5">
+		Zadajte overovací kód odoslaný na e-mail
+	</h5>
+	<h5 class="h5">
+		<!-- {{ partiallyHideEmail(advert.contactEmail) }} -->
+	</h5>
+
+	<input class="form-control form-control-lg ps-2" formControlName="code" type="number">
+	
+	<div class="d-flex justify-content-between mt-3">
+		<input class="btn btn-primary" type="submit" value="Overiť" [disabled]="securityForm.invalid">
 		
-		<div class="d-flex justify-content-between mt-3">
-			<input class="btn btn-primary" type="submit" value="Odoslať" [disabled]="securityForm.invalid">
-			<input *ngIf="validateToken()" class="btn btn-primary" type="submit" value="Odoslať (ADMIN)" [disabled]="securityForm.invalid">
+		<!-- ADMIN -->
+		<input *ngIf="validateToken()" class="btn btn-primary" type="submit" value="Odoslať (ADMIN)" [disabled]="securityForm.invalid">
 
-			<button class="btn btn-primary" type="button" (click)="this.createHash()" value="Znovu odoslať overovací kód na e-mail">
-				Odoslať overovací kód na e-mail
-			</button>
+		<button class="btn btn-primary" type="button" (click)="this.createHash()">
+			Znovu odoslať overovací kód na e-mail
+		</button>
 
-			<input class="btn btn-danger" type="button" (click)="formCancel.emit()" value="Zrušiť">
-		</div>
+		<input class="btn btn-danger" type="button" (click)="formCancel.emit()" value="Zrušiť">
+	</div>
 
 	<small class="d-flex justify-content-between mt-3">
 	</small>

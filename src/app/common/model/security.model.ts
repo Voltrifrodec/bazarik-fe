@@ -8,6 +8,10 @@ export interface SecurityRequest {
 	hash: string;
 }
 
+export interface SecurityDetail {
+	hash: string;
+}
+
 export interface SecurityAction {
 	action: 'create' | 'update' | 'delete';
 }

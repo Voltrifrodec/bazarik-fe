@@ -67,6 +67,13 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		action: 'create'
 	}
 
+	@Output()
+	sendMessage = '';
+
+	send(): void {
+		this.sendMessage = 'send';
+	}
+
 	categories?: Category[];
 	subcategories?: Subcategory[];
 	subsubcategories?: Subsubcategory[];
