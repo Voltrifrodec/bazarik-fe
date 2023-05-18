@@ -171,7 +171,7 @@
     <div class="form-group">
         <p class="h3">E-mailová adresa</p>
         <input formControlName="contactEmail" type="search" class="form-control form-control-lg"
-			placeholder="Zadajte svoj e-mail pre overene pridania inzerátu.">
+			placeholder="Zadajte svoj e-mail pre overene pridania inzerátu." autocomplete="email">
         <small class="form-text text-muted">Na túto e-mailovú adresu Vám bude zaslaný kód na overenie.</small>
 		<h5 *ngIf="advertForm.controls['contactEmail'].invalid" class="text-danger">
 			Je nutné zadať správnu e-mailovú adresu
