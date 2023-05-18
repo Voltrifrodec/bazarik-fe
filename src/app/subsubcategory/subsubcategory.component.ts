@@ -49,8 +49,6 @@ export class SubsubcategoryComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.subsubcategoryId = this.route.snapshot.params['subsubcategoryId'];
-		this.getSubsubcategoryById();
 		this.getAdverts();
 	}
 

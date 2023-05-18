@@ -31,6 +31,8 @@ export class CategoriesComponent {
 		private router: Router
 	) {
 		this.categoryId = this.route.snapshot.params['categoryId'];
+		this.getSubcategories();
+		this.getCategoryById();
 	}
 	
 	getCategoryById(): void {
@@ -54,9 +56,7 @@ export class CategoriesComponent {
 	}
 	
 	ngOnInit(): void {
-		this.getSubcategories();
 		this.getAdverts();
-		this.getCategoryById();
 	}
 
 }

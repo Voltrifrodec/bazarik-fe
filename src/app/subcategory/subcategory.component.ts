@@ -58,9 +58,7 @@ export class SubcategoryComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.getSubsubcategories();
 		this.getAdverts();
-		this.getSubcategoryById();
 	}
 
 	getRightWordDeclension(): void {
