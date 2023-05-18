@@ -96,8 +96,6 @@ export class AdminTableComponent {
 	}
 
 	deleteAdverts(): void {
-		// if (window.confirm(``)) {}
-		// TODO: Zozbierať všetky Idečka inzerátov
 		let checkboxes = document.getElementsByName('checkbox');
 		let advertsIds: string[] = [];
 
