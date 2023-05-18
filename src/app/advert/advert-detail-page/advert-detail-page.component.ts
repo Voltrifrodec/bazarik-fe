@@ -40,6 +40,11 @@ export class AdvertDetailPageComponent {
 	) {
 		this.advertId = route.snapshot.paramMap.get('advertId');
 		this.getAdvert();
+		this.scrollToTop();
+	}
+
+	scrollToTop(): void {
+		window.scrollTo(0, 0);
 	}
 
 	getAdvert(): void {
