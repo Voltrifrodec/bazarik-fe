@@ -19,7 +19,7 @@
 		></app-category-section-list>
         <!-- (pageChange)="getAdverts($any($event))" -->
 
-	<app-advert-number [advertNumber]="adverts?.content?.length" [levelWord]="levelWord"></app-advert-number>
+	<app-advert-number [advertNumber]="adverts?.content?.length || 0" [levelWord]="levelWord"></app-advert-number>
 
 	<app-category-advert-list [adverts]="adverts"></app-category-advert-list>
 
