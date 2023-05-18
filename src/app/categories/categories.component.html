@@ -15,6 +15,8 @@
 	<h3>{{category?.name}}</h3>
 
 	<app-category-section-list [subcategories]="subcategories"></app-category-section-list>
+
+	<app-advert-number [advertNumber]="adverts?.length" [levelWord]="levelWord"></app-advert-number>
 	
 	<app-category-advert-list [adverts]="adverts"></app-category-advert-list>
 </div>

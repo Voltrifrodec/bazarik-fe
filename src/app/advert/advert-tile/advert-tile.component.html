@@ -1,4 +1,5 @@
-<div *ngIf="advert" class="border border-dark h-100 mb-md-2 mb-4">
+<div *ngIf="advert" class="border border-dark h-100 mb-md-2 mb-4" routerLink="/advert/{{ advert.id }}" role="button">
+
 	<div class="text-center h-50 advert-img">
 		<img
 			class="mg-fluid border-secondary w-100"

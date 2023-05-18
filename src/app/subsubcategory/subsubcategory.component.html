@@ -1,27 +1,32 @@
 <div class="m-3">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a class="link" routerLink="/">Domov</a> 
-        </li>
-        <li class="breadcrumb-item">
-            <a class="link" routerLink="/categories/{{subsubcategory?.subcategory?.category?.id}}">{{subsubcategory?.subcategory?.category?.name}}</a> 
-        </li>
-        <li class="breadcrumb-item">
-            <a class="link" routerLink="/subcategories/{{subsubcategory?.subcategory?.id}}">{{subsubcategory?.subcategory?.name}}</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a class="link" routerLink="/subsubcategories/{{subsubcategory?.id}}">
-                <span class="fw-bold">{{subsubcategory?.name}}</span>
-            </a>
-        </li>
-    </ol>
-    <hr>
-    <h3>{{subsubcategory?.name}}</h3>   
-    <app-subsubcategory-advert-list [adverts]="adverts"></app-subsubcategory-advert-list>
-</div>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a class="link" routerLink="/">Domov</a>
+		</li>
+		<li class="breadcrumb-item">
+			<a class="link"
+				routerLink="/categories/{{subsubcategory?.subcategory?.category?.id}}">{{subsubcategory?.subcategory?.category?.name}}</a>
+		</li>
+		<li class="breadcrumb-item">
+			<a class="link"
+				routerLink="/subcategories/{{subsubcategory?.subcategory?.id}}">{{subsubcategory?.subcategory?.name}}</a>
+		</li>
+		<li class="breadcrumb-item">
+			<a class="link" routerLink="/subsubcategories/{{subsubcategory?.id}}">
+				<span class="fw-bold">{{subsubcategory?.name}}</span>
+			</a>
+		</li>
+	</ol>
 
-<!-- <div class="m-3 pt-2 pb-2">
-</div> -->
-<!-- <div class="border border-dark bg-container-alt p-2 m-3">
-    <span class="CategoriesGridInformation text-info d-block text-center">Už neexistujú žiadne ďalšie podkategórie na zobrazenie.</span>
-</div> -->
+	<hr>
+
+	<h3>{{subsubcategory?.name}}</h3>
+
+	<div class="bg-container-alt p-2 border border-dark">
+		<span class="text-dark fw-bold d-block">V tejto podpodkategórii sa už nenachádzajú ďaľšie podpodpodkategórie</span>
+	</div>
+
+	<app-advert-number [advertNumber]="adverts?.length" [levelWord]="levelWord"></app-advert-number>
+
+	<app-subsubcategory-advert-list [adverts]="adverts"></app-subsubcategory-advert-list>
+</div>
