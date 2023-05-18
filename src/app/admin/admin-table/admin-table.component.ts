@@ -64,7 +64,7 @@ export class AdminTableComponent {
 	}
 
 	changePage(pageNumber: number): void {
-		this.defaultPageNumber = ((pageNumber <= 1) ? 1 : 0) - 1;
+		this.defaultPageNumber = ((pageNumber <= 1) ? 1 : pageNumber) - 1;
 		let page: Pagination = {
 			page: this.defaultPageNumber,
 			size: this.adverts?.pageable?.pageSize ? this.adverts?.pageable?.pageSize : this.defaultPageSize,
