@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Advert } from '../common/model/advert.model';
+import { Advert, AdvertResponse } from '../common/model/advert.model';
 import { Category } from '../common/model/category.model';
+import { Pagination } from '../common/model/pagination';
 import { Subcategory } from '../common/model/subcategory.model';
 import { AdvertService } from '../common/service/advert.service';
 import { CategoryService } from '../common/service/category.service';
@@ -17,8 +18,8 @@ export class CategoriesComponent {
 	categoryId: number;
 	category?: Category;
 
-	subcategories?: Subcategory[];
-	adverts?: Advert[];
+    subcategories?: Subcategory[];
+    adverts?: AdvertResponse;
 
 	levelWord = 'kategórii';
 

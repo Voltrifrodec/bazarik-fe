@@ -1,4 +1,4 @@
-<ng-container *ngIf="adverts?.length; then advertsExist; else advertsMissing"></ng-container>
+<ng-container *ngIf="adverts?.content; then advertsExist; else advertsMissing"></ng-container>
 <ng-template #advertsExist>
 	<div class="container px-0">
 		<div class="row g-2">
