@@ -45,7 +45,6 @@ export class AdminComponent {
 	}
 
 	deleteAdvertById(advertId: string) {
-		console.log(advertId);
 		this.authService.validateToken()?.pipe(untilDestroyed(this)).subscribe(() => {
 			if (window.confirm(`Naozaj chcete vymazať tento inzerát?\n${advertId}`)) {
 				this.advertService.deleteAdvert(advertId).pipe(untilDestroyed(this)).subscribe(() => {
@@ -81,7 +80,7 @@ export class AdminComponent {
 				query: ''
 			}
 		}
-		
+
 		this.getAllAdverts(pagination);
 	}
 
