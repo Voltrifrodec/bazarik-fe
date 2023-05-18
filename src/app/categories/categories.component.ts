@@ -51,8 +51,8 @@ export class CategoriesComponent {
 	}
 	
 	getAdverts(): void {
-		this.advertService.getAllAdvertsByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((advertResponse: AdvertResponse) => {
-			this.adverts = advertResponse;
+		this.advertService.getAllAdvertsByCategoryId(this.categoryId).pipe(untilDestroyed(this)).subscribe((adverts: AdvertResponse) => {
+			this.adverts = adverts;
 		})
 	}
 	

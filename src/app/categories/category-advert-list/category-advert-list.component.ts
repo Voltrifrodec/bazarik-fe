@@ -37,8 +37,6 @@ export class CategoryAdvertListComponent implements OnInit {
 	  })
 	}
 
-
-
 	ngOnInit(): void {
 		let date = new Date().toUTCString();
 		console.log(date, 'Amount of received adverts at advert-list:', this.adverts);

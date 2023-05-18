@@ -19,7 +19,18 @@
 
 	<app-subcategory-section-list [subsubcategories]="subsubcategories"></app-subcategory-section-list>
 
-	<app-advert-number [advertNumber]="adverts?.length || 0" [levelWord]="levelWord"></app-advert-number>
+	<app-advert-number [advertNumber]="adverts?.content?.length || 0" [levelWord]="levelWord"></app-advert-number>
 
 	<app-subcategory-advert-list [adverts]="adverts"></app-subcategory-advert-list>
+
+	
+	<div class="d-flex justify-content-center">
+		<ngb-pagination
+			[collectionSize]="getTotalElements()"
+			[page]="getPageNumber()"
+			[pageSize]="getPageSize()"
+			(pageChange)="changePage($event)"
+		></ngb-pagination>
+	</div>
+	
 </div>
