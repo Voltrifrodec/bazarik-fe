@@ -33,7 +33,7 @@ export class AdminComponent {
 		
 		if (!this.checkLogged()) {
 			this.router.navigate(['/'])
-			window.alert(`Na túto stránku majú prístup len prihlásení administrátori.`);
+			window.alert(`Na túto stránku má prístup len administrátori.`);
 			return;
 		}
 	}
@@ -61,7 +61,7 @@ export class AdminComponent {
 		}
 		
 		if (!this.checkLogged()) {
-			window.alert('Na vymazanie inzerátov musíte byť prihlásení ako administrátor.');
+			window.alert('Na vymazanie inzerátov musíte byť prihlásený ako administrátor.');
 			return;
 		}
 

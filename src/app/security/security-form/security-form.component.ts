@@ -245,7 +245,7 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 	private redirectToAdvertDetail(advertId: string, message: string) {
 		this.clearForm.emit();
 
-		window.alert(`Inzerát bol úspešne ${message}.\nBudete presmerovaní na stránku inzerátu.`);
+		window.alert(`Inzerát bol úspešne ${message}.\nBudete presmerovaný na stránku inzerátu.`);
 		window.scrollTo(0, 0);
 		this.router.navigate([`/advert/${advertId}`]);
 	}

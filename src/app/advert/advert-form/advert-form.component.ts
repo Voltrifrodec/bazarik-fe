@@ -284,7 +284,7 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 	leaveDialog(): void {
 		let userResponse = window.confirm(
-			`Naozaj chcete odísť z tejto stránky?\nBudete presmerovaní na hlavnú stránku.`
+			`Naozaj chcete odísť z tejto stránky?\nBudete presmerovaný na hlavnú stránku.`
 		);
 
 		if (userResponse) {
