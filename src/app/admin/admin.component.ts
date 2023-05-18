@@ -1,11 +1,10 @@
-import { Component, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../common/service/auth.service';
 import { faExpandArrowsAlt, faPen, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AdvertService } from '../common/service/advert.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Advert, AdvertResponse } from '../common/model/advert.model';
+import { AdvertResponse } from '../common/model/advert.model';
 import { Pagination } from '../common/model/pagination.model';
 
 @UntilDestroy()
