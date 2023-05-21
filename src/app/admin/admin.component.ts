@@ -22,6 +22,8 @@ export class AdminComponent {
 
 	adminDropdown: boolean = !true;
 
+	validatedAdmin = false;
+
 	adverts?: AdvertResponse;
 
 	constructor(
@@ -29,13 +31,8 @@ export class AdminComponent {
 		private authService: AuthService,
 		private router: Router
 	) {
+		this.validateAdmin();
 		this.getAllAdverts();
-		
-		if (!this.checkLogged()) {
-			this.router.navigate(['/'])
-			window.alert(`Na túto stránku má prístup len administrátori.`);
-			return;
-		}
 	}
 
 	getAllAdverts(pagination?: Pagination): void {
@@ -45,23 +42,56 @@ export class AdminComponent {
 	}
 
 	deleteAdvertById(advertId: string) {
-		this.authService.validateToken()?.pipe(untilDestroyed(this)).subscribe(() => {
-			if (window.confirm(`Naozaj chcete vymazať tento inzerát?\n${advertId}`)) {
-				this.advertService.deleteAdvert(advertId).pipe(untilDestroyed(this)).subscribe(() => {
-					window.alert('Inzerát bol úspešne vymazaný.');
-				});
+		if (! this.checkTokenInLocalStorage()) {
+			window.alert('Token could not be found.');
+			return;
+		}
+
+		this.authService.validateToken().pipe(untilDestroyed(this)).subscribe({
+			next: (v) => (v) ? this.deleteAdvert(advertId) : console.log(v),
+			error: (e) =>  {
+				console.log(e);
+				console.error(e);
 			}
-		})
+		});
+	}
+
+	private checkTokenInLocalStorage() {
+		return this.authService.getToken();
+	}
+
+	private validateAdmin() {
+		if (! this.checkTokenInLocalStorage()) {
+			window.alert('Token could not be found.');
+			return;
+		}
+
+		this.authService.validateToken().pipe(untilDestroyed(this)).subscribe({
+			next: (v) => {
+				this.validatedAdmin = (v) ? true : false;
+			},
+			error: (e) => {
+				console.error(e);
+			}
+		});
+	}
+
+	private deleteAdvert(advertId: string) {
+		if (window.confirm(`Naozaj chcete vymazať tento inzerát?\n${advertId}`)) {
+			this.advertService.deleteAdvert(advertId).pipe(untilDestroyed(this)).subscribe(() => {
+				window.alert('Inzerát bol úspešne vymazaný.');
+			}); 
+		}
 	}
 
 	deleteAdvertsByIds(advertIds: string[]) {
-		if (! advertIds) {
-			window.alert(`Neboli poslané žiadne Idečka`);
+		if (! this.checkTokenInLocalStorage()) {
+			window.alert('Token could not be found.');
 			return;
 		}
 		
-		if (!this.checkLogged()) {
-			window.alert('Na vymazanie inzerátov musíte byť prihlásený ako administrátor.');
+		if (! advertIds) {
+			window.alert(`Neboli poslané žiadne Idečka`);
 			return;
 		}
 
@@ -84,8 +114,8 @@ export class AdminComponent {
 		this.getAllAdverts(pagination);
 	}
 
-	checkLogged(): boolean {
-		return this.authService.isLogged() ? true : false;
+	private removeTokenFromLocalStorage() {
+		this.authService.removeToken();
 	}
 
 	public search(): void {
