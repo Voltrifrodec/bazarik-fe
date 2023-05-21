@@ -26,12 +26,14 @@
 		<span class="text-dark fw-bold d-block">V tejto podpodkategórii sa už nenachádzajú ďalšie podpodpodkategórie</span>
 	</div>
 
-	<app-advert-number [advertNumber]="getTotalElements()" [levelWord]="levelWord"></app-advert-number>
-
-	<app-page-size-form
-		[pageSize]="getPageSize()"
-		(pageSizeOutput)="changePageSize($event)"
-	></app-page-size-form>
+	<div class="d-flex justify-content-between my-3">
+		<app-advert-number [advertNumber]="getNumberOfElements()" [levelWord]="levelWord"></app-advert-number>
+	
+		<app-page-size-form
+			[pageSize]="getPageSize()"
+			(pageSizeOutput)="changePageSize($event)"
+		></app-page-size-form>
+	</div>
 
 	<app-subsubcategory-advert-list [adverts]="adverts"></app-subsubcategory-advert-list>
 
