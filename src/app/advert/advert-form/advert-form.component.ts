@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -27,7 +27,7 @@ import { SubsubcategoryService } from 'src/app/common/service/subsubcategory.ser
 	templateUrl: './advert-form.component.html',
 	styleUrls: ['./advert-form.component.css']
 })
-export class AdvertFormComponent implements OnInit, OnDestroy {
+export class AdvertFormComponent implements OnInit {
 
 	descriptionCharacterCount: number = 0;
 	maximumDescriptionCharacterCount: number = 1024;
@@ -124,11 +124,9 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		if (this.router.url.includes('/advert/new')) {
 			this.action.action = 'create';			
 		}
-
-	}
-
-	ngOnDestroy(): void {
-		// this.saveToLocalStorage();
+		
+		let advertId = this.route.snapshot.paramMap.get('advertId');
+		if (advertId) this.advertId = advertId;
 	}
 
 	ngOnInit(): void {
@@ -138,12 +136,8 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 		this.getCurrencies();
 
-		this.advertId = this.route.snapshot.paramMap.get('advertId')!;
-		this.getAdvert();
 		
-		if (this.action.action === 'create') {
-			// this.loadFromLocalStorage();
-		}
+		this.getAdvert();
 	}
 
 	getAllCategories(): void {
@@ -198,14 +192,6 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 
 	loadCities(): void {
 		// TODO: Implementovať obec
-		/* 
-		let regionId = Number(this.advertForm.controls['region'].value);
-		
-		this.regionService.getAllDistrictsByRegionId(regionId).pipe(untilDestroyed(this))
-			.subscribe((districts: District[]) => {
-			this.districts = districts;
-		})
-		*/
 	}
 
 	checkWhichFormControlIsInvalid(): void {
@@ -217,7 +203,6 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 					invalid.push(name);
 				}
 			}
-			// console.log(invalid);
 			return;
 		}
 	}
@@ -272,7 +257,6 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 			subsubcategoryId: this.advertForm.controls['subsubcategory'].value,
 
 			contactEmail: this.advertForm.controls['contactEmail'].value,
-			// contactEmail: this.advertForm.controls['contactEmail'].value,
 
 			regionId: this.advertForm.controls['region'].value,
 			districtId: this.advertForm.controls['district'].value,
@@ -288,46 +272,10 @@ export class AdvertFormComponent implements OnInit, OnDestroy {
 		);
 
 		if (userResponse) {
-			// this.saveToLocalStorage();
 			this.router.navigate(['/'])
 			window.scrollTo(0, 0);
 		}
 	}
-
-	/* saveToLocalStorage(): void {
-		let advert = this.prepareAdvert();
-
-		for (const [key, value] of Object.entries(advert)) {
-			if (null == value) continue;
-
-			if (String(value).trim() != null) {
-				localStorage.setItem(key, String(value));
-			}
-		}
-	}
-
-	loadFromLocalStorage(): void {
-		for (let i = 0; i < localStorage.length; i++) {
-			let key = localStorage.key(i);
-			if (null == key) continue;
-
-			let value = localStorage.getItem(key);
-			if (null == value) continue;
-
-			key = key.replace('Id', '');
-
-			if (key == 'imageId') {
-				if (this.advert != null) {
-					this.advert.image.id = Number(value);
-					continue;
-				}
-			};
-			
-			this.advertForm.controls[key].patchValue(String(value));
-		}
-
-		this.countChars();
-	} */
 
 	countChars(): void {
 		this.descriptionCharacterCount = this.advertForm.controls['description'].value?.length | 0;
