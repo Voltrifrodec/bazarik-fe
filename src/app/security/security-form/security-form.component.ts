@@ -163,8 +163,6 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 			hash: this.hash || ''
 		};
 
-		console.log(securityRequest);
-
 		this.securityForm.controls['code'].reset();
 
 		this.securityService.checkCode(securityRequest).pipe(untilDestroyed(this)).subscribe((codeCheck: boolean) => {
