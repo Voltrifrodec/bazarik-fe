@@ -14,7 +14,7 @@ export class NavbarComponent {
 	faSearch = faSearch;
 	faPlus = faPlus;
 
-	adminDropdown: boolean = !true;
+	adminDropdown: boolean = false;
 
 	searchForm: FormGroup;
 

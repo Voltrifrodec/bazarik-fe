@@ -24,7 +24,7 @@
 				<button class="btn btn-danger" ">ADMIN</button>
 				
 			</div> -->
-			<div [ngIf]="adminDropdown">
+			<ng-template [ngIf]="adminDropdown">
 				<button type="button" class="btn btn-danger dropdown-toggle" (click)="toggleDropdown()"
 					aria-expanded="false">
 				  	ADMIN
@@ -34,7 +34,7 @@
 					<button class="d-block text-nowrap btn btn-primary w-100" routerLink="/admin" (click)="toggleDropdown()">ADMIN PANEL</button>
 					<button class="d-block text-nowrap btn btn-danger w-100" (click)="logout(); toggleDropdown()">ODHLÁSIŤ SA</button>
 				</div>
-			</div>
+			</ng-template>
 			
         </nav>
     </div>
