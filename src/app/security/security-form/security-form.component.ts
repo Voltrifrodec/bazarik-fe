@@ -39,6 +39,8 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 
 	email: string = '';
 
+	validatedAdmin = false;
+
 	constructor(
 		private router: Router,
 		private securityService: SecurityService,
@@ -47,6 +49,7 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 		private toastService: ToastService,
 		private authService: AuthService
 	) {
+		this.validateAdmin();
 		this.securityForm = new FormGroup({
 			code: new FormControl(null, [Validators.required]),
 			hash: new FormControl()
@@ -62,6 +65,9 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 	}
 
 	getEmail(): void {
+		if (! this.advert) return;
+		if (! this.advert.id) return;
+
 		this.advertService.getAdvertById(this.advert.id).subscribe((advert: Advert) => {
 			this.email = this.partiallyHideEmail(advert.contact.email);
 		})
@@ -71,6 +77,7 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 		this.clearForm.emit();
 	}
 
+	/** @deprecated */
 	public validateToken() {
 		return this.authService.isLogged();
 	}
@@ -123,17 +130,31 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 	}
 
 	saveAdvert() {
-		if (this.validateToken()) {
-			this.sendFile();
-			return;
-		}
-		
-		if (!this.advert) {
-			this.toastService.error(`Nemožno vytvoriť prázdny inzerát.`);
+		if (! this.authService.isTokenInLocalStorage()) {
+			if (!this.advert) {
+				this.toastService.error(`Nemožno vytvoriť prázdny inzerát.`);
+				return;
+			}
+	
+			this.verifyHashCode();
 			return;
 		}
 
-		this.verifyHashCode();
+		this.authService.validateToken().pipe(untilDestroyed(this)).subscribe({
+			next: (v) => (v) ? this.sendFile() : console.log(v),
+			error: (e) => console.error(e)
+		})
+	}
+
+	validateAdmin() {
+		if (! this.authService.isTokenInLocalStorage()) {
+			return;
+		}
+
+		this.authService.validateToken().pipe(untilDestroyed(this)).subscribe({
+			next: (v) => this.validatedAdmin = (v) ? true : false,
+			error: (e) => console.error(e)
+		})
 	}
 
 	private verifyHashCode() {
@@ -141,6 +162,8 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 			code: this.securityForm.controls['code'].value,
 			hash: this.hash || ''
 		};
+
+		console.log(securityRequest);
 
 		this.securityForm.controls['code'].reset();
 
@@ -228,7 +251,6 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 	}
 
 	private updateAdvert(): void {
-		// console.log(`Update advert was called`);
 		this.advertService.updateAdvert(this.advert).pipe(untilDestroyed(this)).subscribe(() => {
 			this.redirectToAdvertDetail(this.advert.id, `upravený`);
 		});
@@ -243,11 +265,21 @@ export class SecurityFormComponent implements OnDestroy, OnChanges {
 	}
 
 	private redirectToAdvertDetail(advertId: string, message: string) {
+		/*
 		this.clearForm.emit();
 
 		window.alert(`Inzerát bol úspešne ${message}.\nBudete presmerovaný na stránku inzerátu.`);
 		window.scrollTo(0, 0);
 		this.router.navigate([`/advert/${advertId}`]);
+		*/
+		this.clearForm.emit();
+		this.toastService.success(`Inzerát bol úspešne ${message}.`);
+		this.toastService.success(`Budete presmerovaný na stránku inzerátu.`);
+		
+		setTimeout(() => {
+			window.scrollTo(0, 0);
+			this.router.navigate([`/advert/${advertId}`]);
+		}, 5000);
 	}
 
 	partiallyHideEmail(email: string): string {
