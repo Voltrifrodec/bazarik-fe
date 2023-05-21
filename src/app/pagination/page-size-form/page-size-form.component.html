@@ -1,10 +1,10 @@
-<form [formGroup]="paginationForm" class="mb-1">
-	<div class="d-flex justify-content-end">
-		<span>Veľkosť stránky:&nbsp;</span>
-		<select class="" formControlName="pageSize" [selectedIndex]="1" title="Page size" (change)="setPageSize()">
-			<option value="5">5</option>
-			<option selected value="10">10</option>
-			<option value="25">25</option>
-		</select>
-	</div>
+<form [formGroup]="paginationForm" class="mb-1 d-inline">
+	<span class="pt-1">
+		Počet inzerátov na stránku:&nbsp;
+	</span>
+	<select class="p-1" formControlName="pageSize" [selectedIndex]="1" title="Page size" (change)="setPageSize()">
+		<option value="5">5</option>
+		<option selected value="10">10</option>
+		<option value="25">25</option>
+	</select>
 </form>
