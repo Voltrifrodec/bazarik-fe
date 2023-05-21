@@ -53,7 +53,7 @@ export class NavbarComponent {
 	logout(): void {
 		this.authService.logout().subscribe();
 		this.router.navigate(['']);
-		localStorage.removeItem('token');
+		this.authService.removeToken();
 	}
 
 	toggleDropdown(): void {
