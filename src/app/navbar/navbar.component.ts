@@ -55,9 +55,19 @@ export class NavbarComponent {
 	}
 
 	isLogged() {
+		if (! this.authService.getToken()) {
+			console.error('Token could not be found.')
+			this.unauthorizeUser();
+			return;
+		}
+
 		this.authService.validateToken().pipe(untilDestroyed(this)).subscribe({
 			next: (v) => {
 				this.adminButton = (v) ? true : false;
+			},
+			error: (e) => {
+				this.unauthorizeUser();
+				console.error(e);
 			}
 		})
 	}
@@ -75,5 +85,13 @@ export class NavbarComponent {
 
 	reloadWindow() {
 		window.location.reload();
+	}
+
+	private unauthorizeUser() {
+		this.removeTokenFromLocalStorage();
+	}
+
+	private removeTokenFromLocalStorage() {
+		this.authService.removeToken();
 	}
 }
