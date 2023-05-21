@@ -25,7 +25,6 @@ export class PageSizeFormComponent {
 
 	setPageSize(): void {
 		let pageSize = this.paginationForm.controls['pageSize'].value;
-		console.log(pageSize);
 		this.pageSizeOutput.emit(pageSize);
 	}
 
