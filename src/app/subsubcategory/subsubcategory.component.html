@@ -28,5 +28,20 @@
 
 	<app-advert-number [advertNumber]="getTotalElements()" [levelWord]="levelWord"></app-advert-number>
 
+	<app-page-size-form
+		[pageSize]="getPageSize()"
+		(pageSizeOutput)="changePageSize($event)"
+	></app-page-size-form>
+
 	<app-subsubcategory-advert-list [adverts]="adverts"></app-subsubcategory-advert-list>
+
+	<div class="d-flex justify-content-center">
+		<ngb-pagination
+			[collectionSize]="getTotalElements()"
+			[page]="getPageNumber()"
+			[pageSize]="getPageSize()"
+			(pageChange)="changePage($event)"
+		></ngb-pagination>
+	</div>
+
 </div>
