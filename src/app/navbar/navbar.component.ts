@@ -18,9 +18,8 @@ export class NavbarComponent {
 	faSignOut = faSignOutAlt;
 	faAdmin = faUser;
 
-	// TODO: ZMENIŤ
-	adminButton = true;
-	adminDropdown: boolean = true;
+	adminButton = false;
+	adminDropdown: boolean = false;
 
 	searchForm: FormGroup;
 
@@ -58,21 +57,23 @@ export class NavbarComponent {
 	isLogged() {
 		this.authService.validateToken().pipe(untilDestroyed(this)).subscribe({
 			next: (v) => {
-				// TODO: IMPLEMENT
-				console.log(v);
 				this.adminButton = (v) ? true : false;
-				// this.adminDropdown = 
 			}
 		})
 	}
 
 	logout(): void {
 		this.authService.logout().subscribe();
-		this.router.navigate(['']);
 		this.authService.removeToken();
+		this.router.navigate(['/']);
+		this.reloadWindow();
 	}
 
 	toggleDropdown(): void {
 		this.adminDropdown = this.adminDropdown ? false : true;
+	}
+
+	reloadWindow() {
+		window.location.reload();
 	}
 }
