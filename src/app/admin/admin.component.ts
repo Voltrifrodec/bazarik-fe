@@ -50,7 +50,6 @@ export class AdminComponent {
 		this.authService.validateToken().pipe(untilDestroyed(this)).subscribe({
 			next: (v) => (v) ? this.deleteAdvert(advertId) : console.log(v),
 			error: (e) =>  {
-				console.log(e);
 				console.error(e);
 			}
 		});
@@ -89,7 +88,7 @@ export class AdminComponent {
 			window.alert('Token could not be found.');
 			return;
 		}
-		
+
 		if (! advertIds) {
 			window.alert(`Neboli poslané žiadne Idečka`);
 			return;
