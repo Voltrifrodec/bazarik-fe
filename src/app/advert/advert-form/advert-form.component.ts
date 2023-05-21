@@ -125,7 +125,7 @@ export class AdvertFormComponent implements OnInit {
 			this.action.action = 'create';			
 		}
 		
-		let advertId = this.route.snapshot.paramMap.get('advertId');
+		let advertId = this.route.snapshot.params['advertId'];
 		if (advertId) this.advertId = advertId;
 	}
 
