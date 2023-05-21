@@ -8,7 +8,7 @@ import { Pagination } from 'src/app/common/model/pagination.model';
 	templateUrl: './category-advert-list.component.html',
 	styleUrls: ['./category-advert-list.component.css']
 })
-export class CategoryAdvertListComponent implements OnInit, OnChanges {
+export class CategoryAdvertListComponent {
 
 	faLocationArrow = faLocationArrow;
 	faExclamationCircle = faExclamationCircle;
@@ -18,14 +18,5 @@ export class CategoryAdvertListComponent implements OnInit, OnChanges {
 
 	@Input()
 	adverts?: AdvertResponse;
-
-	ngOnChanges(changes: SimpleChanges): void {
-		console.log(this.adverts);
-	}
-
-	ngOnInit(): void {
-		let date = new Date().toUTCString();
-		console.log(date, 'Amount of received adverts at advert-list:', this.adverts);
-	}
 
 }
