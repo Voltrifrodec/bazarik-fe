@@ -40,7 +40,9 @@ export class AuthService {
 		return this.http.post<boolean>(`${this.tokenUrl}/check`, null, { headers });
 	}
 
-	/**DEPRECATED */
+	/**DEPRECATED
+	 * @deprecated
+	*/
 	isLogged(): null | undefined | void {
 		console.error('THIS METHOD IS DEPRACTED!');
 		// return this.getToken() !== null;
