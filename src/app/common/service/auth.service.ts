@@ -32,8 +32,7 @@ export class AuthService {
 		return this.http.delete(this.tokenUrl, { headers });
 	}
 
-	validateToken(): Observable<boolean> | null {
-		if (this.getToken() === null) return null;
+	validateToken(): Observable<boolean> {
 		const headers = new HttpHeaders({
 			'Content-Type': 'application/json',
 			'Authorization': '' + this.getToken()
