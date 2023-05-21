@@ -1,3 +1,8 @@
-<app-search-list
+<div class="d-flex justify-content-center LoadingScreen" *ngIf="!pageLoaded">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<app-search-list *ngIf="pageLoaded"
 	[query]="queryOutput"
 ></app-search-list>

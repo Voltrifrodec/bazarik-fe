@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import { Advert } from 'src/app/common/model/advert.model';
@@ -6,6 +6,7 @@ import { AdvertService } from 'src/app/common/service/advert.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { SecurityAction } from 'src/app/common/model/security.model';
+import { HttpClient } from '@angular/common/http';
 
 @UntilDestroy()
 @Component({
@@ -13,9 +14,11 @@ import { SecurityAction } from 'src/app/common/model/security.model';
   templateUrl: './advert-detail-page.component.html',
   styleUrls: ['./advert-detail-page.component.css']
 })
-export class AdvertDetailPageComponent {
+export class AdvertDetailPageComponent implements OnInit {
 
     faClipboard = faClipboard;
+
+	pageLoaded = false;
 
 	@Output()
 	action: SecurityAction = {
@@ -36,7 +39,8 @@ export class AdvertDetailPageComponent {
 		private router: Router,
 		private route: ActivatedRoute,
 		private service: AdvertService,
-		private toastService: ToastService
+		private toastService: ToastService,
+		private http: HttpClient
 	) {
 		this.advertId = route.snapshot.paramMap.get('advertId');
 		this.getAdvert();
@@ -87,5 +91,17 @@ export class AdvertDetailPageComponent {
 	editAdvert() {
 		this.router.navigate([`/advert/edit/${this.advertId}`]);
 		window.scrollTo(0, 0);
+	}
+
+
+	ngOnInit(): void {
+
+		this.http.get('http://localhost:8080/api/categories').subscribe(Response => {
+			if (Response) {
+				this.pageLoaded = true;
+				return;
+			}
+		});
+
 	}
 }
