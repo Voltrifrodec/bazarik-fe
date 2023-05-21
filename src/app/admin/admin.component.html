@@ -1,12 +1,14 @@
-<h1 class="display-5 underline mt-3 text-center">
-	Admin panel
-</h1>
-
-<hr>
-
-<app-admin-table
-	[adverts]="adverts"
-	(advertToDelete)="deleteAdvertById($event)"
-	(advertsToDelete)="deleteAdvertsByIds($event)"
-	(pageChange)="getAllAdverts($event)"
-></app-admin-table>
+<ng-template [ngIf]="validatedAdmin">
+	<h1 class="display-5 underline mt-3 text-center">
+		Admin panel
+	</h1>
+	
+	<hr>
+	
+	<app-admin-table
+		[adverts]="adverts"
+		(advertToDelete)="deleteAdvertById($event)"
+		(advertsToDelete)="deleteAdvertsByIds($event)"
+		(pageChange)="getAllAdverts($event)"
+	></app-admin-table>
+</ng-template>
