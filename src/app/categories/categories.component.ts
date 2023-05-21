@@ -76,6 +76,10 @@ export class CategoriesComponent {
 		return this.adverts?.content?.length ? this.adverts?.totalElements : this.defaultTotalElements;
 	}
 
+	getNumberOfElements(): number {
+		return this.adverts?.content?.length ? this.adverts?.totalElements : 0;
+	}
+
 	getCategoryById(): void {
 		this.categoryService.getCategoryById(this.categoryId).pipe(untilDestroyed(this)).subscribe((category: Category) => {
 			this.category = category;
