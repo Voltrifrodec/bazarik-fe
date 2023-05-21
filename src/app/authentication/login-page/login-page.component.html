@@ -2,7 +2,7 @@
     <div class="LoginFormHeader p-3 border-bottom border-dark">
         <p class="h2 text-center">Prihlásiť sa ako administrátor</p>
     </div>
-    <div *ngIf="!isLogged()">
+    <ng-template [ngIf]="!loggedInAsAdmin">
         <form [formGroup]="loginForm" (submit)="login()" class="form-group p-md-2 m-4 LoginFormSection">
 
             <div class="FormItem">
@@ -36,9 +36,12 @@
                 Zostavajúce pokusy: 3
             </div> -->
         </form>
-    </div>
-    <div *ngIf="isLogged()" class="d-flex justify-content-center flex-column align-items-center">
-        <p class="h4 text-danger text-center p-4">Už ste prihláseý ako administrátor</p>
-        <button routerLink="/" class="btn btn-success w-50">Domovská stránka</button>
-    </div>
+    </ng-template>
+    <ng-template [ngIf]="loggedInAsAdmin">
+		<div class="d-flex justify-content-center flex-column align-items-center">
+			<p class="h4 text-danger text-center p-4">Už ste prihlásený ako administrátor</p>
+			<button routerLink="/admin" class="btn btn-primary">Admin panel</button>
+			<button routerLink="/" class="btn btn-success">Domovská stránka</button>
+		</div>
+    </ng-template>
 </div>
