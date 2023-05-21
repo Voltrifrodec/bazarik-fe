@@ -24,7 +24,7 @@
 				<button class="btn btn-danger" ">ADMIN</button>
 				
 			</div> -->
-			<div class="" *ngIf="isLogged()">
+			<div [ngIf]="adminDropdown">
 				<button type="button" class="btn btn-danger dropdown-toggle" (click)="toggleDropdown()"
 					aria-expanded="false">
 				  	ADMIN

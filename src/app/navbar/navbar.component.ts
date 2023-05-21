@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../common/service/auth.service';
+import { untilDestroyed } from '@ngneat/until-destroy';
 
 @Component({
 	selector: 'app-navbar',
@@ -46,8 +47,13 @@ export class NavbarComponent {
 		this.router.navigate([`search/${query}`]);
 	}
 
-	isLogged(): boolean {
-		return this.authService.isLogged();
+	isLogged() {
+		this.authService.validateToken().pipe(untilDestroyed(this)).subscribe({
+			next: (v) => {
+				// TODO: IMPLEMENT
+				this.adminDropdown = (v) ? true : false;
+			}
+		})
 	}
 
 	logout(): void {
