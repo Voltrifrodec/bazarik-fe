@@ -89,6 +89,10 @@ export class SubcategoryComponent {
 		return this.adverts?.content?.length ? this.adverts?.totalElements : this.defaultTotalElements;
 	}
 
+	getNumberOfElements(): number {
+		return this.adverts?.content?.length ? this.adverts?.totalElements : 0;
+	}
+
 	getSubcategoryById(): void {
 		this.subcategoryService.getSubcategoryById(this.subcategoryId).pipe(untilDestroyed(this)).subscribe((subcategory: Subcategory) => {
 			this.subcategory = subcategory;

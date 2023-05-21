@@ -19,12 +19,14 @@
 
 	<app-subcategory-section-list [subsubcategories]="subsubcategories"></app-subcategory-section-list>
 
-	<app-advert-number [advertNumber]="getTotalElements()" [levelWord]="levelWord"></app-advert-number>
-
-	<app-page-size-form
-		[pageSize]="getPageSize()"
-		(pageSizeOutput)="changePageSize($event)"
-	></app-page-size-form>
+	<div class="d-flex justify-content-between my-3">
+		<app-advert-number [advertNumber]="getNumberOfElements()" [levelWord]="levelWord"></app-advert-number>
+	
+		<app-page-size-form
+			[pageSize]="getPageSize()"
+			(pageSizeOutput)="changePageSize($event)"
+		></app-page-size-form>
+	</div>
 
 	<app-subcategory-advert-list [adverts]="adverts"></app-subcategory-advert-list>
 
