@@ -24,7 +24,6 @@ export class CategoriesComponent {
 	adverts?: AdvertResponse;
 
 	levelWord = 'kategórii';
-	numberOfAdvertsWordDeclension = '';
 
 	constructor(
 		private categoryService: CategoryService,
