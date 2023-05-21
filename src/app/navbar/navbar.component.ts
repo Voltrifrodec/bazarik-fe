@@ -56,7 +56,6 @@ export class NavbarComponent {
 
 	isLogged() {
 		if (! this.authService.getToken()) {
-			console.error('Token could not be found.')
 			this.unauthorizeUser();
 			return;
 		}
