@@ -19,7 +19,7 @@
 
 	<app-subcategory-section-list [subsubcategories]="subsubcategories"></app-subcategory-section-list>
 
-	<app-advert-number [advertNumber]="adverts?.content?.length || 0" [levelWord]="levelWord"></app-advert-number>
+	<app-advert-number [advertNumber]="getTotalElements()" [levelWord]="levelWord"></app-advert-number>
 
 	<app-page-size-form
 		[pageSize]="getPageSize()"
