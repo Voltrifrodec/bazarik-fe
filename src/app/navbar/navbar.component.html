@@ -14,25 +14,33 @@
             </form>
 
             <div class="navbar-item col-3 text-center">
-                <button class="btn btn-success" routerLink="/advert/new">
+                <button class="btn btn-success text-nowrap" routerLink="/advert/new">
 					<fa-icon [icon]="faPlus"></fa-icon>
+					&nbsp;
 					<span>Nový inzerát</span>
 				</button>
             </div>
 
-			<!-- <div class="ms-auto navbar-item text-true-right" *ngIf="isLogged()">
-				<button class="btn btn-danger" ">ADMIN</button>
-				
-			</div> -->
-			<ng-template [ngIf]="adminDropdown">
-				<button type="button" class="btn btn-danger dropdown-toggle" (click)="toggleDropdown()"
-					aria-expanded="false">
-				  	ADMIN
-				</button>
+			<ng-template [ngIf]="adminButton">
+				<div>
+					<button type="button" class="btn btn-danger dropdown-toggle text-nowrap" (click)="toggleDropdown()"
+						aria-expanded="false">
+						<fa-icon [icon]="faAdmin"></fa-icon>
+						&nbsp;
+						Admin
+					</button>
+	
+					<div id="adminDropdownMenu" class="position-absolute bg-light border p-1" *ngIf="adminDropdown">
+						<button class="btn btn-success text-nowrap w-100 text-start mb-2" routerLink="/admin" (click)="toggleDropdown()">
+							<fa-icon [icon]="faList"></fa-icon>
+							Panel
+						</button>
 
-				<div *ngIf="this.adminDropdown" class="position-absolute bg-light p-1">
-					<button class="d-block text-nowrap btn btn-primary w-100" routerLink="/admin" (click)="toggleDropdown()">ADMIN PANEL</button>
-					<button class="d-block text-nowrap btn btn-danger w-100" (click)="logout(); toggleDropdown()">ODHLÁSIŤ SA</button>
+						<button class="btn btn-danger text-nowrap w-100" (click)="logout(); toggleDropdown()">
+							<fa-icon [icon]="faSignOut"></fa-icon>
+							Odhlásiť sa
+						</button>
+					</div>
 				</div>
 			</ng-template>
 			
