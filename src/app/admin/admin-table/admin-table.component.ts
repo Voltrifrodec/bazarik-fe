@@ -113,7 +113,7 @@ export class AdminTableComponent {
 			return;
 		}
 
-		if (!window.confirm(`Počet inzerátov na vymazanie: ${advertsIds.length}\nSte si istí?`)) {
+		if (!window.confirm(`Počet inzerátov na vymazanie: ${advertsIds.length}\nSte si istý?`)) {
 			return;
 		}
 
