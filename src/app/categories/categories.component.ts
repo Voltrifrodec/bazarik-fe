@@ -94,7 +94,6 @@ export class CategoriesComponent {
 	getAdvertsByCategoryId(pagination?: Pagination): void {
 		this.advertService.getAllAdvertsByCategoryId(this.categoryId, pagination).pipe(untilDestroyed(this)).subscribe((adverts: AdvertResponse) => {
 			this.adverts = adverts;
-			console.log(this.adverts);
 		})
 	}
 
