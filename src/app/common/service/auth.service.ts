@@ -46,6 +46,10 @@ export class AuthService {
 		// return this.getToken() !== null;
 	}
 
+	isTokenInLocalStorage(): boolean {
+		return localStorage.getItem('token') ? true : false;
+	}
+
 	setToken(token: string): void {
 		localStorage.setItem('token', token);
 	}
