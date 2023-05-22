@@ -1,7 +1,7 @@
 <div class="mt-3">
     <h5>Podpodkategórie</h5>
 </div>
-<div class="bg-container-alt categories-alt-grid border border-dark p-1" *ngIf="subsubcategories">
+<div class="bg-container-alt categories-alt-grid border border-dark p-1" *ngIf="subsubcategories?.length">
     <div *ngFor="let subsubcategory of subsubcategories" class="d-flex justify-content-between bg-success m-2 text-light text-start btn border border-dark" routerLink="/subsubcategories/{{subsubcategory.id}}" role="button">
         <span class="col-10 h6 text-light my-auto">
 			{{subsubcategory.name}}
@@ -11,6 +11,6 @@
 		</span>
     </div>
 </div>
-<div class="bg-container-alt p-2 border border-dark" *ngIf="!subsubcategories">
+<div class="bg-container-alt p-2 border border-dark" *ngIf="!subsubcategories?.length">
     <span class="text-dark fw-bold d-block">V tejto podkategórii sa už nenachádzajú ďalšie podpodkategórie!</span>
 </div>
