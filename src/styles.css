@@ -20,6 +20,11 @@
 
 }
 
+.hover-dark:hover > * {
+	color: var(--bs-dark);
+	transition: color 0.2s;
+}
+
 
 /*? Scrollbar */
 ::-webkit-scrollbar { width: 15px; }
