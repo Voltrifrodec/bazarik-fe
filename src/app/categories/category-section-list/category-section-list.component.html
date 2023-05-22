@@ -2,11 +2,11 @@
     <h5>Podkategórie</h5>
 </div>
 <div class="bg-container-alt categories-alt-grid border border-dark p-1" *ngIf="subcategories?.length">
-    <div *ngFor="let subcategory of subcategories" class="d-flex justify-content-between bg-success m-2 text-light text-start btn border border-dark" role="button" routerLink="/subcategories/{{subcategory.id}}">
-        <span class="col-10 h6 text-light my-auto">
+    <div *ngFor="let subcategory of subcategories" class="hover-dark d-flex justify-content-between bg-success m-2 text-light text-start btn border border-dark" role="button" routerLink="/subcategories/{{subcategory.id}}">
+        <span class="col-10 h6 my-auto">
 			{{subcategory.name}}
 		</span>
-		<span class="col-2 text-light text-end my-auto">
+		<span class="col-2 text-end my-auto">
 			 ({{ subcategory.numberOfAdverts }})
 		</span>
     </div>
