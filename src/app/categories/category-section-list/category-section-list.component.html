@@ -1,11 +1,12 @@
 <div class="mt-3">
     <h5>Podkategórie</h5>
 </div>
-<div class="bg-container-alt categories-alt-grid border border-dark" *ngIf="subcategories?.length">
-    <div *ngFor="let subcategory of subcategories" class="p-2 bg-success m-1" role="button" routerLink="/subcategories/{{subcategory.id}}">
-        <a class="text-light">{{subcategory.name}}</a>
+<div class="bg-container-alt categories-alt-grid border border-dark">
+    <div *ngFor="let subcategory of subcategories" class="d-flex justify-content-between bg-success m-1 text-light text-start btn" role="button" routerLink="/subcategories/{{subcategory.id}}">
+        <a class="col-10 text-light ms-auto h6 m-1">{{subcategory.name}}</a>
+		<span> ({{ subcategory.numberOfAdverts }})</span>
     </div>
 </div>
-<div class="bg-container-alt p-2 border border-dark" *ngIf="!subcategories?.length">
+<div class="bg-container-alt p-2 border border-dark" *ngIf="!subcategories">
     <span class="text-dark fw-bold d-block">V tejto kategórii sa už nenachádzajú ďalšie podkategórie!</span>
 </div>
