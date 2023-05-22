@@ -38,7 +38,7 @@
     
 	<!-- name -->
     <div class="mt-1">
-        <h1 class="h1 d-inline-block align-middle w-75">
+        <h1 class="h1 d-inline-block align-middle w-75 text-break">
             {{advert?.name}}
         </h1>
         <p class="d-inline-block advert-link w-25 btn text-right" (click)="copyHref()" title="Kopírovať odkaz"><fa-icon [icon]="faClipboard"></fa-icon><span class="d-none d-lg-inline-block ps-2">Kopírovať odkaz</span></p>
@@ -81,7 +81,7 @@
 				src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}">
 		</div>
 		<div class="col-md-5 float-end">
-			<p class="description">
+			<p class="description text-break">
 				<span class="h4 d-block">
 					Opis:
 				</span>
