@@ -2,8 +2,9 @@
     <h5>Podpodkategórie</h5>
 </div>
 <div class="bg-container-alt categories-alt-grid border border-dark" *ngIf="subsubcategories?.length">
-    <div *ngFor="let subsubcategory of subsubcategories" class="p-2 bg-success m-1" routerLink="/subsubcategories/{{subsubcategory.id}}" role="button">
+    <div *ngFor="let subsubcategory of subsubcategories" class="d-flex justify-content-between p-2 bg-success m-1 text-light btn" routerLink="/subsubcategories/{{subsubcategory.id}}" role="button">
         <a class="text-light">{{subsubcategory.name}}</a>
+		<span> ({{ subsubcategory.numberOfAdverts }})</span>
     </div>
 </div>
 <div class="bg-container-alt p-2 border border-dark" *ngIf="!subsubcategories?.length">
