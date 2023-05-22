@@ -1,25 +1,26 @@
 <div class="container-fluid bg-banner border-bottom border-dark py-3 NavbarContainer">
     <div class="col-lg-8 mx-auto">
-        <nav class="navbar navbar-expand-lg navbar-light justify-content-lg-between px-3 px-lg-0">
+        <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-lg-between px-3 px-lg-0">
 
-            <div class="navbar-item col-2">
+            <div class="navbar-item col-5 col-sm-2 order-0 order-sm-0">
                 <a routerLink="/" class="navbar-brand fw-bold">Bazarik</a>
             </div>
 
-            <form [formGroup]="searchForm" class="input-group w-25 col-3 flex-grow-1" (submit)="search()">
-                <input formControlName="query" type="search" class="form-control rounded d-inline-block" placeholder="Hľadajte inzerát..." />
-                <button type="submit" class="btn btn-success d-inline">
-					<fa-icon [icon]="faSearch"></fa-icon>
-				</button>
-            </form>
-
-            <div class="navbar-item col-3 text-center">
+            <div class="navbar-item col-7 col-sm-3 text-sm-center text-end order-1 order-sm-3">
                 <button class="btn btn-success text-nowrap" routerLink="/advert/new">
 					<fa-icon [icon]="faPlus"></fa-icon>
 					&nbsp;
 					<span>Nový inzerát</span>
 				</button>
             </div>
+
+            <form [formGroup]="searchForm" class="input-group w-25 col-6 col-sm-7 flex-grow-1 mt-sm-0 mt-3 order-2 order-sm-2" (submit)="search()">
+                <input formControlName="query" type="search" class="form-control rounded d-inline-block" placeholder="Hľadajte inzerát..." />
+                <button type="submit" class="btn btn-success d-inline">
+					<fa-icon [icon]="faSearch"></fa-icon>
+				</button>
+            </form>
+
 
 			<ng-template [ngIf]="adminButton">
 				<div>
