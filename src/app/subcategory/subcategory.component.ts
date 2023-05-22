@@ -35,6 +35,7 @@ export class SubcategoryComponent {
 	) {
 		this.subcategoryId = this.route.snapshot.params['subcategoryId'];
 		this.getSubcategoryById();
+		this.getSubsubcategoriesBySubcategoryId();
 
 		this.paginationForm = new FormGroup({
 			pageSize: new FormControl(this.defaultPageSize, [Validators.required])
@@ -101,7 +102,7 @@ export class SubcategoryComponent {
 		});
 	}
 
-	getSubsubcategories(): void {
+	getSubsubcategoriesBySubcategoryId(): void {
 		this.subcategoryService.getSubsubcategoriesBySubcategoryId(this.subcategoryId).pipe(untilDestroyed(this)).subscribe((subsubcategories: Subsubcategory[]) => {
 			this.subsubcategories = subsubcategories;
 		});
