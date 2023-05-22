@@ -4,7 +4,7 @@
     /* Farby pozadia */
     --paletteColorBackgroundPage: #ffffff; /* Pozadie pre body */
     --paletteColorBanner:#FFCC66; /* Napr. na header, footer, ... */
-    --paletteColorContainer: #FFCC99; /* Napr. ako pozadie inzeratu v liste */
+    --paletteColorContainer: #FFCC66; /* Napr. ako pozadie inzeratu v liste */
     --paletteColorContainerAlt: #ffffff; /* Napr. ako druhotne pozadie stranky, pozadie podkategorii, etc. */
     --paletteColorContainerAlt2: #CC6B5C; /* Napr. ako druhotne pozadie stranky, pozadie podkategorii, etc. */
 
