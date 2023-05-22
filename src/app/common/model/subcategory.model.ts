@@ -4,4 +4,5 @@ export interface Subcategory {
 	id: number;
 	name: string;
 	category: Category | undefined;
+	numberOfAdverts: number;
 }
