@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { faBox } from '@fortawesome/free-solid-svg-icons';
 import { Advert } from 'src/app/common/model/advert.model';
 
 @Component({
@@ -7,12 +8,8 @@ import { Advert } from 'src/app/common/model/advert.model';
   styleUrls: ['./recent-advert-list.component.css']
 })
 export class RecentAdvertListComponent {
-    MilisToDate(arg0: number | undefined | Date) {
-        if(arg0 !== undefined) {
-            return new Date(arg0).toLocaleString('sk-SK');
-        }
-        throw new Error('Neplatný vstupný parameter!');
-    }
+
+	faAdvert = faBox;
     
     @Input()
     adverts?: Advert[];

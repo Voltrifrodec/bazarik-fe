@@ -3,22 +3,23 @@
 		Naposledy pridané inzeráty
 	</h3>
 
-	<hr class="mx-4 opacity-100">
+	<hr class="mx-1 mx-sm-4 my-2 opacity-100">
 
 	<div class="d-flex justify-content-around mt-3">
-		<div *ngFor="let advert of adverts" class="d-flex justify-content-center w-100">
-			<a routerLink="advert/{{advert.id}}">
-				<h5 class="text-center">
+		<div *ngFor="let advert of adverts; index as i" class="d-flex justify-content-center text-break col-3 p-1 {{i > 0 ? 'border-start border-secondary' : ''}}">
+			<a routerLink="advert/{{advert.id}}" class="p-1">
+				<h5 class="text-center text-nowrap">
 					{{advert.category.name}}
 				</h5>
 
 				<div class="text-center thumbnail">
-					<img class="w-100" alt="{{advert?.name}}" width="128" height="128"
+					<img class="w-auto d-none d-sm-inline" alt="{{advert?.name}}" width="128" height="128"
 						src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}">
+					<fa-icon class="fs-2 d-block d-sm-none" [icon]="faAdvert"></fa-icon>
 				</div>
 				
-				<h6 class="text-decoration-underline text-center">
-					 {{advert.name}}
+				<h6 class="text-decoration-underline text-center" title="{{advert.name}}">
+					 {{advert.name.length > 15 ? advert.name.substring(0, 15) + '...' : advert.name}}
 				</h6>
 			</a>
 		</div>
