@@ -235,7 +235,10 @@ h1 {
     }
 }
 @media screen and (min-width:0px) and (max-width:700px) {
-    .categories-grid, .categories-alt-grid, .adverts-grid {
+    .categories-alt-grid, .adverts-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .categories-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 } 
