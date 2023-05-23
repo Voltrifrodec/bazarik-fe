@@ -53,8 +53,25 @@ export class AdvertService {
 		return this.http.get<Advert[]>(`${this.advertsUrl}/recent/${count}`);
 	}
 
-	getAllAdvertsByQuery(query: string): Observable<Advert[]> {
-		return this.http.get<Advert[]>(`${this.apiUrl}/search/${query}`);
+	// getAllAdvertsByQuery(query: string): Observable<Advert[]> {
+	// 	return this.http.get<Advert[]>(`${this.apiUrl}/search/${query}`);
+	// }
+
+	getAllAdvertsByQuery(query: string, pagination: Pagination = {
+		page: 0,
+		size: 10,
+		filter: {
+			query: ''
+		}
+	}
+	): Observable<AdvertResponse> {
+		const params = new HttpParams().appendAll({
+			page: pagination.page,
+			size: pagination.size,
+			query: pagination.filter.query
+		});
+		console.log(this.http.get<AdvertResponse>(`${this.apiUrl}/search/${query}`, { params }));
+		return this.http.get<AdvertResponse>(`${this.apiUrl}/search/${query}`, { params });
 	}
 
 	/**DEPRECATED */
