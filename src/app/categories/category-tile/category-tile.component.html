@@ -1,6 +1,7 @@
 <div class="hover-dark h-100 p-2 d-flex flex-column align-items-center align-items-start justify-content mb-2 bg-success text-light"
 	style="min-height: 10vh;">
 	<span class="d-block h1 emoji">{{emoji}}</span> <!-- EMOJI HERE -->
-	<h3 class="text-center mb-0">{{ category?.name }}</h3>
+	<h3 class="text-center mb-0 d-none d-md-block">{{ category?.name }}</h3>
+	<h3 class="text-center mb-0 d-sm-block d-md-none h5">{{ category?.name }}</h3>
 	<span class="mt-auto text-light">({{ counter }} {{ numberOfAdvertsWordDeclension }})</span>
 </div>
