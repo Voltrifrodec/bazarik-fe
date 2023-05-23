@@ -5,7 +5,7 @@
 
 	<hr class="mx-1 mx-sm-4 my-2 opacity-100">
 
-	<div class="d-flex justify-content-around mt-3">
+	<div class="d-none d-md-flex justify-content-around mt-3 flex-column flex-md-row">
 		<div *ngFor="let advert of adverts; index as i" class="d-flex justify-content-center text-break col-3 p-1 {{i > 0 ? 'border-start border-secondary' : ''}}">
 			<a routerLink="advert/{{advert.id}}" class="p-1">
 				<h5 class="text-center text-nowrap">
@@ -21,6 +21,14 @@
 				<h6 class="text-decoration-underline text-center" title="{{advert.name}}">
 					 {{advert.name.length > 15 ? advert.name.substring(0, 15) + '...' : advert.name}}
 				</h6>
+			</a>
+		</div>
+	</div>
+	<div class="d-block d-md-none">
+		<div *ngFor="let advert of adverts; index as i" class="mt-2 mb-2 ms-2 d-flex">
+			<img alt="{{advert?.name}}" class="float-left me-3" width="32" height="32" src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}">
+			<a routerLink="advert/{{advert.id}}">
+				<h5>{{advert.name.length > 17 ? advert.name.substring(0, 17) + '...' : advert.name}}</h5>
 			</a>
 		</div>
 	</div>

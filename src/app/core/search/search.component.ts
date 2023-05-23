@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Advert } from 'src/app/common/model/advert.model';
+import { Advert, AdvertResponse } from 'src/app/common/model/advert.model';
 import { AdvertService } from 'src/app/common/service/advert.service';
 
 @UntilDestroy()
@@ -12,7 +12,7 @@ import { AdvertService } from 'src/app/common/service/advert.service';
 })
 export class SearchComponent {
 
-	adverts?: Advert[];
+	adverts?: AdvertResponse;
 
 	@Output()
 	public queryOutput: string | null;
@@ -26,6 +26,7 @@ export class SearchComponent {
 		this.router.events.subscribe(() => {
 			this.queryOutput = this.route.snapshot.paramMap.get('query');
 		})
+		console.log(this.queryOutput);
 	}
 
 }

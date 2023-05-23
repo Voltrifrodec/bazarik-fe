@@ -5,20 +5,26 @@
 	
 	<hr>
 
-	<small *ngIf="adverts?.length! == 1" class="h5">Našiel sa {{ adverts?.length }} inzerát.</small>
-	<small *ngIf="(adverts?.length! > 1) && (adverts?.length! < 5)" class="h5">Našli sa {{ adverts?.length }} inzeráty.</small>
-	<small *ngIf="(adverts?.length! >= 5 || adverts?.length! <= 0)" class="h5">Bolo nájdených {{ adverts?.length }} inzerátov.</small>
+	<small *ngIf="adverts?.content?.length! == 1" class="h5">Našiel sa {{ adverts?.content?.length }} inzerát.</small>
+	<small *ngIf="(adverts?.content?.length! > 1) && (adverts?.content?.length! < 5)" class="h5">Našli sa {{ adverts?.content?.length }} inzeráty.</small>
+	<small *ngIf="(adverts?.content?.length! >= 5 || adverts?.content?.length! <= 0)" class="h5">Bolo nájdených {{ adverts?.content?.length }} inzerátov.</small>
 	
-	<div class="d-flex">
-		<div class="row row-cols-2 g-3 mt-0">
-			<app-advert-tile
-				role="button"
-				*ngFor="let advert of adverts"
-				[advert]="advert"
-				routerLink="/advert/{{ advert.id }}"
-				class="col-md-3"
-			></app-advert-tile>
-
-		</div>
+	<div class="d-flex justify-content-between my-2">
+		<app-page-size-form
+			[pageSize]="getPageSize()"
+			(pageSizeOutput)="changePageSize($event)"
+		></app-page-size-form>
 	</div>
+
+	<app-category-advert-list [adverts]="adverts"></app-category-advert-list>
+
+	<div class="d-flex justify-content-center mt-4">
+		<ngb-pagination
+			[collectionSize]="getTotalElements()"
+			[page]="getPageNumber()"
+			[pageSize]="getPageSize()"
+			(pageChange)="changePage($event)"
+		></ngb-pagination>
+	</div>
+
 </div>
