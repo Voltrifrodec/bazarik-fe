@@ -156,7 +156,11 @@
             Obrázok pre inzerát
             <!-- <small class="text-muted h6">Fixná cena znamená, či je možné cenu vyjednať od pôvodnej ceny.</small> -->
         </p>
-        <input formControlName="image" id="file" type="file" accept="image/*" class="form-control-file form-control-lg" (change)="checkFileSize()">
+		<label class="btn btn-secondary auto" (change)="checkFileSize()">
+			Vybrať súbor
+			<input formControlName="image" id="file" type="file" accept="image/*" class="form-control-file form-control-lg"(change)="checkFileSize()">
+		</label>
+		<!-- <span *ngIf="this.fileSizeMB <= 0" class="d-block pb-2">Nie je vybraný žiadny súbor</span> -->
 		<!-- Veľkosť súboru -->
 		<span class="d-block">Veľkosť obrázku: {{this.fileSizeMB}}MB / {{this.maximumFileSizeMB}}MB</span>
 		
@@ -182,7 +186,7 @@
 	<h5 *ngIf="advertForm.invalid" class="text-danger">
 		Je nutné správne vyplniť celý formulár.
 	</h5>
-    <div class="d-flex justify-content-between mt-3">
+    <div class="d-flex justify-content-between mt-3 flex-column flex-md-row">
 		<button class="btn btn-lg btn-primary" (click)="send(); addAdvertDialog.showModal()" [disabled]="advertForm.invalid">
 			Odoslať inzerát
 		</button>

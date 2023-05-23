@@ -38,3 +38,7 @@ dialog > .header {
 dialog > .content {
 	padding: 18px;
 }
+
+input[type=file] {
+	display: none;
+}
