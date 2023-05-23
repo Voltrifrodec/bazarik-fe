@@ -153,7 +153,25 @@ h1 {
     font-size: xx-small;
     margin: 0.4rem;
 } */
-
+.LogoImage {
+    border-radius: 50%;
+    background-color: #333;
+    width: 45px;
+    height: 45px;
+    transition: filter .2s linear;
+}
+.LogoImage:hover {
+    animation: rotateLogo .5s linear infinite;
+    filter: brightness(50%)
+}
+@keyframes rotateLogo {
+    from {
+        rotate: -90deg;
+    }
+    to {
+        rotate: 270deg;
+    }
+}
 
 /*? Nastavenie pre RouterContainer */
 .RouterContainer {

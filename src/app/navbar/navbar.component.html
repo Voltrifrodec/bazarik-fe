@@ -2,11 +2,17 @@
     <div class="col-lg-8 mx-auto">
         <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-lg-between px-3 px-lg-0">
 
-            <div class="navbar-item col-5 col-sm-2 order-0 order-sm-0">
+			<div class="navbar-item col-2 order-0 order-sm-0 d-sm-block d-md-none">
+				<a routerLink="/">
+					<img src="/assets/images/aurel-stodola-bd48f80d-ad84-4ce4-96e2-1eb404b7554-resize-750.webp" alt="Logo" class="LogoImage">
+				</a>
+			</div>
+			
+            <div class="navbar-item col-5 col-sm-2 order-0 order-sm-0 d-none d-md-block">
                 <a routerLink="/" class="navbar-brand fw-bold">Bazarik</a>
             </div>
 
-            <div class="navbar-item col-7 col-sm-3 text-end order-1 order-sm-3">
+            <div class="navbar-item col-6 col-sm-3 text-end order-1 order-sm-3">
                 <button class="btn btn-success text-nowrap" routerLink="/advert/new">
 					<fa-icon [icon]="faPlus"></fa-icon>
 					&nbsp;
