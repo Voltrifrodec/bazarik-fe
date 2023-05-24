@@ -18,7 +18,7 @@ export class NavbarComponent {
 	faSignOut = faSignOutAlt;
 	faAdmin = faUser;
 
-	adminButton = false;
+	adminButton = true;
 	adminDropdown: boolean = false;
 
 	searchForm: FormGroup;
@@ -62,6 +62,7 @@ export class NavbarComponent {
 
 		this.authService.validateToken().pipe(untilDestroyed(this)).subscribe({
 			next: (v) => {
+				console.log(v);
 				this.adminButton = (v) ? true : false;
 			},
 			error: (e) => {

@@ -1,4 +1,4 @@
-<div class="auto m-3 p-2 bg-container border border-dark">
+<div class="auto m-3 p-2 bg-container border border-dark overflow-hidden">
 	<h3 class="mb-2 text-center pb-2">
 		Naposledy pridané inzeráty
 	</h3>
@@ -27,7 +27,7 @@
 	<div class="d-block d-md-none">
 		<div *ngFor="let advert of adverts; index as i" class="mt-2 mb-2 ms-2 d-flex">
 			<img alt="{{advert?.name}}" class="float-left me-3" width="32" height="32" src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}">
-			<a routerLink="advert/{{advert.id}}">
+			<a routerLink="advert/{{advert.id}}" class=" overflow-hidden">
 				<h5>{{advert.name.length > 17 ? advert.name.substring(0, 17) + '...' : advert.name}}</h5>
 			</a>
 		</div>

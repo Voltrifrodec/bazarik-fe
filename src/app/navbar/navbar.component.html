@@ -1,6 +1,6 @@
 <div class="container-fluid bg-banner border-bottom border-dark py-3 NavbarContainer">
-    <div class="col-lg-8 mx-auto">
-        <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-lg-between px-3 px-lg-0">
+    <div class="col-12 col-sm-10 col-md-8 mx-auto">
+        <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-lg-between">
 
 			<div class="navbar-item col-2 order-0 order-sm-0 d-sm-block d-md-none">
 				<a routerLink="/">
@@ -8,48 +8,49 @@
 				</a>
 			</div>
 			
-            <div class="navbar-item col-5 col-sm-2 order-0 order-sm-0 d-none d-md-block">
+            <div class="navbar-item col-5 col-sm-2 order-first d-none d-md-block">
                 <a routerLink="/" class="navbar-brand fw-bold">Bazarik</a>
             </div>
 
-            <div class="navbar-item col-6 col-sm-4 text-end order-1 order-sm-3">
+            <div class="navbar-item col-10 col-sm-4 text-end order-1 order-sm-3">
                 <button class="btn btn-success text-nowrap" routerLink="/advert/new">
 					<fa-icon [icon]="faPlus"></fa-icon>
 					<span class="d-md-inline">&nbsp; Nový inzerát</span>
 				</button>
             </div>
 
-            <form [formGroup]="searchForm" class="input-group w-25 col-6 col-sm-7 flex-grow-1 mt-sm-0 mt-3 order-2 order-sm-2" (submit)="search()">
-                <input formControlName="query" type="search" class="form-control rounded d-inline-block" placeholder="Hľadajte inzerát..." />
-                <button type="submit" class="btn btn-success d-inline">
-					<fa-icon [icon]="faSearch"></fa-icon>
-				</button>
-            </form>
-
-
-			<ng-template [ngIf]="adminButton">
-				<div>
-					<button type="button" class="btn btn-danger dropdown-toggle text-nowrap" (click)="toggleDropdown()"
-						aria-expanded="false">
-						<fa-icon [icon]="faAdmin"></fa-icon>
-						&nbsp;
-						Admin
+			<div class="order-2 col-12 col-sm-6 mt-sm-0 mt-2 order-1 order-sm-2">
+				<form [formGroup]="searchForm" class="input-group flex-grow-1" (submit)="search()">
+					<input formControlName="query" type="search" class="form-control rounded d-inline-block" placeholder="Hľadajte inzerát..." />
+					<button type="submit" class="btn btn-success d-inline">
+						<fa-icon [icon]="faSearch"></fa-icon>
 					</button>
-	
-					<div id="adminDropdownMenu" class="position-absolute bg-light border p-1" *ngIf="adminDropdown">
-						<button class="btn btn-success text-nowrap w-100 text-start mb-2" routerLink="/admin" (click)="toggleDropdown()">
-							<fa-icon [icon]="faList"></fa-icon>
-							Panel
-						</button>
+				</form>
+			</div>
 
-						<button class="btn btn-danger text-nowrap w-100" (click)="logout(); toggleDropdown()">
-							<fa-icon [icon]="faSignOut"></fa-icon>
-							Odhlásiť sa
-						</button>
-					</div>
-				</div>
-			</ng-template>
 			
         </nav>
+		<div class="container-fluid px-0 order-last">
+			<div class="col-12 text-end mt-1" *ngIf="adminButton">
+				<button type="button" class="btn btn-danger dropdown-toggle text-nowrap" (click)="toggleDropdown()"
+					aria-expanded="false">
+					<fa-icon [icon]="faAdmin"></fa-icon>
+					&nbsp;
+					Admin
+				</button>
+
+				<div id="adminDropdownMenu" class="position-absolute bg-light border p-1" *ngIf="adminDropdown">
+					<button class="btn btn-success text-nowrap w-100 text-start mb-2" routerLink="/admin" (click)="toggleDropdown()">
+						<fa-icon [icon]="faList"></fa-icon>
+						Panel
+					</button>
+
+					<button class="btn btn-danger text-nowrap w-100" (click)="logout(); toggleDropdown()">
+						<fa-icon [icon]="faSignOut"></fa-icon>
+						Odhlásiť sa
+					</button>
+				</div>
+			</div>
+		</div>
     </div>
 </div>
