@@ -68,10 +68,10 @@ export class AdvertService {
 		const params = new HttpParams().appendAll({
 			page: pagination.page,
 			size: pagination.size,
-			query: pagination.filter.query
+			query: pagination.filter.query || query
 		});
-		console.log(this.http.get<AdvertResponse>(`${this.apiUrl}/search/${query}`, { params }));
-		return this.http.get<AdvertResponse>(`${this.apiUrl}/search/${query}`, { params });
+		// console.log(this.http.get<AdvertResponse>(`${this.apiUrl}/search/${query}`, { params }));
+		return this.http.get<AdvertResponse>(`${this.apiUrl}/search`, { params });
 	}
 
 	/**DEPRECATED */
