@@ -28,78 +28,87 @@
 	<app-advert-number [advertNumber]="getNumberOfElementsElseZero()" [levelWord]="'zbierke'"></app-advert-number>
 
 	<app-page-size-form
+		class="text-end"
 		[pageSize]="getPageSize()"
 		(pageSizeOutput)="changePageSize($event)"
 	></app-page-size-form>
 </div>
 
-<table class="table table-bordered table-striped table-success border-success" [formGroup]="advertTableForm">
-	<thead>
-		<th class="p-0 text-center border-0">
-			<input formControlName="checkboxToggle" class="form-check-input" type="checkbox" (click)="toggleAllCheckboxes()">
-		</th>
-		<th scope="col" class="border-0">ID</th>
-		<th class="border-0">Názov</th>
-		<th class="border-0">Dátum úpravy</th>
-		<th class="border-0">Cena</th>
-		<th class="border-0">Kategória</th>
-		<th class="border-0">Obrázok</th>
-		<th class="border-0">Otvoriť</th>
-		<th class="border-0">Upraviť</th>
-		<th class="border-0">Vymazať</th>
-	</thead>
-	<tbody *ngIf="adverts">
-		<tr *ngFor="let advert of adverts.content">
-			<td class="text-center">
-				<input class="form-check-input" type="checkbox" name="checkbox" value="{{advert.id}}">
-			</td>
+<hr>
 
-			<td title="Kliknite pre skopírovanie:&NewLine;{{advert.id}}" (click)="copy(advert.id);" role="button">
-				UUID<sup>?</sup>
-			</td>
+<ng-container *ngIf="adverts?.content?.length; then advertsExist; else advertsMissing"></ng-container>
+<ng-template #advertsExist>
+	<table class="table table-bordered table-striped table-success border-success" [formGroup]="advertTableForm" *ngIf="adverts?.content?.length">
+		<thead>
+			<th class="p-0 text-center border-0">
+				<input formControlName="checkboxToggle" class="form-check-input" type="checkbox" (click)="toggleAllCheckboxes()">
+			</th>
+			<th scope="col" class="border-0">ID</th>
+			<th class="border-0">Názov</th>
+			<th class="border-0">Dátum úpravy</th>
+			<th class="border-0">Cena</th>
+			<th class="border-0">Kategória</th>
+			<th class="border-0">Obrázok</th>
+			<th class="border-0">Otvoriť</th>
+			<th class="border-0">Upraviť</th>
+			<th class="border-0">Vymazať</th>
+		</thead>
+		<tbody *ngIf="adverts">
+			<tr *ngFor="let advert of adverts.content">
+				<td class="text-center">
+					<input class="form-check-input" type="checkbox" name="checkbox" value="{{advert.id}}">
+				</td>
 
-			<td class="overflow-hidden">
-				{{ advert.name.slice(0,20) }}<span *ngIf="advert.name.length > 20">...</span>
-			</td>
+				<td title="Kliknite pre skopírovanie:&NewLine;{{advert.id}}" (click)="copy(advert.id);" role="button">
+					UUID<sup>?</sup>
+				</td>
 
-			<td title="{{ getDateFromTimestamp(advert.dateModified) }}">
-				{{ getDateFromTimestamp(advert.dateModified).replaceAll('. ', '.') }}
-			</td>
+				<td class="overflow-hidden">
+					{{ advert.name.slice(0,20) }}<span *ngIf="advert.name.length > 20">...</span>
+				</td>
 
-			<td class="" title="{{advert.priceEur}} {{advert.currency.symbol}}">
-				{{advert.currency.symbol}} {{advert.priceEur}}
-			</td>
+				<td title="{{ getDateFromTimestamp(advert.dateModified) }}">
+					{{ getDateFromTimestamp(advert.dateModified).replaceAll('. ', '.') }}
+				</td>
 
-			<td title="{{advert.category.name}}">
-				{{ advert.category.name }}
-			</td>
+				<td class="" title="{{advert.priceEur}} {{advert.currency.symbol}}">
+					{{advert.currency.symbol}} {{advert.priceEur}}
+				</td>
 
-			<td>
-				<img width="32" height="32" src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}">
-			</td>
+				<td title="{{advert.category.name}}">
+					{{ advert.category.name }}
+				</td>
 
-			<td class="text-center">
-				<button class="btn btn-sm btn-primary" title="OTVORIŤ" routerLink="/advert/{{advert.id}}">
-					<fa-icon [icon]="faArrow"></fa-icon>
-				</button>
-			</td>
+				<td>
+					<img width="32" height="32" src="data:{{advert?.image?.type}};base64,{{advert?.image?.image}}">
+				</td>
 
-			<td class="text-center">
-				<button class="btn btn-sm btn-warning" title="UPRAVIŤ" routerLink="/advert/edit/{{advert.id}}">
-					<fa-icon [icon]="faPen"></fa-icon>
-				</button>
-			</td>
+				<td class="text-center">
+					<button class="btn btn-sm btn-primary" title="OTVORIŤ" routerLink="/advert/{{advert.id}}">
+						<fa-icon [icon]="faArrow"></fa-icon>
+					</button>
+				</td>
 
-			<td class="text-center">
-				<button class="btn btn-sm btn-danger" title="VYMAZAŤ" (click)="deleteAdvert(advert.id);">
-					<fa-icon [icon]="faBin"></fa-icon>
-				</button>
-			</td>
+				<td class="text-center">
+					<button class="btn btn-sm btn-warning" title="UPRAVIŤ" routerLink="/advert/edit/{{advert.id}}">
+						<fa-icon [icon]="faPen"></fa-icon>
+					</button>
+				</td>
 
-			<!-- TODO: Odoslať e-mail na e-mailovú adresu inzerátu -->
-		</tr>
-	</tbody>
-</table>
+				<td class="text-center">
+					<button class="btn btn-sm btn-danger" title="VYMAZAŤ" (click)="deleteAdvert(advert.id);">
+						<fa-icon [icon]="faBin"></fa-icon>
+					</button>
+				</td>
+
+				<!-- TODO: Odoslať e-mail na e-mailovú adresu inzerátu -->
+			</tr>
+		</tbody>
+	</table>
+</ng-template>
+<ng-template #advertsMissing>
+	<app-empty-advert-list></app-empty-advert-list>
+</ng-template>
 
 <div class="d-flex justify-content-center">
 	<ngb-pagination
