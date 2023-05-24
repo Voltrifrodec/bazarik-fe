@@ -75,8 +75,9 @@ export class NavbarComponent {
 	logout(): void {
 		this.authService.logout().subscribe();
 		this.authService.removeToken();
-		this.router.navigate(['/']);
-		this.reloadWindow();
+		this.router.navigate(['/']).then(() =>{
+			this.reloadWindow();
+		});
 	}
 
 	toggleDropdown(): void {
