@@ -72,7 +72,7 @@ export class SearchListComponent implements OnChanges {
 		return this.adverts?.content?.length ? this.adverts?.totalElements : this.defaultTotalElements;
 	}
 
-	getNumberOfElements(): number {
+	getNumberOfElementsElseZero(): number {
 		return this.adverts?.content?.length ? this.adverts?.totalElements : 0;
 	}
 

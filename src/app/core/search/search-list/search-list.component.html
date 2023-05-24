@@ -5,11 +5,9 @@
 	
 	<hr>
 
-	<small *ngIf="adverts?.content?.length! == 1" class="h5">Našiel sa {{ adverts?.content?.length }} inzerát.</small>
-	<small *ngIf="(adverts?.content?.length! > 1) && (adverts?.content?.length! < 5)" class="h5">Našli sa {{ adverts?.content?.length }} inzeráty.</small>
-	<small *ngIf="(adverts?.content?.length! >= 5 || adverts?.content?.length! <= 0)" class="h5">Bolo nájdených {{ adverts?.content?.length }} inzerátov.</small>
-	
 	<div class="d-flex justify-content-between my-2">
+		<app-advert-number [advertNumber]="getNumberOfElementsElseZero()" [levelWord]="'zbierke'"></app-advert-number>
+	
 		<app-page-size-form
 			[pageSize]="getPageSize()"
 			(pageSizeOutput)="changePageSize($event)"
