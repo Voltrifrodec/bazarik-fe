@@ -30,7 +30,6 @@ export class AdminTableComponent {
 	
 	advertTableForm: FormGroup;
 	searchForm: FormGroup; 
-	paginationForm: FormGroup; 
 
 	private defaultPageNumber = 0;
 	private defaultTotalElements = 10;
@@ -45,16 +44,10 @@ export class AdminTableComponent {
 		this.searchForm = new FormGroup({
 			query: new FormControl('', [Validators.required]),
 		})
-
-		this.paginationForm = new FormGroup({
-			pageSize: new FormControl(this.defaultPageSize, [Validators.required])
-		})
 	}
 	
 	filter(): void {
-		// TODO: Filter
-		window.alert(`Táto funkcia zatiaľ nie je implementovaná`);
-		/* this.defaultPageNumber = 0;
+		this.defaultPageNumber = 0;
 		this.defaultFilter = this.searchForm.controls['query'].value;
 		this.pageChange.emit({
 			page: this.defaultPageNumber,
@@ -62,14 +55,14 @@ export class AdminTableComponent {
 			filter: {
 				query: this.defaultFilter
 			}
-		}) */
+		})
 	}
 
 	changePage(pageNumber: number): void {
 		this.defaultPageNumber = ((pageNumber <= 1) ? 1 : pageNumber) - 1;
 		let page: Pagination = {
 			page: this.defaultPageNumber,
-			size: this.adverts?.pageable?.pageSize ? this.adverts?.pageable?.pageSize : this.defaultPageSize,
+			size: this.defaultPageSize,
 			filter: {
 				query: this.defaultFilter
 			}
@@ -77,24 +70,26 @@ export class AdminTableComponent {
 		this.pageChange.emit(page);
 	}
 
-	setPageSize(): void {
-		this.defaultPageSize = this.paginationForm.controls['pageSize'].value;
-		if (this.adverts) {
-			this.adverts.pageable.pageSize = this.defaultPageSize;
-		}
-		this.changePage(this.getPageNumber());
+	changePageSize(pageSize: number) {
+		console.log(pageSize);
+		this.defaultPageSize = pageSize;
+		this.changePage(this.defaultPageNumber);
 	}
 
 	getPageSize(): number {
 		return this.adverts?.pageable?.pageSize ? this.adverts?.pageable?.pageSize : this.defaultPageSize
 	}
-	
+
 	getPageNumber(): number {
 		return this.adverts?.pageable?.pageNumber ? this.adverts?.pageable?.pageNumber + 1 : this.defaultPageNumber;
 	}
-	
+
 	getTotalElements(): number {
 		return this.adverts?.content?.length ? this.adverts?.totalElements : this.defaultTotalElements;
+	}
+
+	getNumberOfElementsElseZero(): number {
+		return this.adverts?.content?.length ? this.adverts?.totalElements : 0;
 	}
 
 	deleteAdverts(): void {
