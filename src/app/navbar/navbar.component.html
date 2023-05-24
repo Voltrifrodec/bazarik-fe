@@ -31,7 +31,7 @@
 			
         </nav>
 		<div class="container-fluid px-0 order-last">
-			<div class="col-12 text-end mt-1" *ngIf="adminButton">
+			<div class="col-12 text-end mt-1 position-relative" *ngIf="adminButton">
 				<button type="button" class="btn btn-danger dropdown-toggle text-nowrap" (click)="toggleDropdown()"
 					aria-expanded="false">
 					<fa-icon [icon]="faAdmin"></fa-icon>
@@ -39,13 +39,13 @@
 					Admin
 				</button>
 
-				<div id="adminDropdownMenu" class="position-absolute bg-light border p-1" *ngIf="adminDropdown">
+				<div id="adminDropdownMenu" class="position-absolute bg-light border border-danger p-1 text-true-right rounded" *ngIf="adminDropdown">
 					<button class="btn btn-success text-nowrap w-100 text-start mb-2" routerLink="/admin" (click)="toggleDropdown()">
 						<fa-icon [icon]="faList"></fa-icon>
 						Panel
 					</button>
 
-					<button class="btn btn-danger text-nowrap w-100" (click)="logout(); toggleDropdown()">
+					<button class="btn btn-danger text-nowrap w-100 text-start" (click)="logout(); toggleDropdown()">
 						<fa-icon [icon]="faSignOut"></fa-icon>
 						Odhlásiť sa
 					</button>
