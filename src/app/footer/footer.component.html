@@ -1,30 +1,30 @@
 <div class="FooterContainer bg-banner border-top border-dark">
     <div class="d-flex flex-md-row flex-column justify-content-center">
         <div class="d-flex flex-column w-md-25 w-100 mt-md-0 mt-2 mb-md-0 mb-2">
-            <hr class="d-md-none text-dark">
             <h4>Rýchla navigácia</h4>
             <a routerLink="/" (click)="scrollUp()">Domov</a>
             <a routerLink="/" (click)="scrollUp()">Vyhľadávanie</a>
             <a routerLink="/advert/new" (click)="scrollUp()">Nový inzerát</a>
+            <hr class="d-md-none text-dark">
         </div>
         <div class="d-flex flex-column w-md-25 w-100 mt-md-0 mt-2 mb-md-0 mb-2" *ngIf="exists">
-            <hr class="d-md-none text-dark">
-            <h4>Nákup</h4>
+			<h4>Nákup</h4>
             <a routerLink="/" (click)="scrollUp()">Nahlásiť podvod</a>
             <a routerLink="/" (click)="scrollUp()">Ochrana osobných údajov</a>
             <a routerLink="/" (click)="scrollUp()">TBD</a>
+            <hr class="d-md-none text-dark">
         </div>
         <div class="d-flex flex-column w-md-25 w-100 mt-md-0 mt-2 mb-md-0 mb-2">
-            <hr class="d-md-none text-dark">
-            <h4>Prihlásenie</h4>
+			<h4>Prihlásenie</h4>
             <a (click)="scrollUp();" routerLink="/login">Prihlásiť sa ako administrátor</a>
+            <hr class="d-md-none text-dark">
         </div>
         <div class="d-flex flex-column w-md-25 w-100 mt-md-0 mt-2 mb-md-0 mb-2" *ngIf="exists">
-            <hr class="d-md-none text-dark">
-            <h4>Podpora</h4>
+			<h4>Podpora</h4>
             <a routerLink="/" (click)="scrollUp()">Najčastejšie otázky</a>
             <a routerLink="/" (click)="scrollUp()">Kontakt na spoločnosť</a>
             <a routerLink="/" (click)="scrollUp()">TBD</a>
+            <hr class="d-md-none text-dark">
         </div>
     </div>
     <div class="row w-100 mt-2">
