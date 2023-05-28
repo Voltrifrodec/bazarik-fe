@@ -3,28 +3,28 @@
         <div class="d-flex flex-column w-md-25 w-100 mt-md-0 mt-2 mb-md-0 mb-2">
             <hr class="d-md-none text-dark">
             <h4>Rýchla navigácia</h4>
-            <a routerLink="/" >Domov</a>
-            <a routerLink="/" >Vyhľadávanie</a>
-            <a routerLink="/" >Nový inzerát</a>
+            <a routerLink="/" (click)="scrollUp()">Domov</a>
+            <a routerLink="/" (click)="scrollUp()">Vyhľadávanie</a>
+            <a routerLink="/advert/new" (click)="scrollUp()">Nový inzerát</a>
         </div>
-        <div class="d-flex flex-column w-md-25 w-100 mt-md-0 mt-2 mb-md-0 mb-2">
+        <div class="d-flex flex-column w-md-25 w-100 mt-md-0 mt-2 mb-md-0 mb-2" *ngIf="exists">
             <hr class="d-md-none text-dark">
             <h4>Nákup</h4>
-            <a routerLink="/" >Nahlásiť podvod</a>
-            <a routerLink="/" >Ochrana osobných údajov</a>
-            <a routerLink="/" >TBD</a>
+            <a routerLink="/" (click)="scrollUp()">Nahlásiť podvod</a>
+            <a routerLink="/" (click)="scrollUp()">Ochrana osobných údajov</a>
+            <a routerLink="/" (click)="scrollUp()">TBD</a>
         </div>
         <div class="d-flex flex-column w-md-25 w-100 mt-md-0 mt-2 mb-md-0 mb-2">
             <hr class="d-md-none text-dark">
             <h4>Prihlásenie</h4>
             <a (click)="scrollUp();" routerLink="/login">Prihlásiť sa ako administrátor</a>
         </div>
-        <div class="d-flex flex-column w-md-25 w-100 mt-md-0 mt-2 mb-md-0 mb-2">
+        <div class="d-flex flex-column w-md-25 w-100 mt-md-0 mt-2 mb-md-0 mb-2" *ngIf="exists">
             <hr class="d-md-none text-dark">
             <h4>Podpora</h4>
-            <a routerLink="/" >Najčastejšie otázky</a>
-            <a routerLink="/" >Kontakt na spoločnosť</a>
-            <a routerLink="/" >TBD</a>
+            <a routerLink="/" (click)="scrollUp()">Najčastejšie otázky</a>
+            <a routerLink="/" (click)="scrollUp()">Kontakt na spoločnosť</a>
+            <a routerLink="/" (click)="scrollUp()">TBD</a>
         </div>
     </div>
     <div class="row w-100 mt-2">

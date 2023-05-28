@@ -130,15 +130,16 @@
         </div>
 
         <!-- district -->
-        <div class="form-group" *ngIf="advertForm.controls['region']">
+        <div class="form-group" *ngIf="advertForm.controls['region'].value">
             <label class="h3">
                 Okres
                 <!-- <small class="text-muted h6">Kliknite sem, pre návrh chýbajúceho okresu.</small> -->
             </label>
             <select formControlName="district" class="form-control form-control-lg" (change)="loadCities()">
 				<option disabled selected [value]="null">Vyberte okres</option>
-				<option *ngFor="let district of districts" [value]="district.id">{{ district.name + ", " +
-					district.postcode }}
+				<option *ngFor="let district of districts" [value]="district.id">
+					{{ district.name + (district.postcode ? ', ' + district.postcode : '')}}
+					<!-- {{ district.name + ", " + district.postcode }} -->
 				</option>
 			</select>
 			<h5 *ngIf="advertForm.controls['district'].invalid" class="text-danger">

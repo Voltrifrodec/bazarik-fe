@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
+	exists = false;
+
 	scrollUp(): void {
 		window.scrollTo(0,0);
 	}

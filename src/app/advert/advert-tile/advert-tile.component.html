@@ -21,7 +21,8 @@
 
 		<span class="d-block">
 			<fa-icon [icon]="faLocationArrow"></fa-icon>
-			{{ advert.district.name }}, {{ advert.district.postcode }}
+			{{ advert.district.name + (advert.district.postcode ? ', ' + advert.district.postcode : '')}}
+			<!-- {{ advert.district.name }}, {{ advert.district.postcode }} -->
 		</span>
 
 		<span class="d-block">
