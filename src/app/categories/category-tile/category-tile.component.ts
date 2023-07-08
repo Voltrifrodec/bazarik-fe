@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Category } from 'src/app/common/model/category.model';
+import { AdvertService } from "../../common/service/advert.service";
+import { Advert } from "../../common/model/advert.model";
 
 
 @UntilDestroy()
@@ -14,22 +16,32 @@ export class CategoryTileComponent implements OnInit {
 	@Input()
 	category?: Category;
 
+
 	emoji?: string;
 
 
 	numberOfAdvertsWordDeclension: string = '';
 	counter = 0;
 
-	constructor() {}
+	latestDate: String | undefined;
+
+	constructor(private advertService: AdvertService) {
+	}
+
 
 	ngOnInit(): void {
 		this.count();
 		this.getRightWordDeclension();
 		this.setEmoji();
+		this.advertService.getRecentAdvertByCategory(this.category!.id).pipe(untilDestroyed(this)).subscribe((advert: Advert[]) => {
+
+			let temp = new Date(advert[0].dateAdded);
+			this.latestDate = `${temp.toLocaleDateString()} ${temp.toLocaleTimeString()}`;
+		});
 	}
-	
+
 	count(): void {
-		if (! this.category?.numberOfAdverts) return;
+		if (!this.category?.numberOfAdverts) return;
 
 		if (this.counter < this.category.numberOfAdverts) {
 			this.counter++;
@@ -41,7 +53,7 @@ export class CategoryTileComponent implements OnInit {
 
 
 	setEmoji(): void {
-		if(this.category?.emoji) {
+		if (this.category?.emoji) {
 			let codePoint: number = parseInt(this.category.emoji.substring(1), 16);
 			this.emoji = String.fromCodePoint(codePoint);
 		}
@@ -50,8 +62,11 @@ export class CategoryTileComponent implements OnInit {
 		}
 	}
 
+	setLatest(): void {
+	}
+
 	getRightWordDeclension(): void {
-		if (! this.category?.numberOfAdverts) {
+		if (!this.category?.numberOfAdverts) {
 			this.numberOfAdvertsWordDeclension = 'inzerátov';
 			return;
 		};
@@ -68,5 +83,6 @@ export class CategoryTileComponent implements OnInit {
 			this.numberOfAdvertsWordDeclension = 'inzerátov';
 		}
 	}
+
 
 }

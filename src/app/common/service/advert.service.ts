@@ -53,6 +53,9 @@ export class AdvertService {
 		return this.http.get<Advert[]>(`${this.advertsUrl}/recent/${count}`);
 	}
 
+	getRecentAdvertByCategory(categoryId: number): Observable<Advert[]> {
+		return this.http.get<Advert[]>(`${this.advertsUrl}/recent-advert/${categoryId}`)
+	}
 	// getAllAdvertsByQuery(query: string): Observable<Advert[]> {
 	// 	return this.http.get<Advert[]>(`${this.apiUrl}/search/${query}`);
 	// }
