@@ -40,6 +40,7 @@ import { AdvertNumberComponent } from './advert/advert-number/advert-number.comp
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminTableComponent } from './admin/admin-table/admin-table.component';
 import { PageSizeFormComponent } from './pagination/page-size-form/page-size-form.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
 	declarations: [
@@ -90,6 +91,10 @@ import { PageSizeFormComponent } from './pagination/page-size-form/page-size-for
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthHeaderInterceptor,
 			multi: true
+		},
+		{
+			provide: LocationStrategy,
+			useClass: HashLocationStrategy
 		},
 		ToastService
 	],
